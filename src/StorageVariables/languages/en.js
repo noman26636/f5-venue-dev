@@ -1,0 +1,38 @@
+export var stringVariables = {
+    //Login, Signup, Forgot Password,Reset password
+    Login: "Login",
+    Email: "Email",
+    EmptyFieldMsg: "Field cannot be empty",
+    ValidEmailRequired: "Valid email is required",
+    Password: "Password",
+    RememberMe: "Remember Me",
+    ForgotPassword: "Forgot Password?",
+    RegisterMsg: "No account yet? <s>Register for a free account</s>, <c>Click here</c>",
+    InvalidLogin: "Invalid login credentials",
+    SomethingWentWrong: "Something went wrong. Please try again",
+    EmailSent: "Link to change password has been to your email. Open that link to change your password.",
+    CreatePassword: "Create a password so that we finish the sign up process",
+    ConfirmPassword: "Confirm password",
+    PasswordResetSuccess: "Your password is reset successfully",
+    PasswordsMismatch: "Passwords do not match",
+    PasswordValidationMsg: "Password must have atleast 8 characters with atleast one digit, one uppercase and one lowercase character",
+    DuplicateEmailErr: "This email is already registered with us",
+    ResetPassword: "Reset Password",
+    //Home
+    BrowseVenues: "Browse venues",
+    Wishlist: "Wish list",
+    ContactUs: "Contact us",
+    SignUp: "Sign up",
+    Logout: "Log out",
+    AddVenue: "Add your venue",
+    Search: "Search",
+    Location: "Location",
+    EventType: "Event Type",
+    NoOfPeople: "No. of people",
+    DateTime: "Date & Time",
+    //General
+    Ok: "Ok",
+    Cancel: "Cancel",
+    Back: "Back",
+    Proceed: "Proceed"
+}

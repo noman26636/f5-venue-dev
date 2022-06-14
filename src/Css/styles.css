@@ -1,0 +1,368 @@
+/* ****************************Common********************************* */
+/* *******************Fonts css starting here*******************************************/
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/Archivo-Bold.eot');
+  src: url('../fonts/Archivo-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Archivo-Bold.woff2') format('woff2'),
+    url('../fonts/Archivo-Bold.woff') format('woff'),
+    url('../fonts/Archivo-Bold.ttf') format('truetype'),
+    url('../fonts/Archivo-Bold.svg#Archivo-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/Archivo-Italic.eot');
+  src: url('../fonts/Archivo-Italic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Archivo-Italic.woff2') format('woff2'),
+    url('../fonts/Archivo-Italic.woff') format('woff'),
+    url('../fonts/Archivo-Italic.ttf') format('truetype'),
+    url('../fonts/Archivo-Italic.svg#Archivo-Italic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/Archivo-MediumItalic.eot');
+  src: url('../fonts/Archivo-MediumItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/Archivo-MediumItalic.woff2') format('woff2'),
+    url('../fonts/Archivo-MediumItalic.woff') format('woff'),
+    url('../fonts/Archivo-MediumItalic.ttf') format('truetype'),
+    url('../fonts/Archivo-MediumItalic.svg#Archivo-MediumItalic') format('svg');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/Archivo-Medium.eot');
+  src: url('../fonts/Archivo-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Archivo-Medium.woff2') format('woff2'),
+    url('../fonts/Archivo-Medium.woff') format('woff'),
+    url('../fonts/Archivo-Medium.ttf') format('truetype'),
+    url('../fonts/Archivo-Medium.svg#Archivo-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/Archivo-BoldItalic.eot');
+  src: url('../fonts/Archivo-BoldItalic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Archivo-BoldItalic.woff2') format('woff2'),
+    url('../fonts/Archivo-BoldItalic.woff') format('woff'),
+    url('../fonts/Archivo-BoldItalic.ttf') format('truetype'),
+    url('../fonts/Archivo-BoldItalic.svg#Archivo-BoldItalic') format('svg');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/Archivo-Regular.eot');
+  src: url('../fonts/Archivo-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Archivo-Regular.woff2') format('woff2'),
+    url('../fonts/Archivo-Regular.woff') format('woff'),
+    url('../fonts/Archivo-Regular.ttf') format('truetype'),
+    url('../fonts/Archivo-Regular.svg#Archivo-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/Archivo-SemiBoldItalic.eot');
+  src: url('../fonts/Archivo-SemiBoldItalic.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/Archivo-SemiBoldItalic.woff2') format('woff2'),
+    url('../fonts/Archivo-SemiBoldItalic.woff') format('woff'),
+    url('../fonts/Archivo-SemiBoldItalic.ttf') format('truetype'),
+    url('../fonts/Archivo-SemiBoldItalic.svg#Archivo-SemiBoldItalic')
+      format('svg');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../fonts/Archivo-SemiBold.eot');
+  src: url('../fonts/Archivo-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Archivo-SemiBold.woff2') format('woff2'),
+    url('../fonts/Archivo-SemiBold.woff') format('woff'),
+    url('../fonts/Archivo-SemiBold.ttf') format('truetype'),
+    url('../fonts/Archivo-SemiBold.svg#Archivo-SemiBold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ***********************************Fonts css ending here***************************************** */
+* {
+  /* content: '';
+  clear: both; */
+  /* display: table; */
+}
+body {
+  font-family: 'Archivo';
+}
+@media only screen and (max-width: 768px) {
+  .medium-hidden {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .small-hidden {
+    display: none;
+  }
+  .px-sm-3 {
+    padding: 0 20px;
+  }
+}
+.info-modal .modal-body {
+  font-weight: bold;
+  font-size: 20px;
+  color: #594a45;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.fw-400 {
+  font-weight: 400;
+}
+.fw-500 {
+  font-weight: 500;
+}
+.fw-600 {
+  font-weight: 600;
+}
+a {
+  cursor: pointer;
+}
+.error-msg {
+  color: #d52042;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+/* Input field */
+.input-wrapper {
+  position: relative;
+  margin-bottom: 15px;
+}
+.input-wrapper input {
+  padding: 11px 10px 10px 52px;
+  background: #efefef;
+  color: #594a45;
+  border: none !important;
+  outline: none !important;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 434px;
+  height: 50px;
+  margin-top: 15px;
+}
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 25px;
+  top: 52px;
+  width: 18px;
+  height: 18px;
+}
+/* Checkbox */
+.checkbox-wrap {
+  display: block;
+  position: relative;
+  padding-left: 33px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-wrap input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #efefef;
+  border: 1px solid #c4c4c4;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-wrap input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-wrap input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-wrap .checkmark:after {
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* Button primary */
+.btn-wrap {
+  position: relative;
+}
+.button-primary {
+  width: 190px;
+  padding: 16px 0;
+  font-size: 18px;
+  margin: 20px 0;
+  text-align: center;
+  color: #fff;
+  background: #1796f8;
+  border-radius: 6px;
+  border: none !important;
+  outline: none !important;
+  font-weight: 600;
+}
+.button-primary.small-btn {
+  width: 150px;
+  padding: 11px 0;
+  font-size: 15px;
+  margin: 0;
+}
+.button-primary.btn-white {
+  background: #fff;
+  color: #1796f8;
+}
+.btn-wrap .btn-icon {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, 50%);
+  right: 55px;
+}
+.btn-wrap .btn-loader {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  right: 12px;
+}
+/* ****************************Login screen********************************* */
+.login-container {
+  height: 100vh;
+}
+.login-container .row {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.login-container .img-wrapper {
+  height: 100%;
+  padding: 0;
+}
+.login-container .img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.login-container .form-wrapper {
+  margin: auto;
+  color: #594a45;
+  font-weight: 500;
+  font-size: 14px;
+  max-width: 434px;
+  padding: 0 20px;
+}
+.login-container .form-wrapper .logo-block {
+  width: 229px;
+  height: 120px;
+  margin: 15px 0;
+}
+.login-container .form-wrapper .logo-block {
+  width: 100%;
+  height: 100%;
+}
+.login-container .form-wrapper h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 25px 0;
+}
+.form-wrapper .signupLink {
+  color: #d52042;
+}
+/* *************************************Header *********************************** */
+.header-block {
+  background: #1796f8;
+  padding: 10px 35px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+.header-block .header-img {
+  width: 15%;
+  height: 56px;
+}
+.header-block .header-img img {
+  width: 108px;
+}
+.header-block nav {
+  width: 50%;
+}
+.header-block nav ul {
+  display: flex;
+  place-content: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.header-block nav ul li {
+}
+.header-block .header-right {
+  display: flex;
+  align-items: center;
+  place-content: flex-end;
+  justify-content: space-between;
+  margin-left: auto;
+  width: 25%;
+}
+.header-block .header-right a {
+  margin: 0 9px;
+}
