@@ -19,7 +19,7 @@ const Pager = props => {
           </div>
         </Link> */}
         <div className='d-flex'>
-          {[...Array(count).keys()].map((val, key) => (
+          {[...Array(count).keys()]?.map((val, key) => (
             <div key={key}>
               {val + 1 === page ? (
                 <div className='px-1'>

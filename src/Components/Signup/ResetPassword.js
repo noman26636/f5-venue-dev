@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AccountSevices } from './AccountSevices';
+import { AccountServices } from './AccountServices';
 import { Constants } from '../../Configurations/Constants';
 import IntlMessageFormat from 'intl-messageformat';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,9 +12,9 @@ import loginImg from "../../Assets/images/login-img.jpg";
 import logo from "../../Assets/images/main-logo.svg";
 import Button from '../Common/Button';
 import { useNavigate } from 'react-router-dom';
-import Modal from '../Common/Modal';
+import { toast } from 'react-toastify';
 const initialFormValues = {
-    password: "PassWord12345",
+    password: "",
     confirmPassword: "",
 
 }
@@ -32,8 +32,6 @@ export default function ResetPassword() {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-
     const dispatch = useDispatch();
     const enableLoginonEnter = (e) => {
         if (e.key === "Enter") {
@@ -43,10 +41,10 @@ export default function ResetPassword() {
     useEffect(() => {
         if (submitted) validate();
     }, [values]);
-    // useEffect(() => {
-    //     if (authState?.user?.access_token)
-    //         navigate("/home");
-    // })
+    useEffect(() => {
+        if (authState?.user?.access_token)
+            navigate("/home");
+    })
     const handleInputChange = ({ target }) => {
         const value = target.type === "checkbox" ? target.checked : target.value;
         const { name } = target;
@@ -58,20 +56,19 @@ export default function ResetPassword() {
     const validate = (fieldValues = values) => {
         let isValid = true;
         const field = {};
-        if (fieldValues.password.trim().length === 0) {
+        if (fieldValues.password?.trim().length === 0) {
             field.password = translations.EmptyFieldMsg;
             isValid = false;
         }
-        else if (fieldValues.password.trim().length < 8 || !/^(?=.*[0-9])(?=.*[A-Za-z])(?=.*[*.!@$%^&(){}[:;<>,.?~_+-=|]).{8,}$/.test(fieldValues.password)) {
-
+        else if (fieldValues.password?.trim().length < 8 || !/^(?=.*[0-9])(?=.*[A-Za-z])(?=.*[*.!@$%^&(){}[:;<>,.?~_+-=|]).{8,}$/.test(fieldValues.password)) {
             field.password = translations.PasswordValidationMsg;
             isValid = false;
         }
-        if (fieldValues.confirmPassword.trim().length === 0) {
+        if (fieldValues.confirmPassword?.trim().length === 0) {
             field.confirmPassword = translations.EmptyFieldMsg;
             isValid = false;
         }
-        else if (fieldValues.confirmPassword.trim() !== fieldValues.password.trim()) {
+        else if (fieldValues.confirmPassword?.trim() !== fieldValues.password?.trim()) {
             field.confirmPassword = translations.PasswordsMismatch;
             isValid = false;
         }
@@ -84,32 +81,37 @@ export default function ResetPassword() {
         setSubmitted(true);
         if (validate()) {
             setShowLoader(true);
-            // values.token = props.params.match.code;
-            // values.email = props.params.match.code;
-            AccountSevices.resetPassword(values).then(res => {
+            const myUrl = new URL(window.location.href.replace(/#/g, '?'));
+            const apiPayload = {
+                token: myUrl.searchParams.get('token'),
+                email: myUrl.searchParams.get('user'),
+                password: values.password,
+                password_confirmation: values.confirmPassword
+            }
+            AccountServices.resetPassword(apiPayload).then(res => {
                 setShowLoader(false);
                 if (res.isAxiosError) {
+                    if (res?.response?.status === 401) {
+                        setErrors({
+                            ...errors, confirmPassword: translations.NewPasswordErr
+                        });
+                    }
                     setErrors({
                         ...errors,
                         confirmPassword: translations.SomethingWentWrong
                     });
                 }
-                else {
-                    setShowModal(true);
-                }
+                else
+                    toast.success(translations.PasswordResetSuccess);
             });
         }
     }
-    const handleModalClose = () => {
-        setShowModal(false);
-        navigate("/login");
-    }
     return (
-        <>
-            <div className='login-container'>
-                <Row>
-                    <Col lg={6} md={6} className="medium-hidden img-wrapper" ><img src={loginImg} alt="Events venue" /></Col>
-                    <Col lg={6} md={6} sm={12} className="form-wrapper">
+        <div className='login-container'>
+            <Row>
+                <Col lg={6} md={6} className="medium-hidden img-wrapper" ><img src={loginImg} alt="Events venue" /></Col>
+                <Col lg={6} md={6} sm={12} className="form-wrapper">
+                    <div className='form-inner-wrap'>
                         <div className='logo-block'>
                             <img src={logo} alt="Events venue" />
                         </div>
@@ -138,13 +140,11 @@ export default function ResetPassword() {
                                 value={values.confirmPassword}
                                 onKeyUp={enableLoginonEnter}
                             />
-                            <Button label={translations.Proceed} onClick={handleClick} showBtnLoader={showLoader}></Button>
+                            <Button label={translations.Proceed} onClick={handleClick} showBtnLoader={showLoader} />
                         </form>
-                    </Col >
-                </Row>
-            </div >
-            <Modal text={translations.PasswordResetSuccess} showModal={showModal} handleClose={handleModalClose} btn1Text={translations.Ok}
-                btn1Click={handleModalClose} />
-        </>
+                    </div>
+                </Col >
+            </Row>
+        </div >
     )
 }

@@ -10,13 +10,23 @@ export default function TextField(props) {
         label,
         disabled,
         onKeyUp,
+        className,
+        placeholder = "",
+        min, max,
+        unit
     } = props;
 
     return (
-        <div className="input-wrapper">
-            <div>{label}</div>
-            <input className="" name={name} value={value} type={type} onChange={onChange} key={label} onKeyUp={onKeyUp} />
-            <img src={icon} className="input-icon" />
+        <div className={`input-wrapper ${className}`}>
+            {label && <div className="label">{label}</div>}
+            <div className={`position-relative`}>
+                {icon && <img src={icon} className="input-icon" />}
+                <input placeholder={placeholder} name={name} value={value} type={type !== "date" && type !== "time" ? type : "text"} onChange={onChange} key={label} min={min} max={max}
+                    onFocus={(e) => { if (type === "date" || type === "time") e.target.type = type; }} />
+                {unit && <div className="unit-block">
+                    <span className="unit-text">{unit}</span>
+                </div>}
+            </div>
             {error && <div className="error-msg">{error}</div>}
         </div>
     );
