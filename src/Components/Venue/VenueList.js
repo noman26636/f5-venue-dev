@@ -3,9 +3,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ToggleBtn from '../Common/ToggleBtn';
 import VenueSearch from './VenueSearch';
-import venueDummyImg from "../../Assets/images/venue-dummy-img.png";
+import noImagePlaceholder from "../../Assets/images/no-image1.png";
 import { Col, Row } from 'reactstrap';
-import yellowStar from "../../Assets/icons/yellow-star.svg";
 import heart from "../../Assets/icons/heart-white.svg";
 import guestIcon from "../../Assets/icons/guests.svg";
 import SearchModal from './SearchModal';
@@ -14,205 +13,26 @@ import { VenueServices } from './VenueServices';
 import Pageloader from '../Common/Pageloader';
 import Pager from '../Common/Pagination';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import yellowStar from "../../Assets/icons/yellow-star.svg";
 import { faMale, faChair } from "@fortawesome/free-solid-svg-icons";
 import { Constants } from '../../Configurations/Constants';
 import { toast } from 'react-toastify';
 import mapboxgl from 'mapbox-gl';
+import { enum_seatingOptions, enum_sortFieldOptions, enum_sortTypeOptions, seatingOptionsTypes, sortFieldTypes, sortTypeOptions } from '../../Utils/indexUtils';
 mapboxgl.accessToken = Constants.mapboxToken;
 const initialFormValues = {
     mapSearch: false,
     location: "",
     eventType: [],
     capacity: 0,
-    seatingOption: 1,
+    seatingOption: 0,
     moreFilters: [],
+    name: "",
+    sortField: -1,
+    sortType: 0,
 }
-const dummyVenues = [
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue1 Lorem ipsum dolor sit amet, consectetur adipiscing",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing  ",
-        isFavourite: false,
-        isFeatured: true
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue2",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: true
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue3",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: true
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue4",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue5",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue6",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue7",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue8",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue9",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue10",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue11",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue12",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue13",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue11",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue12",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue13",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue13",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    },
-    {
-        image: venueDummyImg,
-        logo: venueDummyImg,
-        name: "Venue13",
-        rating: 5,
-        reviews: 500,
-        guests: 300,
-        short_description: "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-        isFavourite: false
-    }
-];
 const VenueList = () => {
     const mapContainerRef = useRef(null);
-
     const appState = useSelector((state) => {
         return state.app;
     });
@@ -224,16 +44,49 @@ const VenueList = () => {
     const [modalType, setModalType] = useState(null);
     const [showLoader, setShowLoader] = useState(false);
     const [venuesList, setVenuesList] = useState([]);
-    const [wishlist, setWishlist] = useState([]);
+    const [pager, setPager] = useState({ current_page: 1, per_page: 20 });
     const [map, setMap] = useState(null);
+    const seatingOptions = [
+        { id: 0, name: translations.Seating },
+        { id: 1, name: translations.Standing }
+    ];
+    const sortFieldOptions = [
+        { id: -1, name: translations.Relevance },
+        { id: 0, name: translations.Reviews },
+        { id: 1, name: translations.Price },
+        { id: 2, name: translations.Capacity }
 
-    const handleInputChange = ({ target }) => {
+    ];
+    const sortTypeOptions = [
+        { id: 0, name: translations.Lowest },
+        { id: 1, name: translations.Highest }
+    ];
+    const handleInputChange = ({ target }, checkboxId, checkboxValue) => {
         const value = target.type === "checkbox" ? target.checked : target.value;
         const { name } = target;
-        setValues({
-            ...values,
-            [name]: value,
-        });
+        if (name === "eventType" || name === "moreFilters") {
+            const index = values[name]?.map(item => item.id).indexOf(checkboxId);
+            const prevData = [...values[name]];
+            if (index === -1) {
+                prevData.push({ id: checkboxId, name: checkboxValue });
+                setValues({
+                    ...values,
+                    [name]: [...prevData],
+                });
+            }
+            else {
+                prevData.splice(index, 1);
+                setValues({
+                    ...values,
+                    [name]: [...prevData],
+                });
+            }
+        }
+        else
+            setValues({
+                ...values,
+                [name]: value,
+            });
     };
     const navigate = useNavigate();
     useEffect(() => {
@@ -247,6 +100,23 @@ const VenueList = () => {
             setValues(valuesObj)
         }
         searchVenues(valuesObj);
+        const map = new mapboxgl.Map({
+            container: mapContainerRef.current,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [50.6, 20.22],
+            zoom: 1.5,
+        });
+        map.on('load', (e) => {
+            return;
+        });
+        map.on('error', (e) => {
+            debugger
+            return;
+        });
+        map.on('move', () => {
+            const { lng, lat } = map.getCenter();
+        });
+        setMap(map);
         return () => {
             if (map)
                 map.remove();
@@ -268,123 +138,129 @@ const VenueList = () => {
             setModalType(value);
         }, 50);
     }
-    const searchVenues = (searchParams = values) => {
+    useEffect(() => {
+        if (Number(values.sortField) !== -1)
+            searchVenues();
+    }, [values.sortField, values.sortType]);
+    const searchVenues = (searchParams = values, pageNumber) => {
         setShowLoader(true);
         const searchObj = {};
-        if (searchParams.location && searchParams.location !== null) searchObj.city = searchParams.location;
-        if (searchParams.capacity > 0) searchObj.people = [searchParams.seatingOption === 1 ? "Seating" : "Standing", Number(searchParams.capacity)];
-        if (searchParams.eventType?.length > 0) searchObj.type = searchParams.eventType;
-        if (searchParams.moreFilters?.length > 0) searchObj.service = searchParams.moreFilters;
-        VenueServices.venueSearch(searchObj).then(res => {
+        if (searchParams?.location && searchParams?.location !== null) searchObj.city = searchParams.location;
+        if (searchParams?.capacity > 0) searchObj.people = [enum_seatingOptions[Number(searchParams.seatingOption)], Number(searchParams?.capacity)];
+        if (searchParams?.eventType?.length > 0) searchObj.type = searchParams.eventType.map(item => item.id);
+        if (searchParams?.moreFilters?.length > 0) searchObj.service = searchParams.moreFilters.map(item => item.id);
+        if (values.name !== "") searchObj.name = values.name;
+        if (Number(values.sortField) !== -1) searchObj.sort = [enum_sortFieldOptions[Number(searchParams.sortField)], enum_sortTypeOptions[Number(searchParams.sortType)]];
+        VenueServices.venueSearch(searchObj, pageNumber, pager.per_page).then(res => {
             setShowLoader(false);
             if (!res.isAxiosError) {
-                setVenuesList(res.data);
+                setVenuesList(res?.data?.data);
+                delete res.data.data;
+                setPager({ ...res.data })
             }
         });
     }
     useEffect(() => {
-        const map = new mapboxgl.Map({
-            container: mapContainerRef.current,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [50.6, 20.22],
-            zoom: 1.5,
-            dragPan: false,
+        if (!values.mapSearch) return;
+        const dummyLatLngs = [{ lat: 90.6, lng: 181.22 }, { lat: 58.6, lng: 20.22 }, { lat: 49.6, lng: 26.22 }, { lat: 50.6, lng: 35.22 },
+        { lat: 81.6, lng: 26.22 }, { lat: 50.6, lng: 62.22 }, { lat: 75.6, lng: 26.22 }, { lat: 50.6, lng: 86.22 },
+        ]
+        let avgLat = 0, avgLng = 0, count = 0;
+        venuesList.forEach((venue, i) => {
+            if (!(dummyLatLngs[i].lat > 90 || dummyLatLngs[i].lat < -90)) {
+                let marker = new mapboxgl.Marker({
+                    color: "#594A45",
+                    draggable: false,
+                }).setLngLat([dummyLatLngs[i].lng, dummyLatLngs[i].lat])
+                    .addTo(map);
+                avgLat += dummyLatLngs[i].lat;
+                avgLng += dummyLatLngs[i].lng;
+                count++;
+            }
         });
-        // const marker = new mapboxgl.Marker({
-        //     color: "#594A45",
-        //     draggable: false,
-        // }).setLngLat([res.venue[0].longitude, res.venue[0].latitude])
-        //     .addTo(map);
-        map.on('move', () => {
-            const { lng, lat } = map.getCenter();
-            // this.setState({
-            //     lng: lng.toFixed(4),
-            //     lat: lat.toFixed(4),
-            //     zoom: map.getZoom().toFixed(2)
-            // });
-        });
+        map.setCenter([avgLng / count, avgLat / count])
         setMap(map);
-    }, [venuesList])
-    const addVenueToWishlist = (id, venueId) => {
-        VenueServices.addVenueToWishlist(id, venueId).then(res => {
-            if (!res.isAxiosError) {
-                toast.success(translations.Success);
-            }
-        });
-    }
-    const showWishlist = () => {
-        VenueServices.showWishlist().then(res => {
-            if (!res.isAxiosError) {
-                setWishlist(res.data);
-            }
-        });
-    }
+    }, [venuesList, values.mapSearch])
     return (
-        <div className='d-flex'>
-            <div className='venue-list-view' onClick={(e) => { setModalType(null) }}
-                style={{ width: values.mapSearch ? '74%' : '100%' }}
-            >
-                <div className='heading-block'>
-                    <h3>{translations.WeddingHalls}</h3>
-                    <ToggleBtn value={values.mapSearch} onChange={handleInputChange} name="mapSearch" />
-                </div>
-                <VenueSearch values={values} handleSearchModal={handleSearchModal} handleSearch={searchVenues} />
-                {
-                    showLoader ? <Pageloader /> :
-                        <Row className='venue-details-block'>
-                            {
-                                venuesList.length < 1 ?
-                                    <div className='no-search-msg'>
-                                        {translations.NoDataToShow}
-                                    </div> :
-                                    venuesList?.map((item, i) =>
-                                        <Col className='venue-block' key={i} xl={3} lg={3} md={4} sm={6} xs={12} onClick={() => { navigate(`/venue/${item.id}`) }}>
-                                            <div className='image-block'>
-                                                <img src={`${Constants.domainUrl}${item.images[0]?.image_path}`} />
-                                                <img src={item.logo} className="logo" />
-                                            </div>
-                                            <div className='venue-details'>
-                                                <div className='d-flex align-items-center'>
-                                                    <span className='venue-name'>{item.name}</span>
-                                                    <div className="heart-bg" style={{ background: item.isFavourite ? "#D00027" : "#C4C4C4" }}> <img src={heart} /></div>
-                                                </div>
-                                                <div className='rating-block'>
-                                                    <span className='ratings'>  {Array.from(Array(item.rating).keys(), n => n + 1)?.map(j => <img src={yellowStar} key={j} />)}</span>
-                                                    <span className='reviews'>{item.reviews} {translations.Reviews}</span>
-                                                </div>
-                                                <div className='d-flex'>
-                                                    <div className='guests mr-3'>
-                                                        <FontAwesomeIcon icon={faMale} className="icon" />
-                                                        <span className='guest-details'>{item.standing_capacity}</span>
-                                                    </div>
-                                                    <div className='guests'>
-                                                        <FontAwesomeIcon icon={faChair} className="icon" />
-                                                        <span className='guest-details'>{item.seating_capacity}</span>
-                                                    </div>
-                                                </div>
-                                                <p className='description'>
-                                                    {item.short_description}
-                                                </p>
-                                            </div>
-                                            {item.isFeatured && <div className='featured-tag'>{translations.Featured}</div>}
-                                        </Col>
-                                    )}
-                        </Row>
-                }
-                <Pager total={venuesList.length} onChange={(current, pageSize) => { }} />
-            </div>
+        <>
             {
-                <div className={`map-block ${values.mapSearch ? 'd-block' : 'd-none'}`} ref={mapContainerRef}>
-                    {/* <div className='map' >
-                    </div> */}
-                </div>
+                showLoader && <Pageloader />
             }
-            <SearchModal showModal={modalType !== null}
-                modalType={modalType}
-                values={values} setValues={setValues} setModalType={setModalType} eventTypesList={eventTypesList} moreServicesList={moreServicesList}
-            />
+            <div className='d-flex'>
+                <div className='venue-list-view' onClick={(e) => { setModalType(null) }}
+                    style={{ width: values.mapSearch ? '74%' : '100%' }}
+                >
+                    <div className='heading-block'>
+                        <h3>{translations.WeddingHalls}</h3>
+                        {/* <ToggleBtn value={values.mapSearch} onChange={handleInputChange} name="mapSearch" /> */}
+                    </div>
+                    <VenueSearch values={values} handleSearchModal={handleSearchModal} handleSearch={searchVenues}
+                        handleInputChange={handleInputChange}
+                    />
+                    <Row className='venue-details-block'>
+                        {
+                            venuesList?.length < 1 ?
+                                <div className='no-search-msg'>
+                                    {translations.NoDataToShow}
+                                </div> :
+                                venuesList?.map((item, i) =>
+                                    <Col className='venue-block' key={i} xl={3} lg={3} md={4} sm={6} xs={12} onClick={() => { navigate(`/venue/${item.id}`) }}>
+                                        <div className='image-block'>
+                                            {<img src={item.images[0]?.image_path} />}
+                                            {/* <img src={item.logo} className="logo" /> */}
+                                        </div>
+                                        <div className='venue-details'>
+                                            <div className='d-flex align-items-center'>
+                                                <span className='venue-name'>{item.name}</span>
+                                                {/* <div className="heart-bg"
+                                                        style={{ background: item.wishlistId ? "#D00027" : "#C4C4C4" }}>
+                                                        <img src={heart} />
+                                                    </div> */}
+                                            </div>
 
-        </div>
+                                            <div className='rating-block'>
+                                                {item.ratings_avg_rating &&
+                                                    <span className='ratings'>
+                                                        {Array.from(Array(item.ratings_avg_rating).keys(), n => n + 1)?.map(j => <img src={yellowStar} key={j} />)}
+                                                    </span>
+                                                }
+                                                {item.ratings?.length > 0 && <span className='reviews'>{item.ratings.length} {translations.Reviews}</span>}
+                                            </div>
+                                            <div className='d-flex'>
+                                                <div className='guests mr-3'>
+                                                    <FontAwesomeIcon icon={faMale} className="icon" />
+                                                    <span className='guest-details'>{item.standing_capacity}</span>
+                                                </div>
+                                                <div className='guests'>
+                                                    <FontAwesomeIcon icon={faChair} className="icon" />
+                                                    <span className='guest-details'>{item.seating_capacity}</span>
+                                                </div>
+                                            </div>
+                                            <p className='description'>
+                                                {item.short_description}
+                                            </p>
+                                        </div>
+                                        {item.featured === 1 && <div className='featured-tag'>{translations.Featured}</div>}
+                                    </Col>
+                                )}
+                    </Row>
+
+                    {/* <Pager total={pager.total} current={pager.current_page}
+                        onChange={(current) => { setPager({ ...pager, current_page: current }); searchVenues(null, current); }} pageSize={pager.per_page} /> */}
+                </div>
+                {
+                    <div className={`map-block ${values.mapSearch ? 'd-block' : 'd-none'}`} ref={mapContainerRef}>
+                        {/* <div className='map' >
+                    </div> */}
+                    </div>
+                }
+                <SearchModal showModal={modalType !== null} modalType={modalType} values={values} setValues={setValues} setModalType={setModalType}
+                    eventTypesList={eventTypesList} moreServicesList={moreServicesList} handleInputChange={handleInputChange}
+                    seatingOptions={seatingOptions} sortFieldOptions={sortFieldOptions} sortTypeOptions={sortTypeOptions}
+
+                />
+            </div>
+        </>
     );
 };
 

@@ -7,6 +7,7 @@ import { AccountServices } from './AccountServices';
 import { userTypes } from '../../Utils/indexUtils';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import IntlMessageFormat from 'intl-messageformat';
 
 const initialFormValues = {
     firstName: "",
@@ -195,7 +196,13 @@ export default function SignupModal(props) {
                 {errors.apiError && <div className="error-msg">{errors.apiError}</div>}
             </ModalBody>
             <ModalFooter>
-                <Button label={translations.CreateVenue} onClick={signup} showBtnLoader={showLoader} className="signup-btn" />
+                <Button label={translations.SignUp} onClick={signup} showBtnLoader={showLoader} className="signup-btn" />
+                <div className='fw-500 mb-3 w-100 text-end'>
+                    {new IntlMessageFormat(translations.LoginMsg, userLanguageData.language).format({
+                        c: chunk1 => <a key={2} onClick={() => { handleClose(); navigate("/login") }} className="signupLink"> {chunk1}</a>
+                    }
+                    )}
+                </div>
             </ModalFooter>
         </Modal>
     );

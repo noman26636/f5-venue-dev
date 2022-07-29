@@ -38,7 +38,7 @@ export const VenueApis = {
   editVenue: `${baseUrl}editvenue/`,
   deleteVenue: `${baseUrl}deletevenue/`,
   addWishlist: `${baseUrl}wishlist`,
-  showWishlist: `${baseUrl}showwishlist/`,
+  showWishlist: `${baseUrl}showwishlist`,
   addVenueToWishlist: `${baseUrl}wishlistvenue`,
   deleteWishlist: `${baseUrl}deletewishlist/`,
   deleteWishlistVenue: `${baseUrl}deleteWishlistVenue/`,

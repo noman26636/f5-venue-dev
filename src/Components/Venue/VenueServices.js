@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { VenueApis } from '../../Configurations/Api_endpoints';
 export const VenueServices = {
-    getallVenues: () => {
-        return axios.get(VenueApis.getallVenues)
+    getallVenues: (pageNumber = 1, pageSize = 20) => {
+        return axios.get(`${VenueApis.getallVenues}?page=${pageNumber}&page_size=${pageSize}`)
             .then(response => response.data)
             .catch(error => {
                 return error;
@@ -15,8 +15,8 @@ export const VenueServices = {
                 return error;
             });
     },
-    venueSearch: (data) => {
-        return axios.post(VenueApis.venueSearch, data)
+    venueSearch: (data, pageNumber = 1, pageSize = 20) => {
+        return axios.post(`${VenueApis.venueSearch}?page=${pageNumber}&per_page=${pageSize}`, data)
             .then(response => response.data)
             .catch(error => {
                 return error;
@@ -57,36 +57,38 @@ export const VenueServices = {
                 return error;
             });
     },
-    showWishlist: () => {
-        return axios.get(VenueApis.showWishlist)
+    showWishlist: (id) => {
+        let url = VenueApis.showWishlist;
+        // if (id) url = `${url}/${id}`
+        return axios.get(url)
             .then(response => response.data)
             .catch(error => {
                 return error;
             });
     },
     addWishlist: (data) => {
-        return axios.post(VenueApis.addWishlist)
+        return axios.post(VenueApis.addWishlist, data)
             .then(response => response.data)
             .catch(error => {
                 return error;
             });
     },
     addVenueToWishlist: (data) => {
-        return axios.post(VenueApis.addVenueToWishlist)
+        return axios.post(VenueApis.addVenueToWishlist, data)
             .then(response => response.data)
             .catch(error => {
                 return error;
             });
     },
     deleteWishlist: (id) => {
-        return axios.delete(`${VenueApis.deleteWishlist}/${id}`)
+        return axios.delete(`${VenueApis.deleteWishlist}${id}`)
             .then(response => response.data)
             .catch(error => {
                 return error;
             });
     },
     deleteWishlistVenue: (id, venueId) => {
-        return axios.delete(`${VenueApis.deleteWishlistVenue}/${id}/venue/${venueId}`)
+        return axios.delete(`${VenueApis.deleteWishlistVenue}${id}/venue/${venueId}`)
             .then(response => response.data)
             .catch(error => {
                 return error;

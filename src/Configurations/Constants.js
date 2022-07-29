@@ -1,7 +1,7 @@
 export var Constants = {
     defaultLang: "en",
     supportedLanguages: ["en", "da"],
-    appVersion: "1.1",
+    appVersion: "1.3",
     domainUrl: window.location.href.indexOf('staging') === -1
         ? 'http://test.event-venue.dk/'
         : 'https://uat-letzwork.azurewebsites.net/',

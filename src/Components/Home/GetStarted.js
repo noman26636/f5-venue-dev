@@ -24,7 +24,7 @@ const GetStarted = (props) => {
                         <img src={calendarIcon} />
                         <h3>{translations.PlanEvent}</h3>
                         <p>{translations.PlanEventDesc}</p>
-                        <Button label={translations.SignUp} onClick={() => setShowSignupModal(true)} className="mt-3" />
+                        <Button label={translations.SignUp} onClick={() => setShowSignupModal(true)} className="mt-3" wrapperClass="m-auto" />
                     </div>
                 </Col>
                 <Col xl={6} lg={6} md={6} sm={12}>
@@ -32,7 +32,8 @@ const GetStarted = (props) => {
                         <img src={cartIcon} />
                         <h3>{translations.AddVenue}</h3>
                         <p>{translations.AddVenueDesc}</p>
-                        <Button label={translations.BecomeSupplier} onClick={() => setShowSignupModal(true)} className="mt-3" />
+                        <Button label={translations.BecomeSupplier} onClick={() => setShowSignupModal(true)} className="mt-3"
+                            wrapperClass="m-auto" />
                     </div>
                 </Col>
             </Row>

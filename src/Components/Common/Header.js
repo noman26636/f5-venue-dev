@@ -36,6 +36,7 @@ export default function Header(props) {
   { text: translations.ManageVenues, path: "/manageVenues" },
   { text: translations.YourProfile, path: "/profile" },
   { text: translations.YourCompany, path: "/company" },
+  { text: translations.Wishlist, path: "/wishlists" },
   ]
   const logout = () => {
     // setShowLoader(true);
@@ -64,7 +65,7 @@ export default function Header(props) {
           <Col xl={1} lg={1} md={1} sm={6} xs={6} className="header-img" onClick={() => { navigate("/home") }}>
             <img src={logo} alt="logo" className="desktop-logo" />
           </Col>
-          <Col xl={8} className="large-hidden">
+          <Col xl={9} className="large-hidden">
             <nav>
               <ul className="menu-items">
                 {getMenuOptions()?.map((item, i) => <li className={`menu-item ${i === active ? "active" : ""}`} key={i}><a onClick={() => { setActive(i); navigate(item.path) }}>{item.text}</a></li>
@@ -72,7 +73,7 @@ export default function Header(props) {
               </ul>
             </nav>
           </Col>
-          <Col xl={4} className="header-right" >
+          <Col xl={3} className={`header-right ${!authState?.user?.access_token && 'ml-n6'}`} >
             <div className='medium-hidden d-flex align-items-center'>
               {authState?.user?.access_token ?
                 <div className='nav-links mx-lg-0'>

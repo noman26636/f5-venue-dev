@@ -22,7 +22,18 @@ export default function TextField(props) {
             <div className={`position-relative`}>
                 {icon && <img src={icon} className="input-icon" />}
                 <input placeholder={placeholder} name={name} value={value} type={type !== "date" && type !== "time" ? type : "text"} onChange={onChange} key={label} min={min} max={max}
-                    onFocus={(e) => { if (type === "date" || type === "time") e.target.type = type; }} />
+                    onFocus={(e) => { if (type === "date" || type === "time") e.target.type = type; }}
+                    onKeyUp={onKeyUp ? onKeyUp :
+                        (type === "number" ?
+                            ({ target, key }) => {
+                                if (key === "." || key === "e" || key === "E" || key === "+" || key === "-") {
+                                    target.value = "";
+                                    return;
+                                }
+                            }
+                            :
+                            () => { return; })}
+                />
                 {unit && <div className="unit-block">
                     <span className="unit-text">{unit}</span>
                 </div>}

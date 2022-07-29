@@ -25,3 +25,16 @@ export const userTypes = {
     user: 1,
     admin: 2
 }
+export const enum_seatingOptions = [
+    "Seating",
+    "Standing"
+]
+export const enum_sortFieldOptions = [
+    "Reviews",
+    "Price",
+    "Capacity"
+]
+export const enum_sortTypeOptions = [
+    "Lowest",
+    "Highest"
+]

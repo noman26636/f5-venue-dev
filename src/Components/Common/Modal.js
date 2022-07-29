@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
+import { Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
+import Button from './Button';
+
 export default function Popup(props) {
-    let { text, title, showModal, handleClose, btn1Text, btn1Click, btn2Text } = props;
+    let { text, title, showModal, handleClose, btn1Text, btn1Click, btn2Text, showBtnLoader } = props;
     return (
         <Modal isOpen={showModal} onClosed={handleClose} backdrop="static" keyboard={false} className="info-modal" centered>
             {title && <ModalHeader closeButton>
@@ -9,13 +11,11 @@ export default function Popup(props) {
             </ModalHeader>}
             <ModalBody>{text}</ModalBody>
             <ModalFooter>
-                {btn2Text && <Button variant="secondary" onClick={handleClose}>
-                    {btn2Text}
-                </Button>
+                {btn2Text &&
+                    <Button label={btn2Text} onClick={handleClose} className={`small-btn btn-white`} />
                 }
-                <Button type='button' variant="primary" color="primary" onClick={btn1Click} >
-                    {btn1Text}
-                </Button>
+                <Button label={btn1Text} onClick={btn1Click} className={`small-btn `} showBtnLoader={showBtnLoader} />
+
             </ModalFooter>
         </Modal>
     );

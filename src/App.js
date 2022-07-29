@@ -20,6 +20,13 @@ const App = () => {
 
   useEffect(() => {
     if (appState.version !== Constants.appVersion) {
+      if ('caches' in window) {
+        caches.keys().then((names) => {
+          names.forEach((name) => {
+            caches.delete(name);
+          });
+        });
+      }
       dispatch({ type: TYPES.RESET });
       if (!userLanguageData || !userLanguageData.language)
         setDefaultLang();

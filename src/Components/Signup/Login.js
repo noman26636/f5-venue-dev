@@ -7,11 +7,13 @@ import * as TYPES from '../../Store/actions/types';
 import TextField from '../Common/TextField';
 import userImg from "../../Assets/icons/user.svg";
 import lock from "../../Assets/icons/lock.svg";
-import loginImg from "../../Assets/images/login-img.jpg";
+// import loginImg from "../../Assets/images/login-img.jpg";
+import loginImg from "../../Assets/images/login-img1.png";
+
 import logo from "../../Assets/images/main-logo.svg";
 import Checkbox from '../Common/Checkbox';
 import Button from '../Common/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SignupModal from './SignupModal';
 const initialFormValues = {
     email: "",
@@ -26,6 +28,8 @@ export default function Login(props) {
         return state.auth;
     });
     const navigate = useNavigate();
+    const myUrl = new URL(window.location.href.replace(/#/g, '?'));
+    const redirectUrl = myUrl.searchParams.get('redirectUrl');
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     const [values, setValues] = useState(initialFormValues);
@@ -42,10 +46,14 @@ export default function Login(props) {
     useEffect(() => {
         if (submitted) validate();
     }, [values]);
-    // useEffect(() => {
-    //     if (authState?.user?.access_token)
-    //         navigate("/home");
-    // })
+    useEffect(() => {
+        if (authState?.user?.access_token) {
+            if (redirectUrl)
+                navigate(`/${redirectUrl}`);
+            else
+                navigate("/home");
+        }
+    })
     const handleInputChange = ({ target }) => {
         const value = target.type === "checkbox" ? target.checked : target.value;
         const { name } = target;
@@ -57,7 +65,11 @@ export default function Login(props) {
     const validate = (fieldValues = values) => {
         let isValid = true;
         const field = {};
-        if (fieldValues.email?.trim().length === 0 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)) {
+        if (fieldValues.email?.trim().length === 0) {
+            field.email = translations.EmptyFieldMsg;
+            isValid = false;
+        }
+        else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)) {
             field.email = translations.ValidEmailRequired;
             isValid = false;
         }
@@ -97,7 +109,10 @@ export default function Login(props) {
                 }
                 else {
                     dispatch({ type: TYPES.LOGIN, data: { ...res } });
-                    navigate(`/home`);
+                    if (redirectUrl)
+                        navigate(`/${redirectUrl}`);
+                    else
+                        navigate(`/home`);
                 }
             });
         }
@@ -111,7 +126,7 @@ export default function Login(props) {
                 <Col lg={6} md={6} className="medium-hidden img-wrapper" ><img src={loginImg} alt="Events venue" /></Col>
                 <Col lg={6} md={6} sm={12} className="form-wrapper">
                     <div className='form-inner-wrap'>
-                        <div className='logo-block'>
+                        <div className='logo-block' onClick={() => navigate("/home")}>
                             <img src={logo} alt="Events venue" />
                         </div>
                         <div className="intro-block">
@@ -129,6 +144,7 @@ export default function Login(props) {
                                 error={errors.email}
                                 value={values.email}
                                 onKeyUp={enableLoginonEnter}
+                                className="mb-3"
                             />
 
                             <TextField name="password"
@@ -139,10 +155,13 @@ export default function Login(props) {
                                 error={errors.password}
                                 value={values.password}
                                 onKeyUp={enableLoginonEnter}
+                                className="mb-3"
                             />
                             <div className='d-flex my-3'>
                                 <Checkbox label={translations.RememberMe} onChange={handleInputChange} value={values.rememberMe} name="rememberMe" />
-                                <div className='ml-auto cursor-pointer' onClick={() => { navigate("/forgotPassword") }}>{translations.ForgotPassword}</div>
+                                <div className='ml-auto cursor-pointer' onClick={() => { navigate("/forgotPassword") }}>
+                                    <a>     {translations.ForgotPassword}</a>
+                                </div>
                             </div>
                             <Button label={translations.Login} onClick={handleClick} showBtnLoader={showLoader} className="w-100" wrapperClass="w-100" />
                             <div className='fw-500 mb-3'>

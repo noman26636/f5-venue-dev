@@ -101,8 +101,11 @@ export default function ResetPassword() {
                         confirmPassword: translations.SomethingWentWrong
                     });
                 }
-                else
-                    toast.success(translations.PasswordResetSuccess);
+                else {
+                    toast.success(translations.PasswordResetSuccess, {
+                        onClose: () => navigate('/login')
+                    });
+                }
             });
         }
     }
