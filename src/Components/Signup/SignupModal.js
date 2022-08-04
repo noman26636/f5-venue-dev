@@ -4,7 +4,6 @@ import TextField from '../Common/TextField';
 import Button from '../Common/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { AccountServices } from './AccountServices';
-import { userTypes } from '../../Utils/indexUtils';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import IntlMessageFormat from 'intl-messageformat';
@@ -106,7 +105,6 @@ export default function SignupModal(props) {
                 last_name: values.lastName,
                 company: values.business,
                 phone_number: values.phone,
-                user_type: userTypes.user
             };
             AccountServices.signupUser(userObj).then(res => {
                 setShowLoader(false);
@@ -155,7 +153,7 @@ export default function SignupModal(props) {
                 />
                 <TextField name="email"
                     label={translations.Email + " *"}
-                    type="text"
+                    type="email"
                     onChange={handleInputChange}
                     error={errors.email}
                     value={values.email}
@@ -163,7 +161,7 @@ export default function SignupModal(props) {
                 />
                 <TextField name="phone"
                     label={translations.PhoneNumber + " *"}
-                    type="text"
+                    type="tel"
                     onChange={handleInputChange}
                     error={errors.phone}
                     value={values.phone}

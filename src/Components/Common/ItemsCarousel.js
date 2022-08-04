@@ -20,7 +20,7 @@ const ItemsCarousel = (props) => {
         setActiveIndex(nextIndex);
     }
     return (
-        <Carousel previous={previousButton} next={nextButton} activeIndex={activeIndex} slide={true} interval={4000000}>
+        <Carousel previous={previousButton} next={nextButton} activeIndex={activeIndex} slide={false} interval={4000000} >
             {window.innerWidth > 600 &&
                 <CarouselIndicators items={[...Array(groups).keys()]}
                     activeIndex={activeIndex}
@@ -29,7 +29,7 @@ const ItemsCarousel = (props) => {
                     }} />
             }
             {
-                [...Array(groups).keys()]?.map(k => <CarouselItem key={k}>
+                [...Array(groups).keys()]?.map(k => <CarouselItem key={k} >
                     {children}
                     {/* {window.innerWidth <= 600 && */}
                     <>

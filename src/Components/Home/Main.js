@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
-import sectionImg1 from "../../Assets/images/section2-img-1.png";
-import sectionImg2 from "../../Assets/images/section2-img-2.png";
-import sectionImg3 from "../../Assets/images/section2-img-3.png";
+import sImg1 from "../../Assets/images/s-img1.jpg";
+import sImg2 from "../../Assets/images/s-img2.jpg";
+import sImg3 from "../../Assets/images/s-img3.jpg";
+import sImg4 from "../../Assets/images/s-img4.jpg";
+import sImg5 from "../../Assets/images/s-img5.jpg";
+import sImg6 from "../../Assets/images/s-img6.jpg";
+import sImg7 from "../../Assets/images/s-img7.jpg";
+import sImg8 from "../../Assets/images/s-img8.jpg";
+import sImg9 from "../../Assets/images/s-img9.jpg";
+import sImg10 from "../../Assets/images/s-img10.jpg";
+import sImg11 from "../../Assets/images/s-img11.jpg";
+import sImg12 from "../../Assets/images/s-img12.jpg";
 import location from "../../Assets/icons/location-gray.svg";
 import eventTypeIcon from "../../Assets/icons/event-type.svg";
 import capacity from "../../Assets/icons/capacity.svg";
@@ -27,7 +36,7 @@ export default function Main(props) {
   const { userLanguageData } = appState;
   const translations = userLanguageData.translations;
   const dispatch = useDispatch();
-  const images = [sectionImg2, sectionImg1, sectionImg3];
+  const images = [sImg1, sImg2, sImg3, sImg4, sImg5, sImg6, sImg7, sImg8, sImg9, sImg10, sImg11, sImg12];
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();

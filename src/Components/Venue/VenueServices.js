@@ -8,6 +8,13 @@ export const VenueServices = {
                 return error;
             });
     },
+    getFeaturedVenues: (pageNumber = 1, pageSize = 20) => {
+        return axios.get(`${VenueApis.getFeaturedVenues}?page=${pageNumber}&page_size=${pageSize}`)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
     getVenueDetails: (id) => {
         return axios.get(`${VenueApis.getVenueDetails}${id}`)
             .then(response => response.data)

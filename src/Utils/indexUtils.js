@@ -21,9 +21,11 @@ export const setDefaultLang = () => {
         .catch((error) => error);
 };
 export const allowDanishChar = `/[^a-zA-Z0-9ÄÖÜäöüßÁÐÉÍÓÚÝÞÆÖáðéíóúýþæöïĳåæøÅÆØçÇñÑäÄèòàùç°§öåäÅÖÄøæåÅØÆ!@$%^&æåøÆÅØéèçà$ù£µ§ÓÚẂÝÀÈÌÒÙẀỲÄËÖÜẄŸóúẃýàèìòùẁỳäëöüẅÿa-zA-Z0-9"".,_ ]*$/g, ''`
-export const userTypes = {
-    user: 1,
-    admin: 2
+export const venueStatus = {
+    enabled: "Enabled",
+    pending: "Pending",
+    rejected: "Rejected",
+
 }
 export const enum_seatingOptions = [
     "Seating",

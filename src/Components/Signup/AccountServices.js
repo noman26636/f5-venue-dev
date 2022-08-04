@@ -29,13 +29,6 @@ export const AccountServices = {
                 return error;
             });
     },
-    refreshToken: (data) => {
-        return axios.post(AccountApis.refreshToken, data)
-            .then(response => response.data)
-            .catch(error => {
-                return error;
-            });
-    },
     resetPassword: (data) => {
         return axios.post(AccountApis.resetPassword, data)
             .then(response => response.data)

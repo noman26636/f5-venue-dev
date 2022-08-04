@@ -6,7 +6,7 @@ import {
     CarouselIndicators,
 } from 'reactstrap';
 function ImageSlider(props) {
-    const { items } = props;
+    const { items, slide = true } = props;
     const [activeIndex, setActiveIndex] = React.useState(0);
     const itemLength = items.length - 1
     const previousButton = () => {
@@ -24,13 +24,13 @@ function ImageSlider(props) {
             <CarouselItem
                 key={i}
             >
-                <img src={item} alt="img" />
+                <img src={item.image_path ? item.image_path : item} alt="img" />
             </CarouselItem>
         );
     });
 
     return (
-        <Carousel previous={previousButton} next={nextButton} interval={5000} slide={false}
+        <Carousel previous={previousButton} next={nextButton} interval={5000} slide={slide}
             activeIndex={activeIndex}>
             {/* <CarouselIndicators items={items}
                 activeIndex={activeIndex}

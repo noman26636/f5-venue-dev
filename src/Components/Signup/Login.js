@@ -18,7 +18,7 @@ import SignupModal from './SignupModal';
 const initialFormValues = {
     email: "",
     password: "",
-    rememberMe: false
+    rememberMe: true
 }
 export default function Login(props) {
     const appState = useSelector((state) => {
@@ -108,7 +108,7 @@ export default function Login(props) {
                     }
                 }
                 else {
-                    dispatch({ type: TYPES.LOGIN, data: { ...res } });
+                    dispatch({ type: TYPES.LOGIN, data: { ...res, rememberMe: values.rememberMe } });
                     if (redirectUrl)
                         navigate(`/${redirectUrl}`);
                     else

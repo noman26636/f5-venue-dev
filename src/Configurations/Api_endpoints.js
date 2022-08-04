@@ -26,6 +26,7 @@ export const AccountApis = {
 }
 export const VenueApis = {
   getallVenues: `${baseUrl}allvenues`,
+  getFeaturedVenues: `${baseUrl}featured`,
   getVenueDetails: `${baseUrl}showvenue/`,
   venueSearch: `${baseUrl}search`,
   getEventTypes: `${baseUrl}event_types`,

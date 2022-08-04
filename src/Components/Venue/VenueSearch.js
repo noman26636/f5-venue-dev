@@ -70,7 +70,7 @@ const VenueSearch = (props) => {
             <div className="search-item search-icon" onClick={() => handleSearch()}>
                 <img src={searchIcon} />
             </div>
-            <div className="search-item ml-auto" onClick={() => {
+            <div className={`search-item sort-block ${!values.mapSearch && "ml-auto"}`} onClick={() => {
                 handleSearchModal("sort")
             }} id="sort">
                 {/* <img src={null} /> */}

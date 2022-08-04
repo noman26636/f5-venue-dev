@@ -100,7 +100,7 @@ export default function SearchModal(props) {
         else if (modalType === "moreFilters") {
             valuesObj = { ...values, moreFilters: [] };
         }
-        setValues({ ...valuesObj });
+        setValues({ ...values, ...valuesObj });
     }
     return (
         <>
