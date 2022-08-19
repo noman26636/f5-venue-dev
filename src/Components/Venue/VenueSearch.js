@@ -16,7 +16,7 @@ const VenueSearch = (props) => {
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     const { values, handleSearchModal, handleSearch, handleInputChange } = props;
-    const { name, location, eventType, capacity, moreFilters, sortField } = values;
+    const { name, location, eventType, capacity, moreFilters, sortField, onKeyUp } = values;
     const getAllItemsName = (arr) => {
         let str = "";
         str += arr.map((item, i) => i === 0 ? item.name : ` ${item.name}`);
@@ -32,6 +32,8 @@ const VenueSearch = (props) => {
                     value={name}
                     className="name-field"
                     icon={values.name !== "" ? eventTypeIconBlue : eventTypeIcon}
+                    onKeyUp={onKeyUp}
+
                 />
             </div>
             <div className="search-item p-0" >
@@ -42,24 +44,19 @@ const VenueSearch = (props) => {
                     value={location}
                     className="name-field"
                     icon={values.location !== "" ? locationIconBlue : locationIcon}
+                    onKeyUp={onKeyUp}
                 />
             </div>
-            {/* <div className={`search-item ${location !== "" && 'selected'}`} onClick={() => {
-                handleSearchModal("location")
-            }} id="location">
-                <img src={ />
-                <span className='search-text'>{location && location !== "" ? location : translations.Location}</span>
-            </div> */}
             <div className={`search-item ${eventType?.length !== 0 && 'selected'}`} onClick={() => {
                 handleSearchModal("eventType")
             }} id="eventType">
-                <img src={eventType?.length !== 0 ? eventTypeIconBlue : eventTypeIcon} />
+                <img alt="" src={eventType?.length !== 0 ? eventTypeIconBlue : eventTypeIcon} />
                 <span className='search-text'>{eventType?.length > 0 ? `${getAllItemsName(eventType)}` : translations.EventType}</span>
             </div>
             <div className={`search-item ${capacity !== 0 && 'selected'}`} onClick={() => {
                 handleSearchModal("capacity")
             }} id="capacity">
-                <img src={capacity !== 0 ? capacityIconBlue : capacityIcon} />
+                <img alt="" src={capacity !== 0 ? capacityIconBlue : capacityIcon} />
                 <span className='search-text'>{capacity !== 0 ? capacity : translations.Capacity}</span>
             </div>
             <div className={`search-item ${moreFilters?.length !== 0 && 'selected'}`} onClick={() => {
@@ -68,12 +65,12 @@ const VenueSearch = (props) => {
                 <span className='search-text'>{moreFilters?.length > 0 ? `${getAllItemsName(moreFilters)}` : translations.More}</span>
             </div>
             <div className="search-item search-icon" onClick={() => handleSearch()}>
-                <img src={searchIcon} />
+                <img alt="" src={searchIcon} />
             </div>
             <div className={`search-item sort-block ${!values.mapSearch && "ml-auto"}`} onClick={() => {
                 handleSearchModal("sort")
             }} id="sort">
-                {/* <img src={null} /> */}
+                {/* <img alt="" src={null} /> */}
                 <span className='search-text'>{`${translations.SortBy}: ${(Number(sortField) === -1 ? translations.Relevance : enum_sortFieldOptions[sortField])}`}
                 </span>
             </div>

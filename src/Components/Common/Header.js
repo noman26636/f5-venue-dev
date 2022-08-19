@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-// import logo from "../../Assets/images/main-logo.svg";
 import logo from "../../Assets/images/logo-blue.svg";
 import burgerMenu from "../../Assets/icons/menu-icon.svg";
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,11 +8,8 @@ import Button from './Button';
 import { AccountServices } from '../Signup/AccountServices';
 import { Row, Col } from 'reactstrap';
 import SignupModal from '../Signup/SignupModal';
-import Modal from '../Common/Modal';
 import LeftMenu from './LeftMenu';
-
 export default function Header(props) {
-  const { } = props;
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLeftMenu, setShowLeftMenu] = useState(false);
   const [active, setActive] = useState(0);
@@ -68,7 +64,9 @@ export default function Header(props) {
           <Col xl={9} className="large-hidden">
             <nav>
               <ul className="menu-items">
-                {getMenuOptions()?.map((item, i) => <li className={`menu-item ${i === active ? "active" : ""}`} key={i}><a onClick={() => { setActive(i); navigate(item.path) }}>{item.text}</a></li>
+                {getMenuOptions()?.map((item, i) => <li className={`menu-item ${i === active ? "active" : ""}`} key={i}>
+                  <a onClick={() => { setActive(i); navigate(item.path) }}>{item.text}</a>
+                </li>
                 )}
               </ul>
             </nav>
@@ -89,7 +87,7 @@ export default function Header(props) {
             </div>
             <div className='burger-menu-block mx-3'>
               <button type="button" className="burger-menu" onClick={() => toggleMenu()}>
-                <img src={burgerMenu} />
+                <img alt="" src={burgerMenu} />
               </button>
             </div>
           </Col>

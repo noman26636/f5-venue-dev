@@ -121,6 +121,27 @@ export const AccountServices = {
                 return error;
             });
     },
+    replyInquiry: (data) => {
+        return axios.post(AccountApis.replyInquiry, data)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
+    getInquiries: () => {
+        return axios.get(AccountApis.getInquiries)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
+    getInquiryHistory: (id) => {
+        return axios.get(`${AccountApis.getInquiryHistory}${id}`)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
     inviteUser: (email) => {
         return axios.post(AccountApis.invite, { email: email })
             .then(response => response.data)

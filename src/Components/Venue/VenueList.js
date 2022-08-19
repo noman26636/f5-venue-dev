@@ -3,23 +3,17 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ToggleBtn from '../Common/ToggleBtn';
 import VenueSearch from './VenueSearch';
-import noImagePlaceholder from "../../Assets/images/no-image.png";
+// import noImagePlaceholder from "../../Assets/images/no-image.png";
 import { Col, Row } from 'reactstrap';
-import heart from "../../Assets/icons/heart-white.svg";
 import SearchModal from './SearchModal';
-import TextField from '../Common/TextField';
 import { VenueServices } from './VenueServices';
 import Pageloader from '../Common/Pageloader';
 import Pager from '../Common/Pagination';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import yellowStar from "../../Assets/icons/yellow-star.svg";
-import unfilledStar from "../../Assets/icons/unfilledStar.svg";
-
 import { faMale, faChair } from "@fortawesome/free-solid-svg-icons";
 import { Constants } from '../../Configurations/Constants';
-import { toast } from 'react-toastify';
 import mapboxgl from 'mapbox-gl';
-import { enum_seatingOptions, enum_sortFieldOptions, enum_sortTypeOptions, seatingOptionsTypes, sortFieldTypes, sortTypeOptions } from '../../Utils/indexUtils';
+import { enum_seatingOptions, enum_sortFieldOptions, enum_sortTypeOptions } from '../../Utils/indexUtils';
 import RatingStars from './RatingStars';
 mapboxgl.accessToken = Constants.mapboxToken;
 const initialFormValues = {
@@ -35,6 +29,23 @@ const initialFormValues = {
     lat: 0,
     lng: 0
 }
+class ClickableMarker extends mapboxgl.Marker {
+    // new method onClick, sets _handleClick to a function you pass in
+    color = "#594A45";
+    draggable = false;
+    onClick(handleClick) {
+        this._handleClick = handleClick;
+        return this;
+    }
+    _onMapClick(e) {
+        const targetElement = e.originalEvent.target;
+        const element = this._element;
+
+        if (this._handleClick && (targetElement === element || element.contains((targetElement)))) {
+            this._handleClick();
+        }
+    }
+};
 const VenueList = () => {
     const mapContainerRef = useRef(null);
     const appState = useSelector((state) => {
@@ -127,17 +138,17 @@ const VenueList = () => {
                 map.remove();
         }
     }, []);
-    const debounce = (fn, delay) => {
-        let timeOutId;
-        return function (...args) {
-            if (timeOutId) {
-                clearTimeout(timeOutId);
-            }
-            timeOutId = setTimeout(() => {
-                fn(...args);
-            }, delay);
-        }
-    }
+    // const debounce = (fn, delay) => {
+    //     let timeOutId;
+    //     return function (...args) {
+    //         if (timeOutId) {
+    //             clearTimeout(timeOutId);
+    //         }
+    //         timeOutId = setTimeout(() => {
+    //             fn(...args);
+    //         }, delay);
+    //     }
+    // }
     const getSearchConfigs = () => {
         VenueServices.getConfigList().then(res => {
             if (!res.isAxiosError) {
@@ -169,6 +180,7 @@ const VenueList = () => {
         }
     }, [values.mapSearch]);
     const searchVenues = (searchParams = values, pageNumber) => {
+        setModalType(null);
         setShowLoader(true);
         const searchObj = {};
         if (searchParams?.location && searchParams?.location !== null) searchObj.city = searchParams.location;
@@ -193,10 +205,16 @@ const VenueList = () => {
         let avgLat = 0, avgLng = 0, count = 0;
         venuesList.forEach(venue => {
             if (!(venue.latitude > 90 || venue.latitude < -90)) {
-                let marker = new mapboxgl.Marker({
-                    color: "#594A45",
-                    draggable: false,
-                }).setLngLat([venue.longitude, venue.latitude])
+                // new mapboxgl.Marker({
+                //     color: "#594A45",
+                //     draggable: false,
+                // }).setLngLat([venue.longitude, venue.latitude])
+                //     .addTo(map);
+                new ClickableMarker()
+                    .setLngLat([venue.longitude, venue.latitude])
+                    .onClick(() => {
+                        console.log(venue);
+                    })
                     .addTo(map);
                 avgLat += venue.latitude;
                 avgLng += venue.longitude;
@@ -214,7 +232,11 @@ const VenueList = () => {
             setValues({ ...values, mapSearch: true });
         }
     }, [venuesList, values.mapSearch])
-
+    const enableSearchonEnter = (e) => {
+        if (e.key === "Enter") {
+            searchVenues();
+        }
+    }
     return (
         <>
             {
@@ -229,7 +251,7 @@ const VenueList = () => {
                         <ToggleBtn value={values.mapSearch} onChange={handleInputChange} name="mapSearch" />
                     </div>
                     <VenueSearch values={values} handleSearchModal={handleSearchModal} handleSearch={searchVenues}
-                        handleInputChange={handleInputChange}
+                        handleInputChange={handleInputChange} onKeyUp={enableSearchonEnter}
                     />
                     <Row className='venue-details-block'>
                         {
@@ -240,7 +262,7 @@ const VenueList = () => {
                                 venuesList?.map((item, i) =>
                                     <Col className='venue-block' key={i} xl={3} lg={3} md={4} sm={6} xs={12} onClick={() => { navigate(`/venue/${item.id}`) }}>
                                         <div className='image-block'>
-                                            {<img src={item.images[0]?.image_path_thumbnail} />}
+                                            {<img alt="" src={item.images[0]?.image_path_thumbnail} />}
                                         </div>
                                         <div className='venue-details'>
                                             <div className='d-flex align-items-center'>

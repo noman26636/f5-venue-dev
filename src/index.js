@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
-import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import configureStore from './Store/configureStore';
 import * as TYPES from './Store/actions/types';

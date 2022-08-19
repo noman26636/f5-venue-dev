@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import yellowStar from "../../Assets/icons/yellow-star.svg";
 import { Col, Row } from 'reactstrap';
 import { VenueServices } from './VenueServices';
 import { useSelector } from 'react-redux';
@@ -35,272 +34,12 @@ import { SimilarVenues } from './SimilarVenues';
 mapboxgl.accessToken = Constants.mapboxToken;
 
 const initialFormValues = { eventDate: "", time: "", content: "", name: "", company: "", email: "", phone: "" };
-const dummyVenue = {
-    //     name: "Pines Wedding Event Venue near Downtown Miami", rating: 3.5, logo: yellowStar, city: "Miami",
-    //     address: "250 rue de la Montagne Montreal, QC H7D 7K9", images: [], type: "type", capacity: 100, style: "",
-    //     long_description: `The main room of TribeHaus is covered with dark wood.
-    // The wood has been treated with the Shou Sugi Ban technique.
-    // Originating in 18th century in Japan, Shou Sugi Ban is a particularly striking method of preserving wood by charring it with fire.
-    // - Display mirrors Graffiti ceiling
-    // -Barm
-    // - can be modify depending on the event: empty, tables, chairs, carpets, plants etc.
-    // The second room of TribeHaus is called Jumanji room and is a bright pink room, filled with plants.
-    // The third room is an empty white gallery space`,
-    //     services: [], iCal: null, phone: 123, email: "abc"
-    id: 2,
-    user_id: 3,
-    name: "Reffen209 Trial",
-    street_address: "Refshalevej 209A",
-    zip_code: 1432,
-    city: "København K",
-    long_description: "Welcome to MACHWERK at Alte Münze. We are building the future where history happened. Located in the heart of Berlin at historic Alte Münze",
-    short_description: "sd",
-    ical: null,
-    price_per_person: "10.000",
-    rent_per_hour: "20.000",
-    rent_per_day: "20.000",
-    minimum_spend: "5.000",
-    additional_info: "Corona might affect placing of Seats",
-    reservation_deposit: "12.000",
-    cleaning_fee: "7.000",
-    cancellation_policy: "Cancelled",
-    standing_capacity: 350,
-    seating_capacity: 200,
-    company_id: 3,
-    deleted_at: null,
-    created_at: "2022-06-28T09:24:03.000000Z",
-    updated_at: "2022-07-18T12:00:25.000000Z",
-    // latitude: 12.61323,
-    // longitude: 55.69079,
-    wishlistId: null,
-    status: "Enabled",
-    images: [
-        {
-            "id": 1,
-            "venue_id": 2,
-            image_path: "1656408243737d73a0f02e8e9f517aa3910f6da3ce57f668d8.jpg.jpg",
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z"
-        },
-        {
-            "id": 2,
-            "venue_id": 2,
-            "image_path": "1656408243d4672bffd5f5a7ad19000e22e150130c919db767.jpg.jpg",
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z"
-        },
-        {
-            "id": 3,
-            "venue_id": 2,
-            "image_path": "1656408243f98b4de3fc97cb4666b15de07f97cdb24be883c6.jpg.jpg",
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z"
-        }
-    ],
-    "videos": [
-        {
-            "id": 1,
-            "venue_id": 2,
-            "video_url": "https://www.youtube.com/watch?v=SqpBIN6VH8o",
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z"
-        },
-        {
-            "id": 2,
-            "venue_id": 2,
-            "video_url": "https://www.youtube.com/watch?v=SqpBIN6VH81",
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z"
-        }
-    ],
-    "tours": [
-        {
-            "id": 1,
-            "venue_id": 2,
-            url: "https://www.youtube.com/watch?v=SqpBIN6VH8o",
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z"
-        }
-    ],
-    "capacity": {
-        "id": 1,
-        "venue_id": 2,
-        "classroom": null,
-        "theatre": null,
-        "banquet": null,
-        "conference": null,
-        "ushape": null,
-        "additional_info": null,
-        "floor_area": null,
-        "deleted_at": null,
-        "created_at": "2022-06-28T09:24:03.000000Z",
-        "updated_at": "2022-06-28T09:24:03.000000Z"
-    },
-    "experience": [
-        {
-            "id": 1,
-            "venue_id": 2,
-            "title": "First Experience",
-            "content": "My First Experience is Experience",
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z"
-        }
-    ],
-    "contact": {
-        "id": 1,
-        "venue_id": 2,
-        "contacttype_id": 1,
-        name: "Humayun Asghar",
-        company_name: "TEO, Islamabad BAc",
-        email: "humayunasghar90@gmail.com",
-        phone_number: "9231354646464",
-        image_path: "1656408243WIN_20211029_11_25_06_Pro.jpg.jpg",
-        "website": "www.contactme.com",
-        "deleted_at": null,
-        "created_at": "2022-06-28T09:24:03.000000Z",
-        "updated_at": "2022-06-28T09:24:03.000000Z"
-    },
-    "information": {
-        "id": 1,
-        "venue_id": 2,
-        "cost_center": "Islamabad f11-markaz",
-        "deleted_at": null,
-        "created_at": "2022-06-28T09:24:03.000000Z",
-        "updated_at": "2022-06-28T09:24:03.000000Z"
-    },
-    "venueet": [
-        {
-            "id": 2,
-            "venue_id": 2,
-            "admin_event_types_id": 1,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "types": {
-                "id": 1,
-                "name": "Party"
-            }
-        }
-    ],
-    "activities": [
-        {
-            "id": 1,
-            "venue_id": 2,
-            "admin_activities_id": 1,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "activity": {
-                "id": 1,
-                "name": "Golfff,hsih"
-            }
-        },
-        {
-            "id": 2,
-            "venue_id": 2,
-            "admin_activities_id": 2,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "activity": {
-                "id": 2,
-                "name": "Bowling"
-            }
-        }
-    ],
-    "types": [
-        {
-            "id": 1,
-            "venue_id": 2,
-            "admin_venue_types_id": 1,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "venuetype": {
-                "id": 1,
-                "name": "Cafee1"
-            }
-        },
-        {
-            "id": 2,
-            "venue_id": 2,
-            "admin_venue_types_id": 2,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "venuetype": {
-                "id": 2,
-                "name": "Bar"
-            }
-        }
-    ],
-    "services": [
-        {
-            "id": 1,
-            "venue_id": 2,
-            "admin_services_facilities_id": 1,
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "admin_services_cat_id": 1,
-            "services": {
-                "id": 1,
-                "category": "Equipment",
-                "value": "Free wifi"
-            }
-        },
-        {
-            "id": 2,
-            "venue_id": 2,
-            "admin_services_facilities_id": 2,
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "admin_services_cat_id": 2,
-            "services": {
-                "id": 2,
-                "category": "Technology",
-                "value": "WIFI"
-            }
-        },
-        {
-            "id": 3,
-            "venue_id": 2,
-            "admin_services_facilities_id": 3,
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "admin_services_cat_id": 3,
-            "services": {
-                "id": 3,
-                "category": "In the venue",
-                "value": "Sauna"
-            }
-        },
-        {
-            "id": 4,
-            "venue_id": 2,
-            "admin_services_facilities_id": 4,
-            "deleted_at": null,
-            "created_at": "2022-06-28T09:24:03.000000Z",
-            "updated_at": "2022-06-28T09:24:03.000000Z",
-            "admin_services_cat_id": 4,
-            "services": {
-                "id": 4,
-                "category": "Equipment",
-                "value": "Stage"
-            }
-        }
-    ]
-}
-const VenueDetails = (props) => {
+const VenueDetails = () => {
     const mapContainerRef = useRef(null);
     const appState = useSelector((state) => {
         return state.app;
     });
-    const { userLanguageData, searchData } = appState;
+    const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     const [venue, setVenue] = useState({});
     const [values, setValues] = useState(initialFormValues);
@@ -343,13 +82,13 @@ const VenueDetails = (props) => {
             }
         });
     }
-    const showWishlist = () => {
-        VenueServices.showWishlist().then(res => {
-            if (!res.isAxiosError) {
-                setWishlist(res.wishlist);
-            }
-        });
-    }
+    // const showWishlist = () => {
+    //     VenueServices.showWishlist().then(res => {
+    //         if (!res.isAxiosError) {
+    //             setWishlist(res.wishlist);
+    //         }
+    //     });
+    // }
     const addToWishlist = (title, venueId, wishlistId) => {
         setShowBtnLoader("wishlist");
         if (!wishlistId) {
@@ -430,20 +169,20 @@ const VenueDetails = (props) => {
         VenueServices.getVenueDetails(venueId).then(res => {
             setShowLoader(false);
             if (!res.isAxiosError && res.venue) {
-                res.venue[0].groupedByDateAvailabilities = setAvailabilities(res.venue[0]?.availabilities);
-                setVenue({ ...res.venue[0], isFavourite: res.isFavourite });
-                if (res.venue && res.venue[0]?.longitude && res.venue[0]?.latitude) {
+                res.venue.groupedByDateAvailabilities = setAvailabilities(res.venue?.availabilities);
+                setVenue({ ...res.venue, isFavourite: res.isFavourite, similarVenues: res.similar || [] });
+                if (res.venue && res.venue?.longitude && res.venue?.latitude) {
                     const map = new mapboxgl.Map({
                         container: mapContainerRef.current,
                         style: 'mapbox://styles/mapbox/streets-v11',
-                        center: [res.venue[0].longitude, res.venue[0].latitude],
+                        center: [res.venue.longitude, res.venue.latitude],
                         zoom: 1.5,
                         dragPan: false,
                     });
-                    const marker = new mapboxgl.Marker({
+                    new mapboxgl.Marker({
                         color: "#594A45",
                         draggable: false,
-                    }).setLngLat([res.venue[0].longitude, res.venue[0].latitude])
+                    }).setLngLat([res.venue.longitude, res.venue.latitude])
                         .addTo(map);
                     setMap(map);
                 }
@@ -496,16 +235,16 @@ const VenueDetails = (props) => {
         if (!validate()) return;
         setShowBtnLoader("inquiry");
         let apiObj = {
-            "event_date": values.eventDate,
-            "number_of_guests": "10",//
+            event_date: values.eventDate,
+            number_of_guests: null,
+            budget: null,
             time: values.time,
-            "budget": "10000",//
-            "description_of_event": values.content,
-            "user_name": values.name,
-            "user_email": values.email,
-            "company": values.company,
-            "phone_number": values.phone,
-            "venue_id": venueId
+            description_of_event: values.content,
+            user_name: values.name,
+            user_email: values.email,
+            company: values.company,
+            phone_number: values.phone,
+            venue_id: venueId
         }
         AccountServices.sendInquiry(apiObj).then(res => {
             setShowBtnLoader(null);
@@ -538,20 +277,20 @@ const VenueDetails = (props) => {
                                 <div className='name'>{venue.name}</div>
                                 <div className='rating-address-block'>
                                     <div className='rating-block'>
-                                        {/* <span>{venue.street_address}, {venue.zip_code}, {venue.city} </span>
-                                        <span className='mx-2'>|</span> */}
+                                        <span>{venue.city} </span>
+                                        <span className='mx-2'>|</span>
                                         <div className='rating'>
                                             <RatingStars rating={venue.ratings_avg_rating} />
                                         </div>
                                     </div>
                                     <div className='address-block'>
-                                        <img src={location} className="mx-2" />
-                                        <span>{venue.street_address} {venue.zip_code} {venue.city}</span>
+                                        <img alt="" src={location} className="mx-2" />
+                                        <span>{venue.street_address} {venue.zip_code}</span>
                                     </div>
                                     <div className='wishlist-block'
                                     // onClick={() => { showWishlist(); setShowWishlistModal(true) }}
                                     >
-                                        <img src={venue.isFavourite?.length > 0 ? heartRed : heartWhite} className="mx-2" width={25} height={25} />
+                                        <img alt="" src={venue.isFavourite?.length > 0 ? heartRed : heartWhite} className="mx-2" width={25} height={25} />
                                         <span>{venue.isFavourite?.length > 0 ? translations.AddedToWishlist : translations.AddToWishlist}</span>
                                     </div>
                                 </div>
@@ -663,14 +402,14 @@ const VenueDetails = (props) => {
                                             Object.keys(services)?.map((service, i) => {
                                                 return <div className='facilities-list-block' key={i}>
                                                     <div className='d-flex align-items-center'>
-                                                        <img width={18} height={18} className='service-icon mr-3' src={getIcon(service)} />
+                                                        <img alt="" width={18} height={18} className='service-icon mr-3' src={getIcon(service)} />
                                                         <span className='sub-title'>{getTitle(service)}</span>
                                                     </div>
                                                     <ul className='facilities-list'>
                                                         {services[service]?.map((item, j) => {
 
                                                             return <li key={j} className={`d-flex align-items-center ${venue.services?.map(i => i.admin_services_facilities_id).indexOf(item.id) === -1 && 'striked-text'}`}>
-                                                                {venue.services?.map(i => i.admin_services_facilities_id).indexOf(item.id) !== -1 && <img src={tick} className="mr-3" />}
+                                                                {venue.services?.map(i => i.admin_services_facilities_id).indexOf(item.id) !== -1 && <img alt="" src={tick} className="mr-3" />}
                                                                 <span> {item.value}</span>
                                                             </li>
                                                         })}
@@ -682,14 +421,14 @@ const VenueDetails = (props) => {
                                         {
                                             <div className='facilities-list-block'>
                                                 <div className='d-flex align-items-center'>
-                                                    <img width={18} height={18} className='service-icon mr-3' src={micIcon} />
+                                                    <img alt="" width={18} height={18} className='service-icon mr-3' src={micIcon} />
                                                     <span className='sub-title'>{translations.EventTypes}</span>
                                                 </div>
                                                 <ul className='facilities-list'>
                                                     {eventTypesList?.map((item, j) => {
 
                                                         return <li key={j} className={`d-flex align-items-center ${venue.venueet?.map(i => i.admin_event_types_id).indexOf(item.id) === -1 && 'striked-text'}`}>
-                                                            {venue.venueet?.map(i => i.admin_event_types_id).indexOf(item.id) !== -1 && <img src={tick} className="mr-3" />}
+                                                            {venue.venueet?.map(i => i.admin_event_types_id).indexOf(item.id) !== -1 && <img alt="" src={tick} className="mr-3" />}
                                                             <span> {item.name}</span>
                                                         </li>
                                                     })}
@@ -699,14 +438,14 @@ const VenueDetails = (props) => {
                                         {
                                             <div className='facilities-list-block'>
                                                 <div className='d-flex align-items-center'>
-                                                    <img width={18} height={18} className='service-icon mr-3' src={buildingIcon} />
+                                                    <img alt="" width={18} height={18} className='service-icon mr-3' src={buildingIcon} />
                                                     <span className='sub-title'>{translations.VenueType}</span>
                                                 </div>
                                                 <ul className='facilities-list'>
                                                     {venueTypesList?.map((item, j) => {
 
                                                         return <li key={j} className={`d-flex align-items-center ${venue.types?.map(i => i.admin_venue_types_id).indexOf(item.id) === -1 && 'striked-text'}`}>
-                                                            {venue.types?.map(i => i.admin_venue_types_id).indexOf(item.id) !== -1 && <img src={tick} className="mr-3" />}
+                                                            {venue.types?.map(i => i.admin_venue_types_id).indexOf(item.id) !== -1 && <img alt="" src={tick} className="mr-3" />}
                                                             <span> {item.name}</span>
                                                         </li>
                                                     })}
@@ -717,14 +456,14 @@ const VenueDetails = (props) => {
                                         {
                                             <div className='facilities-list-block'>
                                                 <div className='d-flex align-items-center'>
-                                                    <img width={18} height={18} className='service-icon mr-3' src={buildingIcon} />
+                                                    <img alt="" width={18} height={18} className='service-icon mr-3' src={buildingIcon} />
                                                     <span className='sub-title'>{translations.Activities}</span>
                                                 </div>
                                                 <ul className='facilities-list'>
                                                     {activitiesList?.map((item, j) => {
 
                                                         return <li key={j} className={`d-flex align-items-center ${venue.activities?.map(i => i.admin_activities_id).indexOf(item.id) === -1 && 'striked-text'}`}>
-                                                            {venue.activities?.map(i => i.admin_activities_id).indexOf(item.id) !== -1 && <img src={tick} className="mr-3" />}
+                                                            {venue.activities?.map(i => i.admin_activities_id).indexOf(item.id) !== -1 && <img alt="" src={tick} className="mr-3" />}
                                                             <span> {item.name}</span>
                                                         </li>
                                                     })}
@@ -736,14 +475,13 @@ const VenueDetails = (props) => {
                                 </div >
                                 {/* Videos */}
                                 {
-                                    venue.videos?.length !== 0 &&
-                                    <div className='videos-block'>
+                                    venue.videos?.length !== 0 && <div className='videos-block'>
                                         <div className='title'>
                                             {translations.Videos}
                                         </div>
                                         <div className='videos'>
                                             {venue.videos?.map((item, i) => {
-                                                return <iframe src={item.video_url} key={i} />
+                                                return <iframe title="iframe" src={item.video_url} key={i} />
                                             })}
                                         </div>
                                     </div>
@@ -757,7 +495,7 @@ const VenueDetails = (props) => {
                                         </div>
                                         <div className='videos'>
                                             {venue.tours?.map((item, i) => {
-                                                return <iframe src={item.url} key={i} />
+                                                return <iframe title="iframe" src={item.url} key={i} />
                                             })}
                                         </div>
                                     </div>

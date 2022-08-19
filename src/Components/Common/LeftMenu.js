@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Button from './Button';
 
 const LeftMenu = (props) => {
     const { menuOptions, showLeftMenu, toggleMenu, logout, setShowSignupModal, active, setActive } = props;

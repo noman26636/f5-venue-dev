@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import FeaturedVenues from './FeaturedVenues';
-import venueDummyImg from "../../Assets/images/venue-dummy-img.png";
 import Main from './Main';
 import HowItWorks from './HowItWorks';
 import Features from './Features';
 import GetStarted from './GetStarted';
 import SignupModal from '../Signup/SignupModal';
-import { useSelector } from 'react-redux';
 import { VenueServices } from '../Venue/VenueServices';
 function Home() {
-    const appState = useSelector((state) => {
-        return state.app;
-    });
-    const { userLanguageData } = appState;
-    const translations = userLanguageData.translations;
     const [showSignupModal, setShowSignupModal] = useState(false);
     const [eventTypesList, setEventTypesList] = useState([]);
     const [featuredVenuesList, setFeaturedVenuesList] = useState([]);

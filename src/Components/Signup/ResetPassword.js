@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { AccountServices } from './AccountServices';
-import { Constants } from '../../Configurations/Constants';
-import IntlMessageFormat from 'intl-messageformat';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Row, Col } from 'reactstrap';
-import * as TYPES from '../../Store/actions/types';
 import TextField from '../Common/TextField';
-import userImg from "../../Assets/icons/user.svg";
 import lock from "../../Assets/icons/lock.svg";
 import loginImg from "../../Assets/images/login-img.jpg";
 import logo from "../../Assets/images/main-logo.svg";
@@ -16,7 +12,6 @@ import { toast } from 'react-toastify';
 const initialFormValues = {
     password: "",
     confirmPassword: "",
-
 }
 export default function ResetPassword() {
     const appState = useSelector((state) => {
@@ -32,7 +27,6 @@ export default function ResetPassword() {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
-    const dispatch = useDispatch();
     const enableLoginonEnter = (e) => {
         if (e.key === "Enter") {
             handleClick();

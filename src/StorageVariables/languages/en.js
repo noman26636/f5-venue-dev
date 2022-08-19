@@ -124,6 +124,7 @@ export var stringVariables = {
     AddToWishlist: "Add to wish list",
     SelectWishlist: "Select a wish list",
     CreateWishlist: "Create new wish list",
+    EditWishlist: "Edit wish list",
     Create: "Create",
     NewListPlaceholder: "E.g. banquet halls, meeting rooms...",
     NameOfList: "Name of the list",

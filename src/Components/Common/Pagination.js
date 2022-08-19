@@ -13,8 +13,8 @@ const Pager = (props) => {
     };
     return (
         <Pagination total={total} itemRender={itemRender} pageSize={pageSize} onChange={onChange} current={current}
-            hideOnSinglePage prevIcon={<img width={12} height={12} src={arrowLeft} />}
-            nextIcon={<img width={12} height={12} src={arrowRight} />}
+            hideOnSinglePage prevIcon={<img alt="" width={12} height={12} src={arrowLeft} />}
+            nextIcon={<img alt="" width={12} height={12} src={arrowRight} />}
             jumpPrevIcon={<span>----</span>}
             jumpNextIcon={<span>----</span>}
 

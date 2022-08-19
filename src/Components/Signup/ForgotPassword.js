@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AccountServices } from './AccountServices';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import TextField from '../Common/TextField';
 import userImg from "../../Assets/icons/user.svg";
@@ -24,7 +24,6 @@ export default function ForgotPassword(props) {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
-    const dispatch = useDispatch();
     const enableLoginonEnter = (e) => {
         if (e.key === "Enter") {
             handleClick();

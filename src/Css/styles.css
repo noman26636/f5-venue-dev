@@ -1175,8 +1175,10 @@ footer .social-icons .icon.linkedin {
 }
 .venue-details-block {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0 !important;
+  gap: 1rem;
+  cursor: pointer;
 }
 .venue-details-block .venue-block {
   padding: 10px 11px;
@@ -1305,7 +1307,7 @@ footer .social-icons .icon.linkedin {
   justify-content: center;
 }
 .featured-venue-block .carousel-inner .carousel-item {
-  width: 90%;
+  width: 92%;
   margin: 0 auto;
 }
 .featured-venue-block .carousel-control-prev-icon {

@@ -64,7 +64,7 @@ export default function PasswordField(props) {
 
   return (
     <div className={classes.root}>
-      <img alt='' className='formFieldIcon' src={icon}></img>
+      <img alt="" className='formFieldIcon' src={icon}></img>
       <TextField
         name={name}
         label={label}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import dropdownIcon from "../../Assets/icons/dropdownArrow.svg";
 
 export default function FormDropdown(props) {
@@ -19,8 +19,8 @@ export default function FormDropdown(props) {
         )
         }
       </select>
-      {icon && <img src={icon} className="input-icon" />}
-      <img src={dropdownIcon} className="dropdownIcon" />
+      {icon && <img alt="" src={icon} className="input-icon" />}
+      <img alt="" src={dropdownIcon} className="dropdownIcon" />
       {error && <div className="error-msg">{error}</div>}
     </div >
   );

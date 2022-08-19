@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Popover, PopoverBody } from "reactstrap";
-import { seatingOptionsTypes } from '../../Utils/indexUtils';
 import Button from '../Common/Button';
 import Checkbox from '../Common/Checkbox';
 import FormDropdown from '../Common/Dropdown';
 import TextField from '../Common/TextField';
 export default function SearchModal(props) {
-    let { showModal, modalType, values, setValues, setModalType, eventTypesList, moreServicesList, handleInputChange, seatingOptions,
+    let { showModal, modalType, values, setValues, eventTypesList, moreServicesList, handleInputChange, seatingOptions,
         sortFieldOptions, sortTypeOptions } = props;
     const { eventType, capacity, moreFilters, seatingOption, sortField, sortType } = values;
     const appState = useSelector((state) => {

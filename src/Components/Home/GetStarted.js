@@ -21,7 +21,7 @@ const GetStarted = (props) => {
             <Row className='bottom-block'>
                 <Col xl={6} lg={6} md={6} sm={12}>
                     <div className='text-center place-self-end px-xl-5 px-lg-5'>
-                        <img src={calendarIcon} />
+                        <img alt="" src={calendarIcon} />
                         <h3>{translations.PlanEvent}</h3>
                         <p>{translations.PlanEventDesc}</p>
                         <Button label={translations.SignUp} onClick={() => setShowSignupModal(true)} className="mt-3" wrapperClass="m-auto" />
@@ -29,7 +29,7 @@ const GetStarted = (props) => {
                 </Col>
                 <Col xl={6} lg={6} md={6} sm={12}>
                     <div className='text-center place-self-start px-xl-5 px-lg-5'>
-                        <img src={cartIcon} />
+                        <img alt="" src={cartIcon} />
                         <h3>{translations.AddVenue}</h3>
                         <p>{translations.AddVenueDesc}</p>
                         <Button label={translations.BecomeSupplier} onClick={() => setShowSignupModal(true)} className="mt-3"

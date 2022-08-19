@@ -30,7 +30,7 @@ const Features = () => {
                     {features?.map((item, i) =>
                         <Col xl={4} lg={4} md={6} sm={6} xs={6} className='feature-item' key={i}>
                             <div className='icon-block'>
-                                <img src={item.icon} />
+                                <img alt="" src={item.icon} />
                             </div>
                             <div className='feature-text'>{item.text}</div>
                         </Col>

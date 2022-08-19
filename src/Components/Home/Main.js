@@ -38,7 +38,6 @@ export default function Main(props) {
   const dispatch = useDispatch();
   const images = [sImg1, sImg2, sImg3, sImg4, sImg5, sImg6, sImg7, sImg8, sImg9, sImg10, sImg11, sImg12];
   const [values, setValues] = useState(initialFormValues);
-  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const handleInputChange = ({ target }) => {
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -84,7 +83,7 @@ export default function Main(props) {
         </Col>
         <Col xl={3} className="search-item">
           <FormDropdown options={eventTypesList} icon={eventTypeIcon} label={translations.EventType} name="eventType" value={values.eventType}
-            error={errors.eventType} onChange={handleInputChange} />
+            onChange={handleInputChange} />
         </Col>
         <Col xl={3} className="search-item">
           <TextField name="capacity"

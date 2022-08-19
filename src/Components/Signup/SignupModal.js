@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
 import TextField from '../Common/TextField';
 import Button from '../Common/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AccountServices } from './AccountServices';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';

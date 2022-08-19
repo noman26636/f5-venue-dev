@@ -8,7 +8,7 @@ export const VenueServices = {
                 return error;
             });
     },
-    getFeaturedVenues: (pageNumber = 1, pageSize = 20) => {
+    getFeaturedVenues: (pageNumber = 1, pageSize = 15) => {
         return axios.get(`${VenueApis.getFeaturedVenues}?page=${pageNumber}&page_size=${pageSize}`)
             .then(response => response.data)
             .catch(error => {

@@ -6,14 +6,12 @@ import location from "../../Assets/icons/location1.svg";
 import { faFacebookF, faTwitter, faYoutube, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Row, Col } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Constants } from '../../Configurations/Constants';
-const Footer = props => {
+const Footer = () => {
     const appState = useSelector((state) => {
         return state.app;
     });
-    const navigate = useNavigate();
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     return (

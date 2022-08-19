@@ -3,7 +3,6 @@ import {
     CarouselControl,
     Carousel,
     CarouselItem,
-    CarouselIndicators,
 } from 'reactstrap';
 function ImageSlider(props) {
     const { items, slide = true } = props;
@@ -24,7 +23,7 @@ function ImageSlider(props) {
             <CarouselItem
                 key={i}
             >
-                <img src={item.image_path ? item.image_path : item} alt="img" />
+                <img alt="" src={item.image_path ? item.image_path : item} />
             </CarouselItem>
         );
     });

@@ -3,12 +3,10 @@ import {
     Carousel,
     CarouselItem,
     CarouselIndicators,
-    Col,
-    Row,
     CarouselControl,
 } from 'reactstrap';
 const ItemsCarousel = (props) => {
-    const { items, children, groups, activeIndex, setActiveIndex } = props;
+    const { children, groups, activeIndex, setActiveIndex } = props;
     const previousButton = () => {
         const nextIndex = activeIndex === 0 ?
             groups - 1 : activeIndex - 1;

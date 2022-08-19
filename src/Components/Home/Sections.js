@@ -15,7 +15,6 @@ import transportIcon from "../../Assets/icons/transport-red.svg";
 import calendarIcon from "../../Assets/icons/calendar.svg";
 import cartIcon from "../../Assets/icons/cart.svg";
 import SignupModal from '../Signup/SignupModal';
-import Modal from '../Common/Modal';
 
 const Sections = () => {
     const navigate = useNavigate();
@@ -56,7 +55,7 @@ const Sections = () => {
                     <Col xl={6} lg={6} md={6} sm={12} className="image-block-wrap">
                         <div className='image-block'>
                             <div className='img-bg'></div>
-                            <img src={sectionImg1} className='section-img' />
+                            <img alt="" src={sectionImg1} className='section-img' />
                         </div>
                     </Col>
                 </Row>
@@ -78,7 +77,7 @@ const Sections = () => {
                     <Col xl={6} lg={6} md={6} sm={12} className="image-block-wrap">
                         <div className='image-block'>
                             <div className='img-bg'></div>
-                            <img src={sectionImg2} className='section-img' />
+                            <img alt="" src={sectionImg2} className='section-img' />
                         </div>
                     </Col>
                 </Row>
@@ -99,7 +98,7 @@ const Sections = () => {
                     <Col xl={6} lg={6} md={6} sm={12} className="image-block-wrap">
                         <div className='image-block'>
                             <div className='img-bg'></div>
-                            <img src={sectionImg3} className='section-img' />
+                            <img alt="" src={sectionImg3} className='section-img' />
                         </div>
                     </Col>
                 </Row>
@@ -123,7 +122,7 @@ const Sections = () => {
                             {features?.map((item, i) =>
                                 <Col xl={4} lg={4} md={6} sm={6} xs={6} className='feature-item' key={i}>
                                     <div className='icon-block'>
-                                        <img src={item.icon} />
+                                        <img alt="" src={item.icon} />
                                     </div>
                                     <div className='feature-text'>{item.text}</div>
                                 </Col>
@@ -142,7 +141,7 @@ const Sections = () => {
                 <Row className='bottom-block'>
                     <Col xl={6} lg={6} md={6} sm={12}>
                         <div className='text-center place-self-end px-xl-5 px-lg-5'>
-                            <img src={calendarIcon} />
+                            <img alt="" src={calendarIcon} />
                             <h3>{translations.PlanEvent}</h3>
                             <p>{translations.PlanEventDesc}</p>
                             <Button label={translations.SignUp} onClick={() => setShowSignupModal(true)} className="mt-3" />
@@ -150,7 +149,7 @@ const Sections = () => {
                     </Col>
                     <Col xl={6} lg={6} md={6} sm={12}>
                         <div className='text-center place-self-start px-xl-5 px-lg-5'>
-                            <img src={cartIcon} />
+                            <img alt="" src={cartIcon} />
                             <h3>{translations.AddVenue}</h3>
                             <p>{translations.AddVenueDesc}</p>
                             <Button label={translations.BecomeSupplier} onClick={() => setShowSignupModal(true)} className="mt-3" />

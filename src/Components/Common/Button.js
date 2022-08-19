@@ -9,16 +9,15 @@ export default function Button(props) {
     showBtnLoader = false,
     className,
     wrapperClass,
-    ...other
   } = props;
   return (
     <div className={`btn-wrap ${wrapperClass}`}>
       <button type="button" className={`button-primary ${className}`} onClick={onClick} disabled={disabled}>{
         showBtnLoader ?
-          <img src={Preloader} className="btn-loader" alt="" /> :
+          <img alt="" src={Preloader} className="btn-loader" /> :
           label
       }</button>
-      {icon && <img src={icon} className="btn-icon" />}
+      {icon && <img alt="" src={icon} className="btn-icon" />}
     </div>
   );
 }
