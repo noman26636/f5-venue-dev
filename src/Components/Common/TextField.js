@@ -1,5 +1,7 @@
 import React from "react";
+import { getFormattedDate } from "../../Utils/indexUtils";
 export default function TextField(props) {
+   
     const {
         name,
         value,
@@ -8,15 +10,38 @@ export default function TextField(props) {
         icon,
         type,
         label,
-        disabled,
         onKeyUp,
+        className,
+        placeholder = "",
+        min = 1, max = 999999,
+        unit,
+        maxLength = 99999,
+       minDate =  getFormattedDate(new Date())
     } = props;
-
     return (
-        <div className="input-wrapper">
-            <div>{label}</div>
-            <input className="" name={name} value={value} type={type} onChange={onChange} key={label} onKeyUp={onKeyUp} />
-            <img src={icon} className="input-icon" />
+        <div className={`input-wrapper ${className}`}>
+            {label && <div className="label">{label}</div>}
+            <div className={`position-relative`}>
+                {icon && <img alt="" src={icon} className="input-icon" />}
+                <input placeholder={placeholder} name={name} value={type==="date"?getFormattedDate(value): value} 
+                type={type !== "time" ? type : "text"}
+                    onChange={onChange} key={label} min={type === "date" ? minDate : min} max={max} maxLength={maxLength}
+                    onFocus={(e) => { if (type === "time") e.target.type = type; }}
+                    onKeyUp={onKeyUp ? onKeyUp :
+                        (type === "number" ?
+                            ({ target, key }) => {
+                                if (key === "." || key === "e" || key === "E" || key === "+" || key === "-") {
+                                    target.value = "";
+                                    return;
+                                }
+                            }
+                            :
+                            () => { return; })}
+                />
+                {unit && <div className="unit-block">
+                    <span className="unit-text">{unit}</span>
+                </div>}
+            </div>
             {error && <div className="error-msg">{error}</div>}
         </div>
     );

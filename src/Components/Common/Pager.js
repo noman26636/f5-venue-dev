@@ -15,15 +15,15 @@ const Pager = props => {
           }}
         >
           <div className={`${page === 1 ? 'backArrow' : 'rightArrow'}`}>
-            <img src={page === 1 ? leftArrow : leftArrowWhite} alt='ohSnap' />
+            <img alt="" src={page === 1 ? leftArrow : leftArrowWhite} alt='ohSnap' />
           </div>
         </Link> */}
         <div className='d-flex'>
-          {[...Array(count).keys()].map((val, key) => (
+          {[...Array(count).keys()]?.map((val, key) => (
             <div key={key}>
               {val + 1 === page ? (
                 <div className='px-1'>
-                  <img src={selected} alt='ohSnap' />
+                  <img alt="" src={selected} alt='ohSnap' />
                 </div>
               ) : (
                 <Link
@@ -33,7 +33,7 @@ const Pager = props => {
                   }}
                 >
                   <div className='px-1'>
-                    <img src={circle} alt='ohSnap' />
+                    <img alt="" src={circle} alt='ohSnap' />
                   </div>
                 </Link>
               )}

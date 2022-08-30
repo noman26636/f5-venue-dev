@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
+import dropdownIcon from "../../Assets/icons/dropdownArrow.svg";
+
 export default function FormDropdown(props) {
   const {
     name,
     label,
     value,
-    title,
     error = null,
     onChange,
     options = [],
     icon,
-    order,
-    key
   } = props;
-  let text = "";
-  if (value !== null && value !== "") {
-    const index = options.map(function (e) { return e.description; }).indexOf(value);
-    text = options[index].description;
-  }
-  const [showDropdown, setshowDropdown] = useState(false);
   return (
-    <div className="dropdownBlock" style={{ order: `${order}` }} key={key}>
-
+    <div className="dropdownBlock" key={label}>
+      <select name={name} onChange={onChange} value={value}>
+        {label && <option value={0}>{label}</option>}
+        {options?.map((item, i) => <option value={item.id} key={i}>{item.name}</option>
+        )
+        }
+      </select>
+      {icon && <img alt="" src={icon} className="input-icon" />}
+      <img alt="" src={dropdownIcon} className="dropdownIcon" />
+      {error && <div className="error-msg">{error}</div>}
     </div >
   );
 }

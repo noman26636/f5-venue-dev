@@ -9,7 +9,9 @@ const initialState = {
     language: defaultLang,
     translations: defaultLang === 'en' ? stringVariablesEn : stringVariablesDa,
   },
-  version: Constants.appVersion,
+  version: "0",
+  searchData: {},
+
 };
 const app = (state = initialState, action) => {
   switch (action.type) {
@@ -25,11 +27,17 @@ const app = (state = initialState, action) => {
         version: action.data,
       };
     }
+    case TYPES.SEARCH_DATA: {
+      return {
+        ...state,
+        searchData: action.data,
+      };
+    }
     case TYPES.RESET: {
       return {
         ...initialState,
-        version: state.version,
-        userLanguageData: { ...state.userLanguageData },
+        version: Constants.appVersion,
+        // userLanguageData: { ...state.userLanguageData },
       };
     }
     default: {

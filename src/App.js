@@ -1,33 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import AppRoutes from './Routes/AppRoutes'
-import Layout from './Components/Common/Layout'
 import { Constants } from './Configurations/Constants';
 import { useDispatch, useSelector } from 'react-redux';
 import * as TYPES from './Store/actions/types';
 import { setDefaultLang } from './Utils/indexUtils';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, Slide } from 'react-toastify';
 const App = () => {
   const appState = useSelector(state => {
     return state.app;
   });
-  const authState = useSelector(state => {
-    return state.auth;
-  });
   const dispatch = useDispatch();
   const userLanguageData = appState.userLanguageData;
-  const user = authState.user;
 
   useEffect(() => {
-    if (appState.version !== Constants.version) {
+    if (appState.version !== Constants.appVersion) {
+      if ('caches' in window) {
+        caches.keys().then((names) => {
+          names.forEach((name) => {
+            caches.delete(name);
+          });
+        });
+      }
       dispatch({ type: TYPES.RESET });
-      dispatch({ type: TYPES.VERSION, data: Constants.version });
       if (!userLanguageData || !userLanguageData.language)
         setDefaultLang();
     }
   }, [])
 
   return (
-    <AppRoutes />
+    <>
+      <AppRoutes />
+      <ToastContainer draggable={false} limit={1} transition={Slide} hideProgressBar={true} autoClose={3000} closeOnClick
+        position="bottom-right" theme='colored'
+      />
+    </>
   )
 }
 export default App

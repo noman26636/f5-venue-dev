@@ -8,13 +8,16 @@ export default function Button(props) {
     disabled = false,
     showBtnLoader = false,
     className,
-    ...other
+    wrapperClass,
   } = props;
   return (
-    <span className="btn-wrap">
-      <button type="button" className={`button-primary ${className}`} onClick={onClick}>{label}</button>
-      {icon && <img src={icon} className="btn-icon" />}
-      {showBtnLoader && <img src={Preloader} className="btn-loader" alt="" />}
-    </span>
+    <div className={`btn-wrap ${wrapperClass}`}>
+      <button type="button" className={`button-primary ${className}`} onClick={onClick} disabled={disabled}>{
+        showBtnLoader ?
+          <img alt="" src={Preloader} className="btn-loader" /> :
+          label
+      }</button>
+      {icon && <img alt="" src={icon} className="btn-icon" />}
+    </div>
   );
 }
