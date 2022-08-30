@@ -4,12 +4,14 @@ import Button from '../Common/Button';
 import calendarIcon from "../../Assets/icons/calendar.svg";
 import cartIcon from "../../Assets/icons/cart.svg";
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const GetStarted = (props) => {
     const { setShowSignupModal } = props;
     const appState = useSelector((state) => {
         return state.app;
     });
+    const navigate=useNavigate();
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     return (

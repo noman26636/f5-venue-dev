@@ -1,10 +1,7 @@
 import React from "react";
+import { getFormattedDate } from "../../Utils/indexUtils";
 export default function TextField(props) {
-    const getFormattedDate = (date) => {
-        const month = (date.getMonth() + 1) < 10 ? `0${(date.getMonth() + 1)}` : (date.getMonth() + 1);
-        const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-        return `${date.getFullYear()}-${month}-${day}`;
-    }
+   
     const {
         name,
         value,
@@ -19,17 +16,17 @@ export default function TextField(props) {
         min = 1, max = 999999,
         unit,
         maxLength = 99999,
-        minDate = getFormattedDate(new Date())
+       minDate =  getFormattedDate(new Date())
     } = props;
-
     return (
         <div className={`input-wrapper ${className}`}>
             {label && <div className="label">{label}</div>}
             <div className={`position-relative`}>
                 {icon && <img alt="" src={icon} className="input-icon" />}
-                <input placeholder={placeholder} name={name} value={value} type={type !== "date" && type !== "time" ? type : "text"}
+                <input placeholder={placeholder} name={name} value={type==="date"?getFormattedDate(value): value} 
+                type={type !== "time" ? type : "text"}
                     onChange={onChange} key={label} min={type === "date" ? minDate : min} max={max} maxLength={maxLength}
-                    onFocus={(e) => { if (type === "date" || type === "time") e.target.type = type; }}
+                    onFocus={(e) => { if (type === "time") e.target.type = type; }}
                     onKeyUp={onKeyUp ? onKeyUp :
                         (type === "number" ?
                             ({ target, key }) => {

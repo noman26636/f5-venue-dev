@@ -9,7 +9,7 @@ import { AccountServices } from '../Signup/AccountServices';
 import { Row, Col } from 'reactstrap';
 import SignupModal from '../Signup/SignupModal';
 import LeftMenu from './LeftMenu';
-export default function Header(props) {
+export default function Header() {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLeftMenu, setShowLeftMenu] = useState(false);
   const [active, setActive] = useState(0);

@@ -137,6 +137,8 @@ const VenueList = () => {
             if (map)
                 map.remove();
         }
+        
+       
     }, []);
     // const debounce = (fn, delay) => {
     //     let timeOutId;
@@ -245,6 +247,8 @@ const VenueList = () => {
             <div className='d-flex'>
                 <div className='venue-list-view' onClick={(e) => { setModalType(null) }}
                     style={{ width: values.mapSearch ? '74%' : '100%' }}
+                    onKeyUp={(e)=>{  if (e.key === "Enter") searchVenues();}}
+                    tabIndex="0"
                 >
                     <div className='heading-block'>
                         <h3>{translations.WeddingHalls}</h3>
@@ -271,7 +275,7 @@ const VenueList = () => {
 
                                             <div className='rating-block'>
                                                 <RatingStars rating={item.ratings_avg_rating} />
-                                                {item.ratings?.length > 0 && <span className='reviews'>{item.ratings.length} {translations.Reviews}</span>}
+                                                {item.ratings?.length > 0 && <span className='reviews'>{item.ratings.length} {item.ratings?.length !== 1 ? translations.Reviews : translations.Review}</span>}
                                             </div>
                                             <div className='d-flex'>
                                                 <div className='guests mr-3'>
@@ -287,7 +291,7 @@ const VenueList = () => {
                                                 {item.short_description}
                                             </p>
                                         </div>
-                                        {item.featured === 1 && <div className='featured-tag'>{translations.Featured}</div>}
+                                        {Boolean(item.featured) && <div className='featured-tag'>{translations.Featured}</div>}
                                     </Col>
                                 )}
                     </Row>

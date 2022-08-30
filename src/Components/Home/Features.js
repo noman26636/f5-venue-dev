@@ -47,7 +47,7 @@ const Features = () => {
                     <p >
                         {translations.LookingForVenueDesc}
                     </p>
-                    <Button label={translations.BrowseVenues} onClick={() => { navigate("/") }} className="btn-white" />
+                    <Button label={translations.BrowseVenues} onClick={() => { navigate("/venueList") }} className="btn-white" />
                 </div>
             </Col>
 

@@ -2,12 +2,16 @@ import { Constants } from "../Configurations/Constants";
 import configureStore from "../Store/configureStore";
 import * as TYPES from '../Store/actions/types';
 
-export const formatDate = (value) => {
-    value = new Date(value);
-    let date = value.getDate() < 10 ? `0${value.getDate()}` : value.getDate();
-    let month = (value.getMonth() + 1) < 10 ? `0${(value.getMonth() + 1)}` : (value.getMonth() + 1);
-    return `${date}/${month}/${value.getFullYear()}`
+export const getFormattedDate = (date,format) => {
+    const month = (date?.getMonth() + 1) < 10 ? `0${(date?.getMonth() + 1)}` : (date?.getMonth() + 1);
+    const day = date?.getDate() < 10 ? `0${date?.getDate()}` : date?.getDate();
+    const year=date?.getFullYear();
+    if(format==="mm/dd/yyyy")
+    return `${month}/${day}/${year}`;
+    else
+    return `${year}-${month}-${day}`;
 }
+
 export const setDefaultLang = () => {
     const { language: browserLanguage } = window.navigator || {};
     const defaultLang = browserLanguage === 'da-DK' ? 'da' : Constants.defaultLang;

@@ -109,7 +109,7 @@ export default function SignupModal(props) {
             AccountServices.signupUser(userObj).then(res => {
                 setShowLoader(false);
                 if (res.isAxiosError || !res.access_token) {
-                    if (res?.response?.status === 403) {
+                    if (res?.response?.data?.email) {
                         setErrors({
                             ...errors, apiError: `${translations.DuplicateEmailErr}`
                         });
@@ -195,12 +195,13 @@ export default function SignupModal(props) {
             </ModalBody>
             <ModalFooter>
                 <Button label={translations.SignUp} onClick={signup} showBtnLoader={showLoader} className="signup-btn" />
+              {translations.LoginMsg &&
                 <div className='fw-500 mb-3 w-100 text-end'>
                     {new IntlMessageFormat(translations.LoginMsg, userLanguageData.language).format({
                         c: chunk1 => <a key={2} onClick={() => { handleClose(); navigate("/login") }} className="signupLink"> {chunk1}</a>
                     }
                     )}
-                </div>
+                </div>}
             </ModalFooter>
         </Modal>
     );

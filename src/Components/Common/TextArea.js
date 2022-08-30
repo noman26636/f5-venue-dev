@@ -8,6 +8,7 @@ export default function TextArea(props) {
         icon,
         label,
         onKeyUp,
+        onFocus,
         className,
         placeholder = "",
         rows,
@@ -18,7 +19,9 @@ export default function TextArea(props) {
             {label && <div className="label">{label}</div>}
             {icon && <img alt="" src={icon} className="input-icon" />}
             <textarea placeholder={placeholder} name={name} value={value} onChange={onChange} key={label} rows={rows}
-                onKeyUp={onKeyUp ? onKeyUp : () => { return; }} />
+                onKeyUp={onKeyUp ? onKeyUp : () => { return; }} 
+                onFocus={onFocus ? onFocus : () => { return; }}
+                />
             {error && <div className="error-msg">{error}</div>}
         </div>
     );

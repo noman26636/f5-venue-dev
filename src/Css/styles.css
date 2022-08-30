@@ -461,7 +461,7 @@ textarea {
 .checkbox-wrap.pink-checkbox .checkmark {
   border: 1px solid #d00027;
   border-radius: 2px;
-  top: -5px;
+  top: 0px;
 }
 .checkbox-wrap.pink-checkbox .checkmark:after,
 .checkbox-wrap.pink-checkbox input:checked ~ .checkmark {
@@ -1625,7 +1625,7 @@ footer .social-icons .icon.linkedin {
   border-radius: 4px;
   padding: 9px 13px;
   cursor: pointer;
-  max-width: 600px;
+  max-width: 160px;
   overflow: hidden;
 }
 /* .venue-list-view .venue-search .search-item.sort-block {
@@ -1643,6 +1643,8 @@ footer .social-icons .icon.linkedin {
   display: flex;
   align-items: center;
   padding: 11px;
+ background: #0a58ca;
+ border-color: #0a58ca;
 }
 .venue-list-view .venue-search .search-item.search-icon img {
   width: 18px;
@@ -1814,11 +1816,11 @@ footer .social-icons .icon.linkedin {
   height: 347px;
 }
 .carousel-control-next-icon {
-  background-image: url(../Assets/icons/arrow-right-black.svg);
+  background-image: url(../Assets/icons/arrow-right-black-circle.svg);
   border: none;
 }
 .carousel-control-prev-icon {
-  background-image: url(../Assets/icons/arrow-left-black.svg);
+  background-image: url(../Assets/icons/arrow-left-black-circle.svg);
   border: none;
 }
 .venue-details-view .venue-details-header .details {
@@ -1832,7 +1834,7 @@ footer .social-icons .icon.linkedin {
 .venue-details-view .venue-details-header .details .rating-address-block {
   display: flex;
   align-items: center;
-  gap: 5rem;
+  gap: 2rem;
   margin-top: 10px;
 }
 .venue-details-view
@@ -1975,6 +1977,7 @@ footer .social-icons .icon.linkedin {
 }
 .venue-details-view .venue-details-body .calendar .calendar-key {
   display: flex;
+  align-items: center;
   font-size: 14px;
   color: #000000;
   gap: 2rem;
@@ -2003,16 +2006,33 @@ footer .social-icons .icon.linkedin {
   .square-box.booked {
   background: #f5a3a3;
 }
+.venue-details-view
+  .venue-details-body
+  .calendar
+  .calendar-key
+  .key
+  .square-box.available {
+  background: #D1FAD1;
+}
 .react-calendar__month-view__days__day.bg-green1,
-.react-calendar__month-view__days__day.bg-red1 {
+.react-calendar__month-view__days__day.bg-red1,
+.react-calendar__month-view__days__day.bg-green2 {
   margin-top: 6px;
   text-align: center;
 }
 .react-calendar__month-view__days__day.bg-green1 {
   background: #95e0b8 !important;
 }
+.react-calendar__month-view__days__day.bg-green2{
+  background: #D1FAD1;
+}
 .react-calendar__month-view__days__day.bg-red1 {
   background: #f5a3a3 !important;
+}
+.react-calendar__tile--active {
+  background: #006edc !important;
+  color: white !important;
+  text-align: center;
 }
 @media only screen and (max-width: 992px) {
   .venue-details-view .venue-details-body {
@@ -2168,6 +2188,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
   line-height: 21px;
   padding: 19px;
   color: #594a45;
+  margin-bottom: 25px;
 }
 .venue-details-view .venue-details-body .contact .contact-list {
   list-style: none;
@@ -2183,6 +2204,12 @@ input[type='time']::-webkit-calendar-picker-indicator {
   width: 20px;
   height: 20px;
   margin-right: 20px;
+}
+.venue-details-view .venue-details-body .contact.info-block .contact-list .list-item{
+  flex-direction: column;
+}
+.venue-details-view .venue-details-body .contact.info-block .contact-list li:first-child {
+  margin-top: 0;
 }
 @media only screen and (max-width: 1200px) {
   .venue-details-view {

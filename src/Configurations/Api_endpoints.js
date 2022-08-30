@@ -29,6 +29,7 @@ export const AccountApis = {
 }
 export const VenueApis = {
   getallVenues: `${baseUrl}allvenues`,
+  getUserVenues: `${baseUrl}venues`,
   getFeaturedVenues: `${baseUrl}featured`,
   getVenueDetails: `${baseUrl}showvenue/`,
   venueSearch: `${baseUrl}search`,
@@ -40,14 +41,15 @@ export const VenueApis = {
   getSitepagesList: `${baseUrl}sitepages`,
   addVenue: `${baseUrl}addvenue`,
   editVenue: `${baseUrl}editvenue/`,
-  deleteVenue: `${baseUrl}deletevenue/`,
+  deleteVenue: `${baseUrl}delete/`,
   addWishlist: `${baseUrl}wishlist`,
   showWishlist: `${baseUrl}showwishlist`,
   addVenueToWishlist: `${baseUrl}wishlistvenue`,
   deleteWishlist: `${baseUrl}deletewishlist/`,
   deleteWishlistVenue: `${baseUrl}deleteWishlistVenue/`,
   postReview: `${baseUrl}reviews`,
-  publishVenue: `${baseUrl}publishVenue/`,
+  publishVenue: `${baseUrl}publish/`,
+  deleteVenueImage: `${baseUrl}publish/`,
 }
 export const BookingApis = {
   saveIcalFeed: `${baseUrl}icalfeed`,

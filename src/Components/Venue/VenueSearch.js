@@ -5,7 +5,7 @@ import capacityIcon from "../../Assets/icons/capacity.svg";
 import locationIconBlue from "../../Assets/icons/location-blue.svg";
 import eventTypeIconBlue from "../../Assets/icons/event-type-blue.svg";
 import capacityIconBlue from "../../Assets/icons/capacity-blue.svg";
-import searchIcon from "../../Assets/icons/search-gray.svg";
+import searchIcon from "../../Assets/icons/search.svg";
 import { useSelector } from 'react-redux';
 import TextField from '../Common/TextField';
 import { enum_sortFieldOptions } from '../../Utils/indexUtils';
@@ -70,7 +70,6 @@ const VenueSearch = (props) => {
             <div className={`search-item sort-block ${!values.mapSearch && "ml-auto"}`} onClick={() => {
                 handleSearchModal("sort")
             }} id="sort">
-                {/* <img alt="" src={null} /> */}
                 <span className='search-text'>{`${translations.SortBy}: ${(Number(sortField) === -1 ? translations.Relevance : enum_sortFieldOptions[sortField])}`}
                 </span>
             </div>

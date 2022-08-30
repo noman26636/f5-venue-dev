@@ -8,6 +8,13 @@ export const VenueServices = {
                 return error;
             });
     },
+    getUserVenues: () => {
+        return axios.get(`${VenueApis.getUserVenues}`)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
     getFeaturedVenues: (pageNumber = 1, pageSize = 15) => {
         return axios.get(`${VenueApis.getFeaturedVenues}?page=${pageNumber}&page_size=${pageSize}`)
             .then(response => response.data)
@@ -17,6 +24,13 @@ export const VenueServices = {
     },
     getVenueDetails: (id) => {
         return axios.get(`${VenueApis.getVenueDetails}${id}`)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
+   publishVenue: (id,data) => {
+        return axios.put(`${VenueApis.publishVenue}${id}`,data)
             .then(response => response.data)
             .catch(error => {
                 return error;
@@ -36,15 +50,15 @@ export const VenueServices = {
                 return error;
             });
     },
-    publishVenue: (id) => {
-        return axios.post(`${VenueApis.publishVenue}${id}`)
+    publishVenue: (id,data) => {
+        return axios.put(`${VenueApis.publishVenue}${id}`,data)
             .then(response => response.data)
             .catch(error => {
                 return error;
             });
     },
-    addVenue: () => {
-        return axios.post(VenueApis.addVenue)
+    addVenue: (data) => {
+        return axios.post(VenueApis.addVenue,data)
             .then(response => response.data)
             .catch(error => {
                 return error;
@@ -59,6 +73,13 @@ export const VenueServices = {
     },
     deleteVenue: (id) => {
         return axios.delete(`${VenueApis.deleteVenue}/${id}`)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
+    deleteVenueImage: (id) => {
+        return axios.delete(`${VenueApis.deleteVenueImage}/${id}`)
             .then(response => response.data)
             .catch(error => {
                 return error;

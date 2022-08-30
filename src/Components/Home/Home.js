@@ -6,10 +6,14 @@ import Features from './Features';
 import GetStarted from './GetStarted';
 import SignupModal from '../Signup/SignupModal';
 import { VenueServices } from '../Venue/VenueServices';
+import { useSelector } from 'react-redux';
 function Home() {
     const [showSignupModal, setShowSignupModal] = useState(false);
     const [eventTypesList, setEventTypesList] = useState([]);
     const [featuredVenuesList, setFeaturedVenuesList] = useState([]);
+    const authState = useSelector((state) => {
+        return state.auth;
+    });
     const handleModalClose = () => {
         setShowSignupModal(false);
     }
@@ -34,7 +38,9 @@ function Home() {
             {featuredVenuesList?.length > 0 && <FeaturedVenues featuredVenuesList={featuredVenuesList.length > 20 ? featuredVenuesList.slice(0, 20) : featuredVenuesList} />}
             <HowItWorks />
             <Features />
-            <GetStarted setShowSignupModal={setShowSignupModal} />
+          { 
+          !authState?.user?.access_token &&
+           <GetStarted setShowSignupModal={setShowSignupModal} />}
             <SignupModal showModal={showSignupModal} handleClose={handleModalClose} />
         </div>
     );
