@@ -144,7 +144,6 @@ function AddVenue() {
   useEffect(() => {
     getConfigs();
     if (venueId) getVenueDetails();
-    setValues({ ...values, ...dummyValues }); //TBR
   }, []);
   useEffect(() => {
     if (submitted) validate();

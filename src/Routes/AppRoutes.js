@@ -46,7 +46,7 @@ let AppRoutes = () => {
               <Route path="/company" element={<Company />} />
               <Route path="/wishlists" element={<Wishlists />} />
               <Route path="/wishlist/:wishlistId" element={<WishlistDetails />} />
-              <Route path="/profile" ele2w ment={<Profile />} /> */}
+              <Route path="/profile" element={<Profile />} /> */}
               {/* </Route> */}
               <Route path='*' element={<Home />} />
             </Routes>
