@@ -11,7 +11,7 @@ const initialState = {
   },
   version: "0",
   searchData: {},
-
+  wishlistData: [],
 };
 const app = (state = initialState, action) => {
   switch (action.type) {
@@ -31,6 +31,12 @@ const app = (state = initialState, action) => {
       return {
         ...state,
         searchData: action.data,
+      };
+    }
+    case TYPES.WISHLIST_DATA: {
+      return {
+        ...state,
+        wishlistData: action.data,
       };
     }
     case TYPES.RESET: {

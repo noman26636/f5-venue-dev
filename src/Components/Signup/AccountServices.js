@@ -8,6 +8,13 @@ export const AccountServices = {
                 return error;
             });
     },
+    signupInvitedUser: (data) => {
+        return axios.post(AccountApis.acceptInvite, data)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
     forgotPassword: (data) => {
         return axios.post(AccountApis.forgotPassword, data)
             .then(response => response.data)
@@ -66,7 +73,7 @@ export const AccountServices = {
     },
 
     editProfile: (data) => {
-        return axios.put(AccountApis.editProfile, data)
+        return axios.post(AccountApis.editProfile, data)
             .then(response => response.data)
             .catch(error => {
                 return error;
@@ -130,6 +137,13 @@ export const AccountServices = {
     },
     getInquiries: () => {
         return axios.get(AccountApis.getInquiries)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
+    inquiriesSearch: (data) => {
+        return axios.post(AccountApis.inquiriesSearch,data)
             .then(response => response.data)
             .catch(error => {
                 return error;
