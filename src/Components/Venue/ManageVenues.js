@@ -7,6 +7,7 @@ import { VenueServices } from './VenueServices';
 import { Col, Row } from 'reactstrap';
 import { toast } from 'react-toastify';
 import { venueStatus } from '../../Utils/indexUtils';
+import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
 const ManageVenues = () => {
     const appState = useSelector((state) => {
@@ -55,20 +56,26 @@ const ManageVenues = () => {
                                 <div className='no-search-msg'>
                                     {translations.NoDataToShow}
                                 </div> :
-                            venuesList?.map((item, i) =>
-                                <div className='venue-item' key={i}>
+                            venuesList?.map((item, i) =>{
+                             return   <div className='venue-item' key={i}>
                                     <Row className='top-block'>
                                         <Col xl={10} lg={10} className='left-item'>
-                                            <div className='logo' style={{ backgroundImage: `url(${item.images[0]?.image_path})` }}></div>
+                                            <img src={item.images[0]?.image_path_thumbnail} className="logo"/>
+                                            {/* <div className='logo' style={{ backgroundImage: `url(${item.images[0]?.image_path_thumbnail})` }}></div> */}
                                             <span className='venue-name'>{item.name}</span>
                                         </Col>
                                         <Col xl={2} lg={2} className='right-item'>
                                             <Button label={translations.Edit} onClick={() => { navigate(`/editVenue/${item.id}`) }} className={`small-btn`} />
                                             <Button label={translations.Preview} onClick={() => { navigate(`/venue/${item.id}`) }} className={`small-btn`} />
-                                            <Button label={Boolean(item.is_Published) ? translations.Unpublish : translations.Publish}
+                                            {item.status==="Enabled" ?
+                                                <Button label={ Boolean(item.is_Published) ? translations.Unpublish : translations.Publish}
                                              onClick={() => { publishVenue(item.id,Boolean(item.is_Published)) }} className={`small-btn publish-btn`}
                                                 showBtnLoader={showBtnLoader===item.id}
-                                            />
+                                            />:
+                                            <Button label={ item.status}
+                                            disabled className={`small-btn publish-btn`}
+                                           />
+                                            }
                                         </Col>
                                     </Row>
                                     <div className='bottom-block'>
@@ -77,6 +84,7 @@ const ManageVenues = () => {
                                         </p>
                                     </div>
                                 </div>
+                            }
                             )}
                     </div>
         </div>

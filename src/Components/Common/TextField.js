@@ -16,7 +16,8 @@ export default function TextField(props) {
         min = 1, max = 999999,
         unit,
         maxLength = 99999,
-       minDate =  getFormattedDate(new Date())
+       minDate =  getFormattedDate(new Date()),
+       disabled
     } = props;
     return (
         <div className={`input-wrapper ${className}`}>
@@ -24,6 +25,7 @@ export default function TextField(props) {
             <div className={`position-relative`}>
                 {icon && <img alt="" src={icon} className="input-icon" />}
                 <input placeholder={placeholder} name={name} value={type==="date"?getFormattedDate(value): value} 
+                disabled={disabled}
                 type={type !== "time" ? type : "text"}
                     onChange={onChange} key={label} min={type === "date" ? minDate : min} max={max} maxLength={maxLength}
                     onFocus={(e) => { if (type === "time") e.target.type = type; }}

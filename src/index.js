@@ -34,7 +34,6 @@ axios.interceptors.response.use(
     let temp = await localStorage.getItem("state");
     temp = temp ? JSON.parse(temp) : null;
     const translations = temp.app.userLanguageData.translations;
-    // debugger;
     const originalConfig = error.config;
     if (
       originalConfig.url === AccountApis.refreshToken ||

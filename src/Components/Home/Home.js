@@ -7,6 +7,7 @@ import GetStarted from './GetStarted';
 import SignupModal from '../Signup/SignupModal';
 import { VenueServices } from '../Venue/VenueServices';
 import { useSelector } from 'react-redux';
+let token=null;
 function Home() {
     const [showSignupModal, setShowSignupModal] = useState(false);
     const [eventTypesList, setEventTypesList] = useState([]);
@@ -18,6 +19,11 @@ function Home() {
         setShowSignupModal(false);
     }
     useEffect(() => {
+        if (window.location.href.indexOf('token') !== -1) {
+            const myUrl = new URL(window.location.href.replace(/#/g, '?'));
+             token = myUrl.searchParams.get('token');
+            setShowSignupModal(true);
+        }
         VenueServices.getConfigList().then(res => {
             if (!res.isAxiosError) {
                 setEventTypesList(res.event_types);
@@ -41,7 +47,7 @@ function Home() {
           { 
           !authState?.user?.access_token &&
            <GetStarted setShowSignupModal={setShowSignupModal} />}
-            <SignupModal showModal={showSignupModal} handleClose={handleModalClose} />
+            <SignupModal showModal={showSignupModal} handleClose={handleModalClose} invitationToken={token}/>
         </div>
     );
 }

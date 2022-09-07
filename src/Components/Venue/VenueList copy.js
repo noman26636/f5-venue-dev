@@ -103,7 +103,7 @@ const VenueList = () => {
             container: mapContainerRef.current,
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [50.6, 20.22],
-            zoom: 3,
+            zoom: 1.5,
         });
         map.on('load', (e) => {
             return;
@@ -191,39 +191,27 @@ const VenueList = () => {
         let avgLat = 0, avgLng = 0, count = 0;
         venuesList.forEach(venue => {
             if (!(venue.latitude > 90 || venue.latitude < -90)) {
-      const marker = new mapboxgl.Marker({ draggable: false,})
-                .setLngLat([ venue.latitude,venue.longitude])
-                .setPopup(new mapboxgl.Popup().setHTML(
-                    `
-                    <div>
-                        <img src=${venue.images[0].image_path_thumbnail} class="popup-img">
+                const marker = new mapboxgl.Marker()
+                    .setLngLat([venue.longitude, venue.latitude])
+                    .setPopup(new mapboxgl.Popup().setHTML(
+                        `
                         <div>
-                            <h3 class="popup-title">${venue.name}</h3>
-                            <div>${venue.street_address}</div>
+                            <img src=${venue.images[0].image_path_thumbnail}>
+                            <div>
+                                <h3 class="popup-title">${venue.name}</h3>
+                                <div>${venue.street_address}</div>
+                            </div>
                         </div>
-                    </div>
-                    `
-                ))
-                .addTo(map);
-                map.on('load', () => {
-                    map.setLayoutProperty('country-label', 'text-field', [
-                    'format',
-                    ['get', 'name_en'],
-                    { 'font-scale': 1.2 },
-                    '\n',
-                    {},
-                    ['get', 'name'],
-                    {
-                    'font-scale': 0.8,
-                    'text-font': [
-                    'literal',
-                    ['DIN Offc Pro Italic', 'Arial Unicode MS Regular']
-                    ]
-                    }
-                    ]);
-                    });
+                        `
+                    ))
+                    .addTo(map);                   
+                // new mapboxgl.Marker({
+                //     color: "#594A45",
+                //     draggable: false,
+                // }).setLngLat([venue.longitude, venue.latitude])
+                //     .addTo(map);
                 avgLat += venue.latitude;
-                 avgLng += venue.longitude;
+                avgLng += venue.longitude;
                 count++;
             }
         });
@@ -303,13 +291,12 @@ const VenueList = () => {
                     <Pager total={pager.total} current={pager.current_page}
                         onChange={(current) => { setPager({ ...pager, current_page: current }); searchVenues(null, current); }} pageSize={pager.per_page} />
                 </div>
-                {
-                    // <div className={`map-block ${values.mapSearch ? 'd-block' : 'd-none'}`} ref={mapContainerRef}>
-                    //     <div className='map' >
-                    //     </div>
-                    // </div>
-                     <div className={`map-container ${values.mapSearch ? 'd-block' : 'd-none'}`} ref={mapContainerRef} />
-                }
+                
+                {/* <div className={`map-block ${values.mapSearch ? 'd-block' : 'd-none'}`} ref={mapContainerRef}>
+                    <div className='map' >
+                    </div>
+                </div> */}
+                                 <div className={`map-container ${values.mapSearch ? 'd-block' : 'd-none'}`} ref={mapContainerRef} />
                 <SearchModal showModal={modalType !== null} modalType={modalType} values={values} setValues={setValues} setModalType={setModalType}
                     eventTypesList={eventTypesList} moreServicesList={moreServicesList} handleInputChange={handleInputChange}
                     seatingOptions={seatingOptions} sortFieldOptions={sortFieldOptions} sortTypeOptions={sortTypeOptions}

@@ -17,11 +17,12 @@ import VenueDetails from '../Components/Venue/VenueDetails'
 import ManageVenues from '../Components/Venue/ManageVenues'
 import AddVenue from '../Components/Venue/AddVenue'
 import AddVenueLanding from '../Components/Venue/AddVenueLanding'
-// import InquiriesList from '../Components/Inquiries/InquiriesList'
-// import Company from '../Components/Profile/Company'
-// import Profile from '../Components/Profile/Profile'
-// import WishlistDetails from '../Components/Wishlist/WishlistDetails'
-// import Wishlists from '../Components/Wishlist/Wishlists'
+import InquiriesList from '../Components/Inquiries/InquiriesList'
+import Company from '../Components/Profile/Company'
+import Profile from '../Components/Profile/Profile'
+import WishlistDetails from '../Components/Wishlist/WishlistDetails'
+import Wishlists from '../Components/Wishlist/Wishlists'
+import InquiryDetails from '../Components/Inquiries/InquiryDetails'
 let AppRoutes = () => {
   const authState = useSelector(state => {
     return state.auth;
@@ -41,12 +42,14 @@ let AppRoutes = () => {
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/venue/:venueId" element={<VenueDetails />} />
               <Route path="/addVenueForm" element={<AddVenue />} />
+              <Route path="/editVenue/:venueId" element={<AddVenue />} />
               <Route path="/manageVenues" element={<ManageVenues />} />
-              {/* <Route path="/inquiries" element={<InquiriesList />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/company" element={<Company />} />
+              <Route path="/inquiries" element={<InquiriesList />} />
+              <Route path="/inquiry/:inquiryId/:token" element={<InquiryDetails />} />
               <Route path="/wishlists" element={<Wishlists />} />
               <Route path="/wishlist/:wishlistId" element={<WishlistDetails />} />
-              <Route path="/profile" ele2w ment={<Profile />} /> */}
               {/* </Route> */}
               <Route path='*' element={<Home />} />
             </Routes>
@@ -65,8 +68,9 @@ let AppRoutes = () => {
             <Route path='*' element={< Layout ><Home /></Layout>} />
             <Route path="/venue/:venueId" element={< Layout ><VenueDetails /></Layout>} />
             <Route path="/addVenue" element={< Layout ><AddVenueLanding /></Layout>} />
-            {/* <Route path="/wishlists" element={< Layout ><Wishlists /></Layout>} />
-            <Route path="/wishlist/:wishlistId" element={< Layout ><WishlistDetails /></Layout>} /> */}
+            <Route path="/inquiry/:inquiryId/:token" element={<InquiryDetails />} />
+            <Route path="/wishlists" element={< Layout ><Wishlists /></Layout>} />
+            <Route path="/wishlist/:wishlistId" element={< Layout ><WishlistDetails /></Layout>} />
           </Routes>
       }
     </>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import yellowStar from "../../Assets/icons/yellow-star.svg";
 import { Col, Row } from "reactstrap";
 import { VenueServices } from "./VenueServices";
-import { useSelector } from "react-redux";
 import location from "../../Assets/icons/location1.svg";
 import tick from "../../Assets/icons/yellow-tick.svg";
 import foodIcon from "../../Assets/icons/fork-knife.svg";
@@ -21,6 +21,8 @@ import IntlMessageFormat from "intl-messageformat";
 import { useNavigate, useParams } from "react-router-dom";
 import phone from "../../Assets/icons/phone.svg";
 import mail from "../../Assets/icons/mail.svg";
+import { useDispatch, useSelector } from "react-redux";
+import * as TYPES from "../../Store/actions/types";
 import Calendar from "react-calendar";
 import { toast } from "react-toastify";
 import { Constants } from "../../Configurations/Constants";
@@ -33,7 +35,6 @@ import RatingStars from "./RatingStars";
 import { ReviewsSlider } from "./ReviewsSlider";
 import { SimilarVenues } from "./SimilarVenues";
 import { getFormattedDate } from "../../Utils/indexUtils";
-
 mapboxgl.accessToken = Constants.mapboxToken;
 
 const initialFormValues = {
@@ -49,7 +50,7 @@ const VenueDetails = () => {
   const appState = useSelector((state) => {
     return state.app;
   });
-  const { userLanguageData } = appState;
+  const { userLanguageData, wishlistData } = appState;
   const translations = userLanguageData.translations;
   const [venue, setVenue] = useState({});
   const [values, setValues] = useState(initialFormValues);
@@ -62,7 +63,7 @@ const VenueDetails = () => {
   const [eventTypesList, setEventTypesList] = useState([]);
   const [venueTypesList, setVenueTypesList] = useState([]);
   const [activitiesList, setActivitiesList] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+  const [wishlists, setWishlists] = useState([]);
   const [map, setMap] = useState(null);
   const navigate = useNavigate();
   const params = useParams();
@@ -70,6 +71,8 @@ const VenueDetails = () => {
   useEffect(() => {
     getVenueDetails();
     getServices();
+    // if (!isLoggedIn) setWishlists(wishlistData);
+    // else getAllWishlists();
     return () => {
       if (map) map.remove();
     };
@@ -89,13 +92,19 @@ const VenueDetails = () => {
       }
     });
   };
-  // const showWishlist = () => {
-  //     VenueServices.showWishlist().then(res => {
-  //         if (!res.isAxiosError) {
-  //             setWishlist(res.wishlist);
-  //         }
-  //     });
-  // }
+  const authState = useSelector((state) => {
+    return state.auth;
+  });
+  const isLoggedIn = !!authState?.user?.access_token;
+  const dispatch = useDispatch();
+  const getAllWishlists = () => {
+    if (!isLoggedIn) return;
+    VenueServices.getAllWishlists().then((res) => {
+      if (!res.isAxiosError) {
+        setWishlists(res.wishlists);
+      }
+    });
+  };
   const addToWishlist = (title, venueId, wishlistId) => {
     setShowBtnLoader("wishlist");
     if (!wishlistId) {
@@ -103,6 +112,13 @@ const VenueDetails = () => {
         (res) => {
           if (!res.isAxiosError) {
             if (res?.wishlist?.id) {
+              dispatch({
+                type: TYPES.WISHLIST_DATA,
+                data: [
+                  ...wishlistData,
+                  { id: Number(res.wishlist.id), name: title },
+                ],
+              });
               VenueServices.addVenueToWishlist({
                 venue_id: venueId,
                 wishlist_id: res.wishlist.id,
@@ -110,8 +126,19 @@ const VenueDetails = () => {
                 setShowBtnLoader(null);
                 if (!res1.isAxiosError) {
                   getVenueDetails();
+                  // dispatch({
+                  //   type: TYPES.VENUES_WISHLIST_DATA,
+                  //   data: {
+                  //     ...venuesWishlistData,
+                  //     [venueId]: [
+                  //       ...venuesWishlistData[venueId],
+                  //       res.wishlist.id,
+                  //     ],
+                  //   },
+                  // });
                   toast.success(translations.VenueAddedToWishlist);
                   setShowWishlistModal(false);
+                  getVenueDetails();
                 }
               });
             } else {
@@ -131,6 +158,15 @@ const VenueDetails = () => {
         if (!res.isAxiosError) {
           toast.success(translations.VenueAddedToWishlist);
           setShowWishlistModal(false);
+          getVenueDetails();
+
+          // dispatch({
+          //   type: TYPES.VENUES_WISHLIST_DATA,
+          //   data: {
+          //     ...venuesWishlistData,
+          //     [venueId]: [...venuesWishlistData[venueId], wishlistId],
+          //   },
+          // });
           getVenueDetails();
         }
       });
@@ -275,21 +311,58 @@ const VenueDetails = () => {
     });
   };
   const setClass = (date) => {
-    // 0-8=>partially ->light green
+    // 0-8=>partially ->yellow
     //>8 booked ->red
+    //else green
     date = date.toDateString();
-    if (venue.groupedByDateAvailabilities?.length > 0) {
+    if (
+      venue.groupedByDateAvailabilities &&
+      Object.keys(venue.groupedByDateAvailabilities).length > 0
+    ) {
       if (venue.groupedByDateAvailabilities[date]) {
+        console.log(venue.groupedByDateAvailabilities[date]);
         return venue.groupedByDateAvailabilities[date] > 0 &&
           venue.groupedByDateAvailabilities[date] < 8
           ? "bg-green1"
           : venue.groupedByDateAvailabilities[date] >= 8
           ? "bg-red1"
-          : (new Date(date)>=new Date().getTime()?"bg-green2":"")
-          ;
-      }
+          : new Date(date) >= new Date().getTime()
+          ? "bg-green2"
+          : "";
+      } else
+        return new Date(date).getTime() >= new Date().getTime()
+          ? "bg-green2"
+          : "";
+    } else {
+      if (venue.availabilities?.length > 0) {
+        return new Date(date).getTime() >= new Date().getTime()
+          ? "bg-green2"
+          : "";
+      } else return "";
     }
-    else return (new Date(date).getTime()>=new Date().getTime()?"bg-green2":"")
+  };
+  const handleWishlistClick = () => {
+    // if (!isLoggedIn) setWishlists(wishlistData);
+    // else getAllWishlists();
+    setShowWishlistModal(true);
+  };
+  
+  const getWishlistIds = () => {
+    debugger
+    //this function return ids of wishlists in which this venue is added.. to be used for guest user
+    let wishlistIds=[];
+    if(isLoggedIn){
+      if(venue.isFavourite?.length > 0)
+   wishlistIds= venue.isFavourite.map(wl=>wl.id)
+    }
+    else
+   { for (let i = 0; i < wishlists?.length; i++) {
+      if (wishlists[i]?.venues?.indexOf(Number(venueId)) !== -1) {
+        wishlistIds = wishlists[i]?.id;
+        continue;
+      }
+    }}
+    return wishlistIds;
   };
   return (
     <>
@@ -318,7 +391,10 @@ const VenueDetails = () => {
                     <RatingStars rating={venue.ratings_avg_rating} />
                   </div>
                   <div className="rating ml-3">
-                  {venue.ratings?.length} {venue.ratings?.length !== 1 ? translations.Reviews : translations.Review}
+                    {venue.ratings?.length}{" "}
+                    {venue.ratings?.length !== 1
+                      ? translations.Reviews
+                      : translations.Review}
                   </div>
                 </div>
                 <div className="address-block">
@@ -327,19 +403,16 @@ const VenueDetails = () => {
                     {venue.street_address} {venue.zip_code}
                   </span>
                 </div>
-                <div
-                  className="wishlist-block"
-                  // onClick={() => { showWishlist(); setShowWishlistModal(true) }}
-                >
+                <div className="wishlist-block" onClick={handleWishlistClick}>
                   <img
                     alt=""
-                    src={venue.isFavourite?.length > 0 ? heartRed : heartWhite}
+                    src={getWishlistIds().length>0 ? heartRed : heartWhite}
                     className="mx-2"
                     width={25}
                     height={25}
                   />
                   <span>
-                    {venue.isFavourite?.length > 0
+                    {getWishlistIds().length>0
                       ? translations.AddedToWishlist
                       : translations.AddToWishlist}
                   </span>
@@ -347,7 +420,7 @@ const VenueDetails = () => {
               </div>
             </div>
           </div>
-          <Row className="venue-details-body">
+          <Row className="venue-details-body gap-xl-5">
             <Col xl={8} lg={8} className="left-content">
               {/* Image slider */}
               {venue.images?.length > 0 && (
@@ -358,11 +431,7 @@ const VenueDetails = () => {
               {/* Details */}
               <div className="details mt-4">
                 <div className="title">{translations.Details}</div>
-                <div className="venue-desc">
-                  <p
-                    dangerouslySetInnerHTML={{ __html: venue.long_description }}
-                  ></p>
-                </div>
+                <div className="venue-desc">{venue.long_description}</div>
               </div>
               {/* Capacity */}
               <div className="capacity mt-4">
@@ -373,7 +442,6 @@ const VenueDetails = () => {
                       {venue.seating_capacity ? venue.seating_capacity : 0}
                     </div>
                     <div className="fs-14">
-                      {" "}
                       {translations.Seating} {translations.capacity}
                     </div>
                   </div>
@@ -382,7 +450,6 @@ const VenueDetails = () => {
                       {venue.standing_capacity ? venue.standing_capacity : 0}
                     </div>
                     <div className="fs-14">
-                      {" "}
                       {translations.Standing} {translations.capacity}
                     </div>
                   </div>
@@ -418,14 +485,14 @@ const VenueDetails = () => {
                   </div>
                   <div className="info-item">
                     <div className="fw-600">
-                      {venue.floor_area ? `${venue.floor_area} m²` : "-"}{" "}
+                      {venue.floor_area ? `${venue.floor_area} m²` : "-"}
                     </div>
                     <div className="fs-14">{translations.FloorArea} </div>
                   </div>
                 </div>
                 {venue.additional_info?.length !== 0 && (
                   <p>
-                    <span className="fw-600">{translations.Note}:</span>{" "}
+                    <span className="fw-600">{translations.Note}:</span>
                     {venue.additional_info}
                   </p>
                 )}
@@ -475,7 +542,7 @@ const VenueDetails = () => {
                   <p>
                     <span className="fw-600">
                       {translations.CancellationPolicy}:
-                    </span>{" "}
+                    </span>
                     {venue.cancellation_policy}
                   </p>
                 )}
@@ -673,7 +740,7 @@ const VenueDetails = () => {
                     setClass(date)
                   }
                   minDate={new Date()}
-                //   activeStartDate={values.eventDate}
+                  //   activeStartDate={values.eventDate}
                 />
                 {venue.availabilities?.length > 0 ? (
                   <div className="calendar-key">
@@ -782,7 +849,6 @@ const VenueDetails = () => {
                           navigate("/termsandconditions");
                         }}
                       >
-                        {" "}
                         {chunk1}
                       </a>
                     ),
@@ -794,7 +860,6 @@ const VenueDetails = () => {
                           navigate("/privacypolicy");
                         }}
                       >
-                        {" "}
                         {chunk2}
                       </a>
                     ),
@@ -856,14 +921,15 @@ const VenueDetails = () => {
           )}
         </div>
       )}
-
       <WishlistModal
-        wishlist={wishlist}
+        allWishlists={wishlists}
         showModal={showWishlistModal}
         handleClose={() => setShowWishlistModal(false)}
         wishlistVenue={venue}
         addToWishlist={addToWishlist}
         showBtnLoader={showBtnLoader === "wishlist"}
+        isLoggedIn={isLoggedIn}
+        getWishlistIds={getWishlistIds}
       />
     </>
   );

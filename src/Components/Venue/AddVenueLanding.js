@@ -70,11 +70,10 @@ const AddVenueLanding = () => {
                         <p>{translations.GetStartedDesc3}</p>
                     </Col>
                 </Row>
-                <Button label={translations.CreateProfile} onClick={() => navigate("/addVenueForm")} className={`create-profile-btn`}
+                <Button label={translations.CreateProfile} onClick={() =>  navigate("/login?redirectUrl=addVenueForm")} className={`create-profile-btn`}
                     wrapperClass="w-100" />
             </div>
         </div>
     );
 };
-
 export default AddVenueLanding;
