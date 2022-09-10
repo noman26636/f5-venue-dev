@@ -15,7 +15,11 @@ export var stringVariables = {
   InvalidLogin: "Invalid login credentials",
   SomethingWentWrong: "Something went wrong. Please try again",
   EmailSent:
+<<<<<<< HEAD
     "If your email address exists in our database, you will soon receive a password recovery link",
+=======
+    "Link to change password has been sent to your email. Open that link to change your password.",
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   CreatePassword: "Create a password so that we finish the sign up process",
   ConfirmPassword: "Confirm password",
   PasswordResetSuccess: "Your password is reset successfully",
@@ -87,6 +91,10 @@ export var stringVariables = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus consequat tellus at hendrerit.",
   BecomeSupplier: "Become a Supplier",
   // Venue list
+<<<<<<< HEAD
+=======
+  WeddingHalls: "Wedding/Halls",
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   SelectCity: "Select your city",
   Capacity: "Capacity",
   Seating: "Seating",
@@ -136,10 +144,13 @@ export var stringVariables = {
   InfoText1: "Venue responds typically within a workday",
   InfoText2: "Negotiate details directly with the venue",
   InfoText3: "Pay directly to the venue – no added costs",
+<<<<<<< HEAD
   RateVenue:"Rate this venue",
   PostReview:"Post a review",
   TypeReview:"Type your review here",
   ReviewSubmitted:"Your review has been submitted successfully",
+=======
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   //Wishlist
   Wishlists: "Wish lists",
   WishlistsDesc:
@@ -151,7 +162,11 @@ export var stringVariables = {
   Create: "Create",
   NewListPlaceholder: "E.g. banquet halls, meeting rooms...",
   NameOfList: "Name of the list",
+<<<<<<< HEAD
   VenueAlreadyInList: " The venue is already in this list.",
+=======
+  VenueAlreadyInList: " The venue is already on this list.",
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   VenueAddedToWishlist: "Venue has been added to wish list",
   WishlistCreated: "Wishlist has been created.",
   WishlistUpdated: "Wishlist has been updated.",
@@ -199,7 +214,11 @@ export var stringVariables = {
   EditYourVenue: "Edit your venue",
   DeleteVenue: "Delete venue",
   SeeVenue: "See Venue",
+<<<<<<< HEAD
   VenueAdded: "Venue has been successfully created and published.",
+=======
+  VenueAdded: "Venue has been successfully created. You can now publish it.",
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   VenueUpdated: "Venue has been successfully updated",
   VenueDeleteConfirmation:
     "Are you sure you want to delete this venue. This action cannot be undone",
@@ -293,8 +312,11 @@ export var stringVariables = {
   _3DViewsErr:
     "Some 3D views could not be loaded. Please check that you have entered the correct address.",
   _3DViewUrl: "3D view URL address",
+<<<<<<< HEAD
   eg:"e.g.",
   _3dviewssupported:"Currently we support the following services:",
+=======
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   Add3DView: "Add 3D view",
   Videos: "Videos",
   YoutubeVimeoUrl: "Youtube/Vimeo URL address",
@@ -346,7 +368,10 @@ export var stringVariables = {
   SendInvitationDesc:
     "You can invite a new user to this service by filling in the email address below. The user accesses to manage your venues and company information.",
   InvitationSent: "Invitation has been sent successfully",
+<<<<<<< HEAD
   DeleteUserConfirmation:"Do you really want to delete this user from company?",
+=======
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   //Profile
   EditContactInfomation: "Edit contact infomation",
   Address: "Address",

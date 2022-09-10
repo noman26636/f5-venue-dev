@@ -116,7 +116,11 @@ export default function InquiryDetails() {
                 </div>
                 <div className="messages">
                   <div className="message-top">
+<<<<<<< HEAD
                     <div className="avatar senderAvatar">
+=======
+                    <div className="avatar">
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                       {getInitialLetters(inquiryData.inquiry?.user_name)}
                     </div>
                     <div className="author fw-bold">
@@ -162,7 +166,11 @@ export default function InquiryDetails() {
                         {getInitialLetters(inquiryData.inquiry_response[0]?.user_name)}
                       </div>
                       <div className="author fw-bold">
+<<<<<<< HEAD
                         {inquiryData.inquiry_response[0]?.user_name}
+=======
+                        {inquiryData.inquiry?.user_name}
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                       </div>
                       <div className="date">
                         {getFormattedDate(inquiryData.inquiry_response[0]?.created_at)}

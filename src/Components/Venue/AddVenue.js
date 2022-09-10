@@ -69,6 +69,50 @@ const initialFormValues = {
   cost_center: "",
   is_published: 0,
 };
+<<<<<<< HEAD
+=======
+const dummyValues = {
+  name: "v1",
+  street_address: "f11 markaz",
+  zip_code: "4600",
+  city: "Islamabad Pakistan",
+  long_description: "Testing venue",
+  short_description: "test vewnue",
+  contact_per_name: "xyz",
+  company_name: "teo",
+  comp_email: "muniba.hina786@gmail.com",
+  contact_phone: "12222222222",
+  contact_website: "",
+  contacttype_id: 1,
+  contact_image: null,
+  ical: "",
+  standing_capacity: 1,
+  seating_capacity: 1,
+  floorarea: "",
+  additional_info: "",
+  additional_cap_info: "",
+  classroom: "",
+  theatre: "",
+  banquet: "",
+  conference: "",
+  ushape: "",
+  venue_type: [],
+  services: [],
+  event_type: [],
+  activities: [],
+  price_per_person: "",
+  rent_per_hour: "",
+  rent_per_day: "",
+  minimum_spend: "",
+  cleaning_fee: "",
+  reservation_deposit: "",
+  cancellation_policy: "",
+  tour3d: [],
+  videos: [],
+  cost_center: "abccc",
+  images: [],
+};
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
 function AddVenue() {
   const appState = useSelector((state) => {
     return state.app;
@@ -107,6 +151,10 @@ function AddVenue() {
     if (venueId) getVenueDetails();
     else {
       setShowPageLoader(false);
+<<<<<<< HEAD
+=======
+      setValues({ ...values, ...dummyValues });
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     }
   }, []);
   useEffect(() => {
@@ -288,6 +336,7 @@ function AddVenue() {
       field.images = translations.EmptyFieldMsg;
       isValid = false;
     }
+<<<<<<< HEAD
     if (fieldValues.tour3d?.length > 0) {
       fieldValues.tour3d.forEach((link) => {
         if (
@@ -314,6 +363,34 @@ function AddVenue() {
         }
       });
     }
+=======
+    // if (fieldValues.tour3d?.length > 0) {
+    //   fieldValues.tour3d.forEach((link) => {
+    //     if (
+    //       !/^((https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{1,}\.[a-zA-Z]{3,}(\.[a-zA-Z]{2,})?$/.test(
+    //         link
+    //       )
+    //     ) {
+    //       field.tour3d = translations.ValidUrlRequired;
+    //       isValid = false;
+    //       return;
+    //     }
+    //   });
+    // }
+    // if (fieldValues.videos?.length > 0) {
+    //   fieldValues.videos.forEach((link) => {
+    //     if (
+    //       !/^((https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{1,}\.[a-zA-Z]{3,}(\.[a-zA-Z]{2,})?$/.test(
+    //         link
+    //       )
+    //     ) {
+    //       field.videos = translations.ValidUrlRequired;
+    //       isValid = false;
+    //       return;
+    //     }
+    //   });
+    // }
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     setErrors({
       ...field,
     });
@@ -410,6 +487,7 @@ function AddVenue() {
     }
     if (values.tour3d.length > 0) {
       values.tour3d.forEach((element, i) => {
+<<<<<<< HEAD
         if(element!==null && element!=="")
         bodyFormData.append(`tour3d[${i + 1}]`, element);
       });
@@ -417,6 +495,14 @@ function AddVenue() {
     if (values.videos.length > 0) {
       values.videos.forEach((element, i) => { 
         if(element!==null && element!=="")
+=======
+        bodyFormData.append(`tour3d[${i + 1}]`, getEmbeddedUrl(element));
+      });
+    }
+    if (values.videos.length > 0) {
+      values.videos.forEach((element, i) => {
+        
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
         bodyFormData.append(`videos[${i + 1}]`, getEmbeddedUrl(element));
       });
     }
@@ -442,6 +528,7 @@ function AddVenue() {
             setErrors({ ...errors, apiError: errorArr });
           }
         }
+<<<<<<< HEAD
       });
     } else {
       VenueServices.addVenue(bodyFormData).then((res) => {
@@ -461,10 +548,43 @@ function AddVenue() {
                 : null;
             setErrors({ ...errors, apiError: errorArr });
           }
+=======
+        else
+      {  if (res.response.status===400 && res?.response?.data) {
+          const errorArr =
+            Object.keys(res?.response?.data)?.length > 0
+              ? Object.keys(res.response.data).map(
+                  (item) => res.response.data[item]
+                )
+              : null;
+          setErrors({ ...errors, apiError: errorArr });
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
+        }
+      }
+      });
+    } else {
+      VenueServices.addVenue(bodyFormData).then((res) => {
+        setShowLoader(null);
+        if (!res.isAxiosError) {
+          toast.info(translations.VenueAdded, {
+            onClose: () => navigate("/manageVenues"),
+            autoClose: 2000,
+          });
+        } else {
+          if (res.response.status===400 && res?.response?.data) {
+            const errorArr =
+              Object.keys(res?.response?.data)?.length > 0
+                ? Object.keys(res.response.data).map(
+                    (item) => res.response.data[item]
+                  )
+                : null;
+            setErrors({ ...errors, apiError: errorArr });
+          }
         }
       });
     }
   };
+<<<<<<< HEAD
   const getEmbeddedUrl = (url) => {
     if (url?.indexOf("youtu") !== -1) {
       const regExp =
@@ -479,6 +599,16 @@ function AddVenue() {
       return videoId ? `https://player.vimeo.com/video/${videoId}` : url;
     } else return "";
   };
+=======
+  const getEmbeddedUrl=(url)=>{
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url?.match(regExp);
+    const videoId= (match && match[2].length === 11)
+      ? match[2]
+      : null;
+     return videoId?`https://www.youtube.com/embed/${videoId}`:url;     
+  }
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   const handleAttachment = (files, from) => {
     imagesObj = { ...values };
     if (files) {
@@ -1306,6 +1436,7 @@ function AddVenue() {
               <div className="form-section" id="10">
                 <div className="title">{translations._3DViews}</div>
                 <div className="mb-4">{translations._3DViewsDesc}</div>
+<<<<<<< HEAD
                 <div className="mb-3">
                   {translations._3dviewssupported}
                   <div>
@@ -1380,6 +1511,52 @@ function AddVenue() {
                     />
                     <span> {translations.Add3DView}</span>
                   </div>
+=======
+                <div className="label mb-2">{`${translations._3DViewUrl}`}</div>
+                <Row className="form">
+                  {values.tour3d?.map((link, i) => {
+                    return (
+                      <Col xl={12} lg={12} key={i}>
+                        <div className="d-flex align-items-center mb-3">
+                          <TextField
+                            name="tour3d"
+                            placeholder="e.g. https://www.unrealer.com/listings/abcdef"
+                            label={null}
+                            type="url"
+                            onChange={(e) => handleDynamicFieldChange(e, i)}
+                            value={link}
+                            className="text-field-2 w-100 mb-0"
+                          />
+                          <img
+                            alt=""
+                            src={trashIconRed}
+                            className="ml-3"
+                            onClick={(e) => {
+                              removeFields("tour3d", i);
+                            }}
+                          />
+                        </div>
+                      </Col>
+                    );
+                  })}
+                </Row>
+                {values.tour3d?.length < maxLinksAllowed && (
+                  <div
+                    className="add-more-block"
+                    onClick={() => {
+                      setValues({ ...values, tour3d: [...values.tour3d, ""] });
+                    }}
+                  >
+                    <img
+                      alt=""
+                      src={plusIconWhite}
+                      width={21}
+                      height={21}
+                      className="mr-3"
+                    />
+                    <span> {translations.Add3DView}</span>
+                  </div>
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                 )}
                 {errors.tour3d && (
                   <div className="error-msg">{errors.tour3d}</div>

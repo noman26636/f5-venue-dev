@@ -15,7 +15,10 @@ export default function WishlistModal(props) {
     const translations = userLanguageData.translations;
     const [error, setError] = useState(null);
     const getWishlistOptions = () => {
+<<<<<<< HEAD
         const a=[{ id: -1, name: translations.CreateWishlist }, ...allWishlists];
+=======
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
         return [{ id: -1, name: translations.CreateWishlist }, ...allWishlists];
     }
     useEffect(() => {
@@ -23,6 +26,7 @@ export default function WishlistModal(props) {
         setError(null);
     }, [showModal])
     useEffect(() => {
+<<<<<<< HEAD
         if(wishlistIds?.indexOf(Number(values.selectedList))!=-1) setError(translations.VenueAlreadyInList);
         else setError(null);
     }, [values.selectedList,showModal])
@@ -33,6 +37,28 @@ export default function WishlistModal(props) {
         //adding venue to already created wl
         else
         addToWishlist(values.title, wishlistVenue.id, Number(values.selectedList));
+=======
+        if(wishlistIds?.indexOf(values.selectedList)!==-1) setError(translations.VenueAlreadyInList);
+        else setError(null);
+    }, [values.selectedList])
+    const add=()=>{
+//         const alreadyAdded = wish   ();
+//         if (values.title !== "") {
+//             addToWishlist(values.title, wishlistVenue.id, null);
+//         }
+// //  else if (Number(values.list) !== 0 && alreadyAdded()) {
+//         else if (Number(values.list) !== 0 && wishlistIds.indexOf(Number(values.list))===-1 ) {
+//             addToWishlist(null, wishlistVenue.id, Number(values.list));
+//         }
+//         else if (wishlistIds.indexOf(Number(values.list)!==-1)) {
+
+//             setError(translations.VenueAlreadyInList);
+//         }
+//         else if (Number(values.list) !== 0 && !alreadyAdded) {
+//             addToWishlist(null, wishlistVenue.id, Number(values.list));
+//         }
+//         else { handleClose(); }
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     }
     return (
         <Modal isOpen={showModal} onClosed={handleClose} backdrop="static" keyboard={false} className="wishlist-modal" centered>
@@ -52,7 +78,11 @@ export default function WishlistModal(props) {
                         />
                     </>
                 }
+<<<<<<< HEAD
                 {values.selectedList == -1 &&
+=======
+                {Number(values.selectedList) === -1 &&
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                     <TextField name="title"
                         label={`${translations.NameOfList} *`}
                         type="text"
@@ -63,7 +93,11 @@ export default function WishlistModal(props) {
                 }
                 <Button label={translations.AddToWishlist} onClick={add} className={`small-btn ml-auto mt-4`} wrapperClass="w-100"
                     showBtnLoader={showBtnLoader} 
+<<<<<<< HEAD
                     disabled={(values.title === "" && (values.selectedList) == -1) || (values.selectedList != -1 && wishlistIds.indexOf(values.selectedList)!=-1)}
+=======
+                    disabled={(values.title === "" && (Number(values.selectedList) === -1)) || (Number(values.selectedList) !== -1 && wishlistIds.indexOf(values.selectedList)!==-1)}
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                 />
             </ModalBody>
         </Modal>

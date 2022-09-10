@@ -142,8 +142,13 @@ export const AccountServices = {
                 return error;
             });
     },
+<<<<<<< HEAD
     inquiriesSearch: (data, pageNumber = 1, pageSize = 50) => {
         return axios.post(`${AccountApis.inquiriesSearch}?page=${pageNumber}&per_page=${pageSize}`, data)
+=======
+    inquiriesSearch: (data) => {
+        return axios.post(AccountApis.inquiriesSearch,data)
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
             .then(response => response.data)
             .catch(error => {
                 return error;

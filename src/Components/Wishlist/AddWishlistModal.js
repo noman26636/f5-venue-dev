@@ -13,7 +13,11 @@ export default function AddWishlistModal(props) {
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     useEffect(() => {
+<<<<<<< HEAD
         setValues({ name: "", description: "" });
+=======
+        setValues({ name: "g-wl", description: "abc" });
+>>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     }, [showModal])
     const handleInputChange = ({ target }) => {
         const value = target.value;
