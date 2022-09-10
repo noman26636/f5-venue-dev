@@ -12,6 +12,7 @@ export default function FormDropdown(props) {
     icon,
   } = props;
   return (
+    <>
     <div className="dropdownBlock" key={label}>
       <select name={name} onChange={onChange} value={value}>
         {label && <option value={0}>{label}</option>}
@@ -21,7 +22,9 @@ export default function FormDropdown(props) {
       </select>
       {icon && <img alt="" src={icon} className="input-icon" />}
       <img alt="" src={dropdownIcon} className="dropdownIcon" />
-      {error && <div className="error-msg">{error}</div>}
+     
     </div >
+     {error && <div className="error-msg">{error}</div>}
+    </>
   );
 }

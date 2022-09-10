@@ -34,7 +34,7 @@ export const ReviewsSlider = (props) => {
                             reviews.slice(activeIndex * numberOfItems, (activeIndex * numberOfItems) + numberOfItems)?.map((item, i) =>
                                 <Col className='venue-block' key={i} xl={3} lg={3} md={4}>
                                     <div className='image-block'>
-                                        <img alt="" src={item.image ? item.image : personImg} className="person-img" />
+                                        {/* <img alt="" src={item.image ? item.image : personImg} className="person-img" /> */}
                                         <div className='review-header'>
                                             <div >{item.name ? item.name : translations.Anonymous}</div>
                                             <RatingStars rating={item.rating} />

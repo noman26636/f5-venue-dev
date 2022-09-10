@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { VenueApis } from '../../Configurations/Api_endpoints';
 export const VenueServices = {
-    getallVenues: (pageNumber = 1, pageSize = 20) => {
-        return axios.get(`${VenueApis.getallVenues}?page=${pageNumber}&page_size=${pageSize}`)
+    getallVenues: () => {
+        return axios.get(`${VenueApis.getallVenues}`)
             .then(response => response.data)
             .catch(error => {
                 return error;
@@ -31,6 +31,13 @@ export const VenueServices = {
     },
    publishVenue: (id,data) => {
         return axios.put(`${VenueApis.publishVenue}${id}`,data)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
+    postReview: (id,data) => {
+        return axios.post(`${VenueApis.postReview}${id}`,data)
             .then(response => response.data)
             .catch(error => {
                 return error;
@@ -65,30 +72,35 @@ export const VenueServices = {
             });
     },
     editVenue: (id, data) => {
-        return axios.post(`${VenueApis.publishVenue}${id}`, data)
+        return axios.post(`${VenueApis.editVenue}${id}`, data)
             .then(response => response.data)
             .catch(error => {
                 return error;
             });
     },
     deleteVenue: (id) => {
-        return axios.delete(`${VenueApis.deleteVenue}/${id}`)
+        return axios.delete(`${VenueApis.deleteVenue}${id}`)
             .then(response => response.data)
             .catch(error => {
                 return error;
             });
     },
     deleteVenueImage: (id) => {
-        return axios.delete(`${VenueApis.deleteVenueImage}/${id}`)
+        return axios.delete(`${VenueApis.deleteVenueImage}${id}`)
             .then(response => response.data)
             .catch(error => {
                 return error;
             });
     },
-    showWishlist: (id) => {
-        let url = VenueApis.showWishlist;
-        // if (id) url = `${url}/${id}`
-        return axios.get(url)
+    getWishlistDetails: (id) => {
+        return axios.get(`${VenueApis.getWishlistDetails}${id}`)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
+    getAllWishlists: () => {
+        return axios.get(VenueApis.getAllWishlists)
             .then(response => response.data)
             .catch(error => {
                 return error;

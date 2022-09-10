@@ -1,6 +1,6 @@
-import { Constants } from "./Constants"
+import { Constants } from "./Constants";
 
-const baseUrl = `${Constants.domainUrl}api/`
+const baseUrl = `${Constants.domainUrl}api/`;
 export const AccountApis = {
   signupUser: `${baseUrl}register`,
   login: `${baseUrl}login`,
@@ -16,17 +16,19 @@ export const AccountApis = {
   resendConfirmationEmail: `${baseUrl}Account/ResendConfirmationEmail`,
   inquiry: `${baseUrl}inquiry`,
   replyInquiry: `${baseUrl}replyback`,
-  getInquiries: `${baseUrl}inquiry`,
-  getInquiryHistory: `${baseUrl}getInquiriesHistory/`,
+  getInquiries: `${baseUrl}inquiries`,
+  inquiriesSearch: `${baseUrl}inquirysearch`,
+  getInquiryHistory: `${baseUrl}inquiry/`,
   invite: `${baseUrl}invite`,
   acceptInvite: `${baseUrl}accept`,
   deleteUserFromCompany: `${baseUrl}deletemember/`,
   getCompany: `${baseUrl}company`,
   updateCompany: `${baseUrl}updatecompany`,
-  getBilling: `${baseUrl}billing`,
-  updateBilling: `${baseUrl}updatebilling`,
+  getBilling: `${baseUrl}companybill`,
+  updateBilling: `${baseUrl}billingupdate`,
+  getProfile: `${baseUrl}profile`,
   editProfile: `${baseUrl}edit`,
-}
+};
 export const VenueApis = {
   getallVenues: `${baseUrl}allvenues`,
   getUserVenues: `${baseUrl}venues`,
@@ -43,16 +45,22 @@ export const VenueApis = {
   editVenue: `${baseUrl}editvenue/`,
   deleteVenue: `${baseUrl}delete/`,
   addWishlist: `${baseUrl}wishlist`,
-  showWishlist: `${baseUrl}showwishlist`,
+  getWishlistDetails: `${baseUrl}showwishlist/`,
+  getAllWishlists:`${baseUrl}vendorwishlist`,
   addVenueToWishlist: `${baseUrl}wishlistvenue`,
   deleteWishlist: `${baseUrl}deletewishlist/`,
   deleteWishlistVenue: `${baseUrl}deleteWishlistVenue/`,
-  postReview: `${baseUrl}reviews`,
+  postReview: `${baseUrl}reviews/`,
   publishVenue: `${baseUrl}publish/`,
-  deleteVenueImage: `${baseUrl}publish/`,
-}
+  deleteVenueImage: `${baseUrl}deleteimage/`,
+};
 export const BookingApis = {
   saveIcalFeed: `${baseUrl}icalfeed`,
-
+};
+export const CMSPagesApis={
+  getContactPageContent: `${baseUrl}`,
+  getAboutPageContent: `${baseUrl}`,
+  getHelpPageContent: `${baseUrl}`,
+  getTermsPageContent: `${baseUrl}`,
+  getPrivacyPageContent: `${baseUrl}`,
 }
-

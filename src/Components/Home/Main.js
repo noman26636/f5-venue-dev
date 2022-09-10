@@ -25,8 +25,9 @@ import * as TYPES from '../../Store/actions/types';
 import { useNavigate } from 'react-router-dom';
 const initialFormValues = {
   location: "",
-  eventType: 0,
-  capacity: null
+  eventType:0,
+  capacity: null,
+  eventTypeObj:{}
 }
 export default function Main(props) {
   const { eventTypesList } = props;
@@ -42,10 +43,17 @@ export default function Main(props) {
   const handleInputChange = ({ target }) => {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const { name } = target;
-    setValues({
+    const valuesObj={
       ...values,
       [name]: value,
-    });
+    }
+    if(name==="eventType")
+    {
+      const index=eventTypesList?.map(item=>item.id).indexOf(Number(target.value));
+      const name=eventTypesList[index].name;
+      valuesObj.eventTypeObj={id:Number(target.value),name:name}
+    }
+    setValues(valuesObj);
   };
 
   const handleSearch = () => {
@@ -83,7 +91,8 @@ export default function Main(props) {
         </Col>
         <Col xl={3} className="search-item">
           <FormDropdown options={eventTypesList} icon={eventTypeIcon} label={translations.EventType} name="eventType" value={values.eventType}
-            onChange={handleInputChange} />
+            onChange={handleInputChange} 
+              />
         </Col>
         <Col xl={3} className="search-item">
           <TextField name="capacity"

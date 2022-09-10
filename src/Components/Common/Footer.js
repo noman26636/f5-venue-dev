@@ -8,12 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Row, Col } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { Constants } from '../../Configurations/Constants';
+import { useNavigate } from 'react-router-dom';
 const Footer = () => {
     const appState = useSelector((state) => {
         return state.app;
     });
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
+    const navigate=useNavigate();
     return (
         <footer className=''>
             <div className='top-section'>
@@ -45,16 +47,16 @@ const Footer = () => {
                         <div className='list'>
                             <h3>{translations.QuickLinks}</h3>
                             <ul className='list-block'>
-                                <li>
+                                <li onClick={() => navigate("/about")}>
                                     <a>{translations.AboutUs}</a>
                                 </li>
-                                <li>
+                                <li onClick={() => navigate("/venueList")}>
                                     <a>{translations.BrowseVenues}</a>
                                 </li>
-                                <li>
+                                <li onClick={() => navigate("/addVenue")}>
                                     <a>{translations.AddVenue}</a>
                                 </li>
-                                <li>
+                                <li onClick={() => navigate("/contactUs")}>
                                     <a>{translations.ContactUs}</a>
                                 </li>
                             </ul>
@@ -64,13 +66,13 @@ const Footer = () => {
                         <div className='list'>
                             <h3>{translations.Support}</h3>
                             <ul className='list-block'>
-                                <li>
+                                <li onClick={() => navigate("/help")}>
                                     <a>{translations.Help}</a>
                                 </li>
-                                <li>
+                                <li onClick={() => navigate("/terms")}>
                                     <a>{translations.TermsOfUse}</a>
                                 </li>
-                                <li>
+                                <li onClick={() => navigate("/privacy")}>
                                     <a>{translations.PrivacyPolicy}</a>
                                 </li>
                             </ul>

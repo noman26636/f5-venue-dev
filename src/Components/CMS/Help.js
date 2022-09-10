@@ -5,12 +5,12 @@ import {  useNavigate } from 'react-router-dom';
 import Pageloader from '../Common/Pageloader';
 import { CmsServices } from './CmsServices';
 
-const PrivacyPolicy = () => {
+const Help = () => {
     const [showLoader, setShowLoader] = useState(false);
     const [data, setData] = useState(null);
     const navigate=useNavigate();
-    const getPrivacyPageContent=()=>{
-         CmsServices.getPrivacyPageContent().then((res) => {
+    const getHelpPageContent=()=>{
+         CmsServices.getHelpPageContent().then((res) => {
             setShowLoader(false);
             if (!res.isAxiosError) {
               setData(res);
@@ -20,7 +20,7 @@ const PrivacyPolicy = () => {
           });
     }
     useEffect(()=>{
-      getPrivacyPageContent(); 
+      getHelpPageContent(); 
     },[])
     return (
         <>
@@ -33,4 +33,4 @@ const PrivacyPolicy = () => {
     );
 };
 
-export default PrivacyPolicy;
+export default Help;

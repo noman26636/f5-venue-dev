@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from "../../Assets/images/logo-blue.svg";
 import burgerMenu from "../../Assets/icons/menu-icon.svg";
 import { useDispatch, useSelector } from 'react-redux';
@@ -65,7 +65,8 @@ export default function Header() {
             <nav>
               <ul className="menu-items">
                 {getMenuOptions()?.map((item, i) => <li className={`menu-item ${i === active ? "active" : ""}`} key={i}>
-                  <a onClick={() => { setActive(i); navigate(item.path) }}>{item.text}</a>
+                 <NavLink  activeclassname="active" to={item.path}>{item.text}
+                 </NavLink> 
                 </li>
                 )}
               </ul>
