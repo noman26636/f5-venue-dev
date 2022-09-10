@@ -13,11 +13,7 @@ const initialFormValues = {
         name: "",
         cvr: "",
         users: [],
-<<<<<<< HEAD
         billing:{email: "", address: "", zipcode: "", reference: "", billing_mail: "", invoice_detail: ""},
-=======
-        billing:{email: "", address: "", zipcode: "", reference: "", billing_email: "", invoice_detail: ""},
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     invitationEmail: ""
 }
 const Company = () => {
@@ -30,11 +26,8 @@ const Company = () => {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(null);
     const [showLoader, setShowLoader] = useState(null);
-<<<<<<< HEAD
     const [userToDelete, setUserToDelete] = useState(null);
-=======
-    const [showModal, setShowModal] = useState(false);
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
+
     const [showInviteUserModal, setShowInviteUserModal] = useState(false);
     const handleInputChange = ({ target }, from = null) => {
         const value = target.type === "checkbox" ? target.checked : target.value;
@@ -65,7 +58,6 @@ const Company = () => {
         const field = {};
         if (formToValidate === "billing") {
             let fieldValues = { ...values.billing };
-<<<<<<< HEAD
             if (!fieldValues.email || fieldValues.email?.trim().length === 0 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)) {
                 field.email = translations.ValidEmailRequired;
                 isValid = false;
@@ -87,24 +79,6 @@ const Company = () => {
         else if (formToValidate === "company") {
             let fieldValues = { ...values };
             if (!fieldValues.name || fieldValues.name?.trim().length === 0) {
-=======
-            if (fieldValues.email?.trim().length === 0 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)) {
-                field.email = translations.ValidEmailRequired;
-                isValid = false;
-            }
-            if (fieldValues.address?.trim().length === 0) {
-                field.address = translations.EmptyFieldMsg;
-                isValid = false;
-            }
-            if (fieldValues.zipcode?.trim().length === 0) {
-                field.zipcode = translations.EmptyFieldMsg;
-                isValid = false;
-            }
-        }
-        else if (formToValidate === "company") {
-            let fieldValues = { ...values };
-            if (fieldValues.name?.trim().length === 0) {
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                 field.name = translations.EmptyFieldMsg;
                 isValid = false;
             }
@@ -114,17 +88,6 @@ const Company = () => {
         });
         return isValid;
     };
-<<<<<<< HEAD
-=======
-    const getCompany = () => {
-        AccountServices.getCompany().then(res => {
-            if (!res.isAxiosError) {
-                setValues({ ...values,...res[0]});
-                const a={ ...values,...res[0]};
-            }
-        });
-    }
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     const inviteUser = () => {
         setShowLoader("invite");
         AccountServices.inviteUser(values.invitationEmail).then(res => {
@@ -142,27 +105,6 @@ const Company = () => {
             }
         });
     }
-<<<<<<< HEAD
-=======
-    // const updateCompany = () => {
-    //     setSubmitted("company");
-    //     if (validate("company")) {
-    //         setShowLoader("company");
-    //         const apiObj = {
-    //             name: values.name,
-    //             cvr: values.cvr
-    //         }
-    //         AccountServices.updateCompany(apiObj).then(res => {
-    //             setSubmitted(null);
-    //             setShowLoader(null);
-    //             if (!res.isAxiosError) {
-    //                 toast.success(translations.Success);
-    //                 setValues({ ...initialFormValues });
-    //             }
-    //         });
-    //     }
-    // }
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     const updateBilling = () => {
         setSubmitted("billing");
         if (validate("billing")) {
@@ -180,20 +122,12 @@ const Company = () => {
             });
         }
     }
-<<<<<<< HEAD
     const deleteUserFromCompany = () => {
         AccountServices.deleteUserFromCompany(userToDelete).then(res => {
             setUserToDelete(null);
             if (!res.isAxiosError) {
                 toast.info(translations.UserDeleted);
                 getBilling();
-=======
-    const deleteUserFromCompany = (id) => {
-        AccountServices.deleteUserFromCompany(id).then(res => {
-            if (!res.isAxiosError) {
-                toast.info(translations.UserDeleted);
-                getCompany();
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
             }
         });
     }
@@ -207,11 +141,7 @@ const Company = () => {
                     <Row className='form'>
                         <Col xl={4} lg={4} md={6}>
                             <TextField name="name"
-<<<<<<< HEAD
                                 label={translations.Name}
-=======
-                                label={translations.Name + " *"}
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                                 type="text" disabled
                                 onChange={(e) => { handleInputChange(e) }}
                                 error={errors.name}
@@ -260,12 +190,8 @@ const Company = () => {
                                             <td>{item.email}</td>
                                             <td>{item.phone_number}</td>
                                             <td>{}</td>
-<<<<<<< HEAD
                                             <td><img alt="" src={deleteIcon} className="bin-icon ml-3 cursor-pointer" 
                                             onClick={() => { setUserToDelete(item.id) }} /></td>
-=======
-                                            <td><img alt="" src={deleteIcon} className="bin-icon ml-3 cursor-pointer" onClick={() => { deleteUserFromCompany(item.id) }} /></td>
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                                         </tr>
                                     })
                                     :
@@ -325,21 +251,12 @@ const Company = () => {
                             />
                         </Col>
                         <Col xl={4} lg={4} md={6}>
-<<<<<<< HEAD
                             <TextField name="billing_mail"
                                 label={`${translations.BillingContactPersonEmail} (${translations.Optional})`}
                                 type="text"
                                 onChange={(e) => { handleInputChange(e, "billing") }}
                                 error={errors.billing_mail}
                                 value={values.billing?.billing_mail}
-=======
-                            <TextField name="billing_email"
-                                label={`${translations.BillingContactPersonEmail} (${translations.Optional})`}
-                                type="text"
-                                onChange={(e) => { handleInputChange(e, "billing") }}
-                                error={errors.billing_email}
-                                value={values.billing?.billing_email}
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                                 className="text-field-2"
                             />
                         </Col>
@@ -358,19 +275,11 @@ const Company = () => {
                     </Row>
                 </div>
             </div >
-<<<<<<< HEAD
             <InviteUser showModal={showInviteUserModal} handleClose={() => setShowInviteUserModal(false)} email={values.invitationEmail}
                 inviteUser={inviteUser} handleInputChange={handleInputChange}
             />
             <Modal text={translations.DeleteUserConfirmation} showModal={userToDelete!==null} handleClose={() => setUserToDelete(null)} btn1Text={translations.Yes}
                 btn1Click={deleteUserFromCompany} btn2Text={translations.No} />
-=======
-            <Modal text={translations.DeleteConfirmation} showModal={showModal} handleClose={() => setShowModal(false)} btn1Text={translations.Yes}
-                btn1Click={deleteUserFromCompany} btn2Text={translations.No} />
-            <InviteUser showModal={showInviteUserModal} handleClose={() => setShowInviteUserModal(false)} email={values.invitationEmail}
-                inviteUser={inviteUser} handleInputChange={handleInputChange}
-            />
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
         </>
     );
 };

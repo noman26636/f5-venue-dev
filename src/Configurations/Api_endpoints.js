@@ -57,7 +57,6 @@ export const VenueApis = {
 export const BookingApis = {
   saveIcalFeed: `${baseUrl}icalfeed`,
 };
-<<<<<<< HEAD
 export const CMSPagesApis={
   getContactPageContent: `${baseUrl}`,
   getAboutPageContent: `${baseUrl}`,
@@ -65,5 +64,3 @@ export const CMSPagesApis={
   getTermsPageContent: `${baseUrl}`,
   getPrivacyPageContent: `${baseUrl}`,
 }
-=======
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4

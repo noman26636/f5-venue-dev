@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import yellowStar from "../../Assets/icons/yellow-star.svg";
 import { Col, Row } from "reactstrap";
 import { VenueServices } from "./VenueServices";
 import location from "../../Assets/icons/location1.svg";
@@ -35,10 +34,7 @@ import RatingStars from "./RatingStars";
 import { ReviewsSlider } from "./ReviewsSlider";
 import { SimilarVenues } from "./SimilarVenues";
 import { getFormattedDate } from "../../Utils/indexUtils";
-<<<<<<< HEAD
 import ReviewVenueModal from "./ReviewVenueModal";
-=======
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
 mapboxgl.accessToken = Constants.mapboxToken;
 
 const initialFormValues = {
@@ -77,12 +73,7 @@ const VenueDetails = () => {
   useEffect(() => {
     getVenueDetails();
     getServices();
-<<<<<<< HEAD
     getAllWishlists();
-=======
-    // if (!isLoggedIn) setWishlists(wishlistData);
-    // else getAllWishlists();
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     return () => {
       if (map) map.remove();
     };
@@ -123,7 +114,6 @@ const VenueDetails = () => {
   const isLoggedIn = !!authState?.user?.access_token;
   const dispatch = useDispatch();
   const getAllWishlists = () => {
-<<<<<<< HEAD
     if (!isLoggedIn) setWishlists(wishlistData);
     else 
    { VenueServices.getAllWishlists().then((res) => {
@@ -131,14 +121,6 @@ const VenueDetails = () => {
         setWishlists(res.wishlists);
       }
     });}
-=======
-    if (!isLoggedIn) return;
-    VenueServices.getAllWishlists().then((res) => {
-      if (!res.isAxiosError) {
-        setWishlists(res.wishlists);
-      }
-    });
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   };
   const addToWishlist = (title, venueId, wishlistId) => {
     setShowBtnLoader("wishlist");
@@ -147,19 +129,11 @@ const VenueDetails = () => {
         (res) => {
           if (!res.isAxiosError) {
             if (res?.wishlist?.id) {
-              dispatch({
-                type: TYPES.WISHLIST_DATA,
-                data: [
-                  ...wishlistData,
-                  { id: Number(res.wishlist.id), name: title },
-                ],
-              });
               VenueServices.addVenueToWishlist({
                 venue_id: venueId,
                 wishlist_id: res.wishlist.id,
               }).then((res1) => {
                 setShowBtnLoader(null);
-<<<<<<< HEAD
                 if (!res1.isAxiosError) { 
                   toast.success(translations.VenueAddedToWishlist);
                   setShowWishlistModal(false); 
@@ -169,22 +143,6 @@ const VenueDetails = () => {
                  newWlArr.push(newWl);
                  dispatch({ type: TYPES.WISHLIST_DATA, data: newWlArr});
                  setWishlists(newWlArr);
-=======
-                if (!res1.isAxiosError) {
-                  getVenueDetails();
-                  // dispatch({
-                  //   type: TYPES.VENUES_WISHLIST_DATA,
-                  //   data: {
-                  //     ...venuesWishlistData,
-                  //     [venueId]: [
-                  //       ...venuesWishlistData[venueId],
-                  //       res.wishlist.id,
-                  //     ],
-                  //   },
-                  // });
-                  toast.success(translations.VenueAddedToWishlist);
-                  setShowWishlistModal(false);
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                   getVenueDetails();
                 }
               });
@@ -213,15 +171,6 @@ const VenueDetails = () => {
           dispatch({ type: TYPES.WISHLIST_DATA, data: [...newWl]});
           setWishlists(newWl);
          }
-          getVenueDetails();
-
-          // dispatch({
-          //   type: TYPES.VENUES_WISHLIST_DATA,
-          //   data: {
-          //     ...venuesWishlistData,
-          //     [venueId]: [...venuesWishlistData[venueId], wishlistId],
-          //   },
-          // });
           getVenueDetails();
         }
       });
@@ -405,10 +354,6 @@ const VenueDetails = () => {
   };
   
   const getWishlistIds = () => {
-<<<<<<< HEAD
-=======
-    debugger
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     //this function return ids of wishlists in which this venue is added.. to be used for guest user
     let wishlistIds=[];
     if(isLoggedIn){
@@ -416,15 +361,9 @@ const VenueDetails = () => {
    wishlistIds= venue.isFavourite.map(wl=>wl.id)
     }
     else
-<<<<<<< HEAD
    { for (let i = 0; i < wishlistData?.length; i++) {
       if (wishlistData[i]?.venues?.indexOf(Number(venueId)) !== -1) {
         wishlistIds.push(wishlistData[i]?.id);
-=======
-   { for (let i = 0; i < wishlists?.length; i++) {
-      if (wishlists[i]?.venues?.indexOf(Number(venueId)) !== -1) {
-        wishlistIds = wishlists[i]?.id;
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
         continue;
       }
     }}
@@ -460,14 +399,7 @@ const VenueDetails = () => {
                     <RatingStars rating={venue.ratings_avg_rating} />
                   </div>
                   <div className="rating ml-3">
-<<<<<<< HEAD
                     {venue.ratings?.length} {venue.ratings?.length !== 1? translations.Reviews: translations.Review}
-=======
-                    {venue.ratings?.length}{" "}
-                    {venue.ratings?.length !== 1
-                      ? translations.Reviews
-                      : translations.Review}
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                   </div>
                 </div>
                 <div className="address-block">
@@ -493,7 +425,7 @@ const VenueDetails = () => {
               </div>
             </div>
           </div>
-          <Row className="venue-details-body gap-xl-5">
+          <Row className="venue-details-body">
             <Col xl={8} lg={8} className="left-content">
               {/* Image slider */}
               {venue.images?.length > 0 && (
@@ -1003,7 +935,6 @@ const VenueDetails = () => {
         showBtnLoader={showBtnLoader === "wishlist"}
         isLoggedIn={isLoggedIn}
         getWishlistIds={getWishlistIds}
-<<<<<<< HEAD
       />
        <ReviewVenueModal
        venueId={venueId}
@@ -1014,8 +945,6 @@ const VenueDetails = () => {
         postReview={postReview}
         values={reviewValues}
         setValues={setReviewValues}
-=======
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
       />
     </>
   );

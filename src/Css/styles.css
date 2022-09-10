@@ -2815,16 +2815,11 @@ input[type='time']::-webkit-calendar-picker-indicator {
   font-weight: 300;
   text-align: center;
   margin-right: 10px;
-<<<<<<< HEAD
   text-transform: uppercase;
 }
 .message-top .senderAvatar{
  background-color:  #F08FEE;
 }
-=======
-}
-
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
 .message-top .date {
   flex: 1;
   text-align: end;
@@ -2839,13 +2834,10 @@ input[type='time']::-webkit-calendar-picker-indicator {
 .messages .message-content {
   padding-left: 3rem;
 }
-<<<<<<< HEAD
 .messages .message-content p{
   white-space: pre-wrap;
   margin-left: 0.49rem;
 }
-=======
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
 .reply-block{
   margin-top: 2.8125rem;
   display: flex;
@@ -3213,15 +3205,6 @@ input[type='time']::-webkit-calendar-picker-indicator {
   cursor: pointer;
 
 }
-<<<<<<< HEAD
-=======
-.wishlist-details-view .wishlist-view .bottom-block {
-  font-size: 16px !important;
-}
-.wishlist-details-view .wishlist-view span {
-  margin: 0 5px;
-}
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
 .wishlist-view .delete-icon {
   cursor: pointer;
 }
@@ -3417,34 +3400,6 @@ input[type='time']::-webkit-calendar-picker-indicator {
   border-radius: 0;
   height: 40px;
 }
-<<<<<<< HEAD
-=======
-.wishlist-details-view .wishlist-venues-block .venue-item {
-  padding:20px;
-  font-weight: 400;
-  font-size: 18px;
-  color: #5f6377;
-  margin: 25px 0;
-}
-.wishlist-details-view .wishlist-venues-block .venue-item .name {
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 33px;
-  color: #594a45;
-}
-.wishlist-details-view .wishlist-venues-block .venue-item .venue-img {
-  object-fit: cover;
-  height: 100%;
-}
-.wishlist-details-view .wishlist-venues-block .venue-item .rating-block {
-  display: flex;
-  align-items: center;
-}
-.wishlist-details-view .wishlist-venues-block .venue-item .guests {
-  display: flex;
-  align-items: center;
-}
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
 @media only screen and (max-width: 1200px) {
   .wishlist-details-view {
     padding: 40px 20px;

@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
-=======
-import venueDummyImg from "../../Assets/images/venue-dummy-img.png";
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../Common/Button";
@@ -75,18 +71,11 @@ const dispatch=useDispatch();
        {
         const newWl=[...wishlistData];
         newWl[index].venues.push(selectedVenue.value);
-<<<<<<< HEAD
         dispatch({ type: TYPES.WISHLIST_DATA, data: [...newWl]});
        }
         toast.success(translations.VenueAddedToWishlist);
         getWishlistVenues();}
       
-=======
-         dispatch({ type: TYPES.WISHLIST_DATA, data: [...newWl]});
-        toast.success(translations.VenueAddedToWishlist);
-        getWishlistVenues();}
-      }
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
     });
   };
   const deleteVenueFromWishlist = () => {
@@ -100,7 +89,6 @@ const dispatch=useDispatch();
         const newWl=[...wishlistData];
     newWl[index].venues=   newWl[index].venues.filter(venueId => venueId !== itemToDelete);
          dispatch({ type: TYPES.WISHLIST_DATA, data: [...newWl]});
-<<<<<<< HEAD
        
        }
        setShowModal(false);
@@ -131,19 +119,6 @@ const dispatch=useDispatch();
         }
         document.body.removeChild(textArea);
      }
-=======
-        setShowModal(false);
-        setItemToDelete(null);
-        toast.info(translations.WishlistVenueDeleted);
-        getWishlistVenues();
-       }
-      }
-    });
-  };
-  const shareWishlist = () => {
-    navigator.clipboard.writeText(window.location.href);
-    toast.success(translations.ShareLink, { autoClose: 5000 });
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
   };
   return (
     <>
@@ -151,11 +126,7 @@ const dispatch=useDispatch();
         <Pageloader />
       ) : (
         <>
-<<<<<<< HEAD
           <div className="wishlist-details-view venue-manage-view">
-=======
-          <div className="wishlist-details-view">
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
             <div className="heading-block">
               <div className="left-block">
                 <div className="name-block">
@@ -175,11 +146,7 @@ const dispatch=useDispatch();
                     </span>
                   </div>
                   {/* <span className='mx-2'>|</span>
-<<<<<<< HEAD
                   <div className='info'>{translations.Updated}:   {new Date(wishlist.updated_at).toDateString()} </div> */}
-=======
-                                        <div className='info'>{translations.Updated}:   {new Date(wishlist.updated_at).toDateString()} </div> */}
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                 </div>
               </div>
               <div className="right-block">
@@ -207,11 +174,7 @@ const dispatch=useDispatch();
                 />
               </div>
             </div>
-<<<<<<< HEAD
             <div className="venue-manage-list">
-=======
-            <div className="venue-manage-list wishlist-view wishlist-venues-block">
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
               {wishlist.venues?.map((item, i) => {
                return <div
                   className="venue-item"
@@ -223,30 +186,18 @@ const dispatch=useDispatch();
                 >
                   <Row className="flex-wrap">
                     <Col xl={2} lg={2} md={2} sm={2}>
-<<<<<<< HEAD
                       {<img
                         alt=""
                         src={item.venue.images ?item.venue.images[0]?.image_path_thumbnail:""}
                         className="venue-img"
                       />}
-=======
-                      <img
-                        alt=""
-                        src={item.image ? item.image : venueDummyImg}
-                        className="venue-img"
-                      />
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                     </Col>
                     <Col
                       xl={8}
                       lg={8}
                       md={8}
                       sm={8}
-<<<<<<< HEAD
                       className="px-5 venue-details"
-=======
-                      className="px-5 d-flex flex-column justify-content-center"
->>>>>>> 2d9a972bec9328ea54a70b22831855f5912104e4
                     >
                       <div className="name">{item.venue.name}</div>
                       <div className="venue-info">{item.venue.city}</div>
