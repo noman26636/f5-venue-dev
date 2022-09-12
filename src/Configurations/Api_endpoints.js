@@ -58,9 +58,9 @@ export const BookingApis = {
   saveIcalFeed: `${baseUrl}icalfeed`,
 };
 export const CMSPagesApis={
-  getContactPageContent: `${baseUrl}`,
-  getAboutPageContent: `${baseUrl}`,
-  getHelpPageContent: `${baseUrl}`,
-  getTermsPageContent: `${baseUrl}`,
-  getPrivacyPageContent: `${baseUrl}`,
+  getContactPageContent: `${baseUrl}sitepage/4`,
+  getAboutPageContent: `${baseUrl}sitepage/1`,
+  getHelpPageContent: `${baseUrl}sitepage/5`,
+  getTermsPageContent: `${baseUrl}sitepage/3`,
+  getPrivacyPageContent: `${baseUrl}sitepage/2`,
 }

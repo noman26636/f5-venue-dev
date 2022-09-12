@@ -25,7 +25,6 @@ import * as TYPES from "../../Store/actions/types";
 import Calendar from "react-calendar";
 import { toast } from "react-toastify";
 import { Constants } from "../../Configurations/Constants";
-import mapboxgl from "mapbox-gl";
 import { AccountServices } from "../Signup/AccountServices";
 import WishlistModal from "../Wishlist/WishlistModal";
 import ImageSlider from "../Common/ImageSlider";
@@ -35,8 +34,7 @@ import { ReviewsSlider } from "./ReviewsSlider";
 import { SimilarVenues } from "./SimilarVenues";
 import { getFormattedDate } from "../../Utils/indexUtils";
 import ReviewVenueModal from "./ReviewVenueModal";
-mapboxgl.accessToken = Constants.mapboxToken;
-
+import L from "leaflet";
 const initialFormValues = {
   eventDate: new Date(),
   content: "",
@@ -54,7 +52,7 @@ const VenueDetails = () => {
   const translations = userLanguageData.translations;
   const [venue, setVenue] = useState({});
   const [values, setValues] = useState(initialFormValues);
-  const [reviewValues, setReviewValues] = useState(initialFormValues);
+  const [reviewValues, setReviewValues] = useState({body:"",rating:0});
   const [errors, setErrors] = useState({});
   const [showLoader, setShowLoader] = useState(true);
   const [submitted, setSubmitted] = useState(false);
@@ -78,9 +76,10 @@ const VenueDetails = () => {
       if (map) map.remove();
     };
   }, []);
-  const postReview = (data) => {
+  const postReview = () => {
     setShowBtnLoader("review");
-    VenueServices.postReview(venueId, data).then((res) => {
+    VenueServices.postReview(venueId, reviewValues).then((res) => {
+      debugger
       setShowBtnLoader(null);
       if (!res.isAxiosError) {
         toast.success(translations.ReviewSubmitted);
@@ -169,7 +168,7 @@ const VenueDetails = () => {
           const newWl=[...wishlistData];
           newWl[index].venues.push(venueId);
           dispatch({ type: TYPES.WISHLIST_DATA, data: [...newWl]});
-          setWishlists(newWl);
+         if(!isLoggedIn) setWishlists(newWl);
          }
           getVenueDetails();
         }
@@ -232,20 +231,35 @@ const VenueDetails = () => {
           similarVenues: res.similar || [],
         });
         if (res.venue && res.venue?.longitude && res.venue?.latitude) {
-          const map = new mapboxgl.Map({
-            container: mapContainerRef.current,
-            style: "mapbox://styles/mapbox/streets-v11",
-            center: [res.venue.longitude, res.venue.latitude],
-            zoom: 1.5,
-            dragPan: false,
-          });
-          new mapboxgl.Marker({
-            color: "#594A45",
-            draggable: false,
-          })
-            .setLngLat([res.venue.longitude, res.venue.latitude])
-            .addTo(map);
-          setMap(map);
+          const map = L.map("map").setView([res.venue.longitude, res.venue.latitude], 8);
+          const marker = L.marker([res.venue.longitude, res.venue.latitude]).addTo(
+            map
+          );
+          L.tileLayer(
+            `https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,
+            {
+              maxZoom: 18,
+              tileSize: 512,
+              zoomOffset: -1,
+              accessToken: Constants.mapboxToken,
+              debounceMoveend: true,
+            }
+          ).addTo(map);
+
+
+          // const map = new mapboxgl.Map({
+          //   container: mapContainerRef.current,
+          //   style: "mapbox://styles/mapbox/streets-v11",
+          //   center: [res.venue.longitude, res.venue.latitude],
+          //   zoom: 1.5,
+          //   dragPan: false,
+          // });
+          // new mapboxgl.Marker({
+          //   color: "#594A45",
+          //   draggable: false,
+          // })
+          //   .setLngLat([res.venue.longitude, res.venue.latitude])
+          //   .addTo(map);
         }
       }
       else 
@@ -389,7 +403,14 @@ const VenueDetails = () => {
             <div className="details">
               <div className="d-flex align-items-center mb-4">
               <div className="name">{venue.name}</div>
-            {isLoggedIn &&  <span onClick={()=>setShowReviewModal(true)} className="post-review">{translations.PostReview}</span>}
+            {isLoggedIn &&  
+             <Button
+             label={translations.PostReview}
+             onClick={()=>setShowReviewModal(true)}
+             wrapperClass="ml-auto"
+             className="small-btn"
+           />
+          }
               </div>
               <div className="rating-address-block">
                 <div className="rating-block">
@@ -495,7 +516,7 @@ const VenueDetails = () => {
                     <div className="fs-14">{translations.FloorArea} </div>
                   </div>
                 </div>
-                {venue.additional_info?.length !== 0 && (
+                {venue.additional_info && venue.additional_info?.length !== 0 && (
                   <p>
                     <span className="fw-600">{translations.Note}:</span>
                     {venue.additional_info}
@@ -543,7 +564,7 @@ const VenueDetails = () => {
                     <div className="fs-14">{translations.CleaningFee}</div>
                   </div>
                 </div>
-                {venue.cancellation_policy?.length !== 0 && (
+                {venue.cancellation_policy && venue.cancellation_policy?.length !== 0 && (
                   <p>
                     <span className="fw-600">
                       {translations.CancellationPolicy}:
@@ -873,7 +894,9 @@ const VenueDetails = () => {
               </div>
 
               {venue.latitude && venue.longitude && (
-                <div className="map" ref={mapContainerRef}></div>
+                // <div className="map" ref={mapContainerRef}></div>
+               
+          <div className={`map`} id="map" ref={mapContainerRef} />
               )}
               <div className="contact info-block">
                 <ul className="contact-list">
@@ -894,13 +917,15 @@ const VenueDetails = () => {
                   </li>
                 </ul>
               </div>
-              <div className="contact">
+          {   venue?.contact &&
+           <div className="contact">
                 <div className="sub-title">{translations.ContactInfo}</div>
                 <ul className="contact-list">
-                  <li className="list-item">
+                 {venue.contact?.phone_number && <li className="list-item">
                     <img src={phone} alt="icon" />
                     <div className="text">{venue.contact?.phone_number}</div>
                   </li>
+                  }
                   <li className="list-item">
                     <img src={mail} alt="icon" />
                     <div className="text">{venue.contact?.email}</div>
@@ -911,6 +936,7 @@ const VenueDetails = () => {
                   </li>
                 </ul>
               </div>
+              }
             </Col>
           </Row>
           {/* Similar venues */}

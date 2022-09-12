@@ -36,7 +36,7 @@ export const ReviewsSlider = (props) => {
                                     <div className='image-block'>
                                         {/* <img alt="" src={item.image ? item.image : personImg} className="person-img" /> */}
                                         <div className='review-header'>
-                                            <div >{item.name ? item.name : translations.Anonymous}</div>
+                                            <div className='text-capitalize'>{item.author?.firstname ? `${item.author.firstname} ${item.author.lastname?item.author.lastname:""}` : translations.Anonymous}</div>
                                             <RatingStars rating={item.rating} />
                                         </div>
 

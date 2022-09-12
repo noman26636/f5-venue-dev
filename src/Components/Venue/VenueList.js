@@ -12,16 +12,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMale, faChair } from "@fortawesome/free-solid-svg-icons";
 import { Constants } from "../../Configurations/Constants";
 import * as TYPES from "../../Store/actions/types";
-import mapboxgl from "mapbox-gl";
+import L from "leaflet";
 import {
   enum_seatingOptions,
   enum_sortFieldOptions,
   enum_sortTypeOptions,
 } from "../../Utils/indexUtils";
 import RatingStars from "./RatingStars";
-mapboxgl.accessToken = Constants.mapboxToken;
+let markerGroup=null;
+const mapInitialLat=55,mapInitialLng=9.18,zoom=7.5;
 const initialFormValues = {
-  mapSearch: false,
+  mapSearch: true,
   location: "",
   eventType: [],
   capacity: 0,
@@ -99,68 +100,43 @@ const VenueList = () => {
       }
     }
   };
-  // useEffect(() => {
-  //   if (Number(values.sortField) !== -1) {
-  //     searchVenues();
-  //     setModalType(null);
-  //   }
-  // }, [values.sortField, values.sortType]);
-  // useEffect(() => {
-  //   if (!values.mapSearch) {
-  //     setValues({ ...values, lat: null, lng: null });
-  //   }
-  // }, [values.mapSearch]);
-  // useEffect(() => {
-  //   if (
-  //     values.lat &&
-  //     values.lng &&
-  //     values.lat !== 0 &&
-  //     values.lng !== 0 &&
-  //     values.mapSearch
-  //   )
-  //     searchVenues();
-  // }, [values.lat, values.lng]);
   useEffect(() => {
     console.log(values);
   }, [values]);
   useEffect(() => {
+    if(values.mapSearch)
     setMarkersOnMap(venuesList);
   }, [venuesList, values.mapSearch]);
   const setMarkersOnMap = (venues) => {
     if (!values.mapSearch) return;
-    let avgLat = 0,
-      avgLng = 0,
-      count = 0;
+    let count = 0;
+      const latLngArr = [];
+      if (!map) return;
+      if(markerGroup && map.hasLayer(markerGroup)){
+        map.removeLayer(markerGroup);
+      }
+     markerGroup = L.layerGroup().addTo(map);
     venues.forEach((venue) => {
-      if (!(venue.latitude > 90 || venue.latitude < -90)) {
-        const marker = new mapboxgl.Marker({ draggable: false })
-          .setLngLat([venue.latitude, venue.longitude])
-          .setPopup(
-            new mapboxgl.Popup().setHTML(
-              `
+       if (!(venue.latitude > 90 || venue.latitude < -90)) {
+   const marker =  L.marker([venue.longitude,venue.latitude]).addTo(markerGroup);
+      
+                marker.bindPopup( `
+                <div>
+                    <img src=${venue.images[0].image_path_thumbnail} class="popup-img">
                     <div>
-                        <img src=${venue.images[0]?.image_path_thumbnail} class="popup-img">
-                        <div>
-                            <h3 class="popup-title">${venue.name}</h3>
-                            <div>${venue.street_address}</div>
-                        </div>
+                        <h3 class="popup-title">${venue.name}</h3>
+                        <div>${venue.street_address}</div>
                     </div>
-                    `
-            )
-          )
-          .addTo(map);
-        avgLat += venue.latitude;
-        avgLng += venue.longitude;
-        count++;
+                </div>`);
+                latLngArr.push([venue.latitude, venue.longitude]);
+                count++;
       }
     });
     if (count !== 0) {
-      map.setCenter([avgLng / count, avgLat / count]);
-      setMap(map);
-      setValues({ ...values, mapSearch: true });
-    } else {
-      setValues({ ...values, mapSearch: true });
-    }
+map.addLayer(markerGroup);
+map.fitBounds([latLngArr]);
+    } 
+    setValues({ ...values, mapSearch: true });
   };
   const searchVenues = (searchParams = values, pageNumber) => {
     setModalType(null);
@@ -214,14 +190,8 @@ const VenueList = () => {
       setValues({ ...valuesObj });
     }
     searchVenues(valuesObj);
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [50.6, 20.22],
-      zoom: 3,
-    });
-    map.on("moveend", (e) => {
-      if (e.originalEvent) {
+    const map = L.map('map').setView([mapInitialLat, mapInitialLng], zoom);
+    map.on("dragend", (e) => {
         const { lng, lat } = map.getCenter();
         const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
         setValues({ ...valuesObj });
@@ -233,9 +203,14 @@ const VenueList = () => {
           valuesObj.mapSearch
         )
           searchVenues(valuesObj);
-      }
     });
-    map.addControl(new mapboxgl.NavigationControl(), "top-right");
+    L.tileLayer(`https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,{
+      maxZoom: 18,
+      tileSize:  512,
+      zoomOffset: -1, 
+      accessToken: Constants.mapboxToken,
+      debounceMoveend:true
+      }).addTo(map)
     setMap(map);
     return () => {
       if (map) map.remove();
@@ -356,10 +331,9 @@ const VenueList = () => {
             pageSize={pager.per_page}
           />
         </div>
-        <div
-          className={`map-container ${values.mapSearch ? "d-block" : "d-none"}`}
-          ref={mapContainerRef}
-        />
+        <div className={`map-container ${values?.mapSearch ? "d-block" : "d-none"}`}>
+         <div className={`h-100`} id="map" ref={mapContainerRef} />
+         </div>
         <SearchModal
           showModal={modalType !== null}
           modalType={modalType}
@@ -377,5 +351,4 @@ const VenueList = () => {
     </>
   );
 };
-
 export default VenueList;

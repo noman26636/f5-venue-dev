@@ -18,6 +18,7 @@ import RatingStars from "../Venue/RatingStars";
 const WishlistDetails = () => {
   const params = useParams();
   const wishlistId = params.wishlistId;
+  const wishlistToken=params.wishlistToken;
   const appState = useSelector((state) => {
     return state.app;
   });
@@ -50,7 +51,8 @@ const dispatch=useDispatch();
     });
   };
   const getWishlistVenues = () => {
-    VenueServices.getWishlistDetails(wishlistId).then((res) => {
+    
+    VenueServices.getWishlistDetails(wishlistId?wishlistId:wishlistToken).then((res) => {
       if (!res.isAxiosError) {
         setWishlist(res.wishlist[0]);
         setShowLoader(false);
@@ -80,7 +82,7 @@ const dispatch=useDispatch();
   };
   const deleteVenueFromWishlist = () => {
     setShowBtnLoader("delete");
-    VenueServices.deleteWishlistVenue(wishlistId, itemToDelete).then((res) => {
+    VenueServices.deleteWishlistVenue(wishlistId, itemToDelete).then(res => {
     setShowBtnLoader(null);
       if (!res.isAxiosError) {
         const index=wishlistData.map(wl=>wl.id).indexOf(Number(wishlistId));
@@ -94,20 +96,21 @@ const dispatch=useDispatch();
        setShowModal(false);
        toast.info(translations.WishlistVenueDeleted);
        getWishlistVenues();
-       setItemToDelete(null);
+       
       }
-      
+      setItemToDelete(null);
     });
   };
   const shareWishlist = () => {
+    const shareLink=`${window.location.origin}/share/${wishlist.token}`;
     if(navigator && navigator?.clipboard)
-    {navigator.clipboard.writeText(window.location.href);
+    {navigator.clipboard.writeText(shareLink);
       toast.success(translations.ShareLink, { autoClose: 5000 });
     }
     else
     {
         const textArea = document.createElement("textarea");
-        textArea.value = window.location.href;
+        textArea.value = shareLink;
         document.body.prepend(textArea);
         textArea.focus();
         textArea.select();
@@ -150,6 +153,8 @@ const dispatch=useDispatch();
                 </div>
               </div>
               <div className="right-block">
+                {wishlistId &&
+                  <>
                 <MultiselectDD
                   isMulti={false}
                   options={allVenues}
@@ -167,6 +172,7 @@ const dispatch=useDispatch();
                   wrapperClass="mr-3"
                   disabled={selectedVenue === null}
                 />
+                </>}
                 <Button
                   label={translations.Share}
                   onClick={shareWishlist}
@@ -197,7 +203,7 @@ const dispatch=useDispatch();
                       lg={8}
                       md={8}
                       sm={8}
-                      className="px-5 venue-details"
+                      className="venue-details"
                     >
                       <div className="name">{item.venue.name}</div>
                       <div className="venue-info">{item.venue.city}</div>
@@ -236,6 +242,7 @@ const dispatch=useDispatch();
                         </span>
                         <span> {translations.RentPerDay1}</span>
                       </div>
+                     {wishlistId &&
                       <div className="my-3 mx-auto">
                         <img
                           alt=""
@@ -246,7 +253,7 @@ const dispatch=useDispatch();
                             setShowModal(true);
                           }}
                         />
-                      </div>
+                      </div>}
                     </Col>
                   </Row>
                 </div>

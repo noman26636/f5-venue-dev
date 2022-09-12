@@ -51,7 +51,7 @@ const Wishlists = () => {
                 toast.success(translations.WishlistCreated);
                 getAllWishlists();
                 dispatch({ type: TYPES.WISHLIST_DATA, data: [...wishlistData, { ...res.wishlist,venues:[] }] });
-                setWishlists([...wishlistData, {...res.wishlist,venues:[] }]);
+                if (!authState?.user?.access_token) setWishlists([...wishlistData, {...res.wishlist,venues:[] }]);
                 setShowModal(null);
             }
         });
@@ -65,7 +65,7 @@ const Wishlists = () => {
                 toast.info(translations.WishlistDeleted);
                 const newWishlist = wishlistData.filter(wishlist => wishlist.id !== itemToDelete);
                 dispatch({ type: TYPES.WISHLIST_DATA, data: [...newWishlist] });
-                setWishlists([...newWishlist] );
+                if (!authState?.user?.access_token)  setWishlists([...newWishlist] );
                 getAllWishlists();
                 setItemToDelete(null);
             }

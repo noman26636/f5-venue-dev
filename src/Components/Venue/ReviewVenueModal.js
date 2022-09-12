@@ -60,7 +60,7 @@ export default function ReviewVenueModal(props) {
           className={`small-btn ml-auto mt-4`}
           wrapperClass="w-100"
           showBtnLoader={showBtnLoader}
-          disabled={values.rating === 0}
+          disabled={values.rating === 0 || values.body===""}
         />
       </ModalBody>
     </Modal>

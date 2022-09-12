@@ -27,7 +27,6 @@ const Company = () => {
     const [submitted, setSubmitted] = useState(null);
     const [showLoader, setShowLoader] = useState(null);
     const [userToDelete, setUserToDelete] = useState(null);
-
     const [showInviteUserModal, setShowInviteUserModal] = useState(false);
     const handleInputChange = ({ target }, from = null) => {
         const value = target.type === "checkbox" ? target.checked : target.value;

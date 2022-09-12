@@ -1590,7 +1590,7 @@ footer .social-icons .icon.linkedin {
   width: 100% !important;
 } */
 
-.map-container {
+/* .map-container {
   position: relative;
   width: 38%;
   top: 0;
@@ -1603,7 +1603,16 @@ footer .social-icons .icon.linkedin {
 .map-container .mapboxgl-canvas {
   width: 100% !important;
   height: 100% !important;
- } 
+ }  */
+ .map-container {
+  position: relative;
+  width: 26%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  height: 40rem;
+}
 .mapboxgl-popup {
   min-width: 240px;
 }
@@ -1859,6 +1868,8 @@ footer .social-icons .icon.linkedin {
 .venue-details-view .venue-details-header .details {
   font-weight: 400;
   font-size: 18px;
+  width: 100%;
+  margin-bottom: 15px;
 }
 .venue-details-view .venue-details-header .post-review{
   cursor: pointer;
@@ -1866,6 +1877,7 @@ footer .social-icons .icon.linkedin {
   margin-left: 5rem;
   font-weight: 600;
   font-size: 23px;
+
 }
 .venue-details-view .venue-details-header .details .name {
   font-weight: 600;
@@ -3276,7 +3288,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  line-height: 50px;
+  line-height: 30px;
 }
 .venue-manage-view .venue-manage-list .venue-item:last-child {
   margin-bottom: 0px;
@@ -3290,7 +3302,8 @@ input[type='time']::-webkit-calendar-picker-indicator {
 }
 .venue-manage-view .venue-manage-list .venue-item .venue-img {
   object-fit: cover;
-  height: 100%;
+  height: 150px;
+  width: 180px;
 }
 .venue-manage-view .venue-manage-list .venue-item .rating-block {
   display: flex;
