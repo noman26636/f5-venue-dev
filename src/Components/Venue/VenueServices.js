@@ -8,8 +8,8 @@ export const VenueServices = {
                 return error;
             });
     },
-    getUserVenues: () => {
-        return axios.get(`${VenueApis.getUserVenues}`)
+    getUserVenues: (pageNumber = 1, pageSize = 50) => {
+        return axios.get(`${VenueApis.getUserVenues}?page=${pageNumber}&page_size=${pageSize}`)
             .then(response => response.data)
             .catch(error => {
                 return error;
@@ -37,6 +37,7 @@ export const VenueServices = {
             });
     },
     postReview: (id,data) => {
+        debugger
         return axios.post(`${VenueApis.postReview}${id}`,data)
             .then(response => response.data)
             .catch(error => {

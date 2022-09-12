@@ -10,6 +10,7 @@ import { getFormattedDate, venueStatus } from "../../Utils/indexUtils";
 import RatingStars from "./RatingStars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChair, faMale } from "@fortawesome/free-solid-svg-icons";
+import Pager from "../Common/Pagination";
 
 const ManageVenues = () => {
   const appState = useSelector((state) => {
@@ -20,13 +21,15 @@ const ManageVenues = () => {
   const [showLoader, setShowLoader] = useState(true);
   const [venuesList, setVenuesList] = useState([]);
   const [showBtnLoader, setShowBtnLoader] = useState(false);
+  const [pager, setPager] = useState({ current_page: 1, per_page: 20 });
   const navigate = useNavigate();
-  const getUserVenues = () => {
+  const getUserVenues = (pageNumber) => {
     setShowLoader(true);
-    VenueServices.getUserVenues().then((res) => {
+    VenueServices.getUserVenues(pageNumber, pager.per_page).then((res) => {
       setShowLoader(false);
       if (!res.isAxiosError) {
         setVenuesList(res.venues);
+        setPager({...pager, current_page: Number(res.page),total:res.total });
       }
     });
   };
@@ -43,7 +46,7 @@ const ManageVenues = () => {
     );
   };
   useEffect(() => {
-    getUserVenues();
+    getUserVenues(pager.current_page);
   }, []);
   return (
     <div className="venue-manage-view">
@@ -155,6 +158,15 @@ const ManageVenues = () => {
           })
         )}
       </div>
+      <Pager
+            total={pager.total}
+            current={pager.current_page}
+            onChange={(current) => {
+              setPager({ ...pager, current_page: current });
+              getUserVenues(current);
+            }}
+            pageSize={pager.per_page}
+          />
     </div>
   );
 };

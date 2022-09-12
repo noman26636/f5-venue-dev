@@ -143,7 +143,7 @@ export const AccountServices = {
             });
     },
     inquiriesSearch: (data, pageNumber = 1, pageSize = 50) => {
-        return axios.post(`${AccountApis.inquiriesSearch}?page=${pageNumber}&per_page=${pageSize}`, data)
+        return axios.post(`${AccountApis.inquiriesSearch}?page=${pageNumber}&page_size=${pageSize}`, data)
             .then(response => response.data)
             .catch(error => {
                 return error;

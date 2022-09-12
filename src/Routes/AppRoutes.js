@@ -40,8 +40,8 @@ let AppRoutes = () => {
             <Route path="/" exact element={<Home />} />
             <Route path="/home" exact element={<Home />} />
             <Route path="/venueList" element={<VenueList />} />
-            <Route path="/termsandconditions" element={<Terms />} />
-            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/about" element={<About />} />
             <Route path="/help" element={<Help />} />
             <Route path="/contactUs" element={<ContactUs />} />
@@ -57,6 +57,7 @@ let AppRoutes = () => {
               element={<InquiryDetails />}
             />
             <Route path="/wishlists" element={<Wishlists />} />
+            <Route path="/share/:wishlistToken" element={<WishlistDetails />} />
             <Route path="/wishlist/:wishlistId" element={<WishlistDetails />} />
             {/* </Route> */}
             <Route path="*" element={<Home />} />
@@ -93,7 +94,7 @@ let AppRoutes = () => {
           />
           <Route path="/login" exact element={<Login />} />
           <Route
-            path="/termsandconditions"
+            path="/terms"
             element={
               <Layout>
                 <Terms />
@@ -101,7 +102,7 @@ let AppRoutes = () => {
             }
           />
           <Route
-            path="/privacypolicy"
+            path="/privacy"
             element={
               <Layout>
                 <PrivacyPolicy />

@@ -9,8 +9,7 @@ export default function ToggleBtn(props) {
     } = props;
     return (
         <div className="toggle-btn-wrap">
-            {/* <div className="title">{label}</div> */}
-            <input type="checkbox" name={name} className="toggle-btn" value={value} onChange={onChange} key={name} />
+            <input type="checkbox" name={name} className="toggle-btn" value={value} onChange={onChange} key={name} checked={value}/>
         </div>
     );
 }

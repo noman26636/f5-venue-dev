@@ -10,6 +10,7 @@ import Pageloader from "../Common/Pageloader";
 import { VenueServices } from "../Venue/VenueServices";
 import { getFormattedDate } from "../../Utils/indexUtils";
 import { useNavigate } from "react-router-dom";
+import Pager from "../Common/Pagination";
 const initialFormValues = {
   venues: [],
   text: "",
@@ -25,6 +26,7 @@ const InquiriesList = () => {
   const [venuesList, setVenuesList] = useState([]);
   const [inquiresList, setInquiriesList] = useState([]);
   const [showLoader, setShowLoader] = useState(true);
+  const [pager, setPager] = useState({ current_page: 1, per_page: 2 });
   const getOptions = () => {
     return venuesList?.map((item) => ({
       value: item.id,
@@ -45,14 +47,15 @@ const InquiriesList = () => {
       }
     });
   };
-  const getInquiries = () => {
+  const getInquiries = (pageNumber) => {
  let venuesArr=[];
     if(values.venues?.length>0)
      venuesArr  =values.venues.map(venue=>venue.value);
-    AccountServices.inquiriesSearch({...values,venues:venuesArr}).then((res) => {
+    AccountServices.inquiriesSearch({...values,venues:venuesArr},pageNumber, pager.per_page).then((res) => {
       setShowLoader(false);
       if (!res.isAxiosError) {
         setInquiriesList(res.inquiry);
+        setPager({...pager, current_page: Number(res.page),total:res.total });
       }
     });
   };
@@ -130,7 +133,6 @@ const InquiriesList = () => {
                     <div className="text-block">
                       <div>
                         <span className="fw-600">
-                          
                           {translations.WhyDoINotSee}
                         </span>
                         <ul>
@@ -145,6 +147,15 @@ const InquiriesList = () => {
             </tbody>
           </Table>
         </div>
+        <Pager
+            total={pager.total}
+            current={pager.current_page}
+            onChange={(current) => {
+              setPager({ ...pager, current_page: current });
+              getInquiries(current);
+            }}
+            pageSize={pager.per_page}
+          />
       </div>
     </>
   );

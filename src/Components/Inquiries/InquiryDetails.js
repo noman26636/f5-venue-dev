@@ -117,7 +117,6 @@ export default function InquiryDetails() {
                 <div className="messages">
                   <div className="message-top">
                     <div className="avatar senderAvatar">
-
                       {getInitialLetters(inquiryData.inquiry?.user_name)}
                     </div>
                     <div className="author fw-bold">

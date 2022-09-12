@@ -12,14 +12,15 @@ const Terms = () => {
     const getTermsPageContent=()=>{
          CmsServices.getTermsPageContent().then((res) => {
             setShowLoader(false);
-            if (!res.isAxiosError) {
-              setData(res);
+            if (!res.isAxiosError && res?.page?.content) {
+              setData(res.page.content);
             }
             else
            navigate("/home");
           });
     }
     useEffect(()=>{
+      window.scrollTo(0, 0);
       getTermsPageContent(); 
     },[])
     return (
