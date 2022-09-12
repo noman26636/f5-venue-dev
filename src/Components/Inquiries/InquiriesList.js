@@ -39,15 +39,13 @@ const InquiriesList = () => {
   }, []);
   const getVenues = () => {
     setShowLoader(true);
-    const searchObj = {};
-    if (values.search !== "") searchObj.name = values.text;
-    VenueServices.getUserVenues(searchObj).then((res) => {
+    VenueServices.getUserVenues().then((res) => {
       if (!res.isAxiosError) {
         setVenuesList(res?.venues);
       }
     });
   };
-  const getInquiries = (pageNumber) => {
+  const getInquiries = (pageNumber=pager.current_page) => {
  let venuesArr=[];
     if(values.venues?.length>0)
      venuesArr  =values.venues.map(venue=>venue.value);
@@ -94,7 +92,7 @@ const InquiriesList = () => {
               className="text-field-2"
             />
           </div>
-          <div className="search-btn" onClick={getInquiries}>
+          <div className="search-btn" onClick={()=>getInquiries(pager.current_page)}>
             <img alt="" src={searchIcon} />
           </div>
         </div>

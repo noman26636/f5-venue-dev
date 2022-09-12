@@ -97,8 +97,10 @@ const Wishlists = () => {
                                         </div>
                                         <div className='bottom-block'>
                                             <span><span className='fw-600'>{item.venues?.length}</span> {item.venues?.length > 1 ? translations.Venues : translations.Venue} </span>
-                                            |  <span> {translations.Created} :<span className='fw-600'> {new Date(item.created_at).toDateString()} </span></span>
-                                            |   <span> {translations.Updated} :<span className='fw-600'> {new Date(item.updated_at).toDateString()} </span></span>
+                                            <span className='separator'>|</span> 
+                                            <span> {translations.Created} :<span className='fw-600'> {new Date(item.created_at).toDateString()} </span></span>
+                                            <span className='separator'>|</span>  
+                                             <span> {translations.Updated} :<span className='fw-600'> {new Date(item.updated_at).toDateString()} </span></span>
                                             <p className='ml-0'>{item.description}</p>
                                         </div>
                                     </div>

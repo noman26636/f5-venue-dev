@@ -79,7 +79,6 @@ const VenueDetails = () => {
   const postReview = () => {
     setShowBtnLoader("review");
     VenueServices.postReview(venueId, reviewValues).then((res) => {
-      debugger
       setShowBtnLoader(null);
       if (!res.isAxiosError) {
         toast.success(translations.ReviewSubmitted);
@@ -245,21 +244,6 @@ const VenueDetails = () => {
               debounceMoveend: true,
             }
           ).addTo(map);
-
-
-          // const map = new mapboxgl.Map({
-          //   container: mapContainerRef.current,
-          //   style: "mapbox://styles/mapbox/streets-v11",
-          //   center: [res.venue.longitude, res.venue.latitude],
-          //   zoom: 1.5,
-          //   dragPan: false,
-          // });
-          // new mapboxgl.Marker({
-          //   color: "#594A45",
-          //   draggable: false,
-          // })
-          //   .setLngLat([res.venue.longitude, res.venue.latitude])
-          //   .addTo(map);
         }
       }
       else 
@@ -366,7 +350,6 @@ const VenueDetails = () => {
     // else getAllWishlists();
     setShowWishlistModal(true);
   };
-  
   const getWishlistIds = () => {
     //this function return ids of wishlists in which this venue is added.. to be used for guest user
     let wishlistIds=[];
@@ -390,16 +373,6 @@ const VenueDetails = () => {
       ) : (
         <div className="venue-details-view">
           <div className="venue-details-header">
-            {/* <div
-              className="logo"
-              style={{
-                backgroundImage: `url(${
-                  venue.images?.length > 0
-                    ? venue.images[0]?.image_path_thumbnail
-                    : noImg
-                })`,
-              }}
-            ></div> */}
             <div className="details">
               <div className="d-flex align-items-center mb-4">
               <div className="name">{venue.name}</div>
@@ -415,7 +388,7 @@ const VenueDetails = () => {
               <div className="rating-address-block">
                 <div className="rating-block">
                   <span>{venue.city} </span>
-                  <span className="mx-2">|</span>
+                  <span className="mx-2 d-md-none">|</span>
                   <div className="rating">
                     <RatingStars rating={venue.ratings_avg_rating} />
                   </div>

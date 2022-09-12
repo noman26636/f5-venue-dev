@@ -255,7 +255,7 @@ function Profile() {
                         <div className='title'>
                             {translations.ChangePassword}
                         </div>
-                        <div className='d-flex flex-column align-items-center'>
+                        <div className='delete-block'>
                             <Button label={translations.DeleteAccount} onClick={() => { setShowModal(true) }} className="form-btn delete-btn"
                                 showBtnLoader={showLoader === "delete"} />
                             <span className='helping-text'>

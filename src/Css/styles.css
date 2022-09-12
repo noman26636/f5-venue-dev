@@ -211,6 +211,11 @@ button:disabled {
 .ml-3 {
   margin-left: 0.75rem;
 }
+@media (max-width: 768px) {
+.d-md-none{
+  display: none !important;
+}
+}
 .place-self-end {
   place-self: flex-end;
 }
@@ -608,6 +613,11 @@ textarea {
   min-width: 280px;
   padding: 0;
   margin: auto;
+}
+@media (max-width:565px) {
+.rc-pagination {
+  min-width: unset !important;
+}
 }
 .rc-pagination li {
   cursor: pointer;
@@ -1579,31 +1589,6 @@ footer .social-icons .icon.linkedin {
   margin-bottom: 32px;
   width: 23%;
 }
-/* .map-block {
-  width: 38%;
-  position: relative;
-  margin-top: 20px;
-  overflow: hidden;
-}
-.map-block .mapboxgl-canvas {
-  height: 780px !important;
-  width: 100% !important;
-} */
-
-/* .map-container {
-  position: relative;
-  width: 38%;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  overflow: hidden;
-  width: 500px;
-  height: 600px;
-}
-.map-container .mapboxgl-canvas {
-  width: 100% !important;
-  height: 100% !important;
- }  */
  .map-container {
   position: relative;
   width: 26%;
@@ -1635,6 +1620,9 @@ footer .social-icons .icon.linkedin {
 @media only screen and (max-width: 768px) {
   .venue-list-view .venue-details-block .venue-block {
     width: 48%;
+  }
+  .venue-list-view .map-container{
+    display: none !important;
   }
 }
 @media only screen and (max-width: 576px) {
@@ -1949,6 +1937,13 @@ footer .social-icons .icon.linkedin {
   padding: 20px 25px;
   border: 1px solid #cccccc;
 }
+@media only screen and (max-width: 595px) {
+.venue-details-view .venue-details-body .capacity {
+  flex-direction: column;
+  align-items: center;
+}
+}
+
 .venue-details-view .venue-details-body .capacity .capacity-info {
   display: flex;
   flex-wrap: wrap;
@@ -2105,6 +2100,10 @@ footer .social-icons .icon.linkedin {
     align-items: unset;
     flex-direction: column;
     gap: 0;
+  }
+  .venue-details-view .venue-details-header .details .rating-address-block .rating-block{
+    align-items: unset;
+    flex-direction: column;
   }
 }
 @media only screen and (max-width: 576px) {
@@ -2606,6 +2605,11 @@ input[type='time']::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   align-items: center;
 }
+.profile-edit .form-wrap.password-form .delete-block{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
 .profile-edit .form-wrap.password-form .form {
   display: flex;
   justify-content: space-between;
@@ -2656,9 +2660,22 @@ input[type='time']::-webkit-calendar-picker-indicator {
   .profile-edit .form-wrap .title {
     font-size: 20px;
   }
+  .profile-edit .form-wrap.password-form .delete-block{
+    align-items: unset;
+  }
+  .profile-edit .form-wrap.password-form .delete-block .helping-text{
+  text-align: left;
+  }
   .profile-edit .form-wrap .btn-wrap .form-btn.delete-btn {
     padding: 11px 5px;
   }
+  .profile-edit .form-wrap.password-form .title-block{
+    flex-direction: column;
+    align-items: unset;
+  } 
+  .profile-edit .form-wrap.password-form .title-block .btn-wrap{
+margin-top: 10px;
+  } 
 }
 /* ***************************Inquiries listing****************************** */
 .inquiries-list {
@@ -2861,6 +2878,27 @@ input[type='time']::-webkit-calendar-picker-indicator {
   margin-top: 20px;
   text-align: center;
   font-style: italic;
+}
+@media only screen and (max-width: 768px) {
+  .conversation-section{
+    padding: 10px;
+  }
+  .conversation-section .detail-bar{
+    justify-content: unset;
+    margin-bottom: 20px;
+  }
+}
+@media only screen and (max-width: 565px) {
+  .conversation-bar .message-top{
+    flex-direction: column;
+    align-items: unset;
+  }
+  .conversation-bar .message-top .date{
+    text-align: left;
+  }
+  .conversation-bar .message-content{
+    padding: 0;
+  }
 }
 /* ***************************Company ************************ */
 .users-table {
@@ -3215,13 +3253,17 @@ input[type='time']::-webkit-calendar-picker-indicator {
   margin-bottom: 30px;
   overflow: hidden;
   cursor: pointer;
-
 }
 .wishlist-view .delete-icon {
   cursor: pointer;
+  width: 20px;
+    height: 20px;
 }
 .wishlist-view-wrap .top-block {
   width: 100%;
+}
+.wishlist-view-wrap .wishlist-view .bottom-block{
+display: flex;
 }
 @media only screen and (max-width: 1300px) {
   .wishlist-view-wrap .wishlist-view .top-block {
@@ -3237,12 +3279,21 @@ input[type='time']::-webkit-calendar-picker-indicator {
 @media only screen and (max-width: 576px) {
   .wishlist-view-wrap .heading-block {
     flex-direction: column;
-    align-items: unset;
+    align-items: unset !important;
   }
   .wishlist-view-wrap .heading-block .btn-wrap {
     margin-top: 10px;
     margin-left: unset;
   }
+  .wishlist-view .right-item{
+    align-items: flex-end !important;
+  }
+  .wishlist-view-wrap .wishlist-view .bottom-block{
+    flex-direction: column;
+    }
+    .wishlist-view-wrap .wishlist-view .bottom-block .separator{
+      display: none;
+      }
 }
 
 
@@ -3290,6 +3341,10 @@ input[type='time']::-webkit-calendar-picker-indicator {
   justify-content: center;
   line-height: 30px;
 }
+.venue-manage-view .venue-manage-list .venue-item .venue-details .name-block{
+  display: flex;
+  align-items: center;
+}
 .venue-manage-view .venue-manage-list .venue-item:last-child {
   margin-bottom: 0px;
 }
@@ -3320,7 +3375,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: auto;
+  /* flex-wrap: wrap; */
 }
 .venue-manage-view .venue-manage-list .right-item .btn-wrap {
   margin-left: unset;
@@ -3339,28 +3394,23 @@ input[type='time']::-webkit-calendar-picker-indicator {
   .venue-manage-view {
     padding: 32px;
   }
-  /* .venue-manage-view .venue-manage-list .venue-item {
-    padding: 20px 10px;
-  }
-  .venue-manage-view .venue-manage-list .name {
-    max-width: 80%;
-  }
-  .venue-manage-view .venue-manage-list .right-item {
-    justify-content: unset;
-    margin-top: 20px;
-  } */
 }
 @media only screen and (max-width: 576px) {
   .venue-manage-view {
     padding: 32px 20px;
   }
-  /* .venue-manage-view .venue-manage-list .left-item .logo {
-    margin-right: 5px;
+  .venue-manage-view .venue-item .right-item{
+    flex-direction: column;
+    align-items: unset;
+  }
+  .venue-manage-view .venue-manage-list .venue-item .venue-details .name-block{
+ flex-direction: column;
+ flex-wrap: wrap;
+  align-items: unset;
   }
   .venue-manage-view .venue-manage-list .right-item .btn-wrap {
-    margin-right: 5px;
-    margin-bottom: 5px;
-  } */
+    margin-bottom: 3px;
+  }
 }
 /* ******************************wishlist-details-view ************************** */
 .wishlist-details-view {
@@ -3374,13 +3424,13 @@ input[type='time']::-webkit-calendar-picker-indicator {
   display: flex;
   font-weight: 400;
   font-size: 18px;
+  flex-direction: column;
+  align-items: unset;
 }
-.wishlist-details-view .heading-block .left-block .name-block{
+.wishlist-details-view .heading-block .left-block{
   display: flex;
   align-items: center;
-  margin-bottom: 3rem;
-  justify-content: space-between;
-  line-height: 30px;
+  margin-bottom: 20px;
 }
 .wishlist-details-view .heading-block .left-block .name {
   font-weight: 600;
@@ -3391,16 +3441,12 @@ input[type='time']::-webkit-calendar-picker-indicator {
   overflow: hidden;
   height: 40px;
 }
-.wishlist-details-view .heading-block .left-block .info-block {
+.wishlist-details-view .heading-block .info-block {
   display: flex;
   align-items: center;
   gap: 5rem;
 }
-.wishlist-details-view .heading-block .left-block .address-block {
-  display: flex;
-  align-items: center;
-}
-.wishlist-details-view .heading-block .left-block .info-block .info {
+.wishlist-details-view .heading-block .info-block .info {
   display: flex;
   align-items: center;
 }
@@ -3418,20 +3464,26 @@ input[type='time']::-webkit-calendar-picker-indicator {
     padding: 40px 20px;
     margin: 0;
   }
-  .wishlist-details-view .heading-block {
+  .wishlist-details-view .heading-block .left-block{
     flex-direction: column;
+    align-items: unset;
   }
   .wishlist-details-view .heading-block .right-block {
     margin-left: unset;
-    margin-top: 20px;
   }
+  .venue-manage-view .btn-wrap{
+    margin-left: unset;
+  }
+}
+@media only screen and (max-width: 889x) {
+
 }
 @media only screen and (max-width: 576px) {
   .wishlist-details-view {
     padding: 32px 20px;
     margin: 0;
   }
-  .wishlist-details-view .heading-block .left-block .info-block {
+  .wishlist-details-view .heading-block .info-block {
     gap: 0;
   }
   .wishlist-details-view .heading-block .multi-select {

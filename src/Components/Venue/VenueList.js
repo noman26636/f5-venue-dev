@@ -20,7 +20,7 @@ import {
 } from "../../Utils/indexUtils";
 import RatingStars from "./RatingStars";
 let markerGroup=null;
-const mapInitialLat=55,mapInitialLng=9.18,zoom=7.5;
+const mapInitialLat=55,mapInitialLng=9.18,zoom=3;
 const initialFormValues = {
   mapSearch: true,
   location: "",
@@ -134,7 +134,15 @@ const VenueList = () => {
     });
     if (count !== 0) {
 map.addLayer(markerGroup);
-map.fitBounds([latLngArr]);
+let avgLat=0,avgLng=0;
+for (let index = 0; index < latLngArr; index++) {
+ avgLat+=latLngArr[index][0];
+ avgLng+=latLngArr[index][1];
+
+}
+map.panTo([avgLat/count, avgLng/count], zoom);
+
+// map.fitBounds(latLngArr);
     } 
     setValues({ ...values, mapSearch: true });
   };
@@ -191,19 +199,19 @@ map.fitBounds([latLngArr]);
     }
     searchVenues(valuesObj);
     const map = L.map('map').setView([mapInitialLat, mapInitialLng], zoom);
-    map.on("dragend", (e) => {
-        const { lng, lat } = map.getCenter();
-        const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
-        setValues({ ...valuesObj });
-        if (
-          valuesObj.lat &&
-          valuesObj.lng &&
-          valuesObj.lat !== 0 &&
-          valuesObj.lng !== 0 &&
-          valuesObj.mapSearch
-        )
-          searchVenues(valuesObj);
-    });
+    // map.on("dragend", (e) => {
+    //     const { lng, lat } = map.getCenter();
+    //     const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
+    //     setValues({ ...valuesObj });
+    //     if (
+    //       valuesObj.lat &&
+    //       valuesObj.lng &&
+    //       valuesObj.lat !== 0 &&
+    //       valuesObj.lng !== 0 &&
+    //       valuesObj.mapSearch
+    //     )
+    //       searchVenues(valuesObj);
+    // });
     L.tileLayer(`https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,{
       maxZoom: 18,
       tileSize:  512,
