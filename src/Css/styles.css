@@ -408,6 +408,10 @@ textarea {
   padding: 5px 8px;
   padding-bottom: 4px;
 }
+@media (max-width:565px) {.multi-select .multi-select__value-container {
+ max-height: 44px;
+  padding-bottom: 4px;
+}}
 .multi-select .css-1okebmr-indicatorSeparator {
   display: none;
 }
@@ -3459,6 +3463,27 @@ display: flex;
   border-radius: 0;
   height: 40px;
 }
+.wishlist-details-view .heading-block .right-block .dd-block{
+  display: flex;
+  align-items: center;
+}
+.wishlist-details-view [class^='col-'] {
+  padding: 0 !important;
+}
+.wishlist-details-view .venue-item .delete-icon-block{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+padding:0 0.5rem;
+}
+.wishlist-details-view .venue-item .delete-icon-block .price-block{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.wishlist-details-view .venue-item .delete-icon-block .delete-icon{
+  margin: 0.75rem auto;
+}
 @media only screen and (max-width: 1200px) {
   .wishlist-details-view {
     padding: 40px 20px;
@@ -3474,9 +3499,6 @@ display: flex;
   .venue-manage-view .btn-wrap{
     margin-left: unset;
   }
-}
-@media only screen and (max-width: 889x) {
-
 }
 @media only screen and (max-width: 576px) {
   .wishlist-details-view {
@@ -3496,5 +3518,37 @@ display: flex;
   }
   .wishlist-details-view .heading-block .right-block {
     flex-direction: column;
+    align-items: unset;
   }
+  .wishlist-details-view .heading-block .right-block .btn-wrap {
+margin-right: 0 !important;
+width: 69px;
+  }
+  .wishlist-details-view .heading-block .right-block .btn-wrap .small-btn{
+  padding: 0;
+    min-width: unset;
+  }
+  .wishlist-details-view .heading-block .right-block .button-primary.share-btn{
+    margin-top:10px;
+      }
+      .wishlist-details-view .heading-block .info-block {
+        flex-direction: column;
+        align-items: unset;
+      }
+      .wishlist-details-view .separator {
+      display: none;
+      }
+      .wishlist-details-view .venue-item .venue-details{
+margin:15px 0 15px 0;
+      }
+      .wishlist-details-view .venue-item .delete-icon-block{
+        flex-direction: row;
+      }
+      .wishlist-details-view .venue-item .delete-icon-block .price-block{
+        text-align: left;
+      }
+      .wishlist-details-view .venue-item .delete-icon-block .delete-icon{
+        margin: 0;
+        margin-left: auto;
+      }
 }

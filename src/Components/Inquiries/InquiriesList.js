@@ -26,7 +26,7 @@ const InquiriesList = () => {
   const [venuesList, setVenuesList] = useState([]);
   const [inquiresList, setInquiriesList] = useState([]);
   const [showLoader, setShowLoader] = useState(true);
-  const [pager, setPager] = useState({ current_page: 1, per_page: 2 });
+  const [pager, setPager] = useState({ current_page: 1, per_page: 50 });
   const getOptions = () => {
     return venuesList?.map((item) => ({
       value: item.id,

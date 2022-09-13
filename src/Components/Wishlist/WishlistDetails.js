@@ -137,54 +137,54 @@ const WishlistDetails = () => {
           <div className="wishlist-details-view venue-manage-view">
             <div className="heading-block">
               <div className="left-block">
-                  <div className="name">{wishlist.name}</div>
+                <div className="name">{wishlist.name}</div>
                 <div className="right-block">
-                {wishlistId && (
-                  <>
-                    <MultiselectDD
-                      isMulti={false}
-                      options={allVenues}
-                      name="selectedVenue"
-                      value={selectedVenue}
-                      onChange={(data) => {
-                        setSelectedVenue(data);
-                      }}
-                      placeholder={translations.SelectVenue}
-                    />
-                    <Button
-                      label={translations.Add}
-                      onClick={addVenueToWishlist}
-                      className="small-btn"
-                      wrapperClass="mr-3"
-                      disabled={selectedVenue === null}
-                    />
-                  </>
-                )}
-                <Button
-                  label={translations.Share}
-                  onClick={shareWishlist}
-                  className="small-btn"
-                />
-              </div>
-               
+                  {wishlistId && (
+                    <div className="dd-block">
+                      <MultiselectDD
+                        isMulti={false}
+                        options={allVenues}
+                        name="selectedVenue"
+                        value={selectedVenue}
+                        onChange={(data) => {
+                          setSelectedVenue(data);
+                        }}
+                        placeholder={translations.SelectVenue}
+                      />
+                      <Button
+                        label={translations.Add}
+                        onClick={addVenueToWishlist}
+                        className="small-btn"
+                        wrapperClass="mr-3"
+                        disabled={selectedVenue === null}
+                      />
+                    </div>
+                  )}
+                  <Button
+                    label={translations.Share}
+                    onClick={shareWishlist}
+                    className="small-btn share-btn"
+                  />
+                </div>
               </div>
               <div className="info-block">
-                  {wishlist.venues && (
-                    <span className="info">
-                      {wishlist.venues.length}{" "}
-                      {wishlist?.venues?.length === 1
-                        ? translations.Venue
-                        : translations.Venues}
-                    </span>
-                  )}
-                  <span className="mx-2">|</span>
-                  <div className="info">
-                    {translations.Created}:
-                    <span className="fw-600 mx-1">
-                      {new Date(wishlist.created_at).toDateString()}
-                    </span>
-                  </div>
+                {wishlist.venues && (
+                  <span className="info">
+                    {wishlist.venues.length}{" "}
+                    {wishlist?.venues?.length === 1
+                      ? translations.Venue
+                      : translations.Venues}
+                  </span>
+                )}
+                <span className="separator mx-2">|</span>
+
+                <div className="info">
+                  {translations.Created}:
+                  <span className="fw-600 mx-1">
+                    {new Date(wishlist.created_at).toDateString()}
+                  </span>
                 </div>
+              </div>
             </div>
             <div className="venue-manage-list">
               {wishlist.venues?.map((item, i) => {
@@ -198,7 +198,7 @@ const WishlistDetails = () => {
                     }}
                   >
                     <Row className="flex-wrap">
-                      <Col xl={2} lg={2} md={2} sm={2}>
+                      <Col xl={2} lg={3} md={3} sm={3}>
                         {
                           <img
                             alt=""
@@ -213,9 +213,9 @@ const WishlistDetails = () => {
                       </Col>
                       <Col
                         xl={8}
-                        lg={8}
-                        md={8}
-                        sm={8}
+                        lg={6}
+                        md={6}
+                        sm={6}
                         className="venue-details"
                       >
                         <div className="name">{item.venue.name}</div>
@@ -248,13 +248,13 @@ const WishlistDetails = () => {
                       </Col>
                       <Col
                         xl={2}
-                        lg={2}
-                        md={2}
-                        sm={2}
-                        className="px-1 d-flex flex-column justify-content-center"
+                        lg={3}
+                        md={3}
+                        sm={3}
+                        className="delete-icon-block"
                       >
                         {item.venue.rent_per_day && (
-                          <div className="d-flex flex-column text-center">
+                          <div className="price-block">
                             <span className="fw-600">
                               $ {item.venue.rent_per_day}
                             </span>
@@ -262,7 +262,7 @@ const WishlistDetails = () => {
                           </div>
                         )}
                         {wishlistId && (
-                          <div className="my-3 mx-auto">
+                          <div className="delete-icon">
                             <img
                               alt=""
                               src={deleteIcon}
