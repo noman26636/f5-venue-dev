@@ -108,7 +108,7 @@ const VenueList = () => {
     setMarkersOnMap(venuesList);
   }, [venuesList, values.mapSearch]);
   const setMarkersOnMap = (venues) => {
-    if (!values.mapSearch) return;
+    if (!values.mapSearch || !venues ||  venues?.length<1) return;
     let count = 0;
       const latLngArr = [];
       if (!map) return;
@@ -116,6 +116,7 @@ const VenueList = () => {
         map.removeLayer(markerGroup);
       }
      markerGroup = L.layerGroup().addTo(map);
+     debugger
     venues.forEach((venue) => {
        if (!(venue.latitude > 90 || venue.latitude < -90)) {
    const marker =  L.marker([venue.longitude,venue.latitude]).addTo(markerGroup);
@@ -164,7 +165,7 @@ map.panTo([avgLat/count, avgLng/count], zoom);
         );
       if (searchParams.moreFilters?.length > 0)
         searchObj.service = searchParams.moreFilters?.map((item) => item.id);
-      if (!searchParams.name && searchParams.name !== "")
+      if (searchParams.name && searchParams.name !== "")
         searchObj.name = searchParams.name;
       if (Number(searchParams.sortField) !== -1)
         searchObj.sort = [
@@ -178,9 +179,8 @@ map.panTo([avgLat/count, avgLng/count], zoom);
       (res) => {
         setShowLoader(false);
         if (!res.isAxiosError) {
-          setVenuesList(res?.data?.data);
-          delete res.data.data;
-          setPager({ ...res.data });
+          setVenuesList(res?.data);
+          setPager({...pager, current_page: Number(res.page),total:res.total });
         }
       }
     );
@@ -329,6 +329,8 @@ map.panTo([avgLat/count, avgLng/count], zoom);
             )}
           </Row>
 
+        {
+          venuesList && venuesList?.length>0 &&
           <Pager
             total={pager.total}
             current={pager.current_page}
@@ -337,7 +339,7 @@ map.panTo([avgLat/count, avgLng/count], zoom);
               searchVenues(null, current);
             }}
             pageSize={pager.per_page}
-          />
+          />}
         </div>
         <div className={`map-container ${values?.mapSearch ? "d-block" : "d-none"}`}>
          <div className={`h-100`} id="map" ref={mapContainerRef} />

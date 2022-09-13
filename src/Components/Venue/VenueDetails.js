@@ -376,7 +376,7 @@ const VenueDetails = () => {
             <div className="details">
               <div className="d-flex align-items-center mb-4">
               <div className="name">{venue.name}</div>
-            {isLoggedIn &&  
+            {(isLoggedIn && venue?.status==="Enabled") &&  
              <Button
              label={translations.PostReview}
              onClick={()=>setShowReviewModal(true)}
@@ -454,37 +454,37 @@ const VenueDetails = () => {
                   </div>
                   <div className="info-item">
                     <div className="fw-600">
-                      {venue.classroom ? venue.classroom : "-"}
+                      {venue?.capacity?.classroom ? venue?.capacity?.classroom : "-"}
                     </div>
                     <div className="fs-14">{translations.Classroom}</div>
                   </div>
                   <div className="info-item">
                     <div className="fw-600">
-                      {venue.theatre ? venue.theatre : "-"}
+                      {venue?.capacity?.theatre ? venue?.capacity?.theatre : "-"}
                     </div>
                     <div className="fs-14">{translations.Theater}</div>
                   </div>
                   <div className="info-item">
                     <div className="fw-600">
-                      {venue.banquet ? venue.banquet : "-"}
+                      {venue?.capacity?.banquet ? venue?.capacity?.banquet : "-"}
                     </div>
                     <div className="fs-14">{translations.Banquet}</div>
                   </div>
                   <div className="info-item">
                     <div className="fw-600">
-                      {venue.conference ? venue.conference : "-"}
+                      {venue?.capacity?.conference ? venue?.capacity?.conference : "-"}
                     </div>
                     <div className="fs-14">{translations.Conference}</div>
                   </div>
                   <div className="info-item">
                     <div className="fw-600">
-                      {venue.ushape ? venue.ushape : "-"}
+                      {venue?.capacity?.ushape ? venue?.capacity?.ushape : "-"}
                     </div>
                     <div className="fs-14">{translations.U_shape}</div>
                   </div>
                   <div className="info-item">
                     <div className="fw-600">
-                      {venue.floor_area ? `${venue.floor_area} m²` : "-"}
+                      {venue?.capacity?.floor_area ? `${venue?.capacity?.floor_area} m²` : "-"}
                     </div>
                     <div className="fs-14">{translations.FloorArea} </div>
                   </div>
@@ -767,7 +767,9 @@ const VenueDetails = () => {
                   </div>
                 )}
               </div>
-              <div className="inquiry-block">
+              {
+                venue?.status==="Enabled" &&
+                <div className="inquiry-block">
                 <TextField
                   name="eventDate"
                   placeholder={translations.SelectDate}
@@ -864,7 +866,7 @@ const VenueDetails = () => {
                     ),
                   })}
                 </div>
-              </div>
+              </div>}
 
               {venue.latitude && venue.longitude && (
                 // <div className="map" ref={mapContainerRef}></div>

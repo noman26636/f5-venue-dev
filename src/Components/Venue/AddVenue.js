@@ -269,6 +269,10 @@ function AddVenue() {
       field.contact_per_name = translations.EmptyFieldMsg;
       isValid = false;
     }
+    if (fieldValues.company_name?.trim().length === 0) {
+      field.company_name = translations.EmptyFieldMsg;
+      isValid = false;
+    }
     if (fieldValues.comp_email?.trim().length === 0) {
       field.comp_email = translations.EmptyFieldMsg;
       isValid = false;
@@ -334,7 +338,6 @@ function AddVenue() {
     bodyFormData.append("contact_per_name", values.contact_per_name);
     if (values.contact_image?.src)
       bodyFormData.append("contact_image", values.contact_image.src.file);
-    if (values.company_name !== "" && values.company_name !== null)
       bodyFormData.append("company_name", values.company_name);
     bodyFormData.append("comp_email", values.comp_email);
     if (values.contact_phone !== "" && values.contact_phone !== null)
@@ -835,7 +838,7 @@ function AddVenue() {
                         <Col xl={6} lg={6}>
                           <TextField
                             name="company_name"
-                            label={translations.Company}
+                            label={translations.Company + " *"}
                             type="text"
                             onChange={handleInputChange}
                             error={errors.company_name}
