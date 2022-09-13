@@ -83,7 +83,7 @@ const ManageVenues = () => {
                   sm={8}
                   className="venue-details"
                 >
-                  <div className="d-flex align-items-center">
+                  <div className="name-block">
                       <div className="name">{item.name}</div>
                       <div className="px-5">{translations.Created}: {getFormattedDate(item.created_at)}</div>
                       </div>

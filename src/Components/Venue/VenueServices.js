@@ -37,7 +37,6 @@ export const VenueServices = {
             });
     },
     postReview: (id,data) => {
-        debugger
         return axios.post(`${VenueApis.postReview}${id}`,data)
             .then(response => response.data)
             .catch(error => {

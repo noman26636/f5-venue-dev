@@ -28,10 +28,10 @@ export default function WishlistModal(props) {
     }, [values.selectedList,showModal])
     const add=()=>{
         //creating new wl and adding venue to it
-        if(values.selectedList==-1 && values.title!=="")
+        if(values.selectedList==-1 && values.title!=="" && !error)
         addToWishlist(values.title, wishlistVenue.id, null);
         //adding venue to already created wl
-        else
+        else if(!error)
         addToWishlist(values.title, wishlistVenue.id, Number(values.selectedList));
     }
     return (
