@@ -47,7 +47,7 @@ const Footer = () => {
                         <div className='list'>
                             <h3>{translations.QuickLinks}</h3>
                             <ul className='list-block'>
-                                <li onClick={() => navigate("/about")}>
+                                <li onClick={() => navigate(`/about`)}>
                                     <a>{translations.AboutUs}</a>
                                 </li>
                                 <li onClick={() => navigate("/venueList")}>
@@ -56,7 +56,7 @@ const Footer = () => {
                                 <li onClick={() => navigate("/addVenue")}>
                                     <a>{translations.AddVenue}</a>
                                 </li>
-                                <li onClick={() => navigate("/contactUs")}>
+                                <li onClick={() => navigate(`/contact`)}>
                                     <a>{translations.ContactUs}</a>
                                 </li>
                             </ul>
@@ -66,13 +66,13 @@ const Footer = () => {
                         <div className='list'>
                             <h3>{translations.Support}</h3>
                             <ul className='list-block'>
-                                <li onClick={() => navigate("/help")}>
+                                <li onClick={() => navigate(`/help`)}>
                                     <a>{translations.Help}</a>
                                 </li>
-                                <li onClick={() => navigate("/terms")}>
+                                <li onClick={() => navigate(`/terms`)}>
                                     <a>{translations.TermsOfUse}</a>
                                 </li>
-                                <li onClick={() => navigate("/privacy")}>
+                                <li onClick={() => navigate(`/privacy`)}>
                                     <a>{translations.PrivacyPolicy}</a>
                                 </li>
                             </ul>

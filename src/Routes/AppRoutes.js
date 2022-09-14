@@ -5,8 +5,6 @@ import {
   Routes,
   // Navigate, Outlet
 } from "react-router-dom";
-import PrivacyPolicy from "../Components/CMS/PrivacyPolicy";
-import Terms from "../Components/CMS/Terms";
 import Layout from "../Components/Common/Layout";
 import Home from "../Components/Home/Home";
 import ForgotPassword from "../Components/Signup/ForgotPassword";
@@ -23,9 +21,7 @@ import Profile from "../Components/Profile/Profile";
 import WishlistDetails from "../Components/Wishlist/WishlistDetails";
 import Wishlists from "../Components/Wishlist/Wishlists";
 import InquiryDetails from "../Components/Inquiries/InquiryDetails";
-import About from "../Components/CMS/About";
-import Help from "../Components/CMS/Help";
-import ContactUs from "../Components/CMS/ContactUs";
+import CMSpage from "../Components/CMS/CMSpage";
 let AppRoutes = () => {
   const authState = useSelector((state) => {
     return state.auth;
@@ -40,11 +36,11 @@ let AppRoutes = () => {
             <Route path="/" exact element={<Home />} />
             <Route path="/home" exact element={<Home />} />
             <Route path="/venueList" element={<VenueList />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/help" element={<Help />} />
-            <Route path="/contactUs" element={<ContactUs />} />
+            <Route  path="/terms" element={<CMSpage id="3"/>} />
+            <Route  path="/privacy" element={<CMSpage id="2"/>} />
+            <Route  path="/about" element={<CMSpage id="1"/>} />
+            <Route  path="/help" element={<CMSpage id="5"/>} />
+            <Route  path="/contact" element={<CMSpage id="4"/>} />
             <Route path="/venue/:venueId" element={<VenueDetails />} />
             <Route path="/addVenueForm" element={<AddVenue />} />
             <Route path="/editVenue/:venueId" element={<AddVenue />} />
@@ -94,42 +90,42 @@ let AppRoutes = () => {
           />
           <Route path="/login" exact element={<Login />} />
           <Route
-            path="/terms"
+             path="/terms"
             element={
               <Layout>
-                <Terms />
+                <CMSpage id="3"/>
               </Layout>
             }
           />
           <Route
-            path="/privacy"
+             path="/privacy"
             element={
               <Layout>
-                <PrivacyPolicy />
+                <CMSpage id="2"/>
               </Layout>
             }
           />
           <Route
-            path="/about"
+             path="/about"
             element={
               <Layout>
-                <About />
+                <CMSpage id="1"/>
               </Layout>
             }
           />
           <Route
-            path="/help"
+             path="/help"
             element={
               <Layout>
-                <Help />
+                <CMSpage id="5"/>
               </Layout>
             }
           />
           <Route
-            path="/contactUs"
+            path="/contact"
             element={
               <Layout>
-                <ContactUs />
+                <CMSpage id="4"/>
               </Layout>
             }
           />

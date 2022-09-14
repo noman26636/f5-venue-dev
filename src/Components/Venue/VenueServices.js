@@ -1,6 +1,13 @@
 import axios from 'axios';
 import { VenueApis } from '../../Configurations/Api_endpoints';
 export const VenueServices = {
+    getImages: () => {
+        return axios.get(`${VenueApis.getImages}`)
+            .then(response => response.data)
+            .catch(error => {
+                return error;
+            });
+    },
     getallVenues: () => {
         return axios.get(`${VenueApis.getallVenues}`)
             .then(response => response.data)

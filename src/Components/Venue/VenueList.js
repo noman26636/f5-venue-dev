@@ -101,9 +101,6 @@ const VenueList = () => {
     }
   };
   useEffect(() => {
-    console.log(values);
-  }, [values]);
-  useEffect(() => {
     if(values.mapSearch)
     setMarkersOnMap(venuesList);
   }, [venuesList, values.mapSearch]);
@@ -116,14 +113,13 @@ const VenueList = () => {
         map.removeLayer(markerGroup);
       }
      markerGroup = L.layerGroup().addTo(map);
-     debugger
     venues.forEach((venue) => {
        if (!(venue.latitude > 90 || venue.latitude < -90)) {
    const marker =  L.marker([venue.longitude,venue.latitude]).addTo(markerGroup);
       
                 marker.bindPopup( `
                 <div>
-                    <img src=${venue.images[0].image_path_thumbnail} class="popup-img">
+                    <img src=${venue.images?.length>0? venue.images[0].image_path_thumbnail:null} class="popup-img">
                     <div>
                         <h3 class="popup-title">${venue.name}</h3>
                         <div>${venue.street_address}</div>
@@ -141,9 +137,9 @@ for (let index = 0; index < latLngArr; index++) {
  avgLng+=latLngArr[index][1];
 
 }
-map.panTo([avgLat/count, avgLng/count], zoom);
+// map.panTo([avgLat/count, avgLng/count], zoom);
 
-// map.fitBounds(latLngArr);
+ map.fitBounds(latLngArr);
     } 
     setValues({ ...values, mapSearch: true });
   };
@@ -199,25 +195,26 @@ map.panTo([avgLat/count, avgLng/count], zoom);
     }
     searchVenues(valuesObj);
     const map = L.map('map').setView([mapInitialLat, mapInitialLng], zoom);
-    // map.on("dragend", (e) => {
-    //     const { lng, lat } = map.getCenter();
-    //     const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
-    //     setValues({ ...valuesObj });
-    //     if (
-    //       valuesObj.lat &&
-    //       valuesObj.lng &&
-    //       valuesObj.lat !== 0 &&
-    //       valuesObj.lng !== 0 &&
-    //       valuesObj.mapSearch
-    //     )
-    //       searchVenues(valuesObj);
-    // });
+    map.on("dragend", (e) => {
+        const { lng, lat } = map.getCenter();
+        const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
+        setValues({ ...valuesObj });
+        if (
+          valuesObj.lat &&
+          valuesObj.lng &&
+          valuesObj.lat !== 0 &&
+          valuesObj.lng !== 0 &&
+          valuesObj.mapSearch
+        )
+          searchVenues(valuesObj);
+    });
     L.tileLayer(`https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,{
-      maxZoom: 18,
+      maxZoom: 22,
+     minZoom:1,
       tileSize:  512,
       zoomOffset: -1, 
       accessToken: Constants.mapboxToken,
-      debounceMoveend:true
+      debounceMoveend:true,
       }).addTo(map)
     setMap(map);
     return () => {
@@ -283,6 +280,7 @@ map.panTo([avgLat/count, avgLng/count], zoom);
                   sm={6}
                   xs={12}
                   onClick={() => {
+    dispatch({ type: TYPES.SEARCH_DATA, data: values });
                     navigate(`/venue/${item.id}`);
                   }}
                 >

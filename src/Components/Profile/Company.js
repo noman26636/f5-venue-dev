@@ -176,7 +176,7 @@ const Company = () => {
                                 <th>{translations.Name}</th>
                                 <th>{translations.Email}</th>
                                 <th>{translations.Phone}</th>
-                                <th>{translations.Status}</th>
+                                {/* <th>{translations.Status}</th> */}
                                 <th>{translations.Action}</th>
                             </tr>
                         </thead>
@@ -188,7 +188,7 @@ const Company = () => {
                                             <td>{`${item.firstname} ${item.lastname}`}</td>
                                             <td>{item.email}</td>
                                             <td>{item.phone_number}</td>
-                                            <td>{}</td>
+                                            {/* <td>{}</td> */}
                                             <td><img alt="" src={deleteIcon} className="bin-icon ml-3 cursor-pointer" 
                                             onClick={() => { setUserToDelete(item.id) }} /></td>
                                         </tr>

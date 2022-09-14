@@ -32,7 +32,7 @@ import Pageloader from "../Common/Pageloader";
 import RatingStars from "./RatingStars";
 import { ReviewsSlider } from "./ReviewsSlider";
 import { SimilarVenues } from "./SimilarVenues";
-import { getFormattedDate } from "../../Utils/indexUtils";
+import {  getFormattedDate } from "../../Utils/indexUtils";
 import ReviewVenueModal from "./ReviewVenueModal";
 import L from "leaflet";
 const initialFormValues = {
@@ -513,7 +513,7 @@ const VenueDetails = () => {
                     <div className="fs-14"> {translations.RentPerHour}</div>
                   </div>
                   <div className="info-item">
-                    <div className="fw-600">{venue.rent_per_day}</div>
+                    <div className="fw-600">   {venue.rent_per_day ? venue.rent_per_day : "-"}</div>
                     <div className="fs-14">{translations.RentPerDay}</div>
                   </div>
                   <div className="info-item">
@@ -847,7 +847,7 @@ const VenueDetails = () => {
                         className="fw-600"
                         key={1}
                         onClick={() => {
-                          navigate("/termsandconditions");
+                          navigate(`/terms`);
                         }}
                       >
                         {chunk1}
@@ -858,7 +858,7 @@ const VenueDetails = () => {
                         key={2}
                         className="fw-600"
                         onClick={() => {
-                          navigate("/privacypolicy");
+                          navigate(`/privacy`);
                         }}
                       >
                         {chunk2}

@@ -9,6 +9,7 @@ import { AccountServices } from '../Signup/AccountServices';
 import { Row, Col } from 'reactstrap';
 import SignupModal from '../Signup/SignupModal';
 import LeftMenu from './LeftMenu';
+import { enum_sitepages } from '../../Utils/indexUtils';
 export default function Header() {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLeftMenu, setShowLeftMenu] = useState(false);
@@ -25,7 +26,7 @@ export default function Header() {
   const translations = userLanguageData.translations;
   const menuOptions = [{ text: translations.BrowseVenues, path: "/venueList" },
   { text: translations.Wishlist, path: "/wishlists" },
-  { text: translations.ContactUs, path: "/contactUs" }
+  { text: translations.ContactUs, path: `/contact` }
   ]
   const menuOptions_loggedIn = [{ text: translations.BrowseVenues, path: "/venueList" },
   { text: translations.Inquiries, path: "/inquiries" },
