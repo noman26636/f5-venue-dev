@@ -10,7 +10,7 @@ export default function InviteUser(props) {
     });
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
-    let { showModal, email, inviteUser, handleClose, handleInputChange } = props;
+    let { showModal, email, inviteUser, handleClose, handleInputChange,showBtnLoader } = props;
     return (
         <Modal isOpen={showModal} onClosed={handleClose} backdrop="static" keyboard={false} className="invitation-modal" centered>
             <ModalHeader toggle={handleClose}>
@@ -26,7 +26,8 @@ export default function InviteUser(props) {
                         value={email}
                         className="text-field-2"
                     />
-                    <Button label={translations.SendInvitation} onClick={inviteUser} className={`small-btn`} disabled={!email || email === "" || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)} />
+                    <Button label={translations.SendInvitation} onClick={inviteUser} className={`small-btn`} 
+                    disabled={!email || email === "" || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)} showBtnLoader={showBtnLoader}/>
                 </div>
             </ModalBody>
         </Modal>

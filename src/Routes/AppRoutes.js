@@ -167,6 +167,9 @@ let AppRoutes = () => {
               </Layout>
             }
           />
+            <Route path="/share/:wishlistToken" element={  <Layout>
+                <WishlistDetails />
+              </Layout>} />
           <Route
             path="/wishlist/:wishlistId"
             element={

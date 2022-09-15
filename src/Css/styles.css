@@ -211,6 +211,9 @@ button:disabled {
 .ml-3 {
   margin-left: 0.75rem;
 }
+.d-md-none {
+  display: block !important;
+}
 @media (max-width: 768px) {
   .d-md-none {
     display: none !important;

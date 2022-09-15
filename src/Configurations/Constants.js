@@ -1,7 +1,7 @@
 export var Constants = {
     defaultLang: "en",
     supportedLanguages: ["en", "da"],
-    appVersion: "1.12",
+    appVersion: "1.13",
     domainUrl: window.location.href.indexOf('staging') === -1
         ? 'http://test.event-venue.dk/'
         : 'http://test.event-venue.dk/',

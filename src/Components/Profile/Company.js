@@ -100,7 +100,6 @@ const Company = () => {
         AccountServices.getBilling().then(res => {
             if (!res.isAxiosError) {
                 setValues({ ...values,...res[0],billing:res[0]?.billing?res[0]?.billing:{...values.billing}});
-                const a={ ...values,...res[0]};
             }
         });
     }
@@ -275,7 +274,7 @@ const Company = () => {
                 </div>
             </div >
             <InviteUser showModal={showInviteUserModal} handleClose={() => setShowInviteUserModal(false)} email={values.invitationEmail}
-                inviteUser={inviteUser} handleInputChange={handleInputChange}
+                inviteUser={inviteUser} handleInputChange={handleInputChange} showBtnLoader={showLoader === "invite"}
             />
             <Modal text={translations.DeleteUserConfirmation} showModal={userToDelete!==null} handleClose={() => setUserToDelete(null)} btn1Text={translations.Yes}
                 btn1Click={deleteUserFromCompany} btn2Text={translations.No} />
