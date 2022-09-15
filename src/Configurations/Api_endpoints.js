@@ -53,7 +53,7 @@ export const VenueApis = {
   postReview: `${baseUrl}reviews/`,
   publishVenue: `${baseUrl}publish/`,
   deleteVenueImage: `${baseUrl}deleteimage/`,
-  getImages: `${baseUrl}images`,
+  getImages: `${baseUrl}slider_images`,
 
 };
 export const BookingApis = {

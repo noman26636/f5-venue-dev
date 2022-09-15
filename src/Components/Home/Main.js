@@ -64,12 +64,13 @@ export default function Main(props) {
     navigate("/venueList");
   }
 useEffect(()=>{
-  //getImages();
+  getImages();
 },[]);
 const getImages=()=>{
   VenueServices.getImages().then((res) => {
     if (!res.isAxiosError && res.images?.length>0) {
-      setImages(res.images)
+      const imgs=res.images.map(img=>img.image_path);
+      setImages(imgs)
     }
   });
 }
