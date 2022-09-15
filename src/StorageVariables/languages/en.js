@@ -103,6 +103,7 @@ export var stringVariables = {
   Price: "Price",
   Lowest: "Lowest",
   Highest: "Highest",
+  UpdateSearchOnMapMove:"Update search on map move",
   //Venue Details
   Details: "Details",
   VenueStyle: "Venue style",

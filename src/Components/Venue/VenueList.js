@@ -19,10 +19,12 @@ import {
   enum_sortTypeOptions,
 } from "../../Utils/indexUtils";
 import RatingStars from "./RatingStars";
+import Checkbox from "../Common/Checkbox";
 let markerGroup = null;
 const mapInitialLat = 55,
   mapInitialLng = 9.18,
   zoom = 2.5;
+  let mapMoveSearch=false;
 const initialFormValues = {
   mapSearch: true,
   location: "",
@@ -35,8 +37,11 @@ const initialFormValues = {
   sortType: 0,
   lat: 0,
   lng: 0,
+  mapMoveSearch: false,
 };
+
 const VenueList = () => {
+ 
   const mapContainerRef = useRef(null);
   const dispatch = useDispatch();
   const appState = useSelector((state) => {
@@ -92,7 +97,6 @@ const VenueList = () => {
     } else {
       const valuesObj = { ...values, [name]: value };
       if (name === "mapSearch" && !value) {
-        debugger
         valuesObj.lat = null;
         valuesObj.lng = null;
         searchVenues({ ...valuesObj });
@@ -103,6 +107,9 @@ const VenueList = () => {
         setModalType(null);
       }
     }
+    if(name==="mapMoveSearch")
+  {  
+    mapMoveSearch=value;}
   };
   useEffect(() => {
     if (values.mapSearch) setMarkersOnMap(venuesList);
@@ -111,19 +118,19 @@ const VenueList = () => {
     if (!values.mapSearch || !map) return;
     let count = 0;
     const latLngArr = [];
-   
+
     if (markerGroup && map.hasLayer(markerGroup)) {
       map.removeLayer(markerGroup);
     }
     markerGroup = L.layerGroup().addTo(map);
     var boundsArr = new L.LatLngBounds();
-    if(venues && venues?.length >0)
-   { venues.forEach((venue) => {
-      if (!(venue.latitude > 90 || venue.latitude < -90)) {
-        const marker = L.marker([venue.longitude, venue.latitude]).addTo(
-          markerGroup
-        );
-        marker.bindPopup(`
+    if (venues && venues?.length > 0) {
+      venues.forEach((venue) => {
+        if (!(venue.latitude > 90 || venue.latitude < -90)) {
+          const marker = L.marker([venue.longitude, venue.latitude]).addTo(
+            markerGroup
+          );
+          marker.bindPopup(`
                 <div>
                     <img src=${
                       venue.images?.length > 0
@@ -137,12 +144,12 @@ const VenueList = () => {
                         <div>${venue.street_address}</div>
                     </div>
                 </div>`);
-        latLngArr.push([venue.latitude, venue.longitude]);
-        boundsArr.extend(marker.getLatLng());
-        count++;
-      }
-    });
-  }
+          latLngArr.push([venue.latitude, venue.longitude]);
+          boundsArr.extend(marker.getLatLng());
+          count++;
+        }
+      });
+    }
     if (count !== 0) {
       map.addLayer(markerGroup);
       let avgLat = 0,
@@ -151,14 +158,14 @@ const VenueList = () => {
         avgLat += latLngArr[index][0];
         avgLng += latLngArr[index][1];
       }
-     // map.panTo([avgLat/count, avgLng/count], zoom);
+      // map.panTo([avgLat/count, avgLng/count], zoom);
 
-    //  var fg = L.featureGroup([markerGroup]).addTo(map);
-    //  map.fitBounds(fg.getBounds());
+      //  var fg = L.featureGroup([markerGroup]).addTo(map);
+      //  map.fitBounds(fg.getBounds());
 
-     map.fitBounds(boundsArr);
+      map.fitBounds(boundsArr);
 
-    //  map.fitBounds(latLngArr);
+      //  map.fitBounds(latLngArr);
     }
     setValues({ ...values, mapSearch: true });
   };
@@ -166,7 +173,6 @@ const VenueList = () => {
     document.getElementById("demo").innerHTML = "Hello World";
   }
   const searchVenues = (searchParams = values, pageNumber) => {
-    
     setModalType(null);
     setShowLoader(true);
     const searchObj = {};
@@ -225,6 +231,7 @@ const VenueList = () => {
     searchVenues(valuesObj);
     const map = L.map("map").setView([mapInitialLat, mapInitialLng], zoom);
     map.on("dragend", (e) => {
+      if (!mapMoveSearch) return;
       const { lng, lat } = map.getCenter();
       const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
       setValues({ ...valuesObj });
@@ -270,12 +277,12 @@ const VenueList = () => {
     }, 50);
   };
   const gotoVenue = (id) => {
-    debugger
     dispatch({ type: TYPES.SEARCH_DATA, data: values });
     navigate(`/venue/${id}`);
   };
   return (
     <>
+    
       {showLoader && <Pageloader />}
       <div className="d-flex">
         <div
@@ -379,6 +386,15 @@ const VenueList = () => {
           }`}
         >
           <div className={`h-100`} id="map" ref={mapContainerRef} />
+          <div className="map-checkbox">
+            <Checkbox
+              className=""
+              label={translations.UpdateSearchOnMapMove}
+              onChange={handleInputChange}
+              value={values.mapMoveSearch || mapMoveSearch}
+              name="mapMoveSearch"
+            />
+          </div>
         </div>
         <SearchModal
           showModal={modalType !== null}

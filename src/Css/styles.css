@@ -1625,6 +1625,14 @@ display: none;
 .mapboxgl-popup-close-button {
   display: none;
 }
+.map-container .map-checkbox{
+  position: absolute;
+  background: #fff;
+  padding: 10px;
+  top: 11px;
+  left: 52px;
+  z-index: 1000;
+}
 @media only screen and (max-width: 992px) {
   .venue-list-view .venue-details-block .venue-block {
     width: 30%;
