@@ -9,7 +9,7 @@ import { VenueServices } from "./VenueServices";
 import Pageloader from "../Common/Pageloader";
 import Pager from "../Common/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMale, faChair } from "@fortawesome/free-solid-svg-icons";
+import { faMale, faChair, faG } from "@fortawesome/free-solid-svg-icons";
 import { Constants } from "../../Configurations/Constants";
 import * as TYPES from "../../Store/actions/types";
 import L from "leaflet";
@@ -19,8 +19,10 @@ import {
   enum_sortTypeOptions,
 } from "../../Utils/indexUtils";
 import RatingStars from "./RatingStars";
-let markerGroup=null;
-const mapInitialLat=55,mapInitialLng=9.18,zoom=3;
+let markerGroup = null;
+const mapInitialLat = 55,
+  mapInitialLng = 9.18,
+  zoom = 2.5;
 const initialFormValues = {
   mapSearch: true,
   location: "",
@@ -90,8 +92,10 @@ const VenueList = () => {
     } else {
       const valuesObj = { ...values, [name]: value };
       if (name === "mapSearch" && !value) {
+        debugger
         valuesObj.lat = null;
         valuesObj.lng = null;
+        searchVenues({ ...valuesObj });
       }
       setValues({ ...valuesObj });
       if (name === "sortField" || name === "sortType") {
@@ -101,49 +105,68 @@ const VenueList = () => {
     }
   };
   useEffect(() => {
-    if(values.mapSearch)
-    setMarkersOnMap(venuesList);
+    if (values.mapSearch) setMarkersOnMap(venuesList);
   }, [venuesList, values.mapSearch]);
   const setMarkersOnMap = (venues) => {
-    if (!values.mapSearch || !venues ||  venues?.length<1) return;
+    if (!values.mapSearch || !map) return;
     let count = 0;
-      const latLngArr = [];
-      if (!map) return;
-      if(markerGroup && map.hasLayer(markerGroup)){
-        map.removeLayer(markerGroup);
-      }
-     markerGroup = L.layerGroup().addTo(map);
-    venues.forEach((venue) => {
-       if (!(venue.latitude > 90 || venue.latitude < -90)) {
-   const marker =  L.marker([venue.longitude,venue.latitude]).addTo(markerGroup);
-      
-                marker.bindPopup( `
+    const latLngArr = [];
+   
+    if (markerGroup && map.hasLayer(markerGroup)) {
+      map.removeLayer(markerGroup);
+    }
+    markerGroup = L.layerGroup().addTo(map);
+    var boundsArr = new L.LatLngBounds();
+    if(venues && venues?.length >0)
+   { venues.forEach((venue) => {
+      if (!(venue.latitude > 90 || venue.latitude < -90)) {
+        const marker = L.marker([venue.longitude, venue.latitude]).addTo(
+          markerGroup
+        );
+        marker.bindPopup(`
                 <div>
-                    <img src=${venue.images?.length>0? venue.images[0].image_path_thumbnail:null} class="popup-img">
+                    <img src=${
+                      venue.images?.length > 0
+                        ? venue.images[0].image_path_thumbnail
+                        : null
+                    } class="popup-img">
                     <div>
-                        <h3 class="popup-title">${venue.name}</h3>
+                      <a href="/venue/${venue.id}" >  
+                      <h3 class="popup-title">${venue.name}</h3>
+                      </a>
                         <div>${venue.street_address}</div>
                     </div>
                 </div>`);
-                latLngArr.push([venue.latitude, venue.longitude]);
-                count++;
+        latLngArr.push([venue.latitude, venue.longitude]);
+        boundsArr.extend(marker.getLatLng());
+        count++;
       }
     });
+  }
     if (count !== 0) {
-map.addLayer(markerGroup);
-let avgLat=0,avgLng=0;
-for (let index = 0; index < latLngArr; index++) {
- avgLat+=latLngArr[index][0];
- avgLng+=latLngArr[index][1];
+      map.addLayer(markerGroup);
+      let avgLat = 0,
+        avgLng = 0;
+      for (let index = 0; index < latLngArr; index++) {
+        avgLat += latLngArr[index][0];
+        avgLng += latLngArr[index][1];
+      }
+     // map.panTo([avgLat/count, avgLng/count], zoom);
 
-}
-// map.panTo([avgLat/count, avgLng/count], zoom);
+    //  var fg = L.featureGroup([markerGroup]).addTo(map);
+    //  map.fitBounds(fg.getBounds());
 
- map.fitBounds(latLngArr);
-    } 
+     map.fitBounds(boundsArr);
+
+    //  map.fitBounds(latLngArr);
+    }
     setValues({ ...values, mapSearch: true });
   };
+  function gotoVenue1() {
+    document.getElementById("demo").innerHTML = "Hello World";
+  }
   const searchVenues = (searchParams = values, pageNumber) => {
+    
     setModalType(null);
     setShowLoader(true);
     const searchObj = {};
@@ -156,9 +179,7 @@ for (let index = 0; index < latLngArr; index++) {
           Number(searchParams.capacity),
         ];
       if (searchParams.eventType?.length > 0)
-        searchObj.type = searchParams.eventType?.map((item) =>
-          Number(item.id)
-        );
+        searchObj.type = searchParams.eventType?.map((item) => Number(item.id));
       if (searchParams.moreFilters?.length > 0)
         searchObj.service = searchParams.moreFilters?.map((item) => item.id);
       if (searchParams.name && searchParams.name !== "")
@@ -176,7 +197,11 @@ for (let index = 0; index < latLngArr; index++) {
         setShowLoader(false);
         if (!res.isAxiosError) {
           setVenuesList(res?.data);
-          setPager({...pager, current_page: Number(res.page),total:res.total });
+          setPager({
+            ...pager,
+            current_page: Number(res.page),
+            total: res.total,
+          });
         }
       }
     );
@@ -186,36 +211,43 @@ for (let index = 0; index < latLngArr; index++) {
     getSearchConfigs();
     let valuesObj = {};
     if (searchData) {
-      valuesObj.eventType = searchData?.eventTypeObj?.id ? [searchData.eventTypeObj]    : [];
+      valuesObj.eventType = searchData?.eventTypeObj?.id
+        ? [searchData.eventTypeObj]
+        : [];
       valuesObj.location = searchData.location ? searchData.location : "";
-      valuesObj.capacity = searchData.capacity? Number(searchData.capacity): 0;
+      valuesObj.capacity = searchData.capacity
+        ? Number(searchData.capacity)
+        : 0;
       valuesObj = { ...values, ...valuesObj };
       dispatch({ type: TYPES.SEARCH_DATA, data: {} });
       setValues({ ...valuesObj });
     }
     searchVenues(valuesObj);
-    const map = L.map('map').setView([mapInitialLat, mapInitialLng], zoom);
+    const map = L.map("map").setView([mapInitialLat, mapInitialLng], zoom);
     map.on("dragend", (e) => {
-        const { lng, lat } = map.getCenter();
-        const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
-        setValues({ ...valuesObj });
-        if (
-          valuesObj.lat &&
-          valuesObj.lng &&
-          valuesObj.lat !== 0 &&
-          valuesObj.lng !== 0 &&
-          valuesObj.mapSearch
-        )
-          searchVenues(valuesObj);
+      const { lng, lat } = map.getCenter();
+      const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
+      setValues({ ...valuesObj });
+      if (
+        valuesObj.lat &&
+        valuesObj.lng &&
+        valuesObj.lat !== 0 &&
+        valuesObj.lng !== 0 &&
+        valuesObj.mapSearch
+      )
+        searchVenues(valuesObj);
     });
-    L.tileLayer(`https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,{
-      maxZoom: 22,
-     minZoom:1,
-      tileSize:  512,
-      zoomOffset: -1, 
-      accessToken: Constants.mapboxToken,
-      debounceMoveend:true,
-      }).addTo(map)
+    L.tileLayer(
+      `https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,
+      {
+        maxZoom: 22,
+        minZoom: 1,
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: Constants.mapboxToken,
+        debounceMoveend: true,
+      }
+    ).addTo(map);
     setMap(map);
     return () => {
       if (map) map.remove();
@@ -236,6 +268,11 @@ for (let index = 0; index < latLngArr; index++) {
     setTimeout(() => {
       setModalType(value);
     }, 50);
+  };
+  const gotoVenue = (id) => {
+    debugger
+    dispatch({ type: TYPES.SEARCH_DATA, data: values });
+    navigate(`/venue/${id}`);
   };
   return (
     <>
@@ -279,10 +316,7 @@ for (let index = 0; index < latLngArr; index++) {
                   md={4}
                   sm={6}
                   xs={12}
-                  onClick={() => {
-    dispatch({ type: TYPES.SEARCH_DATA, data: values });
-                    navigate(`/venue/${item.id}`);
-                  }}
+                  onClick={() => gotoVenue(item.id)}
                 >
                   <div className="image-block">
                     {<img alt="" src={item.images[0]?.image_path_thumbnail} />}
@@ -327,21 +361,25 @@ for (let index = 0; index < latLngArr; index++) {
             )}
           </Row>
 
-        {
-          venuesList && venuesList?.length>0 &&
-          <Pager
-            total={pager.total}
-            current={pager.current_page}
-            onChange={(current) => {
-              setPager({ ...pager, current_page: current });
-              searchVenues(null, current);
-            }}
-            pageSize={pager.per_page}
-          />}
+          {venuesList && venuesList?.length > 0 && (
+            <Pager
+              total={pager.total}
+              current={pager.current_page}
+              onChange={(current) => {
+                setPager({ ...pager, current_page: current });
+                searchVenues(null, current);
+              }}
+              pageSize={pager.per_page}
+            />
+          )}
         </div>
-        <div className={`map-container ${values?.mapSearch ? "d-block" : "d-none"}`}>
-         <div className={`h-100`} id="map" ref={mapContainerRef} />
-         </div>
+        <div
+          className={`map-container ${
+            values?.mapSearch ? "d-block" : "d-none"
+          }`}
+        >
+          <div className={`h-100`} id="map" ref={mapContainerRef} />
+        </div>
         <SearchModal
           showModal={modalType !== null}
           modalType={modalType}

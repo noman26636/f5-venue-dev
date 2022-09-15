@@ -1608,8 +1608,11 @@ display: none;
   overflow: hidden;
   height: 40rem;
 }
-.mapboxgl-popup {
-  min-width: 240px;
+.leaflet-popup-content{
+  width: 150px !important;
+}
+.leaflet-popup-content a{
+  text-decoration: none !important;
 }
 .popup-title {
   font-size: 20px;
@@ -3414,13 +3417,20 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     padding: 32px;
   }
 }
+@media only screen and (max-width: 889px) {
+  .venue-manage-view .manage-venue-item .row{
+    flex-direction: column;
+  }
+  .venue-manage-view .manage-venue-item .right-item {
+    justify-content: space-between;
+  }
+}
 @media only screen and (max-width: 576px) {
   .venue-manage-view {
     padding: 32px 20px;
   }
-  .venue-manage-view .venue-item .right-item {
-    flex-direction: column;
-    align-items: unset;
+  .venue-manage-view .venue-item{
+    padding: 20px 5px !important;
   }
   .venue-manage-view .venue-manage-list .venue-item .venue-details .name-block {
     flex-direction: column;
@@ -3429,7 +3439,16 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
   .venue-manage-view .venue-manage-list .right-item .btn-wrap {
     margin-bottom: 3px;
+    margin-right: 0;
   }
+  .venue-manage-view .venue-manage-list .right-item .btn-wrap .small-btn {
+    font-weight: 500;
+    font-size: 12px;
+    min-width: unset;
+    min-height: unset;
+    width: 60px;
+    padding: 5px 0;
+}
 }
 /* ******************************wishlist-details-view ************************** */
 .wishlist-details-view {
@@ -3511,7 +3530,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   .wishlist-details-view .heading-block .right-block {
     margin-left: unset;
   }
-  .venue-manage-view .btn-wrap {
+  .venue-manage-view .btn-wrap.share-btn-block {
     margin-left: unset;
   }
 }

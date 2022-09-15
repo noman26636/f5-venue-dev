@@ -164,6 +164,7 @@ const WishlistDetails = () => {
                     label={translations.Share}
                     onClick={shareWishlist}
                     className="small-btn share-btn"
+                    wrapperClass="share-btn-block"
                   />
                 </div>
               </div>
