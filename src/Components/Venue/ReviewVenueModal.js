@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import Button from "../Common/Button";
@@ -6,7 +6,7 @@ import TextArea from "../Common/TextArea";
 import yellowStar from "../../Assets/icons/yellow-star.svg";
 import unfilledStar from "../../Assets/icons/unfilledStar.svg";
 export default function ReviewVenueModal(props) {
-  let { values,setValues, showModal, handleClose, showBtnLoader, setShowBtnLoader,postReview } =
+  let { values,setValues, showModal, handleClose, showBtnLoader,postReview } =
     props;
   const appState = useSelector((state) => {
     return state.app;

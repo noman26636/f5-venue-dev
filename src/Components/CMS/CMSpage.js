@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Pageloader from "../Common/Pageloader";
 import { CmsServices } from "./CmsServices";
 
@@ -20,9 +20,6 @@ const CMSpage = (props) => {
       } else navigate("/home");
     });
   };
-  useEffect(() => {
-       
-  }, []);
   useEffect(() => {
    window.scrollTo(0, 0);
     getPageContent();
