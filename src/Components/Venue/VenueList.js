@@ -24,7 +24,7 @@ let markerGroup = null;
 const mapInitialLat = 55,
   mapInitialLng = 9.18,
   zoom = 2.5;
-  let mapMoveSearch=false;
+let mapMoveSearch = true;
 const initialFormValues = {
   mapSearch: true,
   location: "",
@@ -35,13 +35,13 @@ const initialFormValues = {
   name: "",
   sortField: -1,
   sortType: 0,
-  lat: 0,
-  lng: 0,
-  mapMoveSearch: false,
+  ne_lat: 0,
+  ne_lng: 0,
+  sw_lat: 0,
+  sw_lng: 0,
+  mapMoveSearch: mapMoveSearch,
 };
-
 const VenueList = () => {
- 
   const mapContainerRef = useRef(null);
   const dispatch = useDispatch();
   const appState = useSelector((state) => {
@@ -97,19 +97,22 @@ const VenueList = () => {
     } else {
       const valuesObj = { ...values, [name]: value };
       if (name === "mapSearch" && !value) {
-        valuesObj.lat = null;
-        valuesObj.lng = null;
+        valuesObj.ne_lat = null;
+        valuesObj.ne_lng = null;
+        valuesObj.sw_lat = null;
+        valuesObj.sw_lng = null;
         searchVenues({ ...valuesObj });
       }
       setValues({ ...valuesObj });
       if (name === "sortField" || name === "sortType") {
-        searchVenues();
+        debugger;
+        searchVenues({ ...valuesObj });
         setModalType(null);
       }
     }
-    if(name==="mapMoveSearch")
-  {  
-    mapMoveSearch=value;}
+    if (name === "mapMoveSearch") {
+      mapMoveSearch = value;
+    }
   };
   useEffect(() => {
     if (values.mapSearch) setMarkersOnMap(venuesList);
@@ -195,8 +198,18 @@ const VenueList = () => {
           enum_sortFieldOptions[Number(searchParams.sortField)],
           enum_sortTypeOptions[Number(searchParams.sortType)],
         ];
-      if (searchParams.lat && searchParams.lng)
-        searchObj.coordinates = [searchParams.lat, searchParams.lng];
+      if (
+        searchParams.ne_lat &&
+        searchParams.ne_lng &&
+        searchParams.sw_lat &&
+        searchParams.sw_lng
+      )
+        searchObj.coordinates = [
+          searchParams.ne_lat,
+          searchParams.ne_lng,
+          searchParams.sw_lat,
+          searchParams.sw_lng,
+        ];
     }
     VenueServices.venueSearch(searchObj, pageNumber, pager.per_page).then(
       (res) => {
@@ -232,14 +245,27 @@ const VenueList = () => {
     const map = L.map("map").setView([mapInitialLat, mapInitialLng], zoom);
     map.on("dragend", (e) => {
       if (!mapMoveSearch) return;
-      const { lng, lat } = map.getCenter();
-      const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
+      const bounds = map.getBounds();
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+      const valuesObj = {
+        ...values,
+        ne_lat: ne.lat,
+        ne_lng: ne.lng,
+        sw_lat: sw.lat,
+        sw_lng: sw.lng,
+        mapSearch: true,
+      };
       setValues({ ...valuesObj });
       if (
-        valuesObj.lat &&
-        valuesObj.lng &&
-        valuesObj.lat !== 0 &&
-        valuesObj.lng !== 0 &&
+        valuesObj.ne_lat &&
+        valuesObj.ne_lng &&
+        valuesObj.ne_lat !== 0 &&
+        valuesObj.ne_lng !== 0 &&
+        valuesObj.sw_lat &&
+        valuesObj.sw_lng &&
+        valuesObj.sw_lat !== 0 &&
+        valuesObj.sw_lng !== 0 &&
         valuesObj.mapSearch
       )
         searchVenues(valuesObj);
@@ -282,7 +308,6 @@ const VenueList = () => {
   };
   return (
     <>
-    
       {showLoader && <Pageloader />}
       <div className="d-flex">
         <div
