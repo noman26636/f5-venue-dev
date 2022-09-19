@@ -204,12 +204,12 @@ const VenueList = () => {
         searchParams.sw_lat &&
         searchParams.sw_lng
       )
-        searchObj.coordinates = [
-          searchParams.ne_lat,
-          searchParams.ne_lng,
-          searchParams.sw_lat,
-          searchParams.sw_lng,
-        ];
+        searchObj.coordinates = {
+        ne: [ searchParams.ne_lat,
+          searchParams.ne_lng],
+        sw: [ searchParams.sw_lat,
+          searchParams.sw_lng]
+         };
     }
     VenueServices.venueSearch(searchObj, pageNumber, pager.per_page).then(
       (res) => {
