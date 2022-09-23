@@ -59,17 +59,17 @@ const ManageVenues = () => {
         />
       </div>
       {showLoader && <Pageloader />}
-      <div className="venue-manage-list">
+      <div className="venue-manage-list ">
         {venuesList?.length < 1 ? (
           <div className="no-search-msg">{translations.NoDataToShow}</div>
         ) : (
           venuesList?.map((item, i) => {
            return <div
-              className="venue-item"
+              className="venue-item manage-venue-item"
               key={i}
             >
               <Row className="flex-wrap">
-                <Col xl={2} lg={2} md={2} sm={2}>
+                <Col xl={2} lg={3} md={3} >
                   <img
                     alt=""
                     src={item.images[0]?.image_path_thumbnail}
@@ -78,15 +78,16 @@ const ManageVenues = () => {
                 </Col>
                 <Col
                   xl={8}
-                  lg={8}
-                  md={8}
-                  sm={8}
+                  lg={6}
+                  md={6}
+                  sm={6}
                   className="venue-details"
                 >
                   <div className="name-block">
                       <div className="name">{item.name}</div>
-                      <div className="px-5">{translations.Created}: {getFormattedDate(item.created_at)}</div>
+                     
                       </div>
+                    <div >{translations.Created}: {getFormattedDate(item.created_at)}</div>
                   <div className="venue-info">{item.city}</div>
                   <div className="rating-block">
                     <RatingStars rating={item.ratings_avg_rating} />
@@ -117,7 +118,10 @@ const ManageVenues = () => {
                     </div>
                   </div>
                 </Col>
-                <Col xl={2} lg={2} className="right-item">
+                <Col  xl={2}
+                  lg={3}
+                  md={3}
+                   className="right-item">
                   <Button
                     label={translations.Edit}
                     onClick={() => {

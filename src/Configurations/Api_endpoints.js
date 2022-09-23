@@ -53,14 +53,12 @@ export const VenueApis = {
   postReview: `${baseUrl}reviews/`,
   publishVenue: `${baseUrl}publish/`,
   deleteVenueImage: `${baseUrl}deleteimage/`,
+  getImages: `${baseUrl}slider_images`,
+
 };
 export const BookingApis = {
   saveIcalFeed: `${baseUrl}icalfeed`,
 };
 export const CMSPagesApis={
-  getContactPageContent: `${baseUrl}sitepage/4`,
-  getAboutPageContent: `${baseUrl}sitepage/1`,
-  getHelpPageContent: `${baseUrl}sitepage/5`,
-  getTermsPageContent: `${baseUrl}sitepage/3`,
-  getPrivacyPageContent: `${baseUrl}sitepage/2`,
+  getPageContent: `${baseUrl}sitepage/`,
 }

@@ -23,12 +23,15 @@ import TextField from '../Common/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import * as TYPES from '../../Store/actions/types';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { VenueServices } from '../Venue/VenueServices';
 const initialFormValues = {
   location: "",
   eventType:0,
   capacity: null,
   eventTypeObj:{}
 }
+const imagesArr = [sImg1, sImg2, sImg3, sImg4, sImg5, sImg6, sImg7, sImg8, sImg9, sImg10, sImg11, sImg12];
 export default function Main(props) {
   const { eventTypesList } = props;
   const appState = useSelector((state) => {
@@ -37,8 +40,8 @@ export default function Main(props) {
   const { userLanguageData } = appState;
   const translations = userLanguageData.translations;
   const dispatch = useDispatch();
-  const images = [sImg1, sImg2, sImg3, sImg4, sImg5, sImg6, sImg7, sImg8, sImg9, sImg10, sImg11, sImg12];
   const [values, setValues] = useState(initialFormValues);
+  const [images, setImages] = useState(imagesArr);
   const navigate = useNavigate();
   const handleInputChange = ({ target }) => {
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -60,7 +63,17 @@ export default function Main(props) {
     dispatch({ type: TYPES.SEARCH_DATA, data: values });
     navigate("/venueList");
   }
-
+useEffect(()=>{
+  getImages();
+},[]);
+const getImages=()=>{
+  VenueServices.getImages().then((res) => {
+    if (!res.isAxiosError && res.images?.length>0) {
+      const imgs=res.images.map(img=>img.image_path);
+      setImages(imgs)
+    }
+  });
+}
   return (
     <div className='main-section'>
       <Row className='main-section-inner'>

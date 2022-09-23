@@ -103,6 +103,7 @@ export var stringVariables = {
   Price: "Price",
   Lowest: "Lowest",
   Highest: "Highest",
+  UpdateSearchOnMapMove:"Update search on map move",
   //Venue Details
   Details: "Details",
   VenueStyle: "Venue style",
@@ -199,7 +200,7 @@ export var stringVariables = {
   EditYourVenue: "Edit your venue",
   DeleteVenue: "Delete venue",
   SeeVenue: "See Venue",
-  VenueAdded: "Venue has been successfully created and published.",
+  VenueAdded: "Venue has been successfully created and sent to admin for approval.",
   VenueUpdated: "Venue has been successfully updated",
   VenueDeleteConfirmation:
     "Are you sure you want to delete this venue. This action cannot be undone",

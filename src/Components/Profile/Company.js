@@ -100,7 +100,6 @@ const Company = () => {
         AccountServices.getBilling().then(res => {
             if (!res.isAxiosError) {
                 setValues({ ...values,...res[0],billing:res[0]?.billing?res[0]?.billing:{...values.billing}});
-                const a={ ...values,...res[0]};
             }
         });
     }
@@ -176,7 +175,7 @@ const Company = () => {
                                 <th>{translations.Name}</th>
                                 <th>{translations.Email}</th>
                                 <th>{translations.Phone}</th>
-                                <th>{translations.Status}</th>
+                                {/* <th>{translations.Status}</th> */}
                                 <th>{translations.Action}</th>
                             </tr>
                         </thead>
@@ -188,7 +187,7 @@ const Company = () => {
                                             <td>{`${item.firstname} ${item.lastname}`}</td>
                                             <td>{item.email}</td>
                                             <td>{item.phone_number}</td>
-                                            <td>{}</td>
+                                            {/* <td>{}</td> */}
                                             <td><img alt="" src={deleteIcon} className="bin-icon ml-3 cursor-pointer" 
                                             onClick={() => { setUserToDelete(item.id) }} /></td>
                                         </tr>
@@ -275,7 +274,7 @@ const Company = () => {
                 </div>
             </div >
             <InviteUser showModal={showInviteUserModal} handleClose={() => setShowInviteUserModal(false)} email={values.invitationEmail}
-                inviteUser={inviteUser} handleInputChange={handleInputChange}
+                inviteUser={inviteUser} handleInputChange={handleInputChange} showBtnLoader={showLoader === "invite"}
             />
             <Modal text={translations.DeleteUserConfirmation} showModal={userToDelete!==null} handleClose={() => setUserToDelete(null)} btn1Text={translations.Yes}
                 btn1Click={deleteUserFromCompany} btn2Text={translations.No} />

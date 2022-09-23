@@ -9,7 +9,7 @@ import { VenueServices } from "./VenueServices";
 import Pageloader from "../Common/Pageloader";
 import Pager from "../Common/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMale, faChair } from "@fortawesome/free-solid-svg-icons";
+import { faMale, faChair, faG } from "@fortawesome/free-solid-svg-icons";
 import { Constants } from "../../Configurations/Constants";
 import * as TYPES from "../../Store/actions/types";
 import L from "leaflet";
@@ -19,8 +19,12 @@ import {
   enum_sortTypeOptions,
 } from "../../Utils/indexUtils";
 import RatingStars from "./RatingStars";
-let markerGroup=null;
-const mapInitialLat=55,mapInitialLng=9.18,zoom=3;
+import Checkbox from "../Common/Checkbox";
+let markerGroup = null;
+const mapInitialLat = 55,
+  mapInitialLng = 9.18,
+  zoom = 2.5;
+let mapMoveSearch = true;
 const initialFormValues = {
   mapSearch: true,
   location: "",
@@ -31,8 +35,11 @@ const initialFormValues = {
   name: "",
   sortField: -1,
   sortType: 0,
-  lat: 0,
-  lng: 0,
+  ne_lat: 0,
+  ne_lng: 0,
+  sw_lat: 0,
+  sw_lng: 0,
+  mapMoveSearch: mapMoveSearch,
 };
 const VenueList = () => {
   const mapContainerRef = useRef(null);
@@ -90,62 +97,83 @@ const VenueList = () => {
     } else {
       const valuesObj = { ...values, [name]: value };
       if (name === "mapSearch" && !value) {
-        valuesObj.lat = null;
-        valuesObj.lng = null;
+        valuesObj.ne_lat = null;
+        valuesObj.ne_lng = null;
+        valuesObj.sw_lat = null;
+        valuesObj.sw_lng = null;
+        searchVenues({ ...valuesObj });
       }
       setValues({ ...valuesObj });
       if (name === "sortField" || name === "sortType") {
-        searchVenues();
+        searchVenues({ ...valuesObj });
         setModalType(null);
       }
     }
+    if (name === "mapMoveSearch") {
+      mapMoveSearch = value;
+    }
   };
   useEffect(() => {
-    console.log(values);
-  }, [values]);
-  useEffect(() => {
-    if(values.mapSearch)
-    setMarkersOnMap(venuesList);
+    if (values.mapSearch) setMarkersOnMap(venuesList);
   }, [venuesList, values.mapSearch]);
   const setMarkersOnMap = (venues) => {
-    if (!values.mapSearch) return;
+    if (!values.mapSearch || !map) return;
     let count = 0;
-      const latLngArr = [];
-      if (!map) return;
-      if(markerGroup && map.hasLayer(markerGroup)){
-        map.removeLayer(markerGroup);
-      }
-     markerGroup = L.layerGroup().addTo(map);
-    venues.forEach((venue) => {
-       if (!(venue.latitude > 90 || venue.latitude < -90)) {
-   const marker =  L.marker([venue.longitude,venue.latitude]).addTo(markerGroup);
-      
-                marker.bindPopup( `
+    const latLngArr = [];
+
+    if (markerGroup && map.hasLayer(markerGroup)) {
+      map.removeLayer(markerGroup);
+    }
+    markerGroup = L.layerGroup().addTo(map);
+    var boundsArr = new L.LatLngBounds();
+    if (venues && venues?.length > 0) {
+      venues.forEach((venue) => {
+        if (!(venue.latitude > 90 || venue.latitude < -90)) {
+          const marker = L.marker([venue.longitude, venue.latitude]).addTo(
+            markerGroup
+          );
+          marker.bindPopup(`
                 <div>
-                    <img src=${venue.images[0].image_path_thumbnail} class="popup-img">
+                    <img src=${
+                      venue.images?.length > 0
+                        ? venue.images[0].image_path_thumbnail
+                        : null
+                    } class="popup-img">
                     <div>
-                        <h3 class="popup-title">${venue.name}</h3>
+                      <a href="/venue/${venue.id}" >  
+                      <h3 class="popup-title">${venue.name}</h3>
+                      </a>
                         <div>${venue.street_address}</div>
                     </div>
                 </div>`);
-                latLngArr.push([venue.latitude, venue.longitude]);
-                count++;
-      }
-    });
+          latLngArr.push([venue.latitude, venue.longitude]);
+          boundsArr.extend(marker.getLatLng());
+          count++;
+        }
+      });
+    }
     if (count !== 0) {
-map.addLayer(markerGroup);
-let avgLat=0,avgLng=0;
-for (let index = 0; index < latLngArr; index++) {
- avgLat+=latLngArr[index][0];
- avgLng+=latLngArr[index][1];
+      map.addLayer(markerGroup);
+      let avgLat = 0,
+        avgLng = 0;
+      for (let index = 0; index < latLngArr; index++) {
+        avgLat += latLngArr[index][0];
+        avgLng += latLngArr[index][1];
+      }
+      // map.panTo([avgLat/count, avgLng/count], zoom);
 
-}
-map.panTo([avgLat/count, avgLng/count], zoom);
+      //  var fg = L.featureGroup([markerGroup]).addTo(map);
+      //  map.fitBounds(fg.getBounds());
 
-// map.fitBounds(latLngArr);
-    } 
+      map.fitBounds(boundsArr);
+
+      //  map.fitBounds(latLngArr);
+    }
     setValues({ ...values, mapSearch: true });
   };
+  function gotoVenue1() {
+    document.getElementById("demo").innerHTML = "Hello World";
+  }
   const searchVenues = (searchParams = values, pageNumber) => {
     setModalType(null);
     setShowLoader(true);
@@ -159,28 +187,39 @@ map.panTo([avgLat/count, avgLng/count], zoom);
           Number(searchParams.capacity),
         ];
       if (searchParams.eventType?.length > 0)
-        searchObj.type = searchParams.eventType?.map((item) =>
-          Number(item.id)
-        );
+        searchObj.type = searchParams.eventType?.map((item) => Number(item.id));
       if (searchParams.moreFilters?.length > 0)
         searchObj.service = searchParams.moreFilters?.map((item) => item.id);
-      if (!searchParams.name && searchParams.name !== "")
+      if (searchParams.name && searchParams.name !== "")
         searchObj.name = searchParams.name;
       if (Number(searchParams.sortField) !== -1)
         searchObj.sort = [
           enum_sortFieldOptions[Number(searchParams.sortField)],
           enum_sortTypeOptions[Number(searchParams.sortType)],
         ];
-      if (searchParams.lat && searchParams.lng)
-        searchObj.coordinates = [searchParams.lat, searchParams.lng];
+      if (
+        searchParams.ne_lat &&
+        searchParams.ne_lng &&
+        searchParams.sw_lat &&
+        searchParams.sw_lng
+      )
+        searchObj.coordinates = {
+        ne: [ searchParams.ne_lat,
+          searchParams.ne_lng],
+        sw: [ searchParams.sw_lat,
+          searchParams.sw_lng]
+         };
     }
     VenueServices.venueSearch(searchObj, pageNumber, pager.per_page).then(
       (res) => {
         setShowLoader(false);
         if (!res.isAxiosError) {
-          setVenuesList(res?.data?.data);
-          delete res.data.data;
-          setPager({ ...res.data });
+          setVenuesList(res?.data);
+          setPager({
+            ...pager,
+            current_page: Number(res.page),
+            total: res.total,
+          });
         }
       }
     );
@@ -190,35 +229,57 @@ map.panTo([avgLat/count, avgLng/count], zoom);
     getSearchConfigs();
     let valuesObj = {};
     if (searchData) {
-      valuesObj.eventType = searchData?.eventTypeObj?.id ? [searchData.eventTypeObj]    : [];
+      valuesObj.eventType = searchData?.eventTypeObj?.id
+        ? [searchData.eventTypeObj]
+        : [];
       valuesObj.location = searchData.location ? searchData.location : "";
-      valuesObj.capacity = searchData.capacity? Number(searchData.capacity): 0;
+      valuesObj.capacity = searchData.capacity
+        ? Number(searchData.capacity)
+        : 0;
       valuesObj = { ...values, ...valuesObj };
       dispatch({ type: TYPES.SEARCH_DATA, data: {} });
       setValues({ ...valuesObj });
     }
     searchVenues(valuesObj);
-    const map = L.map('map').setView([mapInitialLat, mapInitialLng], zoom);
-    // map.on("dragend", (e) => {
-    //     const { lng, lat } = map.getCenter();
-    //     const valuesObj = { ...values, lat: lat, lng: lng, mapSearch: true };
-    //     setValues({ ...valuesObj });
-    //     if (
-    //       valuesObj.lat &&
-    //       valuesObj.lng &&
-    //       valuesObj.lat !== 0 &&
-    //       valuesObj.lng !== 0 &&
-    //       valuesObj.mapSearch
-    //     )
-    //       searchVenues(valuesObj);
-    // });
-    L.tileLayer(`https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,{
-      maxZoom: 18,
-      tileSize:  512,
-      zoomOffset: -1, 
-      accessToken: Constants.mapboxToken,
-      debounceMoveend:true
-      }).addTo(map)
+    const map = L.map("map").setView([mapInitialLat, mapInitialLng], zoom);
+    map.on("dragend", (e) => {
+      if (!mapMoveSearch) return;
+      const bounds = map.getBounds();
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+      const valuesObj = {
+        ...values,
+        ne_lat: ne.lat,
+        ne_lng: ne.lng,
+        sw_lat: sw.lat,
+        sw_lng: sw.lng,
+        mapSearch: true,
+      };
+      setValues({ ...valuesObj });
+      if (
+        valuesObj.ne_lat &&
+        valuesObj.ne_lng &&
+        valuesObj.ne_lat !== 0 &&
+        valuesObj.ne_lng !== 0 &&
+        valuesObj.sw_lat &&
+        valuesObj.sw_lng &&
+        valuesObj.sw_lat !== 0 &&
+        valuesObj.sw_lng !== 0 &&
+        valuesObj.mapSearch
+      )
+        searchVenues(valuesObj);
+    });
+    L.tileLayer(
+      `https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,
+      {
+        maxZoom: 22,
+        minZoom: 1,
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: Constants.mapboxToken,
+        debounceMoveend: true,
+      }
+    ).addTo(map);
     setMap(map);
     return () => {
       if (map) map.remove();
@@ -239,6 +300,10 @@ map.panTo([avgLat/count, avgLng/count], zoom);
     setTimeout(() => {
       setModalType(value);
     }, 50);
+  };
+  const gotoVenue = (id) => {
+    dispatch({ type: TYPES.SEARCH_DATA, data: values });
+    navigate(`/venue/${id}`);
   };
   return (
     <>
@@ -282,9 +347,7 @@ map.panTo([avgLat/count, avgLng/count], zoom);
                   md={4}
                   sm={6}
                   xs={12}
-                  onClick={() => {
-                    navigate(`/venue/${item.id}`);
-                  }}
+                  onClick={() => gotoVenue(item.id)}
                 >
                   <div className="image-block">
                     {<img alt="" src={item.images[0]?.image_path_thumbnail} />}
@@ -329,19 +392,34 @@ map.panTo([avgLat/count, avgLng/count], zoom);
             )}
           </Row>
 
-          <Pager
-            total={pager.total}
-            current={pager.current_page}
-            onChange={(current) => {
-              setPager({ ...pager, current_page: current });
-              searchVenues(null, current);
-            }}
-            pageSize={pager.per_page}
-          />
+          {venuesList && venuesList?.length > 0 && (
+            <Pager
+              total={pager.total}
+              current={pager.current_page}
+              onChange={(current) => {
+                setPager({ ...pager, current_page: current });
+                searchVenues(null, current);
+              }}
+              pageSize={pager.per_page}
+            />
+          )}
         </div>
-        <div className={`map-container ${values?.mapSearch ? "d-block" : "d-none"}`}>
-         <div className={`h-100`} id="map" ref={mapContainerRef} />
-         </div>
+        <div
+          className={`map-container ${
+            values?.mapSearch ? "d-block" : "d-none"
+          }`}
+        >
+          <div className={`h-100`} id="map" ref={mapContainerRef} />
+          <div className="map-checkbox">
+            <Checkbox
+              className=""
+              label={translations.UpdateSearchOnMapMove}
+              onChange={handleInputChange}
+              value={values.mapMoveSearch || mapMoveSearch}
+              name="mapMoveSearch"
+            />
+          </div>
+        </div>
         <SearchModal
           showModal={modalType !== null}
           modalType={modalType}

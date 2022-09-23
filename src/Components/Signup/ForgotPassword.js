@@ -106,7 +106,6 @@ export default function ForgotPassword(props) {
                                 value={values.email}
                                 onKeyUp={enableLoginonEnter}
                             />
-                            {/* <div className='ml-auto cursor-pointer' onClick={() => { navigate("/login") }}>{translations.Back}</div> */}
                             <Button label={translations.Proceed} onClick={handleClick} showBtnLoader={showLoader} />
                         </form>
                     </div>

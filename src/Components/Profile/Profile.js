@@ -137,7 +137,6 @@ function Profile() {
                 setShowLoader(null);
                 if (!res.isAxiosError) {
                     setSubmitted(null);
-                    // setValues(initialFormValues);
                     toast.success(translations.Success);
                 }
             });
@@ -156,7 +155,7 @@ function Profile() {
                 setShowLoader(null);
                 if (!res.isAxiosError) {
                     setSubmitted(null);
-                    setValues(initialFormValues);
+                    setValues({...values,passwordData:initialFormValues.passwordData});
                     toast.success(translations.Success);
                 }
                 else

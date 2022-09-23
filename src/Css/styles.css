@@ -4,142 +4,142 @@ html {
   scroll-behavior: smooth;
 }
 @font-face {
-  font-family: 'Archivo';
-  src: url('../fonts/Archivo-Bold.eot');
-  src: url('../fonts/Archivo-Bold.eot#iefix') format('embedded-opentype'),
-    url('../fonts/Archivo-Bold.woff2') format('woff2'),
-    url('../fonts/Archivo-Bold.woff') format('woff'),
-    url('../fonts/Archivo-Bold.ttf') format('truetype'),
-    url('../fonts/Archivo-Bold.svg#Archivo-Bold') format('svg');
+  font-family: "Archivo";
+  src: url("../fonts/Archivo-Bold.eot");
+  src: url("../fonts/Archivo-Bold.eot#iefix") format("embedded-opentype"),
+    url("../fonts/Archivo-Bold.woff2") format("woff2"),
+    url("../fonts/Archivo-Bold.woff") format("woff"),
+    url("../fonts/Archivo-Bold.ttf") format("truetype"),
+    url("../fonts/Archivo-Bold.svg#Archivo-Bold") format("svg");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Archivo';
-  src: url('../fonts/Archivo-Italic.eot');
-  src: url('../fonts/Archivo-Italic.eot#iefix') format('embedded-opentype'),
-    url('../fonts/Archivo-Italic.woff2') format('woff2'),
-    url('../fonts/Archivo-Italic.woff') format('woff'),
-    url('../fonts/Archivo-Italic.ttf') format('truetype'),
-    url('../fonts/Archivo-Italic.svg#Archivo-Italic') format('svg');
+  font-family: "Archivo";
+  src: url("../fonts/Archivo-Italic.eot");
+  src: url("../fonts/Archivo-Italic.eot#iefix") format("embedded-opentype"),
+    url("../fonts/Archivo-Italic.woff2") format("woff2"),
+    url("../fonts/Archivo-Italic.woff") format("woff"),
+    url("../fonts/Archivo-Italic.ttf") format("truetype"),
+    url("../fonts/Archivo-Italic.svg#Archivo-Italic") format("svg");
   font-weight: normal;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Archivo';
-  src: url('../fonts/Archivo-MediumItalic.eot');
-  src: url('../fonts/Archivo-MediumItalic.eot#iefix')
-      format('embedded-opentype'),
-    url('../fonts/Archivo-MediumItalic.woff2') format('woff2'),
-    url('../fonts/Archivo-MediumItalic.woff') format('woff'),
-    url('../fonts/Archivo-MediumItalic.ttf') format('truetype'),
-    url('../fonts/Archivo-MediumItalic.svg#Archivo-MediumItalic') format('svg');
+  font-family: "Archivo";
+  src: url("../fonts/Archivo-MediumItalic.eot");
+  src: url("../fonts/Archivo-MediumItalic.eot#iefix")
+      format("embedded-opentype"),
+    url("../fonts/Archivo-MediumItalic.woff2") format("woff2"),
+    url("../fonts/Archivo-MediumItalic.woff") format("woff"),
+    url("../fonts/Archivo-MediumItalic.ttf") format("truetype"),
+    url("../fonts/Archivo-MediumItalic.svg#Archivo-MediumItalic") format("svg");
   font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Archivo';
-  src: url('../fonts/Archivo-Medium.eot');
-  src: url('../fonts/Archivo-Medium.eot#iefix') format('embedded-opentype'),
-    url('../fonts/Archivo-Medium.woff2') format('woff2'),
-    url('../fonts/Archivo-Medium.woff') format('woff'),
-    url('../fonts/Archivo-Medium.ttf') format('truetype'),
-    url('../fonts/Archivo-Medium.svg#Archivo-Medium') format('svg');
+  font-family: "Archivo";
+  src: url("../fonts/Archivo-Medium.eot");
+  src: url("../fonts/Archivo-Medium.eot#iefix") format("embedded-opentype"),
+    url("../fonts/Archivo-Medium.woff2") format("woff2"),
+    url("../fonts/Archivo-Medium.woff") format("woff"),
+    url("../fonts/Archivo-Medium.ttf") format("truetype"),
+    url("../fonts/Archivo-Medium.svg#Archivo-Medium") format("svg");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Archivo';
-  src: url('../fonts/Archivo-BoldItalic.eot');
-  src: url('../fonts/Archivo-BoldItalic.eot#iefix') format('embedded-opentype'),
-    url('../fonts/Archivo-BoldItalic.woff2') format('woff2'),
-    url('../fonts/Archivo-BoldItalic.woff') format('woff'),
-    url('../fonts/Archivo-BoldItalic.ttf') format('truetype'),
-    url('../fonts/Archivo-BoldItalic.svg#Archivo-BoldItalic') format('svg');
+  font-family: "Archivo";
+  src: url("../fonts/Archivo-BoldItalic.eot");
+  src: url("../fonts/Archivo-BoldItalic.eot#iefix") format("embedded-opentype"),
+    url("../fonts/Archivo-BoldItalic.woff2") format("woff2"),
+    url("../fonts/Archivo-BoldItalic.woff") format("woff"),
+    url("../fonts/Archivo-BoldItalic.ttf") format("truetype"),
+    url("../fonts/Archivo-BoldItalic.svg#Archivo-BoldItalic") format("svg");
   font-weight: bold;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Archivo';
-  src: url('../fonts/Archivo-Regular.eot');
-  src: url('../fonts/Archivo-Regular.eot#iefix') format('embedded-opentype'),
-    url('../fonts/Archivo-Regular.woff2') format('woff2'),
-    url('../fonts/Archivo-Regular.woff') format('woff'),
-    url('../fonts/Archivo-Regular.ttf') format('truetype'),
-    url('../fonts/Archivo-Regular.svg#Archivo-Regular') format('svg');
+  font-family: "Archivo";
+  src: url("../fonts/Archivo-Regular.eot");
+  src: url("../fonts/Archivo-Regular.eot#iefix") format("embedded-opentype"),
+    url("../fonts/Archivo-Regular.woff2") format("woff2"),
+    url("../fonts/Archivo-Regular.woff") format("woff"),
+    url("../fonts/Archivo-Regular.ttf") format("truetype"),
+    url("../fonts/Archivo-Regular.svg#Archivo-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Archivo';
-  src: url('../fonts/Archivo-SemiBoldItalic.eot');
-  src: url('../fonts/Archivo-SemiBoldItalic.eot#iefix')
-      format('embedded-opentype'),
-    url('../fonts/Archivo-SemiBoldItalic.woff2') format('woff2'),
-    url('../fonts/Archivo-SemiBoldItalic.woff') format('woff'),
-    url('../fonts/Archivo-SemiBoldItalic.ttf') format('truetype'),
-    url('../fonts/Archivo-SemiBoldItalic.svg#Archivo-SemiBoldItalic')
-      format('svg');
+  font-family: "Archivo";
+  src: url("../fonts/Archivo-SemiBoldItalic.eot");
+  src: url("../fonts/Archivo-SemiBoldItalic.eot#iefix")
+      format("embedded-opentype"),
+    url("../fonts/Archivo-SemiBoldItalic.woff2") format("woff2"),
+    url("../fonts/Archivo-SemiBoldItalic.woff") format("woff"),
+    url("../fonts/Archivo-SemiBoldItalic.ttf") format("truetype"),
+    url("../fonts/Archivo-SemiBoldItalic.svg#Archivo-SemiBoldItalic")
+      format("svg");
   font-weight: 600;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Archivo';
-  src: url('../fonts/Archivo-SemiBold.eot');
-  src: url('../fonts/Archivo-SemiBold.eot#iefix') format('embedded-opentype'),
-    url('../fonts/Archivo-SemiBold.woff2') format('woff2'),
-    url('../fonts/Archivo-SemiBold.woff') format('woff'),
-    url('../fonts/Archivo-SemiBold.ttf') format('truetype'),
-    url('../fonts/Archivo-SemiBold.svg#Archivo-SemiBold') format('svg');
+  font-family: "Archivo";
+  src: url("../fonts/Archivo-SemiBold.eot");
+  src: url("../fonts/Archivo-SemiBold.eot#iefix") format("embedded-opentype"),
+    url("../fonts/Archivo-SemiBold.woff2") format("woff2"),
+    url("../fonts/Archivo-SemiBold.woff") format("woff"),
+    url("../fonts/Archivo-SemiBold.ttf") format("truetype"),
+    url("../fonts/Archivo-SemiBold.svg#Archivo-SemiBold") format("svg");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Della Respira';
-  src: url('../fonts/DellaRespira-Regular.eot');
-  src: url('../fonts/DellaRespira-Regular.eot#iefix')
-      format('embedded-opentype'),
-    url('../fonts/DellaRespira-Regular.woff2') format('woff2'),
-    url('../fonts/DellaRespira-Regular.woff') format('woff'),
-    url('../fonts/DellaRespira-Regular.ttf') format('truetype'),
-    url('../fonts/DellaRespira-Regular.svg#DellaRespira-Regular') format('svg');
+  font-family: "Della Respira";
+  src: url("../fonts/DellaRespira-Regular.eot");
+  src: url("../fonts/DellaRespira-Regular.eot#iefix")
+      format("embedded-opentype"),
+    url("../fonts/DellaRespira-Regular.woff2") format("woff2"),
+    url("../fonts/DellaRespira-Regular.woff") format("woff"),
+    url("../fonts/DellaRespira-Regular.ttf") format("truetype"),
+    url("../fonts/DellaRespira-Regular.svg#DellaRespira-Regular") format("svg");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Della Respira';
-  src: url('../fonts/DellaRespira-Regular_1.eot');
-  src: url('../fonts/DellaRespira-Regular_1.eot#iefix')
-      format('embedded-opentype'),
-    url('../fonts/DellaRespira-Regular_1.woff2') format('woff2'),
-    url('../fonts/DellaRespira-Regular_1.woff') format('woff'),
-    url('../fonts/DellaRespira-Regular_1.ttf') format('truetype'),
-    url('../fonts/DellaRespira-Regular_1.svg#DellaRespira-Regular')
-      format('svg');
+  font-family: "Della Respira";
+  src: url("../fonts/DellaRespira-Regular_1.eot");
+  src: url("../fonts/DellaRespira-Regular_1.eot#iefix")
+      format("embedded-opentype"),
+    url("../fonts/DellaRespira-Regular_1.woff2") format("woff2"),
+    url("../fonts/DellaRespira-Regular_1.woff") format("woff"),
+    url("../fonts/DellaRespira-Regular_1.ttf") format("truetype"),
+    url("../fonts/DellaRespira-Regular_1.svg#DellaRespira-Regular")
+      format("svg");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 /* ***********************************Fonts css ending here***************************************** */
 body {
-  font-family: 'Archivo';
+  font-family: "Archivo";
   height: 100%;
   width: 100%;
   color: #1a1a1a;
@@ -211,10 +211,13 @@ button:disabled {
 .ml-3 {
   margin-left: 0.75rem;
 }
-@media (max-width: 768px) {
-.d-md-none{
-  display: none !important;
+.d-md-none {
+  display: block !important;
 }
+@media (max-width: 768px) {
+  .d-md-none {
+    display: none !important;
+  }
 }
 .place-self-end {
   place-self: flex-end;
@@ -239,7 +242,7 @@ a:hover {
   margin-top: 5px;
 }
 .row,
-[class^='col-'] {
+[class^="col-"] {
   margin: 0;
   padding: 0;
 }
@@ -280,7 +283,7 @@ a:hover {
   margin-bottom: 15px;
   max-height: 22px;
 }
-.input-wrapper input:disabled{
+.input-wrapper input:disabled {
   background: #80808012 !important;
 }
 .input-wrapper .input-icon ~ input {
@@ -408,10 +411,12 @@ textarea {
   padding: 5px 8px;
   padding-bottom: 4px;
 }
-@media (max-width:565px) {.multi-select .multi-select__value-container {
- max-height: 44px;
-  padding-bottom: 4px;
-}}
+@media (max-width: 565px) {
+  .multi-select .multi-select__value-container {
+    max-height: 44px;
+    padding-bottom: 4px;
+  }
+}
 .multi-select .css-1okebmr-indicatorSeparator {
   display: none;
 }
@@ -446,7 +451,7 @@ textarea {
   background-color: #2196f3;
 }
 .checkmark:after {
-  content: '';
+  content: "";
   position: absolute;
   display: none;
 }
@@ -502,7 +507,7 @@ textarea {
   margin: 10px;
 }
 .toggle-btn:after {
-  content: '';
+  content: "";
   width: 52px;
   height: 22px;
   display: inline-block;
@@ -511,7 +516,7 @@ textarea {
   clear: both;
 }
 .toggle-btn:before {
-  content: '';
+  content: "";
   width: 26px;
   height: 26px;
   display: block;
@@ -618,10 +623,10 @@ textarea {
   padding: 0;
   margin: auto;
 }
-@media (max-width:565px) {
-.rc-pagination {
-  min-width: unset !important;
-}
+@media (max-width: 565px) {
+  .rc-pagination {
+    min-width: unset !important;
+  }
 }
 .rc-pagination li {
   cursor: pointer;
@@ -939,7 +944,7 @@ footer {
   color: #59595b;
   overflow: hidden;
 }
-footer [class^='col-'] {
+footer [class^="col-"] {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1026,7 +1031,7 @@ footer .social-icons .icon.linkedin {
     padding: 30px;
     margin: 0;
   }
-  footer [class^='col-'] {
+  footer [class^="col-"] {
     align-items: flex-start;
   }
 }
@@ -1056,7 +1061,7 @@ footer .social-icons .icon.linkedin {
   margin: 25px 0;
 }
 .home-page .main-section .main-section-inner .text-block .title-1 {
-  font-family: 'Della Respira';
+  font-family: "Della Respira";
   font-size: 30px;
   font-weight: 800;
   display: block;
@@ -1183,7 +1188,7 @@ footer .social-icons .icon.linkedin {
   margin: auto;
 }
 .featured-venue-block .title {
-  font-family: 'Della Respira';
+  font-family: "Della Respira";
   font-style: normal;
   font-weight: 800;
   font-size: 36px;
@@ -1329,10 +1334,10 @@ footer .social-icons .icon.linkedin {
   margin: 0 auto;
 }
 .featured-venue-block .carousel-control-prev-icon {
-  background-image: url('../Assets/icons/arrow-left-blue.svg');
+  background-image: url("../Assets/icons/arrow-left-blue.svg");
 }
 .featured-venue-block .carousel-control-next-icon {
-  background-image: url('../Assets/icons/arrow-right-blue.svg');
+  background-image: url("../Assets/icons/arrow-right-blue.svg");
 }
 .featured-venue-block .carousel-control-prev-icon,
 .featured-venue-block .carousel-control-next-icon {
@@ -1438,7 +1443,7 @@ footer .social-icons .icon.linkedin {
   padding: 0;
 }
 .home-page .section-3 .text-block .section-text .general-text {
-  font-family: 'Della Respira';
+  font-family: "Della Respira";
   font-weight: 500;
   font-size: 30px;
 }
@@ -1531,7 +1536,7 @@ footer .social-icons .icon.linkedin {
   padding: 0 25px;
 }
 .home-page .section-4 .top-block .section-text {
-  font-family: 'Della Respira';
+  font-family: "Della Respira";
   font-weight: 500;
   font-size: 36px;
 }
@@ -1544,7 +1549,7 @@ footer .social-icons .icon.linkedin {
   margin: 0;
   margin-top: 75px;
 }
-.section-4 .bottom-block [class^='col-'] {
+.section-4 .bottom-block [class^="col-"] {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1573,7 +1578,11 @@ footer .social-icons .icon.linkedin {
 /* **************Venue list view *************************/
 .venue-list-view {
   padding: 33px;
-  min-height: 500px;
+  height: 85vh;
+  overflow: auto;
+}
+.venue-list-view::-webkit-scrollbar {
+display: none;
 }
 .venue-list-view .heading-block {
   display: flex;
@@ -1593,7 +1602,7 @@ footer .social-icons .icon.linkedin {
   margin-bottom: 32px;
   width: 23%;
 }
- .map-container {
+.map-container {
   position: relative;
   width: 26%;
   top: 0;
@@ -1602,19 +1611,33 @@ footer .social-icons .icon.linkedin {
   overflow: hidden;
   height: 40rem;
 }
-.mapboxgl-popup {
-  min-width: 240px;
+.leaflet-popup-content{
+  width: 150px !important;
+}
+.leaflet-popup-content a{
+  text-decoration: none !important;
 }
 .popup-title {
   font-size: 20px;
   color: #17a689 !important;
 }
-.popup-img{
+.popup-img {
   width: 100%;
   height: 140px;
 }
-.mapboxgl-popup-close-button{
+.mapboxgl-popup-close-button {
   display: none;
+}
+.map-container .map-checkbox{
+  position: absolute;
+  background: #fff;
+  padding: 10px;
+  top: 11px;
+  left: 52px;
+  z-index: 1000;
+}
+.leaflet-control-attribution a{
+  display: none !important;
 }
 @media only screen and (max-width: 992px) {
   .venue-list-view .venue-details-block .venue-block {
@@ -1625,7 +1648,7 @@ footer .social-icons .icon.linkedin {
   .venue-list-view .venue-details-block .venue-block {
     width: 48%;
   }
-  .venue-list-view .map-container{
+  .venue-list-view .map-container {
     display: none !important;
   }
 }
@@ -1676,8 +1699,8 @@ footer .social-icons .icon.linkedin {
   display: flex;
   align-items: center;
   padding: 11px;
- background: #0a58ca;
- border-color: #0a58ca;
+  background: #0a58ca;
+  border-color: #0a58ca;
 }
 .venue-list-view .venue-search .search-item.search-icon img {
   width: 18px;
@@ -1863,13 +1886,12 @@ footer .social-icons .icon.linkedin {
   width: 100%;
   margin-bottom: 15px;
 }
-.venue-details-view .venue-details-header .post-review{
+.venue-details-view .venue-details-header .post-review {
   cursor: pointer;
   color: #0a58ca;
   margin-left: 5rem;
   font-weight: 600;
   font-size: 23px;
-
 }
 .venue-details-view .venue-details-header .details .name {
   font-weight: 600;
@@ -1942,10 +1964,10 @@ footer .social-icons .icon.linkedin {
   border: 1px solid #cccccc;
 }
 @media only screen and (max-width: 595px) {
-.venue-details-view .venue-details-body .capacity {
-  flex-direction: column;
-  align-items: center;
-}
+  .venue-details-view .venue-details-body .capacity {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .venue-details-view .venue-details-body .capacity .capacity-info {
@@ -2073,16 +2095,15 @@ footer .social-icons .icon.linkedin {
 .react-calendar__month-view__days__day.bg-green1 {
   background: #f6eaac !important;
 }
-.react-calendar__month-view__days__day.bg-green2{
+.react-calendar__month-view__days__day.bg-green2 {
   background: #95e0b8;
 }
 .react-calendar__month-view__days__day.bg-red1 {
   background: #f5a3a3 !important;
 }
-.react-calendar__tile{
+.react-calendar__tile {
   margin-top: 6px;
   margin-right: 4px;
-
 }
 .react-calendar__tile--active {
   background: #006edc !important;
@@ -2105,7 +2126,11 @@ footer .social-icons .icon.linkedin {
     flex-direction: column;
     gap: 0;
   }
-  .venue-details-view .venue-details-header .details .rating-address-block .rating-block{
+  .venue-details-view
+    .venue-details-header
+    .details
+    .rating-address-block
+    .rating-block {
     align-items: unset;
     flex-direction: column;
   }
@@ -2223,15 +2248,15 @@ footer .social-icons .icon.linkedin {
   margin: 0;
   cursor: pointer;
 }
-input[type='date']::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator {
   background: none;
-  background-image: url('../Assets/icons/calendar2.svg');
+  background-image: url("../Assets/icons/calendar2.svg");
   background-repeat: no-repeat;
   background-position: center center;
 }
-input[type='time']::-webkit-calendar-picker-indicator {
+input[type="time"]::-webkit-calendar-picker-indicator {
   background: none;
-  background-image: url('../Assets/icons/dropdownArrow.svg');
+  background-image: url("../Assets/icons/dropdownArrow.svg");
   background-repeat: no-repeat;
   background-position: center center;
 }
@@ -2265,10 +2290,18 @@ input[type='time']::-webkit-calendar-picker-indicator {
   height: 20px;
   margin-right: 20px;
 }
-.venue-details-view .venue-details-body .contact.info-block .contact-list .list-item{
+.venue-details-view
+  .venue-details-body
+  .contact.info-block
+  .contact-list
+  .list-item {
   flex-direction: column;
 }
-.venue-details-view .venue-details-body .contact.info-block .contact-list li:first-child {
+.venue-details-view
+  .venue-details-body
+  .contact.info-block
+  .contact-list
+  li:first-child {
   margin-top: 0;
 }
 @media only screen and (max-width: 1200px) {
@@ -2311,7 +2344,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
   font-weight: 600;
   font-size: 24px;
   color: #594a45;
-  font-family: 'Archivo';
+  font-family: "Archivo";
 }
 .reviews-slider .venue-block {
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
@@ -2363,10 +2396,10 @@ input[type='time']::-webkit-calendar-picker-indicator {
 .wishlist-modal .label {
   margin-bottom: 7px;
 }
-.wishlist-modal .error-msg{
+.wishlist-modal .error-msg {
   color: #333;
   font-size: 15px;
-    font-weight: 500;
+  font-weight: 500;
 }
 /* *****************Add Venue Landing Page ************************** */
 .add-venue-landing {
@@ -2447,7 +2480,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
   padding-bottom: 0;
 }
 .add-venue-landing .section-3 .section-title {
-  font-family: 'Della Respira';
+  font-family: "Della Respira";
   font-weight: 500;
   font-size: 30px;
   text-align: center;
@@ -2588,7 +2621,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
   font-size: 14px;
   margin-top: 7px;
 }
-.profile-edit .form-wrap .form [class^='col-'] {
+.profile-edit .form-wrap .form [class^="col-"] {
   display: flex;
   justify-content: center;
 }
@@ -2609,10 +2642,10 @@ input[type='time']::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   align-items: center;
 }
-.profile-edit .form-wrap.password-form .delete-block{
-display: flex;
-flex-direction: column;
-align-items: center;
+.profile-edit .form-wrap.password-form .delete-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .profile-edit .form-wrap.password-form .form {
   display: flex;
@@ -2625,7 +2658,7 @@ align-items: center;
 .profile-edit .form-wrap.preferences-form .form {
   flex-direction: column;
 }
-.profile-edit .form-wrap.preferences-form .form [class^='col-'] {
+.profile-edit .form-wrap.preferences-form .form [class^="col-"] {
   flex-direction: column;
   justify-content: flex-start;
   margin-bottom: 20px;
@@ -2664,22 +2697,22 @@ align-items: center;
   .profile-edit .form-wrap .title {
     font-size: 20px;
   }
-  .profile-edit .form-wrap.password-form .delete-block{
+  .profile-edit .form-wrap.password-form .delete-block {
     align-items: unset;
   }
-  .profile-edit .form-wrap.password-form .delete-block .helping-text{
-  text-align: left;
+  .profile-edit .form-wrap.password-form .delete-block .helping-text {
+    text-align: left;
   }
   .profile-edit .form-wrap .btn-wrap .form-btn.delete-btn {
     padding: 11px 5px;
   }
-  .profile-edit .form-wrap.password-form .title-block{
+  .profile-edit .form-wrap.password-form .title-block {
     flex-direction: column;
     align-items: unset;
-  } 
-  .profile-edit .form-wrap.password-form .title-block .btn-wrap{
-margin-top: 10px;
-  } 
+  }
+  .profile-edit .form-wrap.password-form .title-block .btn-wrap {
+    margin-top: 10px;
+  }
 }
 /* ***************************Inquiries listing****************************** */
 .inquiries-list {
@@ -2734,7 +2767,7 @@ margin-top: 10px;
 .inquiries-list .table ul li {
   padding-left: 20px;
 }
-.inquiries-list .search-btn{
+.inquiries-list .search-btn {
   display: flex;
   align-items: center;
   padding: 11px;
@@ -2748,17 +2781,18 @@ margin-top: 10px;
   align-self: flex-end;
   margin-bottom: 16px;
 }
-.inquiries-list .search-btn img{ 
+.inquiries-list .search-btn img {
   width: 18px;
   height: 18px;
   position: unset;
   margin: 0 8px 0 10px;
 }
-.prose table:not(.unprose), .table {
+.prose table:not(.unprose),
+.table {
   border-collapse: collapse;
 }
-.inquiries-list .inquiries-table .table-row{
-  border-bottom:1px solid #8080805e;
+.inquiries-list .inquiries-table .table-row {
+  border-bottom: 1px solid #8080805e;
   border-collapse: unset;
   cursor: pointer;
 }
@@ -2791,29 +2825,30 @@ margin-top: 10px;
 .conversation-section {
   display: flex;
   margin: 0 auto;
-  padding:50px;
+  padding: 50px;
 }
-.conversation-section .detail-bar{
+.conversation-section .detail-bar {
   display: flex;
   justify-content: center;
   height: fit-content;
 }
 .card-header {
   background-color: #f9f9f9;
-  font-size: .8125rem;
+  font-size: 0.8125rem;
   font-weight: bold;
   padding: 0.6875rem;
 }
 
 .conversation-section .heading {
   font-weight: bold;
-  font-size: .8125rem;
+  font-size: 0.8125rem;
 }
-.conversation-section .venue-link{
-  color:#0a58ca;
+.conversation-section .venue-link {
+  color: #0a58ca;
   cursor: pointer;
 }
-.event-section, .venue-section {
+.event-section,
+.venue-section {
   margin-bottom: 1.25rem;
   line-height: 1.6;
 }
@@ -2825,10 +2860,9 @@ margin-top: 10px;
 
 .conversation .title {
   font-size: 1.4375rem;
-  font-weight: bold; 
+  font-weight: bold;
   border-bottom: 1px solid #d5d5d5;
   padding-bottom: 0.8125rem;
-
 }
 
 .message-top {
@@ -2850,8 +2884,8 @@ margin-top: 10px;
   margin-right: 10px;
   text-transform: uppercase;
 }
-.message-top .senderAvatar{
- background-color:  #F08FEE;
+.message-top .senderAvatar {
+  background-color: #f08fee;
 }
 .message-top .date {
   flex: 1;
@@ -2867,11 +2901,11 @@ margin-top: 10px;
 .messages .message-content {
   padding-left: 3rem;
 }
-.messages .message-content p{
+.messages .message-content p {
   white-space: pre-wrap;
   margin-left: 0.49rem;
 }
-.reply-block{
+.reply-block {
   margin-top: 2.8125rem;
   display: flex;
   flex-direction: column;
@@ -2884,23 +2918,23 @@ margin-top: 10px;
   font-style: italic;
 }
 @media only screen and (max-width: 768px) {
-  .conversation-section{
+  .conversation-section {
     padding: 10px;
   }
-  .conversation-section .detail-bar{
+  .conversation-section .detail-bar {
     justify-content: unset;
     margin-bottom: 20px;
   }
 }
 @media only screen and (max-width: 565px) {
-  .conversation-bar .message-top{
+  .conversation-bar .message-top {
     flex-direction: column;
     align-items: unset;
   }
-  .conversation-bar .message-top .date{
+  .conversation-bar .message-top .date {
     text-align: left;
   }
-  .conversation-bar .message-content{
+  .conversation-bar .message-content {
     padding: 0;
   }
 }
@@ -3189,7 +3223,7 @@ margin-top: 10px;
   .add-venue-view {
     padding: 40px;
   }
-  .add-venue-view .form-block .form-wrap .form-section .form [class^='col-'] {
+  .add-venue-view .form-block .form-wrap .form-section .form [class^="col-"] {
     max-width: unset;
   }
 }
@@ -3204,7 +3238,7 @@ margin-top: 10px;
     .form-wrap
     .form-section
     .contact-info-form
-    [class^='col-'] {
+    [class^="col-"] {
     width: 100%;
   }
 }
@@ -3251,7 +3285,7 @@ margin-top: 10px;
   }
 }
 /* ************************** Wishlist view ******************************/
- .wishlist-view .venue-item {
+.wishlist-view .venue-item {
   border: 1px solid #e5e5e5;
   padding: 20px 30px;
   margin-bottom: 30px;
@@ -3261,13 +3295,17 @@ margin-top: 10px;
 .wishlist-view .delete-icon {
   cursor: pointer;
   width: 20px;
-    height: 20px;
+  height: 20px;
 }
 .wishlist-view-wrap .top-block {
   width: 100%;
 }
-.wishlist-view-wrap .wishlist-view .bottom-block{
-display: flex;
+.wishlist-view-wrap .wishlist-view .bottom-block {
+  display: flex;
+  flex-direction: column;
+}
+.wishlist-view-wrap .wishlist-view .bottom-block .wishlist-data{
+  display: flex;
 }
 @media only screen and (max-width: 1300px) {
   .wishlist-view-wrap .wishlist-view .top-block {
@@ -3280,7 +3318,7 @@ display: flex;
     margin-top: 0 !important;
   }
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 768px) {
   .wishlist-view-wrap .heading-block {
     flex-direction: column;
     align-items: unset !important;
@@ -3289,19 +3327,16 @@ display: flex;
     margin-top: 10px;
     margin-left: unset;
   }
-  .wishlist-view .right-item{
+  .wishlist-view .right-item {
     align-items: flex-end !important;
   }
-  .wishlist-view-wrap .wishlist-view .bottom-block{
+  .wishlist-view-wrap .wishlist-view .bottom-block .separator {
+    display: none;
+  }
+  .wishlist-view-wrap .wishlist-view .bottom-block .wishlist-data{
     flex-direction: column;
-    }
-    .wishlist-view-wrap .wishlist-view .bottom-block .separator{
-      display: none;
-      }
+  }
 }
-
-
-
 
 /* *************************Venue manage list*************************** */
 .venue-manage-view {
@@ -3331,7 +3366,7 @@ display: flex;
 }
 .venue-manage-view .venue-manage-list .venue-item {
   border: 1px solid #e5e5e5;
-  padding:20px;
+  padding: 20px;
   font-weight: 400;
   font-size: 18px;
   color: #5f6377;
@@ -3339,13 +3374,13 @@ display: flex;
   overflow: hidden;
   cursor: pointer;
 }
-.venue-manage-view .venue-manage-list .venue-item .venue-details{
+.venue-manage-view .venue-manage-list .venue-item .venue-details {
   display: flex;
   flex-direction: column;
   justify-content: center;
   line-height: 30px;
 }
-.venue-manage-view .venue-manage-list .venue-item .venue-details .name-block{
+.venue-manage-view .venue-manage-list .venue-item .venue-details .name-block {
   display: flex;
   align-items: center;
 }
@@ -3385,10 +3420,7 @@ display: flex;
   margin-left: unset;
   margin-right: 25px;
 }
-.venue-manage-view
-  .venue-manage-list
-  .right-item
-  .btn-wrap:last-child {
+.venue-manage-view .venue-manage-list .right-item .btn-wrap:last-child {
   margin-right: 0px;
 }
 .venue-manage-view .venue-manage-list .venue-item .small-btn.publish-btn {
@@ -3399,22 +3431,38 @@ display: flex;
     padding: 32px;
   }
 }
+@media only screen and (max-width: 889px) {
+  .venue-manage-view .manage-venue-item .row{
+    flex-direction: column;
+  }
+  .venue-manage-view .manage-venue-item .right-item {
+    justify-content: space-between;
+  }
+}
 @media only screen and (max-width: 576px) {
   .venue-manage-view {
     padding: 32px 20px;
   }
-  .venue-manage-view .venue-item .right-item{
-    flex-direction: column;
-    align-items: unset;
+  .venue-manage-view .venue-item{
+    padding: 20px 5px !important;
   }
-  .venue-manage-view .venue-manage-list .venue-item .venue-details .name-block{
- flex-direction: column;
- flex-wrap: wrap;
-  align-items: unset;
+  .venue-manage-view .venue-manage-list .venue-item .venue-details .name-block {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: unset;
   }
   .venue-manage-view .venue-manage-list .right-item .btn-wrap {
     margin-bottom: 3px;
+    margin-right: 0;
   }
+  .venue-manage-view .venue-manage-list .right-item .btn-wrap .small-btn {
+    font-weight: 500;
+    font-size: 12px;
+    min-width: unset;
+    min-height: unset;
+    width: 60px;
+    padding: 5px 0;
+}
 }
 /* ******************************wishlist-details-view ************************** */
 .wishlist-details-view {
@@ -3431,7 +3479,7 @@ display: flex;
   flex-direction: column;
   align-items: unset;
 }
-.wishlist-details-view .heading-block .left-block{
+.wishlist-details-view .heading-block .left-block {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -3463,25 +3511,25 @@ display: flex;
   border-radius: 0;
   height: 40px;
 }
-.wishlist-details-view .heading-block .right-block .dd-block{
+.wishlist-details-view .heading-block .right-block .dd-block {
   display: flex;
   align-items: center;
 }
-.wishlist-details-view [class^='col-'] {
+.wishlist-details-view [class^="col-"] {
   padding: 0 !important;
 }
-.wishlist-details-view .venue-item .delete-icon-block{
+.wishlist-details-view .venue-item .delete-icon-block {
   display: flex;
   flex-direction: column;
   justify-content: center;
-padding:0 0.5rem;
+  padding: 0 0.5rem;
 }
-.wishlist-details-view .venue-item .delete-icon-block .price-block{
+.wishlist-details-view .venue-item .delete-icon-block .price-block {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-.wishlist-details-view .venue-item .delete-icon-block .delete-icon{
+.wishlist-details-view .venue-item .delete-icon-block .delete-icon {
   margin: 0.75rem auto;
 }
 @media only screen and (max-width: 1200px) {
@@ -3489,14 +3537,14 @@ padding:0 0.5rem;
     padding: 40px 20px;
     margin: 0;
   }
-  .wishlist-details-view .heading-block .left-block{
+  .wishlist-details-view .heading-block .left-block {
     flex-direction: column;
     align-items: unset;
   }
   .wishlist-details-view .heading-block .right-block {
     margin-left: unset;
   }
-  .venue-manage-view .btn-wrap{
+  .venue-manage-view .btn-wrap.share-btn-block {
     margin-left: unset;
   }
 }
@@ -3521,34 +3569,45 @@ padding:0 0.5rem;
     align-items: unset;
   }
   .wishlist-details-view .heading-block .right-block .btn-wrap {
-margin-right: 0 !important;
-width: 69px;
+    margin-right: 0 !important;
+    width: 69px;
   }
-  .wishlist-details-view .heading-block .right-block .btn-wrap .small-btn{
-  padding: 0;
+  .wishlist-details-view .heading-block .right-block .btn-wrap .small-btn {
+    padding: 0;
     min-width: unset;
   }
-  .wishlist-details-view .heading-block .right-block .button-primary.share-btn{
-    margin-top:10px;
-      }
-      .wishlist-details-view .heading-block .info-block {
-        flex-direction: column;
-        align-items: unset;
-      }
-      .wishlist-details-view .separator {
-      display: none;
-      }
-      .wishlist-details-view .venue-item .venue-details{
-margin:15px 0 15px 0;
-      }
-      .wishlist-details-view .venue-item .delete-icon-block{
-        flex-direction: row;
-      }
-      .wishlist-details-view .venue-item .delete-icon-block .price-block{
-        text-align: left;
-      }
-      .wishlist-details-view .venue-item .delete-icon-block .delete-icon{
-        margin: 0;
-        margin-left: auto;
-      }
+  .wishlist-details-view .heading-block .right-block .button-primary.share-btn {
+    margin-top: 10px;
+  }
+  .wishlist-details-view .heading-block .info-block {
+    flex-direction: column;
+    align-items: unset;
+  }
+  .wishlist-details-view .separator {
+    display: none;
+  }
+  .wishlist-details-view .venue-item .venue-details {
+    margin: 15px 0 15px 0;
+  }
+  .wishlist-details-view .venue-item .delete-icon-block {
+    flex-direction: row;
+  }
+  .wishlist-details-view .venue-item .delete-icon-block .price-block {
+    text-align: left;
+  }
+  .wishlist-details-view .venue-item .delete-icon-block .delete-icon {
+    margin: 0;
+    margin-left: auto;
+  }
+}
+/* *****************************CMS pages********************** */
+.cms-page{
+  margin: 20px 50px 50px 50px;
+    padding-top: 45px;
+    text-align: justify;
+}
+.cms-page .title{
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom:20px;
 }
