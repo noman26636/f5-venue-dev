@@ -105,7 +105,6 @@ const VenueList = () => {
       }
       setValues({ ...valuesObj });
       if (name === "sortField" || name === "sortType") {
-        debugger;
         searchVenues({ ...valuesObj });
         setModalType(null);
       }
