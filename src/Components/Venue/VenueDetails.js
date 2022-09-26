@@ -8,7 +8,6 @@ import techIcon from "../../Assets/icons/wrench.svg";
 import cakeIcon from "../../Assets/icons/cake.svg";
 import micIcon from "../../Assets/icons/microphone.svg";
 import buildingIcon from "../../Assets/icons/building.svg";
-import noImg from "../../Assets/images/no-image.png";
 import heartRed from "../../Assets/icons/heart-red.svg";
 import heartWhite from "../../Assets/icons/heartRedBorder.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -346,8 +345,6 @@ const VenueDetails = () => {
     }
   };
   const handleWishlistClick = () => {
-    // if (!isLoggedIn) setWishlists(wishlistData);
-    // else getAllWishlists();
     setShowWishlistModal(true);
   };
   const getWishlistIds = () => {
@@ -739,7 +736,6 @@ const VenueDetails = () => {
                     setClass(date)
                   }
                   minDate={new Date()}
-                  //   activeStartDate={values.eventDate}
                 />
                 {venue.availabilities?.length > 0 ? (
                   <div className="calendar-key">
@@ -876,17 +872,14 @@ const VenueDetails = () => {
               <div className="contact info-block">
                 <ul className="contact-list">
                   <li className="list-item">
-                    {/* <img src={phone} alt="icon" /> */}
                     <div className="fw-600"> {translations.InfoText1_h}</div>
                     <div className="text">{translations.InfoText1}</div>
                   </li>
                   <li className="list-item">
-                    {/* <img src={phone} alt="icon" /> */}
                     <div className="fw-600"> {translations.InfoText2_h}</div>
                     <div className="text">{translations.InfoText2}</div>
                   </li>
                   <li className="list-item">
-                    {/* <img src={phone} alt="icon" /> */}
                     <div className="fw-600"> {translations.InfoText3_h}</div>
                     <div className="text">{translations.InfoText3}</div>
                   </li>

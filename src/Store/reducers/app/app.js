@@ -43,7 +43,6 @@ const app = (state = initialState, action) => {
       return {
         ...initialState,
         version: Constants.appVersion,
-        // userLanguageData: { ...state.userLanguageData },
       };
     }
     default: {

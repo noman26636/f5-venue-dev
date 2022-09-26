@@ -160,14 +160,7 @@ const VenueList = () => {
         avgLat += latLngArr[index][0];
         avgLng += latLngArr[index][1];
       }
-      // map.panTo([avgLat/count, avgLng/count], zoom);
-
-      //  var fg = L.featureGroup([markerGroup]).addTo(map);
-      //  map.fitBounds(fg.getBounds());
-
       map.fitBounds(boundsArr);
-
-      //  map.fitBounds(latLngArr);
     }
     setValues({ ...values, mapSearch: true });
   };

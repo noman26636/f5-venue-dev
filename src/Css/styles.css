@@ -753,8 +753,6 @@ textarea {
   opacity: 1;
   margin-right: 0;
 }
-.signup-modal .input-wrapper .label {
-}
 @media (max-width: 576px) {
   .signup-modal .modal-body {
     flex-wrap: unset;
@@ -797,8 +795,6 @@ header {
   width: 175px;
   cursor: pointer;
 }
-.header-block nav {
-}
 .header-block nav ul {
   display: flex;
   justify-content: center;
@@ -806,8 +802,6 @@ header {
   padding: 0;
   margin: 0;
   gap: 5%;
-}
-.header-block nav ul li {
 }
 .header-block nav ul li a.active {
   color: #0a58ca;
@@ -1097,26 +1091,6 @@ footer .social-icons .icon.linkedin {
     margin: 30px 0;
   }
 }
-/* ****************Image slider******************** */
-
-/* .carousel-indicators {
-  bottom: -61px;
-  width: 169px;
-  margin: auto;
-  justify-content: space-between;
-}
-.carousel-indicators [data-bs-target] {
-  width: 15.6px;
-  height: 15.6px;
-  border-radius: 20px;
-  opacity: unset;
-  border: 0;
-}
-.carousel-indicators .active {
-  opacity: unset;
-  outline: 2px solid white;
-  outline-offset: 4px;
-} */
 /* ***********Search block*********************** */
 .home-page .search-block {
   display: flex;
@@ -1276,8 +1250,6 @@ footer .social-icons .icon.linkedin {
   margin-right: 3px;
   color: #414040;
 }
-.venue-details-block .venue-block .venue-details .guests .guest-details {
-}
 .venue-details-block .venue-block .venue-details .description {
   margin-bottom: 0;
   max-height: 53px;
@@ -1354,25 +1326,6 @@ footer .social-icons .icon.linkedin {
 .featured-venue-block .carousel-control-next {
   right: -10%;
 }
-/* .featured-venue-block .carousel-indicators {
-  bottom: -61px;
-  width: 169px;
-  margin: auto;
-  justify-content: space-between;
-}
-.featured-venue-block .carousel-indicators [data-bs-target] {
-  width: 15.6px;
-  height: 15.6px;
-  border-radius: 20px;
-  opacity: unset;
-  border: 0;
-  background: #0a58ca;
-}
-.featured-venue-block .carousel-indicators .active {
-  opacity: unset;
-  outline: 2px solid #0a58ca;
-  outline-offset: 4px;
-} */
 /* *****************************How it works block*****************************/
 .home-page .how-it-works-section {
   background: #fff;
@@ -1684,9 +1637,6 @@ display: none;
   max-width: 160px;
   overflow: hidden;
 }
-/* .venue-list-view .venue-search .search-item.sort-block {
-  margin-left: auto;
-} */
 .venue-list-view .venue-search .search-item.selected {
   border-color: #0a58ca;
 }
@@ -1719,22 +1669,12 @@ display: none;
 .venue-list-view .venue-search .search-item.selected .search-text {
   color: #0a58ca;
 }
-.venue-list-view .venue-search .name-field,
-.venue-list-view .venue-search .name-field div {
-  /* position: unset !important; */
-}
 .venue-list-view .venue-search .name-field input {
   background: transparent;
-  /* border: 1px solid #e5e5e5 !important; */
   border-radius: 4px;
   padding: 9px 13px;
   padding-left: 37px;
 }
-/* @media only screen and (max-width: 1300px) {
-  .venue-list-view .venue-search .search-item.sort-block {
-    margin-left: unset !important;
-  }
-} */
 /* ****************************Venue Search modal ***************************** */
 .search-modal .popover {
   box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 10%) !important;
@@ -1935,10 +1875,7 @@ display: none;
   cursor: pointer;
 }
 .venue-details-view .venue-details-body {
-  /* max-height: 2500px; */
   display: flex;
-  /* flex-direction: column; */
-  /* flex-wrap: wrap; */
 }
 .venue-details-view .venue-details-body .title {
   font-weight: 600;
@@ -1969,7 +1906,6 @@ display: none;
     align-items: center;
   }
 }
-
 .venue-details-view .venue-details-body .capacity .capacity-info {
   display: flex;
   flex-wrap: wrap;
@@ -2023,10 +1959,6 @@ display: none;
   text-decoration: line-through;
   color: #969696;
   margin-left: 25px;
-}
-.venue-details-view .venue-details-body .videos-block {
-}
-.venue-details-view .venue-details-body .videos-block .videos {
 }
 .venue-details-view .venue-details-body .videos-block .videos iframe {
   display: block;
@@ -2208,11 +2140,12 @@ display: none;
   }
 }
 
-/* ***React calendar styling end************* */
+/* *************************************React calendar styling end************* */
+
+
 /* **************************Venue details view******************************** */
 .venue-details-view .venue-details-body .right-content {
   max-width: 365px;
-  /* padding: 0; */
 }
 .venue-details-view .venue-details-body .inquiry-block .terms-text {
   font-weight: 400;
@@ -2402,8 +2335,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-weight: 500;
 }
 /* *****************Add Venue Landing Page ************************** */
-.add-venue-landing {
-}
 .add-venue-landing .main-section {
   background-image: url(../Assets/images/add-venue-img-1.png);
   background-position: center center;
@@ -2436,8 +2367,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .add-venue-landing .section-2 {
   margin-top: 100px;
   padding: 0 6%;
-}
-.add-venue-landing .section-2 .row {
 }
 .add-venue-landing .section-2 .left-section {
   overflow: hidden;
@@ -2509,7 +2438,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   box-shadow: 0px 10px 17px #0000000a;
   margin: 0 0 20px 0;
   max-width: 400px;
-  /* margin: auto; */
   overflow: hidden;
 }
 .add-venue-landing .section-3 .section-items .section-item:hover {
@@ -2740,7 +2668,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .inquiries-list .search-block .search-item input {
   padding: 9px 8px;
   width: 340px;
-  /* padding-left: 40px; */
 }
 .table {
   border: 1px solid #e5e5e5;
@@ -3172,8 +3099,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   .col-xl-6 {
   width: 48%;
 }
-.add-venue-view .form-block .form-wrap .form-section .form .service-section {
-}
 .add-venue-view .form-block .form-wrap .form-section .sub-title {
   font-weight: 600;
   font-size: 16px;
@@ -3197,7 +3122,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  /* margin-bottom: 20px; */
   position: relative;
 }
 .add-venue-view .form-block .uploadPhotos-wrap .delete-icon {

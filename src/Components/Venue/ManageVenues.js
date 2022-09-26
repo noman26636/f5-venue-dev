@@ -91,17 +91,12 @@ const ManageVenues = () => {
                   <div className="venue-info">{item.city}</div>
                   <div className="rating-block">
                     <RatingStars rating={item.ratings_avg_rating} />
-                    {
-                    // item.ratings_count !== 0
-                    true 
-                    && (
                       <span className="reviews">
                         {item.ratings_count}{" "}
                         {item.ratings_count !== 1
                           ? translations.Reviews
                           : translations.Review}
                       </span>
-                    )}
                   </div>
                   <div className="d-flex">
                     <div className="guests mr-3">

@@ -11,7 +11,6 @@ const GetStarted = (props) => {
     const appState = useSelector((state) => {
         return state.app;
     });
-    const navigate=useNavigate();
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     return (

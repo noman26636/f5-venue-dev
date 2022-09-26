@@ -2,7 +2,7 @@ import React from "react";
 import Files from "react-butterfiles";
 export default function FileUpload(props) {
     let {
-        maxSize, isMultiple, onSuccess, onError, multipleMaxSize, multipleMaxCount, error } = props;
+        maxSize, isMultiple, onSuccess, onError, multipleMaxSize, multipleMaxCount } = props;
     return (
         <>
             <Files
@@ -18,7 +18,6 @@ export default function FileUpload(props) {
             >
                 {props.children}
             </Files>
-            {/* {error && <div className="error-msg">{error}</div>} */}
         </>
     );
 }

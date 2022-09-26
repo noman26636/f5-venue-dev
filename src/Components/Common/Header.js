@@ -36,9 +36,7 @@ export default function Header() {
   { text: translations.Wishlist, path: "/wishlists" },
   ]
   const logout = () => {
-    // setShowLoader(true);
     AccountServices.logout().then(res => {
-      // setShowLoader(false);
       dispatch({ type: TYPES.LOGOUT });
       navigate(`/home`);
     });

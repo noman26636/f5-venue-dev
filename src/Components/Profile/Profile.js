@@ -5,7 +5,6 @@ import * as TYPES from '../../Store/actions/types';
 import Button from '../Common/Button';
 import { AccountServices } from '../Signup/AccountServices';
 import { Col, Row } from 'reactstrap';
-import Checkbox from '../Common/Checkbox';
 import Modal from '../Common/Modal';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -297,22 +296,6 @@ function Profile() {
                             showBtnLoader={showLoader === "password"} />
                     </Row>
                 </div>
-                {/* <div className='form-wrap preferences-form'>
-                    <div className='title'>
-                        {translations.CommunicationPreferences}
-                    </div>
-                    <Row className='form '>
-                        <Col xl={4} lg={4} md={6}>
-                            <Checkbox className="pink-checkbox" label={translations.Newsletter} onChange={(e) => { handleInputChange(e, "preferenceData") }} value={values.preferenceData.newsLetter}
-                                name="newsLetter" />
-                            <div className='checkbox-desc'>{translations.NewsletterDesc}</div>
-                        </Col>
-                        <Col xl={4} lg={4} md={6}>
-                            <Checkbox className="pink-checkbox" label={translations.ProductNews} onChange={(e) => { handleInputChange(e, "preferenceData") }} value={values.preferenceData.productNews} name="productNews" />
-                            <div className='checkbox-desc'>{translations.ProductNewsDesc}</div>
-                        </Col>
-                    </Row>
-                </div> */}
             </div >
             <Modal text={translations.DeleteConfirmation} showModal={showModal} handleClose={() => setShowModal(false)} btn1Text={translations.Yes}
                 btn1Click={deleteAccount} btn2Text={translations.No} />

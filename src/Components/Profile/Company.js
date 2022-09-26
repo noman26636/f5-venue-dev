@@ -157,8 +157,6 @@ const Company = () => {
                                 className="text-field-2"
                             />
                         </Col>
-                        {/* <Button label={translations.Update} onClick={updateCompany} className="small-btn ml-auto" wrapperClass="w-100"
-                            showBtnLoader={showLoader === "company"} /> */}
                     </Row>
                 </div>
                 <div className='users-table'>

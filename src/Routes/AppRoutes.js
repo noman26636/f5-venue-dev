@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import {
   Route,
   Routes,
-  // Navigate, Outlet
 } from "react-router-dom";
 import Layout from "../Components/Common/Layout";
 import Home from "../Components/Home/Home";
@@ -32,7 +31,6 @@ let AppRoutes = () => {
         <Layout>
           <Routes>
             {/* Auth routes */}
-            {/* <Route element={<AuthWrapper />}> */}
             <Route path="/" exact element={<Home />} />
             <Route path="/home" exact element={<Home />} />
             <Route path="/venueList" element={<VenueList />} />
@@ -55,7 +53,6 @@ let AppRoutes = () => {
             <Route path="/wishlists" element={<Wishlists />} />
             <Route path="/share/:wishlistToken" element={<WishlistDetails />} />
             <Route path="/wishlist/:wishlistId" element={<WishlistDetails />} />
-            {/* </Route> */}
             <Route path="*" element={<Home />} />
           </Routes>
         </Layout>
@@ -183,17 +180,4 @@ let AppRoutes = () => {
     </>
   );
 };
-// const AuthWrapper = () => {
-//   const authState = useSelector(state => {
-//     return state.auth;
-//   });
-//   return authState?.user?.access_token
-//     ? <Navigate to="/home" replace />
-//     : <Outlet />
-// };
-// const CommonRoutes = () => {
-//   return (
-//     <></>
-//   )
-// }
 export default AppRoutes;
