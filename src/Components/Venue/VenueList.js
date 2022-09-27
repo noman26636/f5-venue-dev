@@ -197,11 +197,9 @@ const VenueList = () => {
         searchParams.sw_lng
       )
         searchObj.coordinates = {
-        ne: [ searchParams.ne_lat,
-          searchParams.ne_lng],
-        sw: [ searchParams.sw_lat,
-          searchParams.sw_lng]
-         };
+          ne: [searchParams.ne_lat, searchParams.ne_lng],
+          sw: [searchParams.sw_lat, searchParams.sw_lng],
+        };
     }
     VenueServices.venueSearch(searchObj, pageNumber, pager.per_page).then(
       (res) => {
@@ -223,11 +221,22 @@ const VenueList = () => {
     let valuesObj = {};
     if (searchData) {
       valuesObj.eventType = searchData?.eventTypeObj?.id
-        ? [searchData.eventTypeObj]
-        : [];
+        ? [searchData.eventTypeObj]  : (searchData.eventType?.length>0?[...searchData.eventType]:[]);
       valuesObj.location = searchData.location ? searchData.location : "";
       valuesObj.capacity = searchData.capacity
         ? Number(searchData.capacity)
+        : 0;
+      valuesObj.seatingOption = searchData.seatingOption
+        ? Number(searchData.seatingOption)
+        : 0;
+      valuesObj.moreFilters =
+        searchData.moreFilters?.length > 0 ? [...searchData.moreFilters] : [];
+      valuesObj.name = searchData.name ? searchData.name : "";
+      valuesObj.sortField = searchData.sortField
+        ? Number(searchData.sortField)
+        : -1;
+      valuesObj.sortType = searchData.sortType
+        ? Number(searchData.sortType)
         : 0;
       valuesObj = { ...values, ...valuesObj };
       dispatch({ type: TYPES.SEARCH_DATA, data: {} });
