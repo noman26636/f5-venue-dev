@@ -278,11 +278,46 @@ a:hover {
   border-radius: 6px;
   width: 100%;
   max-width: 434px;
+  transition: 0.5s;
 }
+
+.input-wrapper textarea {
+  color: #1a1a1a;
+  width: 100%;
+  max-width: 434px;
+  transition: 0.5s;
+}
+.input-wrapper textarea:focus {
+  border: 1px solid #007fff !important;
+  box-shadow: 0px 0px 0px 3px rgba(0, 144, 237, 0.4);
+}
+.input-wrapper input[type="text"]:focus {
+  border: 1px solid #007fff !important;
+  box-shadow: 0px 0px 0px 3px rgba(0, 144, 237, 0.4);
+}
+
+.input-wrapper input[type="email"]:focus {
+  border: 1px solid #007fff !important;
+  box-shadow: 0px 0px 0px 3px rgba(0, 144, 237, 0.4);
+}
+.input-wrapper input[type="tel"]:focus {
+  border: 1px solid #007fff !important;
+  box-shadow: 0px 0px 0px 3px rgba(0, 144, 237, 0.4);
+}
+.input-wrapper input[type="url"]:focus {
+  border: 1px solid #007fff !important;
+  box-shadow: 0px 0px 0px 3px rgba(0, 144, 237, 0.4);
+}
+.input-wrapper input[type="number"]:focus {
+  border: 1px solid #007fff !important;
+  box-shadow: 0px 0px 0px 3px rgba(0, 144, 237, 0.4);
+}
+
 .input-wrapper .label {
   margin-bottom: 15px;
   max-height: 22px;
 }
+
 .input-wrapper input:disabled {
   background: #80808012 !important;
 }
@@ -1091,6 +1126,32 @@ footer .social-icons .icon.linkedin {
     margin: 30px 0;
   }
 }
+
+/* ****************** Carousel Image Slider ***************** */
+.carouselImage {
+  object-fit: contain;
+}
+/* ********************* Drop zone file upload *************************** */
+.dropzone {
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+}
+.myDropZone {
+  position: absolute;
+  height: 6.2rem;
+  width: 100%;
+  border: 2px solid gray;
+  border-radius: 10px;
+  border-style: dotted;
+}
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 /* ***********Search block*********************** */
 .home-page .search-block {
   display: flex;
@@ -1535,7 +1596,7 @@ footer .social-icons .icon.linkedin {
   overflow: auto;
 }
 .venue-list-view::-webkit-scrollbar {
-display: none;
+  display: none;
 }
 .venue-list-view .heading-block {
   display: flex;
@@ -1564,10 +1625,11 @@ display: none;
   overflow: hidden;
   height: 40rem;
 }
-.leaflet-popup-content{
+.leaflet-popup-content {
   width: 150px !important;
 }
-.leaflet-popup-content a,a.leaflet-popup-close-button {
+.leaflet-popup-content a,
+a.leaflet-popup-close-button {
   text-decoration: none !important;
 }
 .popup-title {
@@ -1581,7 +1643,7 @@ display: none;
 .mapboxgl-popup-close-button {
   display: none;
 }
-.map-container .map-checkbox{
+.map-container .map-checkbox {
   position: absolute;
   background: #fff;
   padding: 10px;
@@ -1589,7 +1651,7 @@ display: none;
   left: 52px;
   z-index: 1000;
 }
-.leaflet-control-attribution a{
+.leaflet-control-attribution a {
   display: none !important;
 }
 @media only screen and (max-width: 992px) {
@@ -2101,12 +2163,14 @@ display: none;
 .react-calendar__navigation__next2-button {
   display: none;
 }
+
 .react-calendar__navigation__prev-button,
 .react-calendar__navigation__next-button,
 .react-calendar__navigation__label {
   border: none;
   background: #fff;
   font-size: 32px;
+  text-align: center;
   color: #b5bec6;
 }
 .react-calendar__navigation__label {
@@ -2124,6 +2188,10 @@ display: none;
   flex: 0 0 14.2857%;
   text-align: center;
 }
+.react-calendar__month-view__days__day--weekend {
+  color: #594a45 !important;
+}
+
 .react-calendar__month-view__weekdays__weekday abbr {
   text-decoration: none;
 }
@@ -2131,7 +2199,6 @@ display: none;
   border: none;
   background-color: #fff;
   font-weight: 400;
-  font-size: 19.1243px;
   color: #594a45;
 }
 @media only screen and (max-width: 576px) {
@@ -2141,7 +2208,6 @@ display: none;
 }
 
 /* *************************************React calendar styling end************* */
-
 
 /* **************************Venue details view******************************** */
 .venue-details-view .venue-details-body .right-content {
@@ -3228,7 +3294,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
 }
-.wishlist-view-wrap .wishlist-view .bottom-block .wishlist-data{
+.wishlist-view-wrap .wishlist-view .bottom-block .wishlist-data {
   display: flex;
 }
 @media only screen and (max-width: 1300px) {
@@ -3257,7 +3323,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   .wishlist-view-wrap .wishlist-view .bottom-block .separator {
     display: none;
   }
-  .wishlist-view-wrap .wishlist-view .bottom-block .wishlist-data{
+  .wishlist-view-wrap .wishlist-view .bottom-block .wishlist-data {
     flex-direction: column;
   }
 }
@@ -3356,7 +3422,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 @media only screen and (max-width: 889px) {
-  .venue-manage-view .manage-venue-item .row{
+  .venue-manage-view .manage-venue-item .row {
     flex-direction: column;
   }
   .venue-manage-view .manage-venue-item .right-item {
@@ -3367,7 +3433,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   .venue-manage-view {
     padding: 32px 20px;
   }
-  .venue-manage-view .venue-item{
+  .venue-manage-view .venue-item {
     padding: 20px 5px !important;
   }
   .venue-manage-view .venue-manage-list .venue-item .venue-details .name-block {
@@ -3386,7 +3452,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     min-height: unset;
     width: 60px;
     padding: 5px 0;
-}
+  }
 }
 /* ******************************wishlist-details-view ************************** */
 .wishlist-details-view {
@@ -3525,13 +3591,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   }
 }
 /* *****************************CMS pages********************** */
-.cms-page{
+.cms-page {
   margin: 20px 50px 50px 50px;
-    padding-top: 45px;
-    text-align: justify;
+  padding-top: 45px;
+  text-align: justify;
 }
-.cms-page .title{
+.cms-page .title {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }

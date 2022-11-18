@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import "./Css/styles.css";
+import 'react-calendar/dist/Calendar.css';
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";

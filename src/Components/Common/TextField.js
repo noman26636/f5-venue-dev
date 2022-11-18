@@ -24,7 +24,7 @@ export default function TextField(props) {
             {label && <div className="label">{label}</div>}
             <div className={`position-relative`}>
                 {icon && <img alt="" src={icon} className="input-icon" />}
-                <input placeholder={placeholder} name={name} value={type==="date"?getFormattedDate(value): value} 
+                <input className="inputCapacity" placeholder={placeholder} name={name} value={type==="date"?getFormattedDate(value): value} 
                 disabled={disabled}
                 type={type !== "time" ? type : "text"}
                     onChange={onChange} key={label} min={type === "date" ? minDate : min} max={max} maxLength={maxLength}

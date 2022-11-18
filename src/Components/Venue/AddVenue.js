@@ -334,7 +334,7 @@ function AddVenue() {
     bodyFormData.append("contact_per_name", values.contact_per_name);
     if (values.contact_image?.src)
       bodyFormData.append("contact_image", values.contact_image.src.file);
-      bodyFormData.append("company_name", values.company_name);
+    bodyFormData.append("company_name", values.company_name);
     bodyFormData.append("comp_email", values.comp_email);
     if (values.contact_phone !== "" && values.contact_phone !== null)
       bodyFormData.append("contact_phone", values.contact_phone);
@@ -409,14 +409,14 @@ function AddVenue() {
     }
     if (values.tour3d.length > 0) {
       values.tour3d.forEach((element, i) => {
-        if(element!==null && element!=="")
-        bodyFormData.append(`tour3d[${i + 1}]`, element);
+        if (element !== null && element !== "")
+          bodyFormData.append(`tour3d[${i + 1}]`, element);
       });
     }
     if (values.videos.length > 0) {
-      values.videos.forEach((element, i) => { 
-        if(element!==null && element!=="")
-        bodyFormData.append(`videos[${i + 1}]`, getEmbeddedUrl(element));
+      values.videos.forEach((element, i) => {
+        if (element !== null && element !== "")
+          bodyFormData.append(`videos[${i + 1}]`, getEmbeddedUrl(element));
       });
     }
     values.images.forEach((img, i) => {
@@ -501,20 +501,9 @@ function AddVenue() {
           image.src = file.src.base64;
           image.onload = function () {
             count--;
-            if (this.height < imgMinHeight || this.width < imgMinWidth) {
-              setErrors({
-                ...errors,
-                [from]: `${new IntlMessageFormat(
-                  translations.imgDimensionError,
-                  userLanguageData.language
-                ).format({
-                  minHeight: imgMinHeight,
-                  minWidth: imgMinWidth,
-                })}`,
-              });
-            } else {
-              imagesObj = { ...imagesObj, [from]: [file, ...imagesObj.images] };
-            }
+
+            imagesObj = { ...imagesObj, [from]: [file, ...imagesObj.images] };
+
             if (count === 0) {
               setValues({ ...imagesObj });
             }
@@ -1209,7 +1198,6 @@ function AddVenue() {
                     <FileUpload
                       maxSize={maxFileSize}
                       multipleMaxCount={numberOfImages}
-                      multipleMaxSize={maxFileSize * numberOfImages}
                       isMultiple={true}
                       onSuccess={(files) => {
                         handleAttachment(files, "images");
@@ -1219,13 +1207,20 @@ function AddVenue() {
                       }
                       error={errors.images}
                     >
-                      {({ browseFiles }) => (
-                        <Button
-                          label={translations.UploadPhotos}
-                          onClick={browseFiles}
-                          className="upload-btn"
-                          icon={plusIconBlue}
-                        />
+                      {({ browseFiles, getDropZoneProps }) => (
+                        <div className="dropzone">
+                          <div
+                            {...getDropZoneProps({ className: "myDropZone" })}
+                          />
+                          <div className="buttonContainer">
+                            <Button
+                              label={translations.UploadPhotos}
+                              onClick={browseFiles}
+                              className="upload-btn"
+                              icon={plusIconBlue}
+                            />
+                          </div>
+                        </div>
                       )}
                     </FileUpload>
                   </div>

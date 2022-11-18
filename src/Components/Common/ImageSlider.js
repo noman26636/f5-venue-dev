@@ -23,7 +23,7 @@ function ImageSlider(props) {
             <CarouselItem
                 key={i}
             >
-                <img alt="" src={item.image_path ? item.image_path : item} />
+                <img className='carouselImage' alt="" src={item.image_path ? item.image_path : item} />
             </CarouselItem>
         );
     });

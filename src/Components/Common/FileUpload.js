@@ -2,7 +2,7 @@ import React from "react";
 import Files from "react-butterfiles";
 export default function FileUpload(props) {
     let {
-        maxSize, isMultiple, onSuccess, onError, multipleMaxSize, multipleMaxCount } = props;
+        maxSize, isMultiple, onSuccess, onError, multipleMaxSize, multipleMaxCount, getDropZoneProps } = props;
     return (
         <>
             <Files
@@ -14,7 +14,7 @@ export default function FileUpload(props) {
                 onError={errors => { onError(errors) }}
                 multipleMaxCount={multipleMaxCount}
                 multipleMaxSize={multipleMaxSize}
-
+                getDropZoneProps={getDropZoneProps}
             >
                 {props.children}
             </Files>
