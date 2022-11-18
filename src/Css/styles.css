@@ -1567,7 +1567,7 @@ display: none;
 .leaflet-popup-content{
   width: 150px !important;
 }
-.leaflet-popup-content a{
+.leaflet-popup-content a,a.leaflet-popup-close-button {
   text-decoration: none !important;
 }
 .popup-title {

@@ -400,7 +400,7 @@ const VenueList = () => {
               current={pager.current_page}
               onChange={(current) => {
                 setPager({ ...pager, current_page: current });
-                searchVenues(null, current);
+                searchVenues(values, current);
               }}
               pageSize={pager.per_page}
             />
