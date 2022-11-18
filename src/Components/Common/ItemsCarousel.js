@@ -29,14 +29,12 @@ const ItemsCarousel = (props) => {
             {
                 [...Array(groups).keys()]?.map(k => <CarouselItem key={k} >
                     {children}
-                    {/* {window.innerWidth <= 600 && */}
                     <>
                         <CarouselControl directionText="Prev"
                             direction="prev" onClickHandler={previousButton} />
                         <CarouselControl directionText="Next"
                             direction="next" onClickHandler={nextButton} />
                     </>
-                    {/* } */}
                 </CarouselItem>
                 )
             }

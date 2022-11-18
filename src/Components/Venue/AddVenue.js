@@ -261,10 +261,6 @@ function AddVenue() {
       field.short_description = translations.EmptyFieldMsg;
       isValid = false;
     }
-    // if (fieldValues.ical?.trim().length === 0) {
-    //   field.ical = translations.EmptyFieldMsg;
-    //   isValid = false;
-    // }
     if (fieldValues.contact_per_name?.trim().length === 0) {
       field.contact_per_name = translations.EmptyFieldMsg;
       isValid = false;
@@ -572,14 +568,6 @@ function AddVenue() {
     }
   };
   const deleteImage = (index = null, image = null) => {
-    // if(!index && !image){
-    //   if(!values.contact_image?.src){
-    //     VenueServices.deleteVenueImage(values.contact_image.id).then(() => {
-    //     });
-    //   }
-    //   setValues({ ...values, contact_image: null });
-    //   return;
-    // }
     if (image?.image_path) {
       VenueServices.deleteVenueImage(image.id).then(() => {});
     }
@@ -599,21 +587,6 @@ function AddVenue() {
     data.splice(index, 1);
     setValues({ ...values, [from]: data });
   };
-  //function to convert img url to base64
-  // async function fetchData() {
-  //     let url = "http://test.event-venue.dk/uploads/thumbs/1659439228.jpg";
-  //     let imgExt = url.split(/[#?]/)[0].split(".").pop().trim();
-  //     const response = await fetch(url);
-  //     const blob = await response.blob();
-  //     const file = new File([blob], "profileImage." + imgExt, {
-  //         type: blob.type,
-  //     });
-  //     let reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = function (data) {
-  //         // data.srcElement.result
-  //     };
-  // }
   return (
     <>
       {showPageLoader ? (
@@ -795,14 +768,6 @@ function AddVenue() {
                             }}
                           >
                             {
-                              //      values.contact_image?
-                              //     <img
-                              //   alt=""
-                              //   src={trashIconWhite}
-                              //   className="delete-icon cursor-pointer"
-                              //   onClick={()=>deleteImage()}
-                              // />
-                              // :
                               <img
                                 alt=""
                                 src={plusIconWhite}
@@ -890,11 +855,6 @@ function AddVenue() {
               <div className="form-section" id="2">
                 <div className="title">{translations.CalendarIntegration}</div>
                 <Row className="form">
-                  {/* <Col xl={4} lg={4}>
-                                    <FormDropdown options={eventTypesList} icon={eventTypeIcon} label={translations.BookingSystem} name="eventType"
-                                        value={values.eventType}
-                                        error={errors.eventType} onChange={handleInputChange} />
-                                </Col> */}
                   <Col xl={12} lg={12}>
                     <TextField
                       name="ical"
@@ -1282,11 +1242,6 @@ function AddVenue() {
                               : image.src?.base64
                           }
                         />
-                        {/* <div
-                      className="image"
-                      style={{ backgroundImage: `url(${image.image_path_thumbnail?image.image_path_thumbnail: image.src?.base64})` }}
-                      key={i}
-                    > */}
                         <img
                           alt=""
                           src={trashIconWhite}
@@ -1295,7 +1250,6 @@ function AddVenue() {
                             deleteImage(i, image);
                           }}
                         />
-                        {/* </div> */}
                       </div>
                     );
                   })}

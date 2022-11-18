@@ -87,12 +87,6 @@ export default function Login(props) {
             AccountServices.login(values).then(res => {
                 setShowLoader(false);
                 if (res.isAxiosError || !res.access_token) {
-                    // if (res?.response?.status === 403) {
-                    //     setErrors({
-                    //         ...errors, password: `${translations.email_not_verified}`
-                    //     });
-                    // }
-                    // else
                     if (res?.response?.status === 401) {
                         setErrors({
                             ...errors, password: translations.InvalidLogin

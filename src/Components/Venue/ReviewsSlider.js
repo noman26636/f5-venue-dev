@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import yellowStar from "../../Assets/icons/yellow-star.svg";
-import personImg from "../../Assets/icons/personImage.svg";
-
 import {
     Col,
     Row,

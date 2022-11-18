@@ -31,11 +31,6 @@ function ImageSlider(props) {
     return (
         <Carousel previous={previousButton} next={nextButton} interval={5000} slide={slide}
             activeIndex={activeIndex}>
-            {/* <CarouselIndicators items={items}
-                activeIndex={activeIndex}
-                onClickHandler={(newIndex) => {
-                    setActiveIndex(newIndex);
-                }} /> */}
             {carouselItemData}
             <CarouselControl directionText="Prev"
                 direction="prev" onClickHandler={previousButton} />
