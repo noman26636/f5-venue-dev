@@ -2158,6 +2158,10 @@ a.leaflet-popup-close-button {
   object-fit: contain;
 }
 
+.floorArea{
+  transform: rotate(45deg);
+}
+
 /* ***React calendar styling************* */
 .react-calendar {
   background: #fff;

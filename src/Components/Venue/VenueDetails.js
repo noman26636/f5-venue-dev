@@ -540,7 +540,7 @@ const VenueDetails = () => {
                   </div>
                   <div className="info-item">
                     <img
-                      className="capacity-icons"
+                      className="capacity-icons floorArea"
                       src={floorArea}
                       alt="Floor Capacity Icon"
                     />
