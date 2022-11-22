@@ -1978,6 +1978,7 @@ a.leaflet-popup-close-button {
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
   width: 90px;
   line-height: 15px;
 }
@@ -2147,6 +2148,16 @@ a.leaflet-popup-close-button {
     width: 99% !important;
   }
 }
+
+/* *****************************Capacity Icons********************************** */
+
+.capacity-icons {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 12px;
+  object-fit: contain;
+}
+
 /* ***React calendar styling************* */
 .react-calendar {
   background: #fff;
@@ -2207,7 +2218,7 @@ a.leaflet-popup-close-button {
   }
 }
 
-/* *************************************React calendar styling end************* */
+
 
 /* **************************Venue details view******************************** */
 .venue-details-view .venue-details-body .right-content {

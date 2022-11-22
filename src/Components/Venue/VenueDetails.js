@@ -7,6 +7,14 @@ import foodIcon from "../../Assets/icons/fork-knife.svg";
 import techIcon from "../../Assets/icons/wrench.svg";
 import cakeIcon from "../../Assets/icons/cake.svg";
 import micIcon from "../../Assets/icons/microphone.svg";
+import seating from "../../Assets/icons/seated.svg";
+import standing from "../../Assets/icons/standing.svg";
+import classroomIcon from "../../Assets/icons/classroom.svg";
+import theater from "../../Assets/icons/theater.svg";
+import banquet from "../../Assets/icons/banquet.svg";
+import conference from "../../Assets/icons/conference.svg";
+import uShapeIcon from "../../Assets/icons/UShape.svg";
+import floorArea from "../../Assets/icons/floorArea.svg";
 import buildingIcon from "../../Assets/icons/building.svg";
 import heartRed from "../../Assets/icons/heart-red.svg";
 import heartWhite from "../../Assets/icons/heartRedBorder.svg";
@@ -31,7 +39,7 @@ import Pageloader from "../Common/Pageloader";
 import RatingStars from "./RatingStars";
 import { ReviewsSlider } from "./ReviewsSlider";
 import { SimilarVenues } from "./SimilarVenues";
-import {  getFormattedDate } from "../../Utils/indexUtils";
+import { getFormattedDate } from "../../Utils/indexUtils";
 import ReviewVenueModal from "./ReviewVenueModal";
 import L from "leaflet";
 const initialFormValues = {
@@ -51,7 +59,7 @@ const VenueDetails = () => {
   const translations = userLanguageData.translations;
   const [venue, setVenue] = useState({});
   const [values, setValues] = useState(initialFormValues);
-  const [reviewValues, setReviewValues] = useState({body:"",rating:0});
+  const [reviewValues, setReviewValues] = useState({ body: "", rating: 0 });
   const [errors, setErrors] = useState({});
   const [showLoader, setShowLoader] = useState(true);
   const [submitted, setSubmitted] = useState(false);
@@ -82,14 +90,14 @@ const VenueDetails = () => {
       if (!res.isAxiosError) {
         toast.success(translations.ReviewSubmitted);
         getVenueDetails();
-        setShowReviewModal(false)
+        setShowReviewModal(false);
       }
     });
   };
-  const handleReviewModalClose=()=>{
+  const handleReviewModalClose = () => {
     setReviewValues({ body: "", rating: 0 });
     setShowReviewModal(false);
-  }
+  };
   const getServices = () => {
     VenueServices.getConfigList().then((res) => {
       if (!res.isAxiosError) {
@@ -112,12 +120,13 @@ const VenueDetails = () => {
   const dispatch = useDispatch();
   const getAllWishlists = () => {
     if (!isLoggedIn) setWishlists(wishlistData);
-    else 
-   { VenueServices.getAllWishlists().then((res) => {
-      if (!res.isAxiosError) {
-        setWishlists(res.wishlists);
-      }
-    });}
+    else {
+      VenueServices.getAllWishlists().then((res) => {
+        if (!res.isAxiosError) {
+          setWishlists(res.wishlists);
+        }
+      });
+    }
   };
   const addToWishlist = (title, venueId, wishlistId) => {
     setShowBtnLoader("wishlist");
@@ -131,15 +140,15 @@ const VenueDetails = () => {
                 wishlist_id: res.wishlist.id,
               }).then((res1) => {
                 setShowBtnLoader(null);
-                if (!res1.isAxiosError) { 
+                if (!res1.isAxiosError) {
                   toast.success(translations.VenueAddedToWishlist);
-                  setShowWishlistModal(false); 
-                 const newWl={...res.wishlist};
-                 newWl.venues=[venueId];
-                 const newWlArr=[...wishlistData];
-                 newWlArr.push(newWl);
-                 dispatch({ type: TYPES.WISHLIST_DATA, data: newWlArr});
-                 setWishlists(newWlArr);
+                  setShowWishlistModal(false);
+                  const newWl = { ...res.wishlist };
+                  newWl.venues = [venueId];
+                  const newWlArr = [...wishlistData];
+                  newWlArr.push(newWl);
+                  dispatch({ type: TYPES.WISHLIST_DATA, data: newWlArr });
+                  setWishlists(newWlArr);
                   getVenueDetails();
                 }
               });
@@ -160,14 +169,15 @@ const VenueDetails = () => {
         if (!res.isAxiosError) {
           toast.success(translations.VenueAddedToWishlist);
           setShowWishlistModal(false);
-          const index=wishlistData.map(wl=>wl.id).indexOf(Number(wishlistId));
-          if(index!==-1)
-         {
-          const newWl=[...wishlistData];
-          newWl[index].venues.push(venueId);
-          dispatch({ type: TYPES.WISHLIST_DATA, data: [...newWl]});
-         if(!isLoggedIn) setWishlists(newWl);
-         }
+          const index = wishlistData
+            .map((wl) => wl.id)
+            .indexOf(Number(wishlistId));
+          if (index !== -1) {
+            const newWl = [...wishlistData];
+            newWl[index].venues.push(venueId);
+            dispatch({ type: TYPES.WISHLIST_DATA, data: [...newWl] });
+            if (!isLoggedIn) setWishlists(newWl);
+          }
           getVenueDetails();
         }
       });
@@ -229,10 +239,14 @@ const VenueDetails = () => {
           similarVenues: res.similar || [],
         });
         if (res.venue && res.venue?.longitude && res.venue?.latitude) {
-          const map = L.map("map").setView([res.venue.longitude, res.venue.latitude], 8);
-          const marker = L.marker([res.venue.longitude, res.venue.latitude]).addTo(
-            map
+          const map = L.map("map").setView(
+            [res.venue.longitude, res.venue.latitude],
+            8
           );
+          const marker = L.marker([
+            res.venue.longitude,
+            res.venue.latitude,
+          ]).addTo(map);
           L.tileLayer(
             `https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,
             {
@@ -244,9 +258,7 @@ const VenueDetails = () => {
             }
           ).addTo(map);
         }
-      }
-      else 
-      navigate(`/venueList`);
+      } else navigate(`/venueList`);
     });
   };
   useEffect(() => {
@@ -349,18 +361,18 @@ const VenueDetails = () => {
   };
   const getWishlistIds = () => {
     //this function return ids of wishlists in which this venue is added.. to be used for guest user
-    let wishlistIds=[];
-    if(isLoggedIn){
-      if(venue.isFavourite?.length > 0)
-   wishlistIds= venue.isFavourite.map(wl=>wl.id)
-    }
-    else
-   { for (let i = 0; i < wishlistData?.length; i++) {
-      if (wishlistData[i]?.venues?.indexOf(Number(venueId)) !== -1) {
-        wishlistIds.push(wishlistData[i]?.id);
-        continue;
+    let wishlistIds = [];
+    if (isLoggedIn) {
+      if (venue.isFavourite?.length > 0)
+        wishlistIds = venue.isFavourite.map((wl) => wl.id);
+    } else {
+      for (let i = 0; i < wishlistData?.length; i++) {
+        if (wishlistData[i]?.venues?.indexOf(Number(venueId)) !== -1) {
+          wishlistIds.push(wishlistData[i]?.id);
+          continue;
+        }
       }
-    }}
+    }
     return wishlistIds;
   };
   return (
@@ -372,15 +384,15 @@ const VenueDetails = () => {
           <div className="venue-details-header">
             <div className="details">
               <div className="d-flex align-items-center mb-4">
-              <div className="name">{venue.name}</div>
-            {(isLoggedIn && venue?.status==="Enabled") &&  
-             <Button
-             label={translations.PostReview}
-             onClick={()=>setShowReviewModal(true)}
-             wrapperClass="ml-auto"
-             className="small-btn"
-           />
-          }
+                <div className="name">{venue.name}</div>
+                {isLoggedIn && venue?.status === "Enabled" && (
+                  <Button
+                    label={translations.PostReview}
+                    onClick={() => setShowReviewModal(true)}
+                    wrapperClass="ml-auto"
+                    className="small-btn"
+                  />
+                )}
               </div>
               <div className="rating-address-block">
                 <div className="rating-block">
@@ -390,7 +402,10 @@ const VenueDetails = () => {
                     <RatingStars rating={venue.ratings_avg_rating} />
                   </div>
                   <div className="rating ml-3">
-                    {venue.ratings?.length} {venue.ratings?.length !== 1? translations.Reviews: translations.Review}
+                    {venue.ratings?.length}{" "}
+                    {venue.ratings?.length !== 1
+                      ? translations.Reviews
+                      : translations.Review}
                   </div>
                 </div>
                 <div className="address-block">
@@ -402,13 +417,13 @@ const VenueDetails = () => {
                 <div className="wishlist-block" onClick={handleWishlistClick}>
                   <img
                     alt=""
-                    src={getWishlistIds().length>0 ? heartRed : heartWhite}
+                    src={getWishlistIds().length > 0 ? heartRed : heartWhite}
                     className="mx-2"
                     width={25}
                     height={25}
                   />
                   <span>
-                    {getWishlistIds().length>0
+                    {getWishlistIds().length > 0
                       ? translations.AddedToWishlist
                       : translations.AddToWishlist}
                   </span>
@@ -434,6 +449,11 @@ const VenueDetails = () => {
                 <div className="title">{translations.Capacity}</div>
                 <div className="capacity-info">
                   <div className="info-item">
+                    <img
+                      className="capacity-icons"
+                      src={seating}
+                      alt="Seating Capacity Icon"
+                    />
                     <div className="fw-600">
                       {venue.seating_capacity ? venue.seating_capacity : 0}
                     </div>
@@ -442,6 +462,12 @@ const VenueDetails = () => {
                     </div>
                   </div>
                   <div className="info-item">
+                    <img
+                      className="capacity-icons"
+                      src={standing}
+                      alt="Standing Capacity Icon"
+                    />
+
                     <div className="fw-600">
                       {venue.standing_capacity ? venue.standing_capacity : 0}
                     </div>
@@ -450,38 +476,78 @@ const VenueDetails = () => {
                     </div>
                   </div>
                   <div className="info-item">
+                    <img
+                      className="capacity-icons"
+                      src={classroomIcon}
+                      alt="Classroom Capacity Icon"
+                    />
                     <div className="fw-600">
-                      {venue?.capacity?.classroom ? venue?.capacity?.classroom : "-"}
+                      {venue?.capacity?.classroom
+                        ? venue?.capacity?.classroom
+                        : "-"}
                     </div>
                     <div className="fs-14">{translations.Classroom}</div>
                   </div>
                   <div className="info-item">
+                    <img
+                      className="capacity-icons"
+                      src={theater}
+                      alt="Theater Capacity Icon"
+                    />
                     <div className="fw-600">
-                      {venue?.capacity?.theatre ? venue?.capacity?.theatre : "-"}
+                      {venue?.capacity?.theatre
+                        ? venue?.capacity?.theatre
+                        : "-"}
                     </div>
                     <div className="fs-14">{translations.Theater}</div>
                   </div>
                   <div className="info-item">
+                    <img
+                      className="capacity-icons"
+                      src={banquet}
+                      alt="Banquet Capacity Icon"
+                    />
                     <div className="fw-600">
-                      {venue?.capacity?.banquet ? venue?.capacity?.banquet : "-"}
+                      {venue?.capacity?.banquet
+                        ? venue?.capacity?.banquet
+                        : "-"}
                     </div>
                     <div className="fs-14">{translations.Banquet}</div>
                   </div>
                   <div className="info-item">
+                    <img
+                      className="capacity-icons"
+                      src={conference}
+                      alt="Conference Capacity Icon"
+                    />
                     <div className="fw-600">
-                      {venue?.capacity?.conference ? venue?.capacity?.conference : "-"}
+                      {venue?.capacity?.conference
+                        ? venue?.capacity?.conference
+                        : "-"}
                     </div>
                     <div className="fs-14">{translations.Conference}</div>
                   </div>
                   <div className="info-item">
+                    <img
+                      className="capacity-icons"
+                      src={uShapeIcon}
+                      alt="U-Shape Capacity Icon"
+                    />
                     <div className="fw-600">
                       {venue?.capacity?.ushape ? venue?.capacity?.ushape : "-"}
                     </div>
                     <div className="fs-14">{translations.U_shape}</div>
                   </div>
                   <div className="info-item">
+                    <img
+                      className="capacity-icons"
+                      src={floorArea}
+                      alt="Floor Capacity Icon"
+                    />
                     <div className="fw-600">
-                      {venue?.capacity?.floor_area ? `${venue?.capacity?.floor_area} m²` : "-"}
+                      {venue?.capacity?.floor_area
+                        ? `${venue?.capacity?.floor_area} m²`
+                        : "-"}
                     </div>
                     <div className="fs-14">{translations.FloorArea} </div>
                   </div>
@@ -510,7 +576,10 @@ const VenueDetails = () => {
                     <div className="fs-14"> {translations.RentPerHour}</div>
                   </div>
                   <div className="info-item">
-                    <div className="fw-600">   {venue.rent_per_day ? venue.rent_per_day : "-"}</div>
+                    <div className="fw-600">
+                      {" "}
+                      {venue.rent_per_day ? venue.rent_per_day : "-"}
+                    </div>
                     <div className="fs-14">{translations.RentPerDay}</div>
                   </div>
                   <div className="info-item">
@@ -534,14 +603,15 @@ const VenueDetails = () => {
                     <div className="fs-14">{translations.CleaningFee}</div>
                   </div>
                 </div>
-                {venue.cancellation_policy && venue.cancellation_policy?.length !== 0 && (
-                  <p>
-                    <span className="fw-600">
-                      {translations.CancellationPolicy}:
-                    </span>
-                    {venue.cancellation_policy}
-                  </p>
-                )}
+                {venue.cancellation_policy &&
+                  venue.cancellation_policy?.length !== 0 && (
+                    <p>
+                      <span className="fw-600">
+                        {translations.CancellationPolicy}:
+                      </span>
+                      {venue.cancellation_policy}
+                    </p>
+                  )}
               </div>
               {/* Facilities */}
               <div className="facilities">
@@ -763,111 +833,111 @@ const VenueDetails = () => {
                   </div>
                 )}
               </div>
-              {
-                venue?.status==="Enabled" &&
+              {venue?.status === "Enabled" && (
                 <div className="inquiry-block">
-                <TextField
-                  name="eventDate"
-                  placeholder={translations.SelectDate}
-                  onChange={handleInputChange}
-                  type="date"
-                  error={errors.eventDate}
-                  value={values.eventDate}
-                  className="text-field-2"
-                />
-                <TextArea
-                  name="content"
-                  placeholder={translations.InquiryDesc}
-                  onChange={handleInputChange}
-                  error={errors.content}
-                  value={values.content}
-                  className="text-field-2"
-                  rows={8}
-                  onFocus={() => {
-                    if (values.content === "")
-                      setValues({
-                        ...values,
-                        content: translations.InquiryDesc,
-                      });
-                  }}
-                />
-                <TextField
-                  name="name"
-                  placeholder={translations.Name}
-                  type="text"
-                  onChange={handleInputChange}
-                  error={errors.name}
-                  value={values.name}
-                  className="text-field-2"
-                />
-                <TextField
-                  name="email"
-                  placeholder={translations.Email}
-                  type="email"
-                  onChange={handleInputChange}
-                  error={errors.email}
-                  value={values.email}
-                  className="text-field-2"
-                />
-                <TextField
-                  name="company"
-                  placeholder={`${translations.Company} (${translations.Optional})`}
-                  type="text"
-                  onChange={handleInputChange}
-                  error={errors.company}
-                  value={values.company}
-                  className="text-field-2"
-                />
-                <TextField
-                  name="phone"
-                  placeholder={translations.PhoneNumber}
-                  type="tel"
-                  onChange={handleInputChange}
-                  error={errors.phone}
-                  value={values.phone}
-                  className="text-field-2"
-                />
-                <Button
-                  label={translations.SendInquiry}
-                  onClick={sendInquiry}
-                  showBtnLoader={showBtnLoader === "inquiry"}
-                  wrapperClass="w-100"
-                />
-                <div className="terms-text">
-                  {new IntlMessageFormat(
-                    translations.SendInquiryTerms,
-                    userLanguageData.language
-                  ).format({
-                    a: (chunk1) => (
-                      <a
-                        className="fw-600"
-                        key={1}
-                        onClick={() => {
-                          navigate(`/terms`);
-                        }}
-                      >
-                        {chunk1}
-                      </a>
-                    ),
-                    b: (chunk2) => (
-                      <a
-                        key={2}
-                        className="fw-600"
-                        onClick={() => {
-                          navigate(`/privacy`);
-                        }}
-                      >
-                        {chunk2}
-                      </a>
-                    ),
-                  })}
+                  <TextField
+                    name="eventDate"
+                    placeholder={translations.SelectDate}
+                    onChange={handleInputChange}
+                    type="date"
+                    error={errors.eventDate}
+                    value={values.eventDate}
+                    className="text-field-2"
+                  />
+                  <TextArea
+                    name="content"
+                    placeholder={translations.InquiryDesc}
+                    onChange={handleInputChange}
+                    error={errors.content}
+                    value={values.content}
+                    className="text-field-2"
+                    rows={8}
+                    onFocus={() => {
+                      if (values.content === "")
+                        setValues({
+                          ...values,
+                          content: translations.InquiryDesc,
+                        });
+                    }}
+                  />
+                  <TextField
+                    name="name"
+                    placeholder={translations.Name}
+                    type="text"
+                    onChange={handleInputChange}
+                    error={errors.name}
+                    value={values.name}
+                    className="text-field-2"
+                  />
+                  <TextField
+                    name="email"
+                    placeholder={translations.Email}
+                    type="email"
+                    onChange={handleInputChange}
+                    error={errors.email}
+                    value={values.email}
+                    className="text-field-2"
+                  />
+                  <TextField
+                    name="company"
+                    placeholder={`${translations.Company} (${translations.Optional})`}
+                    type="text"
+                    onChange={handleInputChange}
+                    error={errors.company}
+                    value={values.company}
+                    className="text-field-2"
+                  />
+                  <TextField
+                    name="phone"
+                    placeholder={translations.PhoneNumber}
+                    type="tel"
+                    onChange={handleInputChange}
+                    error={errors.phone}
+                    value={values.phone}
+                    className="text-field-2"
+                  />
+                  <Button
+                    label={translations.SendInquiry}
+                    onClick={sendInquiry}
+                    showBtnLoader={showBtnLoader === "inquiry"}
+                    wrapperClass="w-100"
+                  />
+                  <div className="terms-text">
+                    {new IntlMessageFormat(
+                      translations.SendInquiryTerms,
+                      userLanguageData.language
+                    ).format({
+                      a: (chunk1) => (
+                        <a
+                          className="fw-600"
+                          key={1}
+                          onClick={() => {
+                            navigate(`/terms`);
+                          }}
+                        >
+                          {chunk1}
+                        </a>
+                      ),
+                      b: (chunk2) => (
+                        <a
+                          key={2}
+                          className="fw-600"
+                          onClick={() => {
+                            navigate(`/privacy`);
+                          }}
+                        >
+                          {chunk2}
+                        </a>
+                      ),
+                    })}
+                  </div>
                 </div>
-              </div>}
+              )}
 
               {venue.latitude && venue.longitude && (
                 // <div className="map" ref={mapContainerRef}></div>
-               
-          <div className={`map`} id="map" ref={mapContainerRef} />
+
+                <div className={`map`} id="map" ref={mapContainerRef} />
               )}
               <div className="contact info-block">
                 <ul className="contact-list">
@@ -885,26 +955,29 @@ const VenueDetails = () => {
                   </li>
                 </ul>
               </div>
-          {   venue?.contact &&
-           <div className="contact">
-                <div className="sub-title">{translations.ContactInfo}</div>
-                <ul className="contact-list">
-                 {venue.contact?.phone_number && <li className="list-item">
-                    <img src={phone} alt="icon" />
-                    <div className="text">{venue.contact?.phone_number}</div>
-                  </li>
-                  }
-                  <li className="list-item">
-                    <img src={mail} alt="icon" />
-                    <div className="text">{venue.contact?.email}</div>
-                  </li>
-                  <li className="list-item">
-                    <img src={location} alt="icon" />
-                    <div className="text">{venue.contact?.company_name}</div>
-                  </li>
-                </ul>
-              </div>
-              }
+              {venue?.contact && (
+                <div className="contact">
+                  <div className="sub-title">{translations.ContactInfo}</div>
+                  <ul className="contact-list">
+                    {venue.contact?.phone_number && (
+                      <li className="list-item">
+                        <img src={phone} alt="icon" />
+                        <div className="text">
+                          {venue.contact?.phone_number}
+                        </div>
+                      </li>
+                    )}
+                    <li className="list-item">
+                      <img src={mail} alt="icon" />
+                      <div className="text">{venue.contact?.email}</div>
+                    </li>
+                    <li className="list-item">
+                      <img src={location} alt="icon" />
+                      <div className="text">{venue.contact?.company_name}</div>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </Col>
           </Row>
           {/* Similar venues */}
@@ -930,8 +1003,8 @@ const VenueDetails = () => {
         isLoggedIn={isLoggedIn}
         getWishlistIds={getWishlistIds}
       />
-       <ReviewVenueModal
-       venueId={venueId}
+      <ReviewVenueModal
+        venueId={venueId}
         showModal={showReviewModal}
         handleClose={handleReviewModalClose}
         showBtnLoader={showBtnLoader === "review"}
