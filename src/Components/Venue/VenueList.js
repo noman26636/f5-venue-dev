@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ToggleBtn from "../Common/ToggleBtn";
 import VenueSearch from "./VenueSearch";
 import { Col, Row } from "reactstrap";
@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMale, faChair, faG } from "@fortawesome/free-solid-svg-icons";
 import { Constants } from "../../Configurations/Constants";
 import * as TYPES from "../../Store/actions/types";
-import L from "leaflet";
+import L, { bounds } from "leaflet";
 import {
   enum_seatingOptions,
   enum_sortFieldOptions,
@@ -134,16 +134,17 @@ const VenueList = () => {
           );
           marker.bindPopup(`
                 <div>
-                    <img src=${
-                      venue.images?.length > 0
-                        ? venue.images[0].image_path_thumbnail
-                        : null
-                    } class="popup-img">
+                <a href="/venue/${venue.id}">
+                    <img src=${venue.images?.length > 0
+              ? venue.images[0].image_path_thumbnail
+              : null
+            } class="popup-img">
+                </a>
                     <div>
                       <a href="/venue/${venue.id}" >  
                       <h3 class="popup-title">${venue.name}</h3>
-                      </a>
-                        <div>${venue.street_address}</div>
+                        <div class="popup-address">${venue.street_address}</div>
+                        </a>
                     </div>
                 </div>`);
           latLngArr.push([venue.latitude, venue.longitude]);
@@ -215,13 +216,14 @@ const VenueList = () => {
       }
     );
   };
+
   const navigate = useNavigate();
   useEffect(() => {
     getSearchConfigs();
     let valuesObj = {};
     if (searchData) {
       valuesObj.eventType = searchData?.eventTypeObj?.id
-        ? [searchData.eventTypeObj]  : (searchData.eventType?.length>0?[...searchData.eventType]:[]);
+        ? [searchData.eventTypeObj] : (searchData.eventType?.length > 0 ? [...searchData.eventType] : []);
       valuesObj.location = searchData.location ? searchData.location : "";
       valuesObj.capacity = searchData.capacity
         ? Number(searchData.capacity)
@@ -243,12 +245,54 @@ const VenueList = () => {
       setValues({ ...valuesObj });
     }
     searchVenues(valuesObj);
-    const map = L.map("map").setView([mapInitialLat, mapInitialLng], zoom);
+    const map = L.map("map",{bounceAtZoomLimits: "2"}).setView([mapInitialLat, mapInitialLng], zoom);
+
+    if (MouseEvent.call) {
+     
+      map.on("zoom", (e) => {
+        if (!mapMoveSearch) return;
+        const bounds = map.getBounds();
+        const ne = bounds.getNorthEast();
+        const sw = bounds.getSouthWest();
+
+
+        const valuesObj = {
+          ...values,
+          ne_lat: ne.lat,
+          ne_lng: ne.lng,
+          sw_lat: sw.lat,
+          sw_lng: sw.lng,
+          mapSearch: true,
+        };
+        setValues({ ...valuesObj });
+        if (
+          valuesObj.ne_lat &&
+          valuesObj.ne_lng &&
+          valuesObj.ne_lat !== 0 &&
+          valuesObj.ne_lng !== 0 &&
+          valuesObj.sw_lat &&
+          valuesObj.sw_lng &&
+          valuesObj.sw_lat !== 0 &&
+          valuesObj.sw_lng !== 0 &&
+          valuesObj.mapSearch
+        )
+          searchVenues(valuesObj);
+      
+      })
+      map.on("zoomend", (e) => {
+        if (map.getZoom < 17) {
+          searchVenues(venuesList)
+        }
+      
+      })
+    }
+
     map.on("dragend", (e) => {
       if (!mapMoveSearch) return;
       const bounds = map.getBounds();
       const ne = bounds.getNorthEast();
       const sw = bounds.getSouthWest();
+
       const valuesObj = {
         ...values,
         ne_lat: ne.lat,
@@ -271,11 +315,12 @@ const VenueList = () => {
       )
         searchVenues(valuesObj);
     });
+
     L.tileLayer(
       `https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,
       {
-        maxZoom: 22,
-        minZoom: 1,
+        maxZoom: 18,
+        minZoom: 2,
         tileSize: 512,
         zoomOffset: -1,
         accessToken: Constants.mapboxToken,
@@ -305,7 +350,7 @@ const VenueList = () => {
   };
   const gotoVenue = (id) => {
     dispatch({ type: TYPES.SEARCH_DATA, data: values });
-    navigate(`/venue/${id}`);
+    window.open(`/venue/${id}`, '_blank')
   };
   return (
     <>
@@ -341,6 +386,7 @@ const VenueList = () => {
               <div className="no-search-msg">{translations.NoDataToShow}</div>
             ) : (
               venuesList?.map((item, i) => (
+
                 <Col
                   className="venue-block"
                   key={i}
@@ -349,8 +395,7 @@ const VenueList = () => {
                   md={4}
                   sm={6}
                   xs={12}
-                  onClick={() => gotoVenue(item.id)}
-                >
+                  onClick={() => gotoVenue(item.id)}>
                   <div className="image-block">
                     {<img alt="" src={item.images[0]?.image_path_thumbnail} />}
                   </div>
@@ -389,7 +434,10 @@ const VenueList = () => {
                   {Boolean(item.featured) && (
                     <div className="featured-tag">{translations.Featured}</div>
                   )}
+
                 </Col>
+
+
               ))
             )}
           </Row>
@@ -404,12 +452,12 @@ const VenueList = () => {
               }}
               pageSize={pager.per_page}
             />
+
           )}
         </div>
         <div
-          className={`map-container ${
-            values?.mapSearch ? "d-block" : "d-none"
-          }`}
+          className={`map-container ${values?.mapSearch ? "d-block" : "d-none"
+            }`}
         >
           <div className={`h-100`} id="map" ref={mapContainerRef} />
           <div className="map-checkbox">

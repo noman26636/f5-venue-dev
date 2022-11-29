@@ -27,9 +27,9 @@ import { useEffect } from 'react';
 import { VenueServices } from '../Venue/VenueServices';
 const initialFormValues = {
   location: "",
-  eventType:0,
+  eventType: 0,
   capacity: null,
-  eventTypeObj:{}
+  eventTypeObj: {}
 }
 const imagesArr = [sImg1, sImg2, sImg3, sImg4, sImg5, sImg6, sImg7, sImg8, sImg9, sImg10, sImg11, sImg12];
 export default function Main(props) {
@@ -46,15 +46,14 @@ export default function Main(props) {
   const handleInputChange = ({ target }) => {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const { name } = target;
-    const valuesObj={
+    const valuesObj = {
       ...values,
       [name]: value,
     }
-    if(name==="eventType")
-    {
-      const index=eventTypesList?.map(item=>item.id).indexOf(Number(target.value));
-      const name=eventTypesList[index].name;
-      valuesObj.eventTypeObj={id:Number(target.value),name:name}
+    if (name === "eventType") {
+      const index = eventTypesList?.map(item => item.id).indexOf(Number(target.value));
+      const name = eventTypesList[index].name;
+      valuesObj.eventTypeObj = { id: Number(target.value), name: name }
     }
     setValues(valuesObj);
   };
@@ -63,17 +62,17 @@ export default function Main(props) {
     dispatch({ type: TYPES.SEARCH_DATA, data: values });
     navigate("/venueList");
   }
-useEffect(()=>{
-  getImages();
-},[]);
-const getImages=()=>{
-  VenueServices.getImages().then((res) => {
-    if (!res.isAxiosError && res.images?.length>0) {
-      const imgs=res.images.map(img=>img.image_path);
-      setImages(imgs)
-    }
-  });
-}
+  useEffect(() => {
+    getImages();
+  }, []);
+  const getImages = () => {
+    VenueServices.getImages().then((res) => {
+      if (!res.isAxiosError && res.images?.length > 0) {
+        const imgs = res.images.map(img => img.image_path);
+        setImages(imgs)
+      }
+    });
+  }
   return (
     <div className='main-section'>
       <Row className='main-section-inner'>
@@ -93,19 +92,19 @@ const getImages=()=>{
         </Col>
       </Row>
       <Row className='search-block'>
-        <Col xl={3} className="search-item">
-          <TextField name="location"
-            icon={location} placeholder={translations.Location}
-            type="text"
-            onChange={handleInputChange}
-            value={values.location}
-            className="text-field-3"
-          />
-        </Col>
+          <Col xl={3} className="search-item">
+            <TextField name="location"
+              icon={location} placeholder={translations.Location}
+              type="text"
+              onChange={handleInputChange}
+              value={values.location}
+              className="text-field-3"
+            />
+          </Col>
         <Col xl={3} className="search-item">
           <FormDropdown options={eventTypesList} icon={eventTypeIcon} label={translations.EventType} name="eventType" value={values.eventType}
-            onChange={handleInputChange} 
-              />
+            onChange={handleInputChange}
+          />
         </Col>
         <Col xl={3} className="search-item">
           <TextField name="capacity"

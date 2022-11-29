@@ -1207,18 +1207,13 @@ function AddVenue() {
                       }
                       error={errors.images}
                     >
-                      {({ browseFiles, getDropZoneProps }) => (
-                        <div className="dropzone">
+                      {({ browseFiles, getDropZoneProps, getLableProps}) => (
+                        <div className="dropzone" onClick={browseFiles} {...getDropZoneProps()}>
                           <div
-                            {...getDropZoneProps({ className: "myDropZone" })}
-                          />
+                            {...getDropZoneProps({ className: "myDropZone" })}>
                           <div className="buttonContainer">
-                            <Button
-                              label={translations.UploadPhotos}
-                              onClick={browseFiles}
-                              className="upload-btn"
-                              icon={plusIconBlue}
-                            />
+                            <input {...getLableProps} {...getDropZoneProps()} placeholder="Upload or drag photo here..." readOnly/>
+                          </div>
                           </div>
                         </div>
                       )}

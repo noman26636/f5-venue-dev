@@ -254,7 +254,7 @@ const VenueDetails = () => {
               tileSize: 512,
               zoomOffset: -1,
               accessToken: Constants.mapboxToken,
-              debounceMoveend: true,
+              // debounceMoveend: true,
             }
           ).addTo(map);
         }

@@ -151,6 +151,7 @@ body {
   height: calc(100% - 579px);
   margin-top: 115px;
   min-height: 500px;
+  width: 100%;
 }
 @media only screen and (max-width: 1200px) {
   .large-hidden {
@@ -808,12 +809,15 @@ header {
   z-index: 1071;
 }
 .header-block {
-  padding: 25px 75px;
+  padding: 25px 120px;
   margin: 0 !important;
   color: #1a1a1a;
+  gap: 2.5rem;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+  white-space: nowrap;
+  justify-content: center;
   font-size: 18px;
   font-weight: 800;
   width: 100%;
@@ -846,7 +850,7 @@ header {
   align-items: center;
   place-content: flex-end;
   padding: 0;
-  margin-left: auto;
+  /* margin-left: auto; */
   width: auto;
 }
 .header-block .header-right a {
@@ -979,7 +983,9 @@ footer [class^="col-"] {
   align-items: center;
 }
 footer .top-section {
-  padding: 65px 140px 30px 140px;
+  /* padding: 65px 140px 30px 140px; */
+  padding: 65px 100px 30px 100px;
+
 }
 footer .top-section .row {
   padding: 0;
@@ -1134,22 +1140,38 @@ footer .social-icons .icon.linkedin {
 /* ********************* Drop zone file upload *************************** */
 .dropzone {
   width: 100%;
-  position: relative;
   margin-bottom: 10px;
-}
-.myDropZone {
-  position: absolute;
-  height: 6.2rem;
-  width: 100%;
+  height: 15rem;
+  /* width: 100%; */
   border: 2px solid gray;
-  border-radius: 10px;
+  border-radius: 2px;
   border-style: dotted;
+  border-color: lightgrey;
+  cursor: pointer;
 }
+
 .buttonContainer {
   display: flex;
   align-items: center;
+  width: 13rem;
   justify-content: center;
+  text-align: center;
+  margin-top: 100px;
   gap: 1rem;
+  cursor: pointer;
+} 
+.myDropZone{
+  display: flex;
+  justify-content: center ;
+}
+.buttonContainer input{
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border: none;
+}
+.buttonContainer input::placeholder{
+  color: gray;
 }
 
 /* ***********Search block*********************** */
@@ -1169,6 +1191,7 @@ footer .social-icons .icon.linkedin {
   bottom: -78px;
   z-index: 999;
 }
+
 .home-page .search-block .dropdownBlock,
 .home-page .search-block .search-btn {
   max-width: 434px;
@@ -1215,7 +1238,7 @@ footer .social-icons .icon.linkedin {
 .featured-venue-block {
   margin-top: 140px;
   clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 50% 100%, 0% 90%);
-  height: 475px;
+  /* height: 475px; */
   padding: 0 50px;
 }
 .featured-venue-block .featured-venue-inner-block {
@@ -1245,6 +1268,9 @@ footer .social-icons .icon.linkedin {
   border: 1px solid #efefef;
   /* position: relative; */
 }
+
+
+
 .venue-details-block .venue-block .image-block {
   position: relative;
 }
@@ -1330,6 +1356,11 @@ footer .social-icons .icon.linkedin {
   clip-path: polygon(0 0, 100% 0%, 86% 100%, 0 100%);
   padding-left: 10px;
 }
+@media screen and (min-width: 2080px) {
+  .venue-details-block .venue-block {
+  max-width: 26rem;
+}
+}
 @media only screen and (max-width: 1350px) {
   .home-page .featured-venue-block {
     margin-top: 20px;
@@ -1363,7 +1394,8 @@ footer .social-icons .icon.linkedin {
   justify-content: center;
 }
 .featured-venue-block .carousel-inner .carousel-item {
-  width: 92%;
+  width: 94%;
+  height: 32rem;
   margin: 0 auto;
 }
 .featured-venue-block .carousel-control-prev-icon {
@@ -1406,6 +1438,7 @@ footer .social-icons .icon.linkedin {
   gap: 4%;
   flex-wrap: nowrap;
 }
+
 .home-page .how-it-works-section .section-items .section-item {
   text-align: center;
   background: #fff;
@@ -1433,6 +1466,8 @@ footer .social-icons .icon.linkedin {
   font-weight: 400;
   font-size: 16px;
 }
+
+
 @media only screen and (max-width: 992px) {
   .home-page .how-it-works-section .section-items .section-item {
     padding: 60px 30px;
@@ -1446,6 +1481,7 @@ footer .social-icons .icon.linkedin {
     max-width: 325px;
   }
 }
+
 /* **********Features section***************************** */
 .home-page .section-3 {
   background: #0a58ca;
@@ -1623,7 +1659,7 @@ footer .social-icons .icon.linkedin {
   bottom: 0;
   right: 0;
   overflow: hidden;
-  height: 40rem;
+  /* height: 45rem; */
 }
 .leaflet-popup-content {
   width: 150px !important;
@@ -1635,6 +1671,10 @@ a.leaflet-popup-close-button {
 .popup-title {
   font-size: 20px;
   color: #17a689 !important;
+}
+.popup-address{
+  color: black;
+  text-decoration: none;
 }
 .popup-img {
   width: 100%;
@@ -1864,6 +1904,7 @@ a.leaflet-popup-close-button {
 }
 .venue-details-view .venue-details-body .left-content {
   padding-left: 0 !important;
+  padding-right: 0;
 }
 .venue-details-view .venue-details-body .left-content .carousel {
   /* width: 561px; */
@@ -1874,6 +1915,7 @@ a.leaflet-popup-close-button {
   width: 100%;
   height: 503px;
 }
+
 .carousel-control-next-icon {
   background-image: url(../Assets/icons/arrow-right-black-circle.svg);
   border: none;
@@ -1938,6 +1980,7 @@ a.leaflet-popup-close-button {
 }
 .venue-details-view .venue-details-body {
   display: flex;
+  justify-content: space-evenly;
 }
 .venue-details-view .venue-details-body .title {
   font-weight: 600;
@@ -3607,8 +3650,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 /* *****************************CMS pages********************** */
 .cms-page {
-  margin: 20px 50px 50px 50px;
-  padding-top: 45px;
+  padding: 0px 140px;
+  margin: 10rem 0 4rem 0;
+  width: 100%;
   text-align: justify;
 }
 .cms-page .title {

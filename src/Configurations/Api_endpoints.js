@@ -56,6 +56,11 @@ export const VenueApis = {
   getImages: `${baseUrl}slider_images`,
 
 };
+
+export const HomePageApis = {
+  getHowItWork : `${baseUrl}homepage`
+}
+
 export const BookingApis = {
   saveIcalFeed: `${baseUrl}icalfeed`,
 };

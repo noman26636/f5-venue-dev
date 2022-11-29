@@ -43,7 +43,7 @@ const Features = () => {
                     <div className='general-text'>
                         {translations.LookingForVenue}
                     </div>
-                    <h3 className='section-title'>{translations.FindFastEasy}</h3>
+                    <h3 className='section-title'>{translations.FindFastEasy} </h3>
                     <p >
                         {translations.LookingForVenueDesc}
                     </p>

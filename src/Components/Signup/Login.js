@@ -7,7 +7,7 @@ import * as TYPES from '../../Store/actions/types';
 import TextField from '../Common/TextField';
 import userImg from "../../Assets/icons/user.svg";
 import lock from "../../Assets/icons/lock.svg";
-import loginImg from "../../Assets/images/login-img1.png";
+import loginImg from "../../Assets/images/LoginImage2.jpg";
 import logo from "../../Assets/images/main-logo.svg";
 import Checkbox from '../Common/Checkbox';
 import Button from '../Common/Button';
