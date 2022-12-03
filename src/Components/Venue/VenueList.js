@@ -71,6 +71,10 @@ const VenueList = () => {
     { id: 0, name: translations.Lowest },
     { id: 1, name: translations.Highest },
   ];
+
+
+
+
   const handleInputChange = (
     { target },
     checkboxId = null,
@@ -113,9 +117,12 @@ const VenueList = () => {
       mapMoveSearch = value;
     }
   };
+
   useEffect(() => {
-    if (values.mapSearch) setMarkersOnMap(venuesList);
-  }, [venuesList, values.mapSearch]);
+    if (values.mapSearch) 
+    setMarkersOnMap(venuesList);
+  }, [venuesList]);
+
   const setMarkersOnMap = (venues) => {
     if (!values.mapSearch || !map) return;
     let count = 0;
@@ -217,7 +224,7 @@ const VenueList = () => {
     );
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   useEffect(() => {
     getSearchConfigs();
     let valuesObj = {};
@@ -245,47 +252,74 @@ const VenueList = () => {
       setValues({ ...valuesObj });
     }
     searchVenues(valuesObj);
-    const map = L.map("map",{bounceAtZoomLimits: "2"}).setView([mapInitialLat, mapInitialLng], zoom);
+    const map = L.map("map").setView([mapInitialLat, mapInitialLng], zoom);
 
-    if (MouseEvent.call) {
+    // if (MouseEvent.call) {
      
-      map.on("zoom", (e) => {
-        if (!mapMoveSearch) return;
-        const bounds = map.getBounds();
-        const ne = bounds.getNorthEast();
-        const sw = bounds.getSouthWest();
+      // map.on("zoom", (e) => {
+      //   if (!mapMoveSearch) return;
+      //   // const bounds = map.getBounds();
+      //   // const ne = bounds.getNorthEast();
+      //   // const sw = bounds.getSouthWest();
 
 
-        const valuesObj = {
-          ...values,
-          ne_lat: ne.lat,
-          ne_lng: ne.lng,
-          sw_lat: sw.lat,
-          sw_lng: sw.lng,
-          mapSearch: true,
-        };
-        setValues({ ...valuesObj });
-        if (
-          valuesObj.ne_lat &&
-          valuesObj.ne_lng &&
-          valuesObj.ne_lat !== 0 &&
-          valuesObj.ne_lng !== 0 &&
-          valuesObj.sw_lat &&
-          valuesObj.sw_lng &&
-          valuesObj.sw_lat !== 0 &&
-          valuesObj.sw_lng !== 0 &&
-          valuesObj.mapSearch
-        )
-          searchVenues(valuesObj);
+      //   // const valuesObj = {
+      //   //   ...values,
+      //   //   ne_lat: ne.lat,
+      //   //   ne_lng: ne.lng,
+      //   //   sw_lat: sw.lat,
+      //   //   sw_lng: sw.lng,
+      //   //   mapSearch: true,
+      //   // };
+      //   // setValues({ ...valuesObj });
+      //   // if (
+      //   //   valuesObj.ne_lat &&
+      //   //   valuesObj.ne_lng &&
+      //   //   valuesObj.ne_lat !== 0 &&
+      //   //   valuesObj.ne_lng !== 0 &&
+      //   //   valuesObj.sw_lat &&
+      //   //   valuesObj.sw_lng &&
+      //   //   valuesObj.sw_lat !== 0 &&
+      //   //   valuesObj.sw_lng !== 0 &&
+      //   //   valuesObj.mapSearch
+      //   // )
+      //     searchVenues(valuesObj);
       
-      })
-      map.on("zoomend", (e) => {
-        if (map.getZoom < 17) {
-          searchVenues(venuesList)
-        }
-      
-      })
-    }
+      // })
+     
+    // }
+
+    // map.on("zoomend", (e) => {
+    //   console.log("Zoom end")
+    //   if (!mapMoveSearch) return;
+    //   const bounds = map.getBounds();
+    //   const ne = bounds.getNorthEast();
+    //   const sw = bounds.getSouthWest();
+
+
+    //   const valuesObj = {
+    //     ...values,
+    //     ne_lat: ne.lat,
+    //     ne_lng: ne.lng,
+    //     sw_lat: sw.lat,
+    //     sw_lng: sw.lng,
+    //     mapSearch: true,
+    //   };
+    //   setValues({ ...valuesObj });
+    //   if (
+    //     valuesObj.ne_lat &&
+    //     valuesObj.ne_lng &&
+    //     valuesObj.ne_lat !== 0 &&
+    //     valuesObj.ne_lng !== 0 &&
+    //     valuesObj.sw_lat &&
+    //     valuesObj.sw_lng &&
+    //     valuesObj.sw_lat !== 0 &&
+    //     valuesObj.sw_lng !== 0 &&
+    //     valuesObj.mapSearch
+    //   )
+    //     searchVenues(valuesObj);
+    
+    // })
 
     map.on("dragend", (e) => {
       if (!mapMoveSearch) return;
@@ -315,6 +349,23 @@ const VenueList = () => {
       )
         searchVenues(valuesObj);
     });
+
+    map.on("zoomend", (e) => {
+
+      const bounds = map.getBounds();
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+      const valuesObj = {
+        ...values,
+        ne_lat: ne.lat,
+        ne_lng: ne.lng,
+        sw_lat: sw.lat,
+        sw_lng: sw.lng,
+        mapSearch: true,
+      };
+      searchVenues(valuesObj)
+
+    })
 
     L.tileLayer(
       `https://api.mapbox.com/styles/v1/devhamo/cl7x58ru6002p14rspm04x7e3/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}`,

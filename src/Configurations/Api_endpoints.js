@@ -57,8 +57,8 @@ export const VenueApis = {
 
 };
 
-export const HomePageApis = {
-  getHowItWork : `${baseUrl}homepage`
+export const HomePageApi = {
+  getHomePage : `${baseUrl}homepage`
 }
 
 export const BookingApis = {

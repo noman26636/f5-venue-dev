@@ -80,11 +80,11 @@ axios.interceptors.response.use(
 );
 render(
   <Provider store={configureStore}>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </Provider>,
   document.getElementById("root")
 );

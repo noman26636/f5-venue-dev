@@ -56,8 +56,8 @@ export default function Header() {
   return (
     <>
       <header>
-        <Row className="header-block">
-          <Col xl={1} lg={1} md={1} sm={6} xs={6} className="header-img" onClick={() => { navigate("/home") }}>
+        <Row className={`header-block ${!authState?.user?.access_token && 'header-nonAuthBlock'}`}>
+          <Col xl={1} lg={1} md={1} sm={6} xs={6} className={`header-img ${!authState?.user?.access_token && 'header-img-nonAuth'}`} onClick={() => { navigate("/home") }}>
             <img src={logo} alt="logo" className="desktop-logo" />
           </Col>
           <Col xl={9} className="large-hidden">
@@ -78,7 +78,7 @@ export default function Header() {
                   <Button label={translations.Logout} onClick={() => logout()} className={`small-btn`} />
                 </div>
                 :
-                <div className='nav-links ml-0'>
+                <div className='nav-links ml-0 unAuthUser'>
                   <a onClick={() => navigate("/login")}>{translations.Login}</a> | <a onClick={() => setShowSignupModal(true)}>{translations.SignUp}</a>
                 </div>
               }

@@ -32,7 +32,7 @@ export default function TextField(props) {
                     onKeyUp={onKeyUp ? onKeyUp :
                         (type === "number" ?
                             ({ target, key }) => {
-                                if (key === "." || key === "e" || key === "E" || key === "+" || key === "-") {
+                                if (key === "." || key === "e" || key === "E" || key === "-" || key === "+" ) {
                                     target.value = "";
                                     return;
                                 }

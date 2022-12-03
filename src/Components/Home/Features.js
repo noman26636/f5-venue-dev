@@ -9,10 +9,15 @@ import guitarIcon from "../../Assets/icons/guitar-red.svg";
 import decorIcon from "../../Assets/icons/decor-red.svg";
 import transportIcon from "../../Assets/icons/transport-red.svg";
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { VenueServices } from '../Venue/VenueServices';
+import { HomeServices } from './HomeServices';
 const Features = () => {
     const appState = useSelector((state) => {
         return state.app;
     });
+    const [data, setData] = useState([]);
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     const navigate = useNavigate();
@@ -23,36 +28,33 @@ const Features = () => {
     { icon: decorIcon, text: translations.Decoration },
     { icon: transportIcon, text: translations.Transport }
     ];
+
+    const to_Browse_Venues = () => {
+        navigate("/venueList");
+    }
+    useEffect(() => {
+        getFeatureSection();
+    }, []);
+
+    const getFeatureSection = () => {
+        HomeServices.getHomeServices().then((res) => {
+            if (!res.isAxiosError) {
+                setData(res.homepage)
+            }
+
+        }).then(() => {
+            var btn_browse = document.getElementById("btn-browse");
+            btn_browse.addEventListener("click", to_Browse_Venues)
+        })
+    }
     return (
-        <Row className='section-3'>
-            <Col xl={6} lg={6} md={6} sm={12} className="feature-block-wrap">
-                <Row className="features-block">
-                    {features?.map((item, i) =>
-                        <Col xl={4} lg={4} md={6} sm={6} xs={6} className='feature-item' key={i}>
-                            <div className='icon-block'>
-                                <img alt="" src={item.icon} />
-                            </div>
-                            <div className='feature-text'>{item.text}</div>
-                        </Col>
-                    )}
-                </Row>
-            </Col>
-            <Col xl={6} lg={6} md={6} sm={12} className='text-block'>
-
-                <div className='section-text'>
-                    <div className='general-text'>
-                        {translations.LookingForVenue}
-                    </div>
-                    <h3 className='section-title'>{translations.FindFastEasy} </h3>
-                    <p >
-                        {translations.LookingForVenueDesc}
-                    </p>
-                    <Button label={translations.BrowseVenues} onClick={() => { navigate("/venueList") }} className="btn-white" />
+        data.filter((item) => item.slug === "features").map((item) => {
+            return (
+                <div>
+                    <div key={item.id} dangerouslySetInnerHTML={{ __html: item.content }}></div>
                 </div>
-            </Col>
-
-        </Row>
-
+            )
+        })
     );
 };
 

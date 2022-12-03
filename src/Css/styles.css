@@ -151,6 +151,7 @@ body {
   height: calc(100% - 579px);
   margin-top: 115px;
   min-height: 500px;
+  /* margin: auto; */
   width: 100%;
 }
 @media only screen and (max-width: 1200px) {
@@ -179,7 +180,7 @@ body {
 }
 @media (min-width: 1200px) {
   .ml-n6 {
-    margin-left: -6rem !important;
+    /* padding-right: 6rem !important; */
   }
 }
 .pl-3 {
@@ -824,11 +825,39 @@ header {
   background: #fff;
   box-shadow: 0px 3px 10px 0.84px rgb(0 0 0 / 9%);
 }
+.header-nonAuthBlock{
+  padding: 24px 262px 24px 275px;
+  margin: 0 !important;
+  color: #1a1a1a;
+  gap: 2.5rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  white-space: nowrap;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0px 3px 10px 0.84px rgb(0 0 0 / 9%);
+}
+.header-nonAuthBlock .header-img-nonAuth{
+  height: 65px;
+  /* margin-left: 8px; */
+  display: flex;
+  /* width: 90px; */
+  padding: 0;
+}
+.header-nonAuthBlock .header-img-nonAuth .desktop-logo{
+  width: 175px;
+  cursor: pointer;
+}
 .header-block .header-img {
   height: 65px;
   display: flex;
   padding: 0;
 }
+
 
 .header-block .header-img img {
   width: 175px;
@@ -859,6 +888,9 @@ header {
 .header-block .header-right .nav-links {
   margin-right: 25px;
 }
+.unAuthUser{
+  margin-right: 50px;
+}
 .burger-menu-block {
   display: none !important;
 }
@@ -880,9 +912,15 @@ header {
   .header-block nav ul {
     gap: 2%;
   }
+  .header-nonAuthBlock nav ul{
+    gap: 2%;
+  }
 }
 @media (max-width: 1200px) {
   .header-block {
+    padding: 25px 50px;
+  }
+  .header-nonAuthBlock{
     padding: 25px 50px;
   }
   .burger-menu-block {
@@ -892,6 +930,10 @@ header {
 @media (max-width: 576px) {
   .header-block {
     padding: 25px;
+  }
+  .header-nonAuthBlock{
+    justify-content: space-between;
+    padding: 25px 35px;
   }
 }
 /* -----------------------------------------------------
@@ -984,7 +1026,7 @@ footer [class^="col-"] {
 }
 footer .top-section {
   /* padding: 65px 140px 30px 140px; */
-  padding: 65px 100px 30px 100px;
+  padding: 65px 100px 30px 135px;
 
 }
 footer .top-section .row {
@@ -1085,7 +1127,8 @@ footer .social-icons .icon.linkedin {
   justify-content: space-between;
 }
 .home-page .main-section .main-section-inner .text-block {
-  padding-left: 8%;
+  padding-left: 9%;
+
 }
 @media only screen and (min-width: 992px) {
   .home-page .main-section .main-section-inner .text-block {
@@ -1185,7 +1228,7 @@ footer .social-icons .icon.linkedin {
   border-radius: 6px;
   position: absolute;
   margin: 0 auto;
-  width: 90%;
+  width: 82%;
   left: 0;
   right: 0;
   bottom: -78px;
@@ -1239,10 +1282,10 @@ footer .social-icons .icon.linkedin {
   margin-top: 140px;
   clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 50% 100%, 0% 90%);
   /* height: 475px; */
-  padding: 0 50px;
+  padding: 0 55px;
 }
 .featured-venue-block .featured-venue-inner-block {
-  width: 90%;
+  width: 86%;
   margin: auto;
 }
 .featured-venue-block .title {
@@ -1265,11 +1308,10 @@ footer .social-icons .icon.linkedin {
   padding: 10px 11px;
   background: #fff;
   max-width: 271px;
+  height: 22rem;
   border: 1px solid #efefef;
   /* position: relative; */
 }
-
-
 
 .venue-details-block .venue-block .image-block {
   position: relative;
@@ -1358,7 +1400,7 @@ footer .social-icons .icon.linkedin {
 }
 @media screen and (min-width: 2080px) {
   .venue-details-block .venue-block {
-  max-width: 26rem;
+  max-width: 30rem;
 }
 }
 @media only screen and (max-width: 1350px) {
@@ -1391,12 +1433,17 @@ footer .social-icons .icon.linkedin {
 .featured-venue-block .carousel-inner {
   width: 100%;
   display: flex;
+  padding-bottom: 9em;
   justify-content: center;
 }
 .featured-venue-block .carousel-inner .carousel-item {
   width: 94%;
-  height: 32rem;
+  /* height: 32rem; */
+  /* padding-bottom: 9em; */
   margin: 0 auto;
+}
+.carousel-indicators{
+  display: none;
 }
 .featured-venue-block .carousel-control-prev-icon {
   background-image: url("../Assets/icons/arrow-left-blue.svg");
@@ -1434,8 +1481,8 @@ footer .social-icons .icon.linkedin {
 .home-page .how-it-works-section .section-items {
   margin: auto;
   justify-content: center;
-  width: 90%;
-  gap: 4%;
+  width: 82%;
+  gap: 3%;
   flex-wrap: nowrap;
 }
 
@@ -1447,7 +1494,7 @@ footer .social-icons .icon.linkedin {
   border: 2px solid #ededed91;
   box-shadow: 0px 10px 17px #0000000a;
   margin: 0 0 20px 0;
-  max-width: 400px;
+  max-width: 390px;
 }
 .home-page .how-it-works-section .section-items .section-item:hover {
   border: 2px solid #0a58ca;
@@ -1485,12 +1532,17 @@ footer .social-icons .icon.linkedin {
 /* **********Features section***************************** */
 .home-page .section-3 {
   background: #0a58ca;
+  gap: 5rem;
   color: #ffffff;
-  padding: 100px 80px !important;
+  padding: 100px 170px !important;
   margin: 0;
 }
+
 .home-page .section-3 .text-block {
+  width: 40%;
   padding: 0;
+  display: flex;
+  justify-content: center;
 }
 .home-page .section-3 .text-block .section-text .general-text {
   font-family: "Della Respira";
@@ -1511,11 +1563,12 @@ footer .social-icons .icon.linkedin {
   font-size: 16px !important;
   line-height: 33px;
   margin-bottom: 39px;
-  max-width: 565px;
+  /* max-width: 565px; */
 }
 .home-page .section-3 .feature-block-wrap {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  width: 50%;
 }
 .home-page .section-3 .features-block {
   display: flex;
@@ -1527,7 +1580,6 @@ footer .social-icons .icon.linkedin {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 8px;
 }
 .home-page .section-3 .features-block .feature-item .icon-block {
   display: flex;
@@ -1539,8 +1591,8 @@ footer .social-icons .icon.linkedin {
   border-radius: 60px;
 }
 .home-page .section-3 .features-block .feature-item .icon-block img {
-  width: 60px;
-  height: 60px;
+  width: 116px;
+  height: 116px;
   margin: auto;
 }
 .home-page .section-3 .features-block .feature-item .feature-text {
@@ -3388,13 +3440,17 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 /* *************************Venue manage list*************************** */
 .venue-manage-view {
-  padding: 40px 5%;
+  padding: 40px 0px;
+  width: 83%;
+  margin: auto;
   color: #594a45;
 }
 .venue-manage-view .heading-block {
   font-weight: 600;
   font-size: 30px;
   display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
   align-items: center;
 }
 .venue-manage-view .small-btn {
@@ -3544,7 +3600,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .wishlist-details-view .heading-block .info-block {
   display: flex;
   align-items: center;
-  gap: 5rem;
+  gap: 6rem;
 }
 .wishlist-details-view .heading-block .info-block .info {
   display: flex;
@@ -3650,9 +3706,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 /* *****************************CMS pages********************** */
 .cms-page {
-  padding: 0px 140px;
+  /* padding: 0px 140px; */
   margin: 10rem 0 4rem 0;
-  width: 100%;
+  width: 82%;
+  padding: 50px 0;
+  margin: auto;
   text-align: justify;
 }
 .cms-page .title {

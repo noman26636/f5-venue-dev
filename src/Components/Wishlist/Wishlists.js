@@ -86,7 +86,7 @@ const Wishlists = () => {
             className={`small-btn add-venue-btn`}
           />
         </div>
-        <div>{translations.WishlistsDesc}</div>
+        <div style={{paddingLeft: '20px'}}>{translations.WishlistsDesc}</div>
         {showLoader ? (
           <Pageloader />
         ) : (

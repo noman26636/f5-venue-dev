@@ -64,13 +64,7 @@ export const VenueServices = {
                 return error;
             });
     },
-    publishVenue: (id,data) => {
-        return axios.put(`${VenueApis.publishVenue}${id}`,data)
-            .then(response => response.data)
-            .catch(error => {
-                return error;
-            });
-    },
+  
     addVenue: (data) => {
         return axios.post(VenueApis.addVenue,data)
             .then(response => response.data)

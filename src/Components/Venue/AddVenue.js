@@ -183,8 +183,8 @@ function AddVenue() {
           classroom: venueObj.capacity?.classroom,
           theatre: venueObj.capacity?.theatre,
           banquet: venueObj.capacity?.banquet,
-          conference: venueObj.capacity?.conference,
           ushape: venueObj.capacity?.ushape,
+          conference: venueObj.capacity?.conference,
           venue_type:
             venueObj.types?.length > 0
               ? venueObj.types?.map((item) => item.admin_venue_types_id)
@@ -321,7 +321,7 @@ function AddVenue() {
   };
   const saveChanges = () => {
     setSubmitted(true);
-    if (!validate()) return;
+    if (!validate()) return alert("Wrong");
     setShowLoader("add");
     let bodyFormData = new FormData();
     bodyFormData.append("name", values.name);
@@ -366,8 +366,9 @@ function AddVenue() {
       bodyFormData.append("banquet", values.banquet);
     if (values.conference !== "" && values.conference !== null)
       bodyFormData.append("conference", values.conference);
-    if (values.ushape !== "" && values.ushape !== null)
+    if (values.ushape !== "" || values.ushape !== null)
       bodyFormData.append("ushape", values.ushape);
+      if (values.seating_capacity !== "" && values.seating_capacity !== null)
     bodyFormData.append("seating_capacity", values.seating_capacity);
     if (
       values.additional_cap_info !== "" &&
@@ -425,6 +426,7 @@ function AddVenue() {
     if (venueId) {
       VenueServices.editVenue(venueId, bodyFormData).then((res) => {
         setShowLoader(null);
+        console.log('Venue detail post ====> ', res)
         if (!res.isAxiosError) {
           toast.success(translations.VenueUpdated, {
             onClose: () => navigate("/manageVenues"),
@@ -1205,7 +1207,7 @@ function AddVenue() {
                       onError={(errors) =>
                         handleAttachmentError(errors, "images")
                       }
-                      error={errors.images}
+                      // error={errors.images}
                     >
                       {({ browseFiles, getDropZoneProps, getLableProps}) => (
                         <div className="dropzone" onClick={browseFiles} {...getDropZoneProps()}>
