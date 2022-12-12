@@ -24,7 +24,7 @@ const InquiriesList = () => {
   const translations = userLanguageData.translations;
   const [values, setValues] = useState(initialFormValues);
   const [venuesList, setVenuesList] = useState([]);
-  const [inquiresList, setInquiriesList] = useState([]);
+  const [inquiriesList, setInquiriesList] = useState([]);
   const [showLoader, setShowLoader] = useState(true);
   const [pager, setPager] = useState({ current_page: 1, per_page: 50 });
   const getOptions = () => {
@@ -108,8 +108,8 @@ const InquiriesList = () => {
               </tr>
             </thead>
             <tbody>
-              {inquiresList?.length > 0 ? (
-                inquiresList?.map((item, i) => {
+              {inquiriesList?.length > 0 ? (
+                Array.from(inquiriesList).reverse().map((item, i) => {
                   return (
                     <tr key={i} className="table-row" onClick={()=>navigate(`/inquiry/${item.id}/${item.token}`)}>
                       <td>{item.response_status==="0"?translations.NotReplied:translations.Replied}</td>

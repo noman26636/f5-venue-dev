@@ -4,8 +4,14 @@ import { HomePageApi } from "../../Configurations/Api_endpoints"
 
 
 export const HomeServices =  {
-    getHomeServices : () => {
-        return axios.get(`${HomePageApi.getHomePage}`).then(res => res.data).catch(error => {
+  
+    getFeaturesServices : () => {
+        return axios.get(`${HomePageApi.getFeatures}`).then(res => res.data).catch(error => {
+            return error;
+        });
+    },
+    getHowItWorksServices : () => {
+        return axios.get(`${HomePageApi.getHowItWorks}`).then(res => res.data).catch(error => {
             return error;
         });
     }

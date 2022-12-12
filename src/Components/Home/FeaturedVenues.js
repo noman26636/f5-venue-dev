@@ -13,14 +13,14 @@ const FeaturedVenues = (props) => {
     });
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
-    const numberOfItems = window.innerWidth > 1500 ? 4 : (window.innerWidth > 850 ? 3 : (window.innerWidth > 650 ? 2 : 1));
+    const numberOfItems = window.innerWidth > 3000 ? 9 : window.innerWidth > 2560 ? 7 : window.innerWidth > 2499 ? 6 : window.innerWidth > 2000 ? 5 :window.innerWidth > 1500 ? 4 : (window.innerWidth > 850 ? 3 : (window.innerWidth > 650 ? 2 : 1));
     const groups = Math.floor(featuredVenuesList.length / numberOfItems) + (featuredVenuesList.length % numberOfItems !== 0 ? 1 : 0);
     const [activeIndex, setActiveIndex] = React.useState(0);
     const navigate = useNavigate();
     return (
         <div className='featured-venue-block' >
             <div className='featured-venue-inner-block'>
-                <div className='title'> {translations.FeaturedVenues}</div>
+                {/* <div className='title'> {translations.FeaturedVenues}</div> */}
                 <ItemsCarousel items={featuredVenuesList} activeIndex={activeIndex} setActiveIndex={setActiveIndex} groups={groups}>
                     <Row className='venue-details-block'>
                         {

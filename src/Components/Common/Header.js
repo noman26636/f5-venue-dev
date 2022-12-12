@@ -10,6 +10,9 @@ import { Row, Col } from 'reactstrap';
 import SignupModal from '../Signup/SignupModal';
 import LeftMenu from './LeftMenu';
 import { enum_sitepages } from '../../Utils/indexUtils';
+import { useTranslation } from 'react-i18next';
+
+
 export default function Header() {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLeftMenu, setShowLeftMenu] = useState(false);
@@ -35,6 +38,7 @@ export default function Header() {
   { text: translations.YourCompany, path: "/company" },
   { text: translations.Wishlist, path: "/wishlists" },
   ]
+  const { t } = useTranslation();
   const logout = () => {
     AccountServices.logout().then(res => {
       dispatch({ type: TYPES.LOGOUT });

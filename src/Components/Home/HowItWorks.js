@@ -12,7 +12,7 @@ const HowItWorks = () => {
     const translations = userLanguageData.translations;
 
     useEffect(() => {
-        HomeServices.getHomeServices().then(res => {
+        HomeServices.getHowItWorksServices().then(res => {
             if (!res.isAxiosError) {
                 setData(res.homepage)
             }

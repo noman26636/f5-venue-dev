@@ -22,7 +22,7 @@ export var stringVariables = {
   PasswordsMismatch: "Passwords do not match",
   PasswordValidationMsg:
     "Password must have atleast 8 characters with atleast one digit, one uppercase and one lowercase character",
-  DuplicateEmailErr: "This email is already registered.",
+  DuplicateEmailErr: "This email is already psign.",
   ResetPassword: "Reset Password",
   NewPasswordErr: "New password cannot be same as old password",
   FirstName: "First Name",

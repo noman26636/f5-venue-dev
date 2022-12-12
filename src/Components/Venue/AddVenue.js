@@ -368,8 +368,8 @@ function AddVenue() {
       bodyFormData.append("conference", values.conference);
     if (values.ushape !== "" || values.ushape !== null)
       bodyFormData.append("ushape", values.ushape);
-      if (values.seating_capacity !== "" && values.seating_capacity !== null)
-    bodyFormData.append("seating_capacity", values.seating_capacity);
+    if (values.seating_capacity !== "" && values.seating_capacity !== null)
+      bodyFormData.append("seating_capacity", values.seating_capacity);
     if (
       values.additional_cap_info !== "" &&
       values.additional_cap_info !== null
@@ -398,6 +398,12 @@ function AddVenue() {
         bodyFormData.append(`event_type[${i + 1}]`, element);
       });
     }
+    // if (values.event_type.length > 0) {
+    //   values.event_type.forEach((element, i) => {
+    //     console.log('Element ===> ', element)
+    //     bodyFormData.append(`event_type[${i + 1}]`, element);
+    //   });
+    // }
     if (values.venue_type.length > 0) {
       values.venue_type.forEach((element, i) => {
         bodyFormData.append(`venue_type[${i + 1}]`, element);
@@ -423,10 +429,10 @@ function AddVenue() {
     values.images.forEach((img, i) => {
       if (img.src) bodyFormData.append(`Images[${i + 1}]`, img?.src?.file);
     });
+
     if (venueId) {
       VenueServices.editVenue(venueId, bodyFormData).then((res) => {
         setShowLoader(null);
-        console.log('Venue detail post ====> ', res)
         if (!res.isAxiosError) {
           toast.success(translations.VenueUpdated, {
             onClose: () => navigate("/manageVenues"),
@@ -437,8 +443,8 @@ function AddVenue() {
             const errorArr =
               Object.keys(res?.response?.data)?.length > 0
                 ? Object.keys(res.response.data).map(
-                    (item) => res.response.data[item]
-                  )
+                  (item) => res.response.data[item]
+                )
                 : null;
             setErrors({ ...errors, apiError: errorArr });
           }
@@ -457,8 +463,8 @@ function AddVenue() {
             const errorArr =
               Object.keys(res?.response?.data)?.length > 0
                 ? Object.keys(res.response.data).map(
-                    (item) => res.response.data[item]
-                  )
+                  (item) => res.response.data[item]
+                )
                 : null;
             setErrors({ ...errors, apiError: errorArr });
           }
@@ -560,7 +566,7 @@ function AddVenue() {
   };
   const deleteImage = (index = null, image = null) => {
     if (image?.image_path) {
-      VenueServices.deleteVenueImage(image.id).then(() => {});
+      VenueServices.deleteVenueImage(image.id).then(() => { });
     }
     const picturesArr = [...values.images];
     picturesArr.splice(index, 1);
@@ -754,8 +760,8 @@ function AddVenue() {
                               backgroundImage: values.contact_image?.src
                                 ? `url(${values.contact_image?.src?.base64})`
                                 : values.contact_image?.image_path
-                                ? `url(${values.contact_image?.image_path})`
-                                : `url(${personImage})`,
+                                  ? `url(${values.contact_image?.image_path})`
+                                  : `url(${personImage})`,
                             }}
                           >
                             {
@@ -1207,15 +1213,15 @@ function AddVenue() {
                       onError={(errors) =>
                         handleAttachmentError(errors, "images")
                       }
-                      // error={errors.images}
+                    // error={errors.images}
                     >
-                      {({ browseFiles, getDropZoneProps, getLableProps}) => (
+                      {({ browseFiles, getDropZoneProps, getLableProps }) => (
                         <div className="dropzone" onClick={browseFiles} {...getDropZoneProps()}>
                           <div
                             {...getDropZoneProps({ className: "myDropZone" })}>
-                          <div className="buttonContainer">
-                            <input {...getLableProps} {...getDropZoneProps()} placeholder="Upload or drag photo here..." readOnly/>
-                          </div>
+                            <div className="buttonContainer">
+                              <input {...getLableProps} {...getDropZoneProps()} placeholder="Upload or drag photo here..." readOnly />
+                            </div>
                           </div>
                         </div>
                       )}

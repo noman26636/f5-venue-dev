@@ -56,9 +56,11 @@ function Profile() {
         if (submitted === "profile") validate("profile");
         else if (submitted === "password") validate("password");
     }, [values]);
+
     useEffect(() => {
         getProfile();
     }, [])
+
     const validate = (formToValidate) => {
         let isValid = true;
         const field = {};
@@ -116,8 +118,12 @@ function Profile() {
     const getProfile = () => {
         AccountServices.getProfile().then(res => {
             if (!res.isAxiosError && res?.user)
-            setValues({ ...values, profileData: {...values.profileData, ...res.user[0],
-                company:res.user[0].company?.name,cvr:res.user[0].company?.cvr} })
+                setValues({
+                    ...values, profileData: {
+                        ...values.profileData, ...res.user[0],
+                        company: res.user[0].company?.name, cvr: res.user[0].company?.cvr
+                    }
+                })
         });
     }
     const updateProfile = () => {
@@ -138,6 +144,9 @@ function Profile() {
                     setSubmitted(null);
                     toast.success(translations.Success);
                 }
+                else {
+                    toast.error(translations.DuplicateEmailErr);
+                }
             });
         }
     }
@@ -154,13 +163,12 @@ function Profile() {
                 setShowLoader(null);
                 if (!res.isAxiosError) {
                     setSubmitted(null);
-                    setValues({...values,passwordData:initialFormValues.passwordData});
+                    setValues({ ...values, passwordData: initialFormValues.passwordData });
                     toast.success(translations.Success);
                 }
-                else
-                {
+                else {
                     setErrors({
-                        ...errors,passwordError:res?.response?.data?.message
+                        ...errors, passwordError: res?.response?.data?.message
                     });
                 }
             });
@@ -190,7 +198,7 @@ function Profile() {
                                 label={translations.FirstName + " *"}
                                 type="text"
                                 onChange={(e) => { handleInputChange(e, "profileData") }}
-                                error={errors.firstnme}
+                                error={errors.firstname}
                                 value={values.profileData?.firstname}
                                 className="text-field-2"
                             />
@@ -267,7 +275,7 @@ function Profile() {
                                 label={translations.CurrentPassword + " *"}
                                 type="password"
                                 onChange={(e) => { handleInputChange(e, "passwordData") }}
-                                error={errors.passwordError?errors.passwordError: errors.currentPassword}
+                                error={errors.passwordError ? errors.passwordError : errors.currentPassword}
                                 value={values.passwordData.currentPassword}
                                 className="text-field-2"
                             />

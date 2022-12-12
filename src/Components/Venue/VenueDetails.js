@@ -323,6 +323,9 @@ const VenueDetails = () => {
         toast.success(translations.InquirySent);
         setValues(initialFormValues);
       }
+      else {
+        toast.error(translations.DuplicateEmailErr);
+    }
     });
   };
   const setClass = (date) => {

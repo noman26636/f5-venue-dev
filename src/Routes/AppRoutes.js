@@ -21,6 +21,7 @@ import WishlistDetails from "../Components/Wishlist/WishlistDetails";
 import Wishlists from "../Components/Wishlist/Wishlists";
 import InquiryDetails from "../Components/Inquiries/InquiryDetails";
 import CMSpage from "../Components/CMS/CMSpage";
+import Main from "../Components/MainLanguage/Main";
 let AppRoutes = () => {
   const authState = useSelector((state) => {
     return state.auth;
@@ -31,6 +32,7 @@ let AppRoutes = () => {
         <Layout>
           <Routes>
             {/* Auth routes */}
+            {/* <Route path="/" exact element={<Main />} />  */}
             <Route path="/" exact element={<Home />} />
             <Route path="/home" exact element={<Home />} />
             <Route path="/venueList" element={<VenueList />} />
@@ -58,8 +60,16 @@ let AppRoutes = () => {
         </Layout>
       ) : (
         <Routes>
-          {/* Non-auth routes */}
-          <Route
+          {/* <Route
+            path="/"
+            exact
+            element={
+              <Layout>
+                <Main />
+              </Layout>
+            }
+          /> */}
+            <Route
             path="/"
             exact
             element={

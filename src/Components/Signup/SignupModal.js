@@ -114,18 +114,23 @@ export default function SignupModal(props) {
         last_name: values.lastName,
         phone_number: values.phone,
       };
-      if(invitationToken)
-    { userObj.token= invitationToken;
-        AccountServices.signupInvitedUser(userObj).then((res) => {
-            setShowLoader(false);
-            if (!res.isAxiosError) {
-              handleClose();
-              toast.success(translations.AccountCreated, {
-                onClose: () => navigate("/login"),
-              });
-            }
-          });
-    }
+      if(invitationToken){
+
+      { userObj.token= invitationToken;
+          AccountServices.signupInvitedUser(userObj).then((res) => {
+              setShowLoader(false);
+              if (!res.isAxiosError) {
+                handleClose();
+                toast.success(translations.AccountCreated, {
+                  onClose: () => navigate("/login"),
+                });
+              }
+              else{
+                  toast.error(translations.DuplicateEmailErr);
+              }
+            });
+      }
+      }
       else 
     { 
         userObj.company=values.company;
@@ -134,17 +139,22 @@ export default function SignupModal(props) {
         setShowLoader(false);
         if (res.isAxiosError || !res.access_token) {
           if (res?.response?.data?.email) {
-            setErrors({
-              ...errors,
-              apiError: `${translations.DuplicateEmailErr}`,
-            });
-          } else {
-            setErrors({
-              ...errors,
-              apiError: translations.SomethingWentWrong,
-            });
+            toast.error(translations.DuplicateEmailErr);
+
+            // setErrors({
+            //   ...errors,
+            //   apiError: `${translations.DuplicateEmailErr}`,
+            // });
+          } 
+          else {
+              toast.error(translations.DuplicateEmailErr);
+            // setErrors({
+            //   ...errors,
+            //   apiError: translations.SomethingWentWrong,
+            // });
           }
-        } else {
+        } 
+        else {
           handleClose();
           toast.success(translations.AccountCreated, {
             onClose: () => navigate("/login"),

@@ -89,11 +89,14 @@ const Company = () => {
     };
     const inviteUser = () => {
         setShowLoader("invite");
-        AccountServices.inviteUser(values.invitationEmail).then(res => {
+        AccountServices.inviteUser(values.in9vitationEmail).then(res => {
             setShowLoader(null);
             setShowInviteUserModal(false);
             if (!res.isAxiosError)
                 toast.success(translations.InvitationSent);
+            else{
+                toast.error("The user is already registered to some other company")
+            }
         });
     }
     const getBilling = () => {

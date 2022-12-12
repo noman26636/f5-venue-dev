@@ -37,7 +37,7 @@ const Features = () => {
     }, []);
 
     const getFeatureSection = () => {
-        HomeServices.getHomeServices().then((res) => {
+        HomeServices.getFeaturesServices().then((res) => {
             if (!res.isAxiosError) {
                 setData(res.homepage)
             }

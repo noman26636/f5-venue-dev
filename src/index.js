@@ -12,6 +12,8 @@ import * as TYPES from "./Store/actions/types";
 import { toast } from "react-toastify";
 import { AccountApis } from "./Configurations/Api_endpoints";
 import { render } from "react-dom";
+
+
 axios.interceptors.request.use(
   async function (req) {
     let temp = await localStorage.getItem("state");
@@ -72,12 +74,15 @@ axios.interceptors.response.use(
         return Promise.reject(_error);
       }
     } else {
-      if(translations)
-      toast.error(translations.SomethingWentWrong);
-      return Promise.reject(error);
+      if(translations){
+        // toast.error(translations.SomethingWentWrong);
+        return Promise.reject(error);
+      }
     }
   }
 );
+
+
 render(
   <Provider store={configureStore}>
     {/* <React.StrictMode> */}

@@ -9,6 +9,12 @@ import { Row, Col } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { Constants } from '../../Configurations/Constants';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import cookies from 'js-cookie'
+import { languages } from '../MainLanguage/languages';
+import { useEffect } from 'react';
+
+
 const Footer = () => {
     const appState = useSelector((state) => {
         return state.app;
@@ -16,11 +22,16 @@ const Footer = () => {
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
     const navigate=useNavigate();
+    const {t}= useTranslation();
+    // const currentLanguageCode = cookies.get('i18next') || 'en';
+    // const currentlanguage = languages.find( l => l.code === currentLanguageCode)
+
+  
     return (
         <footer className=''>
             <div className='top-section'>
                 <Row>
-                    <Col xl={3} lg={3} md={3} sm={6} xs={12}>
+                    <Col xl={3} lg={3} md={3} sm={6} xs={12} className="footer-first-block">
                         <div className='list'>
                             <div className='logo-block'>
                                 <img src={logo} alt="Events venue" />

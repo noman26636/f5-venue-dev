@@ -15,8 +15,10 @@ const VenueSearch = (props) => {
     });
     const { userLanguageData } = appState;
     const translations = userLanguageData.translations;
-    const { values, handleSearchModal, handleSearch, handleInputChange } = props;
-    const { name, location, eventType, capacity, moreFilters, sortField, onKeyUp } = values;
+    const { values, handleSearchModal, handleSearch, handleInputChange, toggleButton } = props;
+    const { name, location, eventType, capacity, moreFilters, sortField, onKeyUp } = values;    console.log("Event type ===>", eventType);
+        console.log("Location ===> ", location)
+        console.log("Event type  ===> ", eventType)
     const getAllItemsName = (arr) => {
         let str = "";
         str += arr.map((item, i) => i === 0 ? item.name : ` ${item.name}`);

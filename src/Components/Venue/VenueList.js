@@ -13,6 +13,7 @@ import { faMale, faChair, faG } from "@fortawesome/free-solid-svg-icons";
 import { Constants } from "../../Configurations/Constants";
 import * as TYPES from "../../Store/actions/types";
 import L, { bounds } from "leaflet";
+
 import {
   enum_seatingOptions,
   enum_sortFieldOptions,
@@ -55,6 +56,8 @@ const VenueList = () => {
   const [modalType, setModalType] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
   const [venuesList, setVenuesList] = useState([]);
+  const [toggleButton, setToggleButton] = useState(true);
+  const [checkbox, setCheckBox] = useState(true);
   const [pager, setPager] = useState({ current_page: 1, per_page: 16 });
   const [map, setMap] = useState(null);
   const seatingOptions = [
@@ -74,13 +77,13 @@ const VenueList = () => {
 
 
 
-
   const handleInputChange = (
     { target },
     checkboxId = null,
     checkboxValue = null
   ) => {
     const value = target.type === "checkbox" ? target.checked : target.value;
+    target.name === 'mapSearch' && setToggleButton(value); 
     const { name } = target;
     if (name === "eventType" || name === "moreFilters") {
       const index = values[name]?.map((item) => item.id).indexOf(checkboxId);
@@ -120,7 +123,10 @@ const VenueList = () => {
 
   useEffect(() => {
     if (values.mapSearch) 
-    setMarkersOnMap(venuesList);
+    {
+      setMarkersOnMap(venuesList);
+    }
+
   }, [venuesList]);
 
   const setMarkersOnMap = (venues) => {
@@ -209,8 +215,11 @@ const VenueList = () => {
           sw: [searchParams.sw_lat, searchParams.sw_lng],
         };
     }
+    console.log('Search obj ===> ', searchObj)
     VenueServices.venueSearch(searchObj, pageNumber, pager.per_page).then(
       (res) => {
+        console.log('Search response====> ', res)
+
         setShowLoader(false);
         if (!res.isAxiosError) {
           setVenuesList(res?.data);
@@ -222,12 +231,28 @@ const VenueList = () => {
         }
       }
     );
+    // VenueServices.getallVenues().then(
+    //   (res) => {
+    //     setShowLoader(false);
+    //     if (!res.isAxiosError) {
+    //       setVenuesList(res?.data);
+    //       setPager({
+    //         ...pager,
+    //         current_page: Number(res.page),
+    //         total: res.total,
+    //       });
+    //     }
+    //   }
+    // );
   };
 
   // const navigate = useNavigate();
   useEffect(() => {
+    
     getSearchConfigs();
+
     let valuesObj = {};
+   
     if (searchData) {
       valuesObj.eventType = searchData?.eventTypeObj?.id
         ? [searchData.eventTypeObj] : (searchData.eventType?.length > 0 ? [...searchData.eventType] : []);
@@ -248,10 +273,13 @@ const VenueList = () => {
         ? Number(searchData.sortType)
         : 0;
       valuesObj = { ...values, ...valuesObj };
+
       dispatch({ type: TYPES.SEARCH_DATA, data: {} });
       setValues({ ...valuesObj });
     }
-    searchVenues(valuesObj);
+    searchVenues(values);
+    // getSearchConfigs();
+
     const map = L.map("map").setView([mapInitialLat, mapInitialLng], zoom);
 
     // if (MouseEvent.call) {
@@ -392,6 +420,7 @@ const VenueList = () => {
     });
   };
   const handleSearchModal = (value) => {
+    setCheckBox(value ==modalType)
     if (modalType !== null) {
       setModalType(null);
     }
@@ -399,6 +428,7 @@ const VenueList = () => {
       setModalType(value);
     }, 50);
   };
+
   const gotoVenue = (id) => {
     dispatch({ type: TYPES.SEARCH_DATA, data: values });
     window.open(`/venue/${id}`, '_blank')
@@ -407,11 +437,12 @@ const VenueList = () => {
     <>
       {showLoader && <Pageloader />}
       <div className="d-flex">
+        
         <div
-          className="venue-list-view"
+          className={"venue-list-view " + (toggleButton ? '' : '  venue-list-view-withouttoggle')}
           onClick={(e) => {
             setModalType(null);
-          }}
+          }} 
           style={{ width: values.mapSearch ? "74%" : "100%" }}
           onKeyUp={(e) => {
             if (e.key === "Enter") searchVenues();
@@ -420,6 +451,7 @@ const VenueList = () => {
         >
           <div className="heading-block">
             <h3>{translations.Venues}</h3>
+            
             <ToggleBtn
               value={values.mapSearch}
               onChange={handleInputChange}
@@ -427,6 +459,7 @@ const VenueList = () => {
             />
           </div>
           <VenueSearch
+          // toggleButton={toggleButton}
             values={values}
             handleSearchModal={handleSearchModal}
             handleSearch={searchVenues}
@@ -492,7 +525,6 @@ const VenueList = () => {
               ))
             )}
           </Row>
-
           {venuesList && venuesList?.length > 0 && (
             <Pager
               total={pager.total}
@@ -503,7 +535,6 @@ const VenueList = () => {
               }}
               pageSize={pager.per_page}
             />
-
           )}
         </div>
         <div

@@ -50,7 +50,7 @@ export const VenueServices = {
                 return error;
             });
     },
-    venueSearch: (data, pageNumber = 1, pageSize = 20) => {
+    venueSearch: (data, pageNumber = 1, pageSize = 16) => {
         return axios.post(`${VenueApis.venueSearch}?page=${pageNumber}&page_size=${pageSize}`, data)
             .then(response => response.data)
             .catch(error => {
