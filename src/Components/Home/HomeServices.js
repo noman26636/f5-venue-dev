@@ -14,5 +14,10 @@ export const HomeServices =  {
         return axios.get(`${HomePageApi.getHowItWorks}`).then(res => res.data).catch(error => {
             return error;
         });
-    }
+    },
+    getHomePageTitleServices: () => {
+        return axios.get(`${HomePageApi.getHomePageTitle}`).then(res => res.data).catch(error => {
+            return error;
+        })
+    },
 }

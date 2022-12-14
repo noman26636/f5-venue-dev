@@ -89,7 +89,7 @@ const Company = () => {
     };
     const inviteUser = () => {
         setShowLoader("invite");
-        AccountServices.inviteUser(values.in9vitationEmail).then(res => {
+        AccountServices.inviteUser(values.invitationEmail).then(res => {
             setShowLoader(null);
             setShowInviteUserModal(false);
             if (!res.isAxiosError)

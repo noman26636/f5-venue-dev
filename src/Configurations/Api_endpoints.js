@@ -59,7 +59,8 @@ export const VenueApis = {
 
 export const HomePageApi = {
   getHowItWorks : `${baseUrl}dk/homepage/1`,
-  getFeatures: `${baseUrl}dk/homepage/2`
+  getFeatures: `${baseUrl}dk/homepage/2`,
+  getHomePageTitle: `${baseUrl}dk/homepage/3`,
 }
 
 export const BookingApis = {

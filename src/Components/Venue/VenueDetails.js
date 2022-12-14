@@ -209,7 +209,7 @@ const VenueDetails = () => {
     }
     if (
       fieldValues.email?.trim().length === 0 ||
-      !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fieldValues.email)
+      !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(fieldValues.email))
     ) {
       field.email = translations.ValidEmailRequired;
       isValid = false;
@@ -323,9 +323,7 @@ const VenueDetails = () => {
         toast.success(translations.InquirySent);
         setValues(initialFormValues);
       }
-      else {
-        toast.error(translations.DuplicateEmailErr);
-    }
+    
     });
   };
   const setClass = (date) => {

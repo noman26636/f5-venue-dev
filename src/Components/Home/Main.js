@@ -54,11 +54,12 @@ export default function Main(props) {
       const index = eventTypesList?.map(item => item.id).indexOf(Number(target.value));
       const name = eventTypesList[index].name;
       valuesObj.eventTypeObj = { id: Number(target.value), name: name }
-    }
+    } 
     setValues(valuesObj);
   };
 
   const handleSearch = () => {
+    console.log('Valuesssss ===> ', values)
     dispatch({ type: TYPES.SEARCH_DATA, data: values });
     navigate("/venueList");
   }
@@ -74,8 +75,10 @@ export default function Main(props) {
     });
   }
   return (
+
     <div className='main-section'>
       <Row className='main-section-inner'>
+        {}
         <Col xl={6} lg={6} md={6} sm={12} className='text-block'>
           <div className='title-1'>
             {translations.EnjoyCeleberations}
